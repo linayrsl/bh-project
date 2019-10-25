@@ -1,0 +1,42 @@
+.verification-message {
+  color: rgb(83, 83, 84);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 15px;
+}
+
+/* .verification-code {
+  color: #feab3f;
+  border-bottom: 2px solid #cccbcb;
+  padding-bottom: 5px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 15px;
+}
+
+.verification-code .code {
+  text-align: left;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+} */
+
+.verification-message3 {
+  color: rgb(83, 83, 84);
+  padding-bottom: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 240px;
+}
+
+.verification-code-input label {
+  color: #feab3f;
+}
+
+.verification-form {
+  padding-left: 10px;
+  padding-right: 10px;
+}

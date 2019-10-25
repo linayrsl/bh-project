@@ -1,0 +1,9 @@
+.numOfSiblings label {
+  padding-right: 10px;
+}
+
+.numOfSiblings input {
+  padding-left: 10px;
+  width: 30%;
+  direction: ltr;
+}

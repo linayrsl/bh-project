@@ -1,0 +1,11 @@
+body {
+  background-color: #f9f9f9;
+}
+
+.bh-app {
+  font-family: "Assistant", cursive;
+}
+
+.bh-app .ltr input {
+  direction: ltr !important;
+}

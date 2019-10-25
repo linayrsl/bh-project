@@ -1,0 +1,27 @@
+jobs:
+  build:
+    docker:
+      - image: circleci/python:latest
+      - image: circleci/postgres:11-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: bh_project
+    steps:
+      - checkout
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgres && exit 1
+      - run: mkdir test-reports
+      - run: sudo pip install pytest
+      - run: pip install --user -r requirements.txt
+      - run: python -m pytest --junit-xml=test-reports/pytest_unit.xml ./tests/
+      - store_test_results:
+          path: test-reports

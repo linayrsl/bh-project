@@ -1,0 +1,133 @@
+.text-first-part {
+  font-size: 22px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: #37b9c9;
+  background-image: linear-gradient(to right, #238f9c, #37b9c9);
+  padding-top: 10px;
+  padding-bottom: 40px;
+  color: white;
+  clip-path: polygon(0 0, 100% 0%, 100% 91%, 0 100%);
+}
+
+.bh-logo {
+  width: 50%;
+  text-align: center;
+}
+
+.bh-logo-class {
+  display: flex;
+  justify-content: center;
+}
+
+.information-boxes-upper {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.upper-right-box {
+  background-color: #199cac;
+  height: 160px;
+  width: 350px;
+  border: hidden;
+  border-radius: 5px;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.upper-left-box {
+  background-color: #ffb658;
+  height: 160px;
+  width: 350px;
+  border: hidden;
+  border-radius: 5px;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.highlight {
+  font-weight: bolder;
+}
+
+.information-boxes-lower {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.lower-right-box {
+  background-color: #7590cf;
+  height: 160px;
+  width: 350px;
+  border: hidden;
+  border-radius: 5px;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.lower-left-box {
+  background-color: #db6158;
+  height: 160px;
+  width: 350px;
+  border: hidden;
+  border-radius: 5px;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.information-bar-body {
+  padding-left: 20px;
+  padding-right: 20px;
+  /* border-bottom: 1px grey solid; */
+}
+
+.information-bar-line1 {
+  /* text-decoration: overline; */
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  border-top: 1px grey solid;
+}
+
+.information-bar-line2 {
+  /* text-decoration: overline; */
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  border-top: 1px grey solid;
+}
+
+.information-bar-line3 {
+  /* text-decoration: overline; */
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  border-top: 1px grey solid;
+}
+
+.information-bar-line4 {
+  /* text-decoration: overline; */
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  border-top: 1px grey solid;
+  border-bottom: 1px grey solid;
+}

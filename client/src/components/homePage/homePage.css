@@ -1,0 +1,53 @@
+.home-header {
+  border-bottom: 7px solid #37b9c9;
+  text-align: center;
+}
+
+.home-header .bh-logo {
+  width: 210px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.home-message {
+  background-color: #feab3f;
+  background-image: linear-gradient(to bottom right, #fe9d1f, #fec171);
+  padding-top: 45px;
+  font-family: unset;
+}
+
+.welcome-message {
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+}
+
+.welcome-message .part1 {
+  font-size: 20px;
+}
+
+.welcome-message .part2 {
+  font-size: 26px;
+}
+
+.welcome-message .part2-inner {
+  font-weight: bold;
+}
+
+.welcome-explanation {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 115px;
+  font-size: 18px;
+}
+
+.welcome-disclaimer {
+  text-align: center;
+  font-size: 18px;
+  color: #604118;
+}
+
+.welcome-cta {
+  margin-top: 58px;
+  padding-bottom: 50px;
+}

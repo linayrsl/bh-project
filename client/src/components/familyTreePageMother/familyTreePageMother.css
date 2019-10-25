@@ -1,0 +1,17 @@
+.progress-scale {
+  display: flex;
+}
+
+.progress-scale .level {
+  height: 30px;
+  width: 25%;
+  background-color: #b3b2b2;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  border-left: white 1px solid;
+}
+
+.progress-scale .level.active {
+  background-color: #37b9c9;
+}

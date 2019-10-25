@@ -1,0 +1,2 @@
+class VerificationCodeNotFound(Exception):
+    pass

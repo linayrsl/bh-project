@@ -1,0 +1,91 @@
+.person-details-inner-container {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.person-details input.person-details-image-input {
+  display: none;
+}
+
+.person-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-bottom: 2px solid #cccbcb;
+  height: 150px;
+  position: relative;
+}
+
+.person-details-header span {
+  font-size: 22px;
+  color: rgb(83, 83, 84);
+  padding-bottom: 10px;
+}
+
+.person-details-header label {
+  color: darkgrey;
+  font-size: 18px;
+  text-decoration: underline;
+  z-index: 1;
+}
+
+.image-input {
+  width: 128px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-location {
+  width: 128px;
+  height: 128px;
+  background-size: 128px 128px;
+  background-position: center;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #cccbcb;
+  position: absolute;
+  z-index: 0;
+}
+
+.gender {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #cccbcb;
+}
+
+.gender-options-buttons label {
+  color: grey;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.gender-options-buttons .gender-text {
+  color: darkgrey;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.gender-options {
+  font-size: 20px;
+  color: rgb(83, 83, 84);
+}
+
+.alive-checkbox {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #cccbcb;
+}
+
+.alive-checkbox label {
+  color: rgb(83, 83, 84);
+  font-size: 20px;
+  padding-left: 10px;
+}

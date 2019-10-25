@@ -1,0 +1,46 @@
+.register-cta {
+  margin-top: 58px;
+  padding-bottom: 50px;
+}
+
+.register-body {
+  padding-top: 10px;
+}
+
+.register-user {
+  font-size: 30px;
+  color: rgb(83, 83, 84);
+  margin-bottom: 30px;
+  padding-right: 10px;
+}
+
+.register-form {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.user-checkbox {
+  margin-top: 20px;
+}
+
+.accept-conditions-full {
+  margin-right: 5px;
+  font-size: 18px;
+  color: rgb(83, 83, 84);
+}
+
+.user-checkbox .accept-conditions {
+  text-decoration: underline;
+}
+
+.register-disclaimer {
+  margin-top: 200px;
+  padding-right: 10px;
+  font-size: 20px;
+  color: rgb(83, 83, 84);
+  text-align: center;
+}
+
+input.invalid {
+  border: 1px solid red !important;
+}
