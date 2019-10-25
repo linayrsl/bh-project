@@ -20,7 +20,7 @@ FLASK_APP=./src/server.py flask run
 
 #### Register and Send Verification Code
 
-**POST** `/auth/register/`
+**POST** `/api/auth/register/`
 
 Request body:
 
@@ -37,7 +37,7 @@ Possible responses:
 * 400 Bad Request - the request is malformed
 * 500 Internal Server Error - failed to send verification code
 
-**POST** `/auth/verification-code/<email>`
+**POST** `/api/auth/verification-code/<email>`
 
 Path parameters:
 
@@ -63,7 +63,7 @@ Possible responses:
 
 #### Send resized image 
 
-**POST** `/resize-image/`
+**POST** `/api/resize-image/`
 
 
 Request body:
@@ -86,7 +86,7 @@ Possible responses:
 
 #### Generate and send gedcom
 
-**POST** `/family-tree/`
+**POST** `/api/family-tree/`
 
 
 Request body:
@@ -117,8 +117,3 @@ Possible responses:
 * 200 Ok
 * 400 Bad Request - JSON did not pass the validation 
 * 500 Internal Server Error - failed to send family tree 
-
-
-
-
-

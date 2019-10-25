@@ -1,4 +1,5 @@
 0 HEAD
+1 CHAR UTF-8
 1 SOUR "Family Tree"
 2 VERS 1.0
 2 CORP Beit_Hatfutsot
@@ -6,11 +7,10 @@
 2 TIME 00:00:00
 1 FILE 1.jpg
 1 GEDC
-2 VERS 5.5
-1 LANG SQ
+2 VERS 5.5.1
+1 LANG HE
 0 @I1@ INDI
 1 NAME Alex /Smith/
-1 SURN none
 1 SEX M
 1 BIRT
 2 DATE 10 FEB 1955
@@ -23,7 +23,6 @@
 2 FILE 1.jpg
 0 @I20@ INDI
 1 NAME John /Smith/
-1 SURN none
 1 SEX M
 1 BIRT
 2 DATE 10 FEB 1930
@@ -37,8 +36,6 @@
 1 NAME Monica /Smith/
 1 SEX F
 1 BIRT
-1 NAME Monica /Geller/
-2 TYPE maiden
 2 DATE 10 FEB 1930
 2 PLAC New York
 1 DEAT

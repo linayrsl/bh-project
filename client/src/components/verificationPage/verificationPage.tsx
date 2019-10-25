@@ -33,7 +33,7 @@ class VerificationPageComponent extends React.Component<
 
     let apiResponsePromise = axios
       .post(
-        `https://she-codes-bh-project.herokuapp.com/auth/verification-code/${decodeURIComponent(
+        `/api/auth/verification-code/${decodeURIComponent(
           this.props.match!.params.email
         )}`,
         { verificationCode: this.state.verificationCode }

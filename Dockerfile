@@ -15,6 +15,6 @@ RUN mkdir src
 COPY ./src ./src
 
 RUN mkdir ./static
-COPY --from=client-buider /client/dist/bh-project ./static
+COPY --from=client-buider /client/build ./static
 
 CMD gunicorn --bind 0.0.0.0:$PORT --chdir src server

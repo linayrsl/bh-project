@@ -43,7 +43,7 @@ class TestFamilyTree(unittest.TestCase):
     def test_family_tree_valid(self):
         family_tree = copy.deepcopy(test_family_tree)
         with application.test_client() as client:
-            response: Response = client.post("/family-tree/", json=family_tree)
+            response: Response = client.post("/api/family-tree/", json=family_tree)
 
             self.assertEqual(200, response.status_code)
 
@@ -52,7 +52,7 @@ class TestFamilyTree(unittest.TestCase):
         family_tree["1"]["firstName"] = 123
 
         with application.test_client() as client:
-            response: Response = client.post("/family-tree/", json=family_tree)
+            response: Response = client.post("/api/family-tree/", json=family_tree)
 
             self.assertNotEqual(200, response.status_code)
 
@@ -61,7 +61,7 @@ class TestFamilyTree(unittest.TestCase):
         family_tree["1"]["birthDate"] = "18-12-1983"
 
         with application.test_client() as client:
-            response: Response = client.post("/family-tree/", json=family_tree)
+            response: Response = client.post("/api/family-tree/", json=family_tree)
 
             self.assertNotEqual(200, response.status_code)
 
@@ -70,7 +70,7 @@ class TestFamilyTree(unittest.TestCase):
         family_tree["1"]["gender"] = ""
 
         with application.test_client() as client:
-            response: Response = client.post("/family-tree/", json=family_tree)
+            response: Response = client.post("/api/family-tree/", json=family_tree)
 
             self.assertNotEqual(200, response.status_code)
 
@@ -79,7 +79,7 @@ class TestFamilyTree(unittest.TestCase):
         family_tree["1"]["gender"] = "animal"
 
         with application.test_client() as client:
-            response: Response = client.post("/family-tree/", json=family_tree)
+            response: Response = client.post("/api/family-tree/", json=family_tree)
 
             self.assertNotEqual(200, response.status_code)
 
@@ -88,6 +88,6 @@ class TestFamilyTree(unittest.TestCase):
         family_tree["1"] = ""
 
         with application.test_client() as client:
-            response: Response = client.post("/family-tree/", json=family_tree)
+            response: Response = client.post("/api/family-tree/", json=family_tree)
 
             self.assertNotEqual(200, response.status_code)

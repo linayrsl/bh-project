@@ -46,22 +46,23 @@ CORS(application)
 RequestID(application)
 
 
-@application.route('/')
-def root():
+@application.route('/', defaults={'path': ''})
+@application.route('/<path:path>')
+def root(path: str):
     return application.send_static_file("index.html")
 
 
 application.register_blueprint(
     family_tree,
-    url_prefix="/family-tree")
+    url_prefix="/api/family-tree")
 
 application.register_blueprint(
     auth,
-    url_prefix="/auth")
+    url_prefix="/api/auth")
 
 application.register_blueprint(
     resize_image,
-    url_prefix="/resize-image")
+    url_prefix="/api/resize-image")
 
 
 if __name__ == "__main__":

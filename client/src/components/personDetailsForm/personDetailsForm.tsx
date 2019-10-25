@@ -87,7 +87,7 @@ class PersonDetailsForm extends React.Component<
         axios
           .post<{
             resizedImageB64: string;
-          }>("https://she-codes-bh-project.herokuapp.com/resize-image/", image)
+          }>("/api/resize-image/", image)
           .then(response => {
             if (response && response.data && response.data.resizedImageB64) {
               this.setState({ image: response.data.resizedImageB64 });

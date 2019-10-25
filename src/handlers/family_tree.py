@@ -99,12 +99,12 @@ def family_tree_post():
         return abort(500, description="Failed to generate gedcom")
 
     try:
-        user_id = re.findall(r'I[0-9]+', gedcom_string)[0][1:]
+        user_id = re.findall(r'I[0-9]+', gedcom_string, re.UNICODE)[0][1:]
         file_name = 'user{}.ged'.format(user_id)
         zip_file_name = 'user{}.zip'.format(user_id)
 
         user_last_name = re.findall(r'/\w+', gedcom_string, re.UNICODE)[0][1:]
-        content = '{} family tree'.format(user_last_name)
+        content = str(b'{} family tree', 'utf-8').format(user_last_name)
     except Exception:
         logger.exception("Failed to extract user name and user last name from gedcom string")
         return abort(500, description="Failed to generate gedcom")

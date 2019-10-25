@@ -30,7 +30,7 @@ class RegisterPage extends React.Component<
     this.setState({ httpRequestInProgress: true });
 
     let apiResponsePromise = axios
-      .post("https://she-codes-bh-project.herokuapp.com/auth/register/", {
+      .post("/api/auth/register/", {
         email: this.state.email,
         phone: this.state.phone
       })

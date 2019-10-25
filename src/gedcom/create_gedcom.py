@@ -29,6 +29,7 @@ def create_head_record(file_name):
     # create the HEAD_RECORD
     lines_header = """
 0 HEAD
+1 CHAR UTF-8
 1 SOUR "Family Tree"
 2 VERS 1.0
 2 CORP Beit_Hatfutsot
@@ -36,7 +37,7 @@ def create_head_record(file_name):
 2 TIME {}
 1 FILE {}
 1 GEDC
-2 VERS 5.5""".format(date, time, file_name)
+2 VERS 5.5.1""".format(date, time, file_name)
     return lines_header
 
 
@@ -63,7 +64,7 @@ def create_individual_record(Person, Family):
     lines_person = "\n0 @I{}@ INDI\n1 NAME {} /{}/".format(Person.ID, Person.firstName, Person.lastName)
 
     # set SURN data (maiden name)
-    _result, lines_person_maidenName = check_no_empty_data(Person.maidenName, "\n1 SURN {}".format(Person.maidenName))
+    # _result, lines_person_maidenName = check_no_empty_data(Person.maidenName, "\n1 SURN {}".format(Person.maidenName))
 
     # set SEX data
     lines_person_sex = "\n1 SEX {}".format(Person.gender[0].upper())
@@ -99,7 +100,8 @@ def create_individual_record(Person, Family):
     # set FILE data (image)
     _result, lines_person_image = check_no_empty_data(Person.image, "\n1 OBJE\n2 FILE {}".format(Person.image))
 
-    return lines_person + lines_person_maidenName + lines_person_sex + \
+    # return lines_person + lines_person_maidenName + lines_person_sex + \
+    return lines_person + lines_person_sex + \
            lines_person_birth + lines_person_family + \
            lines_person_death + lines_person_image
 

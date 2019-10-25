@@ -4,16 +4,16 @@ from .class_person import Person
 from .class_family import Family
 from .create_gedcom import *
 
-list_appended_strings = []
-families = []  # list of family IDs
-list_families = []  # list of families data
-the_end = "\n0 TRLR"
-names = []  # list of last names
-dict_image = {}  # collect images
-dict_for_csv = {}  # collect data dictionary for csv
-
 
 def handler(data_dictionary):
+    list_appended_strings = []
+    families = []  # list of family IDs
+    list_families = []  # list of families data
+    the_end = "\n0 TRLR"
+    names = []  # list of last names
+    dict_image = {}  # collect images
+    dict_for_csv = {}  # collect data dictionary for csv
+
     # pulling user data
     for k in data_dictionary:
         user_ID = data_dictionary[k]["ID"]
@@ -38,7 +38,7 @@ def handler(data_dictionary):
     # writing the HEAD Record
     list_appended_strings.append(create_head_record(dict_for_csv["filenameGedcom"]))
     # writing the language data to the HEAD Record
-    list_appended_strings.append(create_language_record(define_language(names_string)))
+    list_appended_strings.append(create_language_record("HE"))
 
     # creating persons
     for _key, details in data_dictionary.items():
@@ -68,4 +68,4 @@ def handler(data_dictionary):
     # transforming INDI data's list to string
     gedcom_string = "".join(list_appended_strings)
 
-    return gedcom_string + the_end, dict_image, dict_for_csv
+    return (gedcom_string + the_end).encode('utf-8').decode('utf-8'), dict_image, dict_for_csv
