@@ -6,7 +6,7 @@ RUN npm ci
 RUN npm run build
 
 
-FROM python:3
+FROM python:3.7
 
 WORKDIR /server
 COPY requirements.txt ./
