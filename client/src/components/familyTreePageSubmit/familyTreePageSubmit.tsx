@@ -149,7 +149,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     });
 
     axios
-      .post("http://localhost:5000/family-tree/", familyTreeJson)
+      .post("/api/family-tree/", familyTreeJson)
       .finally(() => {
         this.props.history!.push("/thank-you");
       });
