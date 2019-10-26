@@ -110,8 +110,9 @@ class FamilyTreePageSiblings extends React.Component<
           id="numOfSiblings"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             let numOfSiblings = parseInt(event.target.value);
-
-            this.setState({ numOfSiblings: numOfSiblings });
+            if (!isNaN(numOfSiblings)) {
+              this.setState({ numOfSiblings: numOfSiblings });
+            }
           }}
         />
         <div className="family-tree-body">

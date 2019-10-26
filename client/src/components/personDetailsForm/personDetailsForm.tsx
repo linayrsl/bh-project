@@ -53,6 +53,10 @@ class PersonDetailsForm extends React.Component<
     };
   }
 
+  componentDidMount() {
+    this.props.onFormValidityChange(this.isFormValid());
+  }
+
   componentDidUpdate(
     prevProps: PersonDetailsFormProps,
     prevState: PersonDetailsFormState
