@@ -46,9 +46,8 @@ CORS(application)
 RequestID(application)
 
 
-@application.route('/', defaults={'path': ''})
-@application.route('/<path:path>')
-def root(path: str):
+@application.route('/')
+def root():
     return application.send_static_file("index.html")
 
 
@@ -63,6 +62,12 @@ application.register_blueprint(
 application.register_blueprint(
     resize_image,
     url_prefix="/api/resize-image")
+
+
+@application.route('/<string:path_part1>')
+@application.route('/<string:path_part1>/<string:path_part2>')
+def client_page2(path_part1: str, path_part2: str = None):
+    return application.send_static_file("index.html")
 
 
 if __name__ == "__main__":
