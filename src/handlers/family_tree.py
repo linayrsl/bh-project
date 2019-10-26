@@ -26,7 +26,7 @@ family_tree_json_schema = {
                 "firstName": {"type": "string"},
                 "lastName": {"type": "string"},
                 "maidenName": {"type": ["string", "null"]},
-                "gender": {"type": "string", "enum": ["male", "female"]},
+                "gender": {"type": "string", "enum": ["male", "female", "other"]},
                 "birthDate": {"type": "string", "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"},
                 "birthPlace": {"type": "string"},
                 "isAlive": {"type": "boolean"},
