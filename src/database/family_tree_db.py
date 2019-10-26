@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import logging
 from typing import Dict
 
@@ -18,11 +18,16 @@ def log_family_tree_submission(db_connection, family_tree: Dict) -> bool:
         try:
             upload_log_record: Dict = {"email": '',
                                        "first_name": submitter['firstName'],
-                                       "last_name": submitter['lastName'], "gender": submitter['gender'][0],
-                                       "gedcom_language": "HE", "date_of_birth": submitter['birthDate'],
-                                       "address": '', "country": '',
-                                       "creation_time": datetime.datetime.now(), "num_of_people": 1,
-                                       "num_of_photos": 0, "is_new_tree": True}
+                                       "last_name": submitter['lastName'],
+                                       "gender": submitter['gender'][0],
+                                       "gedcom_language": "HE",
+                                       "date_of_birth": datetime.strptime(submitter['birthDate'], "%d/%m/%Y"),
+                                       "address": '',
+                                       "country": '',
+                                       "creation_time": datetime.now(),
+                                       "num_of_people": 1,
+                                       "num_of_photos": 0,
+                                       "is_new_tree": True}
         except Exception:
             logger.exception("Failed to generate upload log record")
             return False
