@@ -1,3 +1,19 @@
+.home-page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page-body {
+  flex: 1;
+  background-color: #feab3f;
+  background-image: linear-gradient(to bottom right, #fe9d1f, #fec171);
+  padding-top: 45px;
+  font-family: unset;
+  display: flex;
+  flex-direction: column;
+}
+
 .home-header {
   border-bottom: 7px solid #37b9c9;
   text-align: center;
@@ -7,13 +23,6 @@
   width: 210px;
   margin-top: 30px;
   margin-bottom: 30px;
-}
-
-.home-message {
-  background-color: #feab3f;
-  background-image: linear-gradient(to bottom right, #fe9d1f, #fec171);
-  padding-top: 45px;
-  font-family: unset;
 }
 
 .welcome-message {
@@ -37,7 +46,7 @@
 .welcome-explanation {
   text-align: center;
   margin-top: 30px;
-  margin-bottom: 115px;
+  margin-bottom: 30px;
   font-size: 18px;
 }
 
@@ -49,5 +58,5 @@
 
 .welcome-cta {
   margin-top: 58px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }

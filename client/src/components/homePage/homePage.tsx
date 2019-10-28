@@ -12,7 +12,7 @@ class HomePage extends Component {
         <div className="home-header">
           <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
         </div>
-        <div className="home-message">
+        <div className="home-page-body">
           <div className="welcome-message" tabIndex={1}>
             <span className="part1"> ברוכים הבאים</span>
             <br />
@@ -25,6 +25,7 @@ class HomePage extends Component {
             כאן תוכלו ליצור את עץ המשפחה שלכם
             <br /> ב-4 צעדים פשוטים.
           </div>
+          <div className="vertical-spacer"></div>
           <div className="welcome-disclaimer" tabIndex={3}>
             העץ שתבנו יישמר במאגר עצי המשפחה
             <br /> המאובטח של בית התפוצות ותוכלו לעיין בו

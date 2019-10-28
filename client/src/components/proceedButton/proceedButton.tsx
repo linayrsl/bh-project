@@ -18,24 +18,26 @@ export interface ProceedButtonProps {
 class ProceedButtonComponent extends Component<ProceedButtonProps> {
   render() {
     return (
-      <button
-        tabIndex={this.props.tabIndex}
-        disabled={this.props.disabled}
-        onClick={() => {
-          if (!this.props.callback) {
-            return this.props.history!.push(this.props.nextPageUrl);
-          }
+      <div className="buttom">
+        <button
+          tabIndex={this.props.tabIndex}
+          disabled={this.props.disabled}
+          onClick={() => {
+            if (!this.props.callback) {
+              return this.props.history!.push(this.props.nextPageUrl);
+            }
 
-          this.props.callback().then(() => {
-            this.props.history!.push(this.props.nextPageUrl);
-          });
-        }}
-        className={`proceed-button ${
-          this.props.disabled === true ? "disabled" : ""
-        }`}
-      >
-        {this.props.text}
-      </button>
+            this.props.callback().then(() => {
+              this.props.history!.push(this.props.nextPageUrl);
+            });
+          }}
+          className={`proceed-button ${
+            this.props.disabled === true ? "disabled" : ""
+          }`}
+        >
+          {this.props.text}
+        </button>
+      </div>
     );
   }
 }

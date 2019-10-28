@@ -9,3 +9,6 @@ body {
 .bh-app .ltr input {
   direction: ltr !important;
 }
+.vertical-spacer {
+  flex: 1;
+}
