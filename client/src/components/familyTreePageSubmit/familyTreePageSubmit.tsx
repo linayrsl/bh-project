@@ -148,18 +148,16 @@ class FamilyTreePageSubmitComponent extends React.Component<
       familyTreeJson["1"].siblings.push(key);
     });
 
-    axios
-      .post("/api/family-tree/", familyTreeJson)
-      .finally(() => {
-        this.props.history!.push("/thank-you");
-      });
+    axios.post("/api/family-tree/", familyTreeJson).finally(() => {
+      this.props.history!.push("/thank-you");
+    });
   }
 
   render() {
     return (
       <div className="family-tree-submit-container">
         <Header title="סיימת את בניית עץ המשפחה שלך" />
-        <div className="family-tree-submit-body">
+        <div className="family-tree-submit-body page-content-container">
           <div className="pre-submittion-text">
             זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין
             שגיאה?

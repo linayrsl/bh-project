@@ -66,7 +66,7 @@ class FamilyTreePageFather extends React.Component<
           <div className="level active">3</div>
           <div className="level">4</div>
         </div>
-        <div className="family-tree-body">
+        <div className="family-tree-body page-content-container ">
           <PersonDetailsForm
             idPrefix="father"
             title="אבא"

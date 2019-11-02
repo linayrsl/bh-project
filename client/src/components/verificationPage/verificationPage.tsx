@@ -49,7 +49,7 @@ class VerificationPageComponent extends React.Component<
     return (
       <div className="verification-page-container">
         <Header title="אימות דואר אלקטרוני" />
-        <div className="verification-body">
+        <div className="verification-body page-content-container ">
           <div className="verification-message">
             <div className="verification-message1">
               בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה

@@ -50,6 +50,10 @@ class FamilyTreePageSiblings extends React.Component<
       }
     }
     this.setState({ siblingsDetails: siblingsDetails });
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
   componentDidUpdate(
@@ -97,56 +101,58 @@ class FamilyTreePageSiblings extends React.Component<
           <div className="level active">3</div>
           <div className="level active">4</div>
         </div>
-        <TextInput
-          className="numOfSiblings"
-          defaultValue={
-            this.state.numOfSiblings >= 0
-              ? this.state.numOfSiblings.toString()
-              : ""
-          }
-          type="number"
-          placeholder=""
-          title="כמה אחים ואחיות יש לך ?"
-          id="numOfSiblings"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            let numOfSiblings = parseInt(event.target.value);
-            if (!isNaN(numOfSiblings)) {
-              this.setState({ numOfSiblings: numOfSiblings });
+        <div className="page-content-container">
+          <TextInput
+            className="numOfSiblings"
+            defaultValue={
+              this.state.numOfSiblings >= 0
+                ? this.state.numOfSiblings.toString()
+                : ""
             }
-          }}
-        />
-        <div className="family-tree-body">
-          {Object.keys(this.state.formsValidity).map(siblingId => {
-            return (
-              <PersonDetailsForm
-                key={siblingId}
-                idPrefix={siblingId}
-                title="אח/אחות"
-                displayIsAlive
-                displayMaidenName
-                defaults={this.state.siblingsDetails[siblingId]}
-                onFormChange={(state: PersonDetailsFormState) => {
-                  this.formChangeHandler(siblingId, state);
-                }}
-                onFormValidityChange={(isValid: boolean) => {
-                  let newFormsValidity = { ...this.state.formsValidity }; // Making copy of dict in state with all data
-                  newFormsValidity[siblingId] = isValid;
-                  this.setState({
-                    formsValidity: newFormsValidity
-                  });
-                }}
-              />
-            );
-          })}
-        </div>
-        <div className="family-tree-footer">
-          <ProceedButton
-            disabled={
-              Object.values(this.state.formsValidity).indexOf(false) >= 0
-            } // This expression return true if at least 1 of values in formsValidity dict is falsey
-            text="לסיום הקישו כאן"
-            nextPageUrl="/family-tree/submit"
+            type="number"
+            placeholder=""
+            title="כמה אחים ואחיות יש לך ?"
+            id="numOfSiblings"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              let numOfSiblings = parseInt(event.target.value);
+              if (!isNaN(numOfSiblings)) {
+                this.setState({ numOfSiblings: numOfSiblings });
+              }
+            }}
           />
+          <div className="family-tree-body">
+            {Object.keys(this.state.formsValidity).map(siblingId => {
+              return (
+                <PersonDetailsForm
+                  key={siblingId}
+                  idPrefix={siblingId}
+                  title="אח/אחות"
+                  displayIsAlive
+                  displayMaidenName
+                  defaults={this.state.siblingsDetails[siblingId]}
+                  onFormChange={(state: PersonDetailsFormState) => {
+                    this.formChangeHandler(siblingId, state);
+                  }}
+                  onFormValidityChange={(isValid: boolean) => {
+                    let newFormsValidity = { ...this.state.formsValidity }; // Making copy of dict in state with all data
+                    newFormsValidity[siblingId] = isValid;
+                    this.setState({
+                      formsValidity: newFormsValidity
+                    });
+                  }}
+                />
+              );
+            })}
+          </div>
+          <div className="family-tree-footer">
+            <ProceedButton
+              disabled={
+                Object.values(this.state.formsValidity).indexOf(false) >= 0
+              } // This expression return true if at least 1 of values in formsValidity dict is falsey
+              text="לסיום הקישו כאן"
+              nextPageUrl="/family-tree/submit"
+            />
+          </div>
         </div>
       </div>
     );

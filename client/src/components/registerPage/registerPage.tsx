@@ -53,7 +53,7 @@ class RegisterPage extends React.Component<
     return (
       <div className="register-page-container">
         <Header title="הרשמה" />
-        <div className="register-body">
+        <div className="register-body page-content-container ">
           <div className="register-message">
             <div className="register-user">פרטי רישום</div>
           </div>

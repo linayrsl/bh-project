@@ -12,7 +12,7 @@ class HomePage extends Component {
         <div className="home-header">
           <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
         </div>
-        <div className="home-page-body">
+        <div className="home-page-body ">
           <div className="welcome-message" tabIndex={1}>
             <span className="part1"> ברוכים הבאים</span>
             <br />

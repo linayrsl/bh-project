@@ -24,36 +24,39 @@ class FamilyTreeThankYouPage extends React.Component<
               לחקור ולהיות חלק מסיפור.
             </p>
           </div>
-          <div className="bh-logo-class">
-            <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
-          </div>
-          <div className="information-boxes-upper">
-            <a className="upper-right-box">
-              בואו <span className="highlight"> לבקר </span> במוזיאון העם היהודי
-            </a>
-            <a className="upper-left-box">
-              מוזמנים להתרשם ממבחר הפריטים בחנות המוזיאון
-            </a>
-          </div>
-          <div className="information-boxes-lower">
-            <a className="lower-right-box">
-              בואו <span className="highlight"> ללמוד </span> עם התוכניות
-              החינוכיות
-            </a>
-            <a className="lower-left-box">
-              בואו <span className="highlight"> לגלות </span> על העולם היהודי
-              במאגרי המידע
-            </a>
-          </div>
-          <div className="information-bar-body">
-            <div className="information-bar-line1">
-              אודות מאגר עצי המשפחה במוזאון
+          <div className="page-content-container information">
+            <div className="bh-logo-class">
+              <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
             </div>
-            <div className="information-bar-line2">
-              אודות מאגרי המידע של המוזאון
+            <div className="information-boxes-upper">
+              <a className="upper-right-box information-box">
+                בואו <span className="highlight"> לבקר </span> במוזיאון העם
+                היהודי
+              </a>
+              <a className="upper-left-box information-box">
+                מוזמנים להתרשם ממבחר הפריטים בחנות המוזיאון
+              </a>
             </div>
-            <div className="information-bar-line3">אודות מוזאון העם היהודי</div>
-            <div className="information-bar-line4"> אודות פרוייקט זה </div>
+            <div className="information-boxes-lower">
+              <a className="lower-right-box information-box">
+                בואו <span className="highlight"> ללמוד </span> עם התוכניות
+                החינוכיות
+              </a>
+              <a className="lower-left-box information-box">
+                בואו <span className="highlight"> לגלות </span> על העולם היהודי
+                במאגרי המידע
+              </a>
+            </div>
+            <div className="information-bar-body">
+              <div className="information-bar">
+                אודות מאגר עצי המשפחה במוזאון
+              </div>
+              <div className="information-bar">
+                אודות מאגרי המידע של המוזאון
+              </div>
+              <div className="information-bar">אודות מוזאון העם היהודי</div>
+              <div className="information-bar"> אודות פרוייקט זה </div>
+            </div>
           </div>
         </div>
       </div>

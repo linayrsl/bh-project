@@ -46,6 +46,10 @@ class FamilyTreePageMother extends React.Component<
       let fatherOfMotherDetails = JSON.parse(item);
       this.setState({ fatherOfMotherDetails: fatherOfMotherDetails });
     }
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
   formChangeHandler(formName: string, state: PersonDetailsFormState) {
@@ -62,7 +66,7 @@ class FamilyTreePageMother extends React.Component<
           <div className="level">3</div>
           <div className="level">4</div>
         </div>
-        <div className="family-tree-body">
+        <div className="family-tree-body page-content-container ">
           <PersonDetailsForm
             idPrefix="mother"
             title="אמא"

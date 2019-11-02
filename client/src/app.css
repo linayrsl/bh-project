@@ -12,3 +12,12 @@ body {
 .vertical-spacer {
   flex: 1;
 }
+
+@media only screen and (min-width: 768px) {
+  .page-content-container {
+    width: 768px;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+  }
+}
