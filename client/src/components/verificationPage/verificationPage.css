@@ -1,3 +1,15 @@
+.verification-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.verification-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 .verification-message {
   color: rgb(83, 83, 84);
   padding-left: 10px;
@@ -26,10 +38,8 @@
 
 .verification-message3 {
   color: rgb(83, 83, 84);
-  padding-bottom: 100px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-top: 240px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .verification-code-input label {
@@ -39,4 +49,8 @@
 .verification-form {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.verification-cta {
+  margin-bottom: 30px;
 }

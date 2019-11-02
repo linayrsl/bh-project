@@ -1,10 +1,19 @@
+.register-page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .register-cta {
-  margin-top: 58px;
-  padding-bottom: 50px;
+  margin-bottom: 30px;
+  /* padding-bottom: 50px; */
 }
 
 .register-body {
   padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .register-user {
@@ -34,8 +43,8 @@
 }
 
 .register-disclaimer {
-  margin-top: 200px;
-  padding-right: 10px;
+  margin-bottom: 50px;
+  margin-top: 50px;
   font-size: 20px;
   color: rgb(83, 83, 84);
   text-align: center;

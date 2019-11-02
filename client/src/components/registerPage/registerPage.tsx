@@ -95,6 +95,7 @@ class RegisterPage extends React.Component<
               </div>
             </form>
           </div>
+          <div className="vertical-spacer"></div>
           <div className="register-disclaimer">
             לא לדאוג, לא נשלח הודעות ספאם!
           </div>

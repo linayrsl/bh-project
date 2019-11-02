@@ -58,6 +58,7 @@ class VerificationPageComponent extends React.Component<
               ובה קוד אימות, יש להעתיק את הקוד לכאן:
             </div>
           </div>
+
           <div className="verification-form">
             <form>
               <TextInput
@@ -73,15 +74,18 @@ class VerificationPageComponent extends React.Component<
               <div className="verification-message3">
                 במידה ולא התקבלה הודעה, בדקו את תיבת דואר הזבל
               </div>
-              <ProceedButton
-                disabled={
-                  !this.validateForm() || this.state.httpRequestInProgress
-                }
-                text="אישור"
-                nextPageUrl="/family-tree/me"
-                callback={this.verifyCode.bind(this)}
-              />
             </form>
+          </div>
+          <div className="vertical-spacer"></div>
+          <div className="verification-cta">
+            <ProceedButton
+              disabled={
+                !this.validateForm() || this.state.httpRequestInProgress
+              }
+              text="אישור"
+              nextPageUrl="/family-tree/me"
+              callback={this.verifyCode.bind(this)}
+            />
           </div>
         </div>
       </div>

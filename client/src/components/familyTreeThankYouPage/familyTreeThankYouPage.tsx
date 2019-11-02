@@ -28,22 +28,22 @@ class FamilyTreeThankYouPage extends React.Component<
             <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
           </div>
           <div className="information-boxes-upper">
-            <button className="upper-right-box">
+            <a className="upper-right-box">
               בואו <span className="highlight"> לבקר </span> במוזיאון העם היהודי
-            </button>
-            <button className="upper-left-box">
+            </a>
+            <a className="upper-left-box">
               מוזמנים להתרשם ממבחר הפריטים בחנות המוזיאון
-            </button>
+            </a>
           </div>
           <div className="information-boxes-lower">
-            <button className="lower-right-box">
+            <a className="lower-right-box">
               בואו <span className="highlight"> ללמוד </span> עם התוכניות
               החינוכיות
-            </button>
-            <button className="lower-left-box">
+            </a>
+            <a className="lower-left-box">
               בואו <span className="highlight"> לגלות </span> על העולם היהודי
-              במאגרי המידע החינוכיות
-            </button>
+              במאגרי המידע
+            </a>
           </div>
           <div className="information-bar-body">
             <div className="information-bar-line1">

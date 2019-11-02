@@ -45,6 +45,7 @@ class App extends Component {
             <Route exact path="/thank-you">
               <FamilyTreeThankYouPage />
             </Route>
+            <Route render={() => <div>Page Not Found</div>} />
           </Switch>
         </BrowserRouter>
       </div>

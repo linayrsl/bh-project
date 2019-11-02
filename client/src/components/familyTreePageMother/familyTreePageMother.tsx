@@ -102,17 +102,17 @@ class FamilyTreePageMother extends React.Component<
               this.setState({ fatherOfMotherFormValid: isValid });
             }}
           />
-        </div>
-        <div className="family-tree-footer">
-          <ProceedButton
-            disabled={
-              !this.state.motherFormValid ||
-              !this.state.motherOfMotherFormValid ||
-              !this.state.fatherOfMotherFormValid
-            }
-            text="המשיכו"
-            nextPageUrl="/family-tree/father"
-          />
+          <div className="family-tree-footer">
+            <ProceedButton
+              disabled={
+                !this.state.motherFormValid ||
+                !this.state.motherOfMotherFormValid ||
+                !this.state.fatherOfMotherFormValid
+              }
+              text="המשיכו"
+              nextPageUrl="/family-tree/father"
+            />
+          </div>
         </div>
       </div>
     );

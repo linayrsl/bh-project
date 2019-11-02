@@ -61,6 +61,7 @@ class FamilyTreePageSubmitter extends React.Component<
             idPrefix="me"
             title="אני"
           />
+          <div className="vertical-spacer"></div>
           <div className="family-tree-footer">
             <ProceedButton
               disabled={!this.state.allFormsValid}

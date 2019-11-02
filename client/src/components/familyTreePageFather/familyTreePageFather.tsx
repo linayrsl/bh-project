@@ -46,6 +46,10 @@ class FamilyTreePageFather extends React.Component<
       let fatherOfFatherDetails = JSON.parse(item);
       this.setState({ fatherOfFatherDetails: fatherOfFatherDetails });
     }
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
   formChangeHandler(formName: string, state: PersonDetailsFormState) {
