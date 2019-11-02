@@ -1,16 +1,17 @@
-import cv2
-import numpy as np
+from PIL import Image
+from resizeimage import resizeimage
+import io
 
-dsize = (480, 167)
+
+def resize_image(image: bytes, image_size: int) -> bytes:
+    image_file_object = Image.open(io.BytesIO(image))
+    resized_image: Image = resizeimage.resize_width(image_file_object, image_size, validate=False)
+    resized_image_bytes = image_to_byte_array(resized_image)
+    return resized_image_bytes
 
 
-def transform_image(binary_string_image):
-    if len(binary_string_image) != 0:
-        img = cv2.imdecode(np.frombuffer(binary_string_image, np.uint8), cv2.IMREAD_COLOR)
-        img = cv2.resize(img, dsize)
-    else:
-        return print("The string is empty")
-
-    _result, image_text = cv2.imencode(".jpg", img)
-
-    return image_text
+def image_to_byte_array(image: Image) -> bytes:
+    img_byte_arr = io.BytesIO()
+    image.save(img_byte_arr, format="png")
+    img_byte_arr = img_byte_arr.getvalue()
+    return img_byte_arr

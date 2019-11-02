@@ -165,13 +165,13 @@ class FamilyTreePageSubmitComponent extends React.Component<
           <div className="choose-option">
             <button
               onClick={this.returnButtonHandler.bind(this)}
-              className="option-yes"
+              className="option-yes option-button"
             >
               חזרה
             </button>
             <button
               onClick={this.submitButtonHandler.bind(this)}
-              className="option-no"
+              className="option-no option-button"
             >
               שליחה
             </button>

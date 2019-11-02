@@ -11,10 +11,8 @@
   justify-content: space-between;
 }
 
-.option-yes {
+.option-button {
   border: none;
-  background-color: #37b9c9;
-  background-image: linear-gradient(to right, #238f9c, #37b9c9);
   width: 160px;
   height: 54px;
   line-height: 54px;
@@ -25,18 +23,14 @@
   cursor: pointer;
 }
 
+.option-yes {
+  background-color: #37b9c9;
+  background-image: linear-gradient(to right, #238f9c, #37b9c9);
+}
+
 .option-no {
-  border: none;
   background-color: #c95644;
   background-image: linear-gradient(to right, #b5281d, #c95644);
-  width: 160px;
-  height: 54px;
-  line-height: 54px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
 }
 
 .family-tree-submit-body {

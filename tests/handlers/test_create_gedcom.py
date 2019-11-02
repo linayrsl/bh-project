@@ -1,10 +1,7 @@
-import base64
 import os
 import random
 import unittest
-import numpy as np
 
-import cv2
 from freezegun import freeze_time
 
 from src.gedcom.handler import handler
@@ -17,8 +14,7 @@ def read_expectations_file(file_name: str) -> str:
         return expected_gedcom_string
 
 
-blank_image = np.zeros(shape=[1, 1, 3], dtype=np.uint8)
-_, image_text = cv2.imencode(".jpg", blank_image)
+blank_image = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCAABAAEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+f+iiigD/2Q=="
 
 
 class TestCreateGedcom(unittest.TestCase):
@@ -38,7 +34,7 @@ class TestCreateGedcom(unittest.TestCase):
                 "isAlive": "False",
                 "deathPlace": "Boston",
                 "deathDate": "07/07/2000",
-                "image": base64.b64encode(image_text).decode("ascii"),
+                "image": blank_image,
                 "siblings": []
             },
             "20": {
@@ -54,7 +50,7 @@ class TestCreateGedcom(unittest.TestCase):
                 "isAlive": "False",
                 "deathPlace": "Boston",
                 "deathDate": "07/07/2000",
-                "image": base64.b64encode(image_text).decode("ascii"),
+                "image": blank_image,
                 "siblings": []
             },
             "10": {
@@ -70,7 +66,7 @@ class TestCreateGedcom(unittest.TestCase):
                 "isAlive": "False",
                 "deathPlace": "Boston",
                 "deathDate": "07/07/2000",
-                "image": base64.b64encode(image_text).decode("ascii"),
+                "image": blank_image,
                 "siblings": []
             }
         }
