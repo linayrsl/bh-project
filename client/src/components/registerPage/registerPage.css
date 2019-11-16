@@ -1,5 +1,5 @@
 .register-page-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -39,6 +39,7 @@
 
 .user-checkbox .accept-conditions {
   text-decoration: underline;
+  color: rgb(83, 83, 84);
 }
 
 .register-disclaimer {
