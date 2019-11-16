@@ -40,8 +40,7 @@ family_tree_json_schema = {
                 },
                 "image": {"type": ["string", "null"]}
             },
-            "required": ["gender",
-                         "fatherID",
+            "required": ["fatherID",
                          "motherID",
                          "ID"],
             "dependencies": {
