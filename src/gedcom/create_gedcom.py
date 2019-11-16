@@ -67,7 +67,8 @@ def create_individual_record(Person, Family):
     # _result, lines_person_maidenName = check_no_empty_data(Person.maidenName, "\n1 SURN {}".format(Person.maidenName))
 
     # set SEX data
-    lines_person_sex = "\n1 SEX {}".format(Person.gender[0].upper())
+    lines_person_sex = "\n1 SEX {}".format(Person.gender[0].upper()) \
+        if hasattr(Person, "gender") and Person.gender else ""
 
     # set BIRTh data
     result_date, lines_person_birth_date = check_no_empty_data(Person.birthDate,
