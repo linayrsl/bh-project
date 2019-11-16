@@ -51,7 +51,7 @@ def create_language_record(language):
 
 
 def check_no_empty_data(data, data_str):
-    if data == None:
+    if data is None:
         data_str = ""
         return False, data_str
     else:

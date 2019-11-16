@@ -60,6 +60,7 @@ class RegisterPage extends React.Component<
           <div className="register-form">
             <form>
               <TextInput
+                validateRegex={/[^@]+@[^@]+/}
                 id="email"
                 type="email"
                 title="דואר אלקטרוני"
@@ -79,7 +80,7 @@ class RegisterPage extends React.Component<
                 }}
                 className="ltr"
               />
-              <div className="user-checkbox">
+              <div className="user-checkbox styled-checkbox ">
                 <input
                   onChange={event => {
                     this.setState({ disclaimer: event.target.checked });

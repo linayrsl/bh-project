@@ -48,8 +48,11 @@ def handler(data_dictionary):
         image_filename = "{}.jpg".format(my_person.ID)
 
         # saving personal images
-        dict_image[image_filename] = my_person.image
-        my_person.image = image_filename
+        if hasattr(my_person, "image") and my_person.image:
+            dict_image[image_filename] = my_person.image
+            my_person.image = image_filename
+        else:
+            my_person.image = None
 
         # creating families
         my_parent_family = Family()  # create default object of Family class

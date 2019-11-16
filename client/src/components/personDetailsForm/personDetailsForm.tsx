@@ -9,6 +9,7 @@ export interface PersonDetailsFormProps {
   displayIsAlive?: boolean;
   displayMaidenName?: boolean;
   title: string;
+  isSubmitter?: boolean;
 
   defaults?: PersonDetailsFormState;
   onFormChange: (state: PersonDetailsFormState) => void;
@@ -16,18 +17,19 @@ export interface PersonDetailsFormProps {
 }
 
 export interface PersonDetailsFormState {
-  image: string;
-  firstName: string;
-  lastName: string;
-  maidenName: string;
-  birthDate: string;
-  birthPlace: string;
-  gender: string;
-  motherID: string;
-  fatherID: string;
-  isAlive: boolean;
-  deathPlace: string;
-  deathDate: string;
+  image: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  maidenName: string | null;
+  birthDate: string | null;
+  birthPlace: string | null;
+  gender: string | null;
+  motherID: string | null;
+  fatherID: string | null;
+  isAlive: boolean | null;
+  deathPlace: string | null;
+  deathDate: string | null;
+  isSubmitter: boolean;
 }
 
 class PersonDetailsForm extends React.Component<
@@ -38,18 +40,19 @@ class PersonDetailsForm extends React.Component<
     super(props);
 
     this.state = props.defaults || {
-      image: "",
-      firstName: "",
-      lastName: "",
-      maidenName: "",
-      gender: "",
-      birthDate: "",
-      birthPlace: "",
-      motherID: "",
-      fatherID: "",
+      image: null,
+      firstName: null,
+      lastName: null,
+      maidenName: null,
+      gender: null,
+      birthDate: null,
+      birthPlace: null,
+      motherID: null,
+      fatherID: null,
       isAlive: true,
-      deathDate: "",
-      deathPlace: ""
+      deathDate: null,
+      deathPlace: null,
+      isSubmitter: props.isSubmitter === true
     };
   }
 
@@ -71,15 +74,35 @@ class PersonDetailsForm extends React.Component<
     }
   }
 
+  isDateValid(date: string): boolean {
+    let pattern1 = /^\d{2}\/\d{2}\/\d{4}$/g;
+    let pattern2 = /^[0-9]{4}$/g;
+    let matchFullDate = date.match(pattern1);
+    let matchYear = date.match(pattern2);
+    if (!matchFullDate && !matchYear) {
+      return false;
+    }
+    return true;
+  }
+
   isFormValid(): boolean {
-    return (
-      this.state.firstName.length > 0 &&
-      this.state.lastName.length > 0 &&
-      this.state.gender.length > 0 &&
-      this.state.birthDate.length > 0 &&
-      this.state.birthPlace.length > 0
-    );
-    // Todo form validation
+    if (this.state.isSubmitter) {
+      if (!this.state.firstName || !this.state.lastName || !this.state.gender) {
+        return false;
+      }
+    }
+    if (this.state.birthDate) {
+      if (!this.isDateValid(this.state.birthDate)) {
+        return false;
+      }
+    }
+
+    if (this.state.deathDate) {
+      if (!this.isDateValid(this.state.deathDate)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   imageChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -120,17 +143,16 @@ class PersonDetailsForm extends React.Component<
                   placeholder="הוסיפו תמונה"
                   accept="image/jpeg"
                 />
-                <div
-                  style={{
-                    backgroundImage: `url(data:image/jpeg;base64,${this.state.image})`
-                  }}
-                  className="image-location"
-                ></div>
+                <div className="image-location">
+                  {this.state.image && (
+                    <img src={`data:image/jpeg;base64,${this.state.image}`} />
+                  )}
+                </div>
               </div>
             </div>
             <div className="person-details-inner-container">
               <TextInput
-                defaultValue={this.state.firstName}
+                defaultValue={this.state.firstName ? this.state.firstName : ""}
                 title="שם פרטי"
                 id={`${this.props.idPrefix}_firstName`}
                 type="text"
@@ -140,7 +162,7 @@ class PersonDetailsForm extends React.Component<
                 }}
               />
               <TextInput
-                defaultValue={this.state.lastName}
+                defaultValue={this.state.lastName ? this.state.lastName : ""}
                 title="שם משפחה"
                 id={`${this.props.idPrefix}_lastName`}
                 type="text"
@@ -151,7 +173,9 @@ class PersonDetailsForm extends React.Component<
               />
               {this.props.displayMaidenName && (
                 <TextInput
-                  defaultValue={this.state.maidenName}
+                  defaultValue={
+                    this.state.maidenName ? this.state.maidenName : ""
+                  }
                   title="שם נעורים"
                   id={`${this.props.idPrefix}_maidenName`}
                   type="text"
@@ -200,7 +224,7 @@ class PersonDetailsForm extends React.Component<
                 </div>
               </div>
               <TextInput
-                defaultValue={this.state.birthDate}
+                defaultValue={this.state.birthDate ? this.state.birthDate : ""}
                 title="תאריך לידה"
                 id={`${this.props.idPrefix}_birthDate`}
                 type="text"
@@ -210,7 +234,9 @@ class PersonDetailsForm extends React.Component<
                 }}
               />
               <TextInput
-                defaultValue={this.state.birthPlace}
+                defaultValue={
+                  this.state.birthPlace ? this.state.birthPlace : ""
+                }
                 title="מקום לידה"
                 id={`${this.props.idPrefix}_birthPlace`}
                 type="text"
@@ -225,7 +251,9 @@ class PersonDetailsForm extends React.Component<
                     חי/חיה
                   </label>
                   <input
-                    checked={this.state.isAlive}
+                    checked={
+                      this.state.isAlive === null ? true : this.state.isAlive
+                    }
                     type="checkbox"
                     id={`${this.props.idPrefix}_isAlive`}
                     className="checkbox"
@@ -237,7 +265,9 @@ class PersonDetailsForm extends React.Component<
               )}
               {!this.state.isAlive && (
                 <TextInput
-                  defaultValue={this.state.deathDate}
+                  defaultValue={
+                    this.state.deathDate ? this.state.deathDate : ""
+                  }
                   title="תאריך פטירה"
                   id={`${this.props.idPrefix}_deathDate`}
                   type="text"
@@ -249,7 +279,9 @@ class PersonDetailsForm extends React.Component<
               )}
               {!this.state.isAlive && (
                 <TextInput
-                  defaultValue={this.state.deathPlace}
+                  defaultValue={
+                    this.state.deathPlace ? this.state.deathPlace : ""
+                  }
                   title="מקום פטירה"
                   id={`${this.props.idPrefix}_deathPlace`}
                   type="text"

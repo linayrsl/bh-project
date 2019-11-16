@@ -13,7 +13,8 @@ def log_family_tree_submission(db_connection, family_tree: Dict) -> bool:
             logger.info("Family tree dict is empty")
             return False
 
-        submitter = list(family_tree.values())[0]
+        list_of_people = list(family_tree.values())
+        submitter = list_of_people[0]
 
         try:
             upload_log_record: Dict = {"email": '',
@@ -21,12 +22,15 @@ def log_family_tree_submission(db_connection, family_tree: Dict) -> bool:
                                        "last_name": submitter['lastName'],
                                        "gender": submitter['gender'][0],
                                        "gedcom_language": "HE",
-                                       "date_of_birth": datetime.strptime(submitter['birthDate'], "%d/%m/%Y"),
+                                       "date_of_birth":
+                                           datetime.strptime(submitter['birthDate'], "%d/%m/%Y")
+                                           if submitter['birthDate'] else None,
                                        "address": '',
                                        "country": '',
                                        "creation_time": datetime.now(),
-                                       "num_of_people": 1,
-                                       "num_of_photos": 0,
+                                       "num_of_people": len(list_of_people),
+                                       "num_of_photos":
+                                           sum(1 for item in list_of_people if "image" in item and item["image"]),
                                        "is_new_tree": True}
         except Exception:
             logger.exception("Failed to generate upload log record")

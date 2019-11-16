@@ -92,9 +92,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     familyTreeJson["3"] = {
       ...motherOfMotherDetails!,
       ID: "3",
-      // @ts-ignore
       motherID: null,
-      // @ts-ignore
       fatherID: null,
 
       siblings: []
@@ -102,9 +100,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     familyTreeJson["4"] = {
       ...fatherOfMotherDetails!,
       ID: "4",
-      // @ts-ignore
       motherID: null,
-      // @ts-ignore
       fatherID: null,
       siblings: []
     };
@@ -118,18 +114,14 @@ class FamilyTreePageSubmitComponent extends React.Component<
     familyTreeJson["6"] = {
       ...motherOfFatherDetails!,
       ID: "6",
-      // @ts-ignore
       motherID: null,
-      // @ts-ignore
       fatherID: null,
       siblings: []
     };
     familyTreeJson["7"] = {
       ...fatherOfFatherDetails!,
       ID: "7",
-      // @ts-ignore
       motherID: null,
-      // @ts-ignore
       fatherID: null,
       siblings: []
     };

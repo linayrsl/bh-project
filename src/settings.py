@@ -14,8 +14,13 @@ GEDCOM_EMAIL_FROM = os.environ.get("GEDCOM_EMAIL_FROM")
 
 GEDCOM_EMAIL_TO: List[str] = os.environ.get("GEDCOM_EMAIL_TO", "").split(",")
 
+REPORT_EMAIL_FROM = os.environ.get("REPORT_EMAIL_FROM")
+
+REPORT_EMAIL_TO: List[str] = os.environ.get("REPORT_EMAIL_TO", "").split(",")
+
 PERSON_PHOTO_MAX_ALLOWED_WIDTH: int = int(os.environ.get("PERSON_PHOTO_MAX_ALLOWED_WIDTH", 600))
 
 LOGGLY_CUSTOMER_TOKEN = os.environ.get("LOGGLY_CUSTOMER_TOKEN")
 
 VERIFICATION_CODE_EXPIRATION_SECONDS: int = int(os.environ.get("VERIFICATION_CODE_EXPIRATION_SECONDS", 36000))
+

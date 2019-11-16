@@ -27,8 +27,8 @@ family_tree_json_schema = {
                 "lastName": {"type": "string"},
                 "maidenName": {"type": ["string", "null"]},
                 "gender": {"type": "string", "enum": ["male", "female", "other"]},
-                "birthDate": {"type": "string", "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"},
-                "birthPlace": {"type": "string"},
+                "birthDate": {"type": ["string", "null"], "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"},
+                "birthPlace": {"type": ["string", "null"]},
                 "isAlive": {"type": "boolean"},
                 "deathDate": {"type": "string", "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"},
                 "deathPlace": {"type": "string"},
@@ -38,17 +38,13 @@ family_tree_json_schema = {
                     "type": "array",
                     "items": {"type": "string", "pattern": "^[0-9]+$"}
                 },
-                "image": {"type": "string"}
+                "image": {"type": ["string", "null"]}
             },
             "required": ["firstName",
                          "lastName",
                          "gender",
-                         "birthDate",
-                         "birthPlace",
-                         "isAlive",
                          "fatherID",
                          "motherID",
-                         "image",
                          "ID"],
             "dependencies": {
                 "deathDate": {

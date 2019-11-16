@@ -49,6 +49,14 @@
   border: 2px solid #cccbcb;
   position: absolute;
   z-index: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-location img {
+  height: 128px;
 }
 
 .gender {
