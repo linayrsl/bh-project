@@ -4,6 +4,7 @@ import logging
 from flask import Flask
 from flask_cors import CORS
 from flask_log_request_id import RequestID
+from flask_talisman import Talisman, GOOGLE_CSP_POLICY
 
 from src.handlers.auth import auth
 from src.handlers.family_tree import family_tree
@@ -30,6 +31,7 @@ application = Flask(
 application.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 
 CORS(application)
+Talisman(application, content_security_policy=GOOGLE_CSP_POLICY)
 RequestID(application)
 
 

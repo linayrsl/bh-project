@@ -8,5 +8,6 @@ python-resize-image==1.1.19
 flask-cors==3.0.8
 langdetect==1.0.7
 psycopg2-binary==2.8.3
-flask-log-request-id
+flask-log-request-id==0.10.1
 requests_futures==1.0.0
+flask-talisman==0.7.0
