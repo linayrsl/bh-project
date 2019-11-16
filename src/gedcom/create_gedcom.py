@@ -90,12 +90,13 @@ def create_individual_record(Person, Family):
         result_date, lines_person_death_date =\
             check_no_empty_data(
                 Person.deathDate,
-                "\n2 DATE {}".format(format_date(Person.deathDate))) if "deathDate" in Person else (None, "")
+                "\n2 DATE {}".format(format_date(Person.deathDate))) if hasattr(Person, "deathDate") else (None, "")
+
 
         result_place, lines_person_death_place =\
             check_no_empty_data(
                 Person.deathPlace,
-                "\n2 PLAC {}".format(Person.deathPlace)) if "deathPlace" in Person else (None, "")
+                "\n2 PLAC {}".format(Person.deathPlace)) if hasattr(Person, "deathPlace") else (None, "")
         lines_death = "\n1 DEAT"
         lines_person_death = lines_death + lines_person_death_date + lines_person_death_place
 
@@ -103,7 +104,7 @@ def create_individual_record(Person, Family):
     _result, lines_person_image =\
         check_no_empty_data(
             Person.image,
-            "\n1 OBJE\n2 FILE {}".format(Person.image)) if "image" in Person else (None, "")
+            "\n1 OBJE\n2 FILE {}".format(Person.image)) if hasattr(Person, "image") else (None, "")
 
     # return lines_person + lines_person_maidenName + lines_person_sex + \
     return lines_person + lines_person_sex + \
