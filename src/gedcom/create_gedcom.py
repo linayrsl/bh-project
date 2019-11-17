@@ -61,7 +61,11 @@ def check_no_empty_data(data, data_str):
 def create_individual_record(Person, Family):
     # create the INDIVIDUAL_RECORD
     # set INDI data (person name, id)
-    lines_person = "\n0 @I{}@ INDI\n1 NAME {} /{}/".format(Person.ID, Person.firstName, Person.lastName)
+    lines_person = "\n0 @I{}@ INDI".format(Person.ID)
+    if hasattr(Person, "firstName") or hasattr(Person, "lastName"):
+        lines_person += "\n1 NAME {} /{}/".format(
+            Person.firstName if hasattr(Person, "firstName") else "",
+            Person.lastName if hasattr(Person, "lastName") else "")
 
     # set SURN data (maiden name)
     # _result, lines_person_maidenName = check_no_empty_data(Person.maidenName, "\n1 SURN {}".format(Person.maidenName))
