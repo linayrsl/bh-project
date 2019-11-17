@@ -32,6 +32,7 @@ application.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 
 extended_csp = GOOGLE_CSP_POLICY.copy()
 extended_csp["script-src"] += " 'unsafe-inline'"
+extended_csp["img-src"] = "'self' data:"
 
 CORS(application)
 Talisman(application, content_security_policy=extended_csp)
@@ -41,6 +42,11 @@ RequestID(application)
 @application.route('/')
 def root():
     return application.send_static_file("index.html")
+
+
+@application.route('/manifest.json')
+def manifest():
+    return application.send_static_file("manifest.json")
 
 
 application.register_blueprint(
@@ -58,7 +64,7 @@ application.register_blueprint(
 
 @application.route('/<string:path_part1>')
 @application.route('/<string:path_part1>/<string:path_part2>')
-def client_page2(path_part1: str, path_part2: str = None):
+def client_path_handler(path_part1: str, path_part2: str = None):
     return application.send_static_file("index.html")
 
 

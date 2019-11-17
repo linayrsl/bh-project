@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "עצי המשפחה",
+  "name": "פרוייקט עצי המשפחה של מוזיאון העם היהודי בבית התפוצות",
   "icons": [
     {
       "src": "favicon.ico",
