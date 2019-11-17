@@ -1,10 +1,13 @@
+import axios from "axios";
 import * as React from "react";
+import { withRouter, match } from "react-router-dom";
+
 import { ProceedButton } from "../proceedButton/proceedButton";
 import { Header } from "../header/header";
-import "./verificationPage.css";
-import axios from "axios";
-import { withRouter, match } from "react-router-dom";
 import { TextInput } from "../textInput/textInput";
+import { Loader } from "../loader/loader";
+
+import "./verificationPage.css";
 
 export interface VerificationPageProps {
   match?: match<{ email: string }>;
@@ -48,6 +51,7 @@ class VerificationPageComponent extends React.Component<
   render() {
     return (
       <div className="verification-page-container">
+        {this.state.httpRequestInProgress && <Loader />}
         <Header title="אימות דואר אלקטרוני" />
         <div className="verification-body page-content-container ">
           <div className="verification-message">

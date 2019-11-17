@@ -1,0 +1,19 @@
+.loader {
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(150, 150, 150, 0.5);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader .loader-image {
+  width: 100px;
+  height: 100px;
+}
+
+.loader .loader-image {
+  color: #f8ab3f;
+}

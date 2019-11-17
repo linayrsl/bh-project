@@ -5,6 +5,7 @@ import "./registerPage.css";
 import { ProceedButton } from "../proceedButton/proceedButton";
 import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
+import { Loader } from "../loader/loader";
 
 export interface RegisterPageProps {}
 
@@ -52,6 +53,7 @@ class RegisterPage extends React.Component<
   render() {
     return (
       <div className="register-page-container">
+        {this.state.httpRequestInProgress && <Loader />}
         <Header title="הרשמה" />
         <div className="register-body page-content-container ">
           <div className="register-message">

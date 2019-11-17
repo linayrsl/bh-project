@@ -1,16 +1,21 @@
-import * as React from "react";
-import { History } from "history";
-import { Header } from "../header/header";
 import axios from "axios";
-import "./familyTreePageSubmit.css";
+import { History } from "history";
+import * as React from "react";
 import { withRouter } from "react-router-dom";
+
+import { Header } from "../header/header";
 import { PersonDetailsFormState } from "../personDetailsForm/personDetailsForm";
+import { Loader } from "../loader/loader";
+
+import "./familyTreePageSubmit.css";
 
 export interface FamilyTreePageSubmitProps {
   history?: History;
 }
 
-export interface FamilyTreePageSubmitState {}
+export interface FamilyTreePageSubmitState {
+  httpRequestInProgress: boolean;
+}
 
 interface FamilyTreePersonJson extends PersonDetailsFormState {
   ID: string;
@@ -23,6 +28,10 @@ class FamilyTreePageSubmitComponent extends React.Component<
   FamilyTreePageSubmitProps,
   FamilyTreePageSubmitState
 > {
+  state = {
+    httpRequestInProgress: false
+  };
+
   returnButtonHandler() {
     this.props.history!.push("/family-tree/me");
   }
@@ -48,6 +57,10 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 
   submitButtonHandler() {
+    if (this.state.httpRequestInProgress) {
+      return;
+    }
+
     let submitterDetails = this.getStoredPersonDetails("submitterDetails");
     let motherDetails = this.getStoredPersonDetails("motherDetails");
     let motherOfMotherDetails = this.getStoredPersonDetails(
@@ -140,7 +153,9 @@ class FamilyTreePageSubmitComponent extends React.Component<
       familyTreeJson["1"].siblings.push(key);
     });
 
+    this.setState({ httpRequestInProgress: true });
     axios.post("/api/family-tree/", familyTreeJson).finally(() => {
+      this.setState({ httpRequestInProgress: false });
       this.props.history!.push("/thank-you");
     });
   }
@@ -148,6 +163,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
   render() {
     return (
       <div className="family-tree-submit-container">
+        {this.state.httpRequestInProgress && <Loader />}
         <Header title="סיימת את בניית עץ המשפחה שלך" />
         <div className="family-tree-submit-body page-content-container">
           <div className="pre-submittion-text">
@@ -162,6 +178,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
               חזרה
             </button>
             <button
+              disabled={this.state.httpRequestInProgress}
               onClick={this.submitButtonHandler.bind(this)}
               className="option-no option-button"
             >

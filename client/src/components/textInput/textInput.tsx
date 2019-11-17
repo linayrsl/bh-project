@@ -19,7 +19,6 @@ class TextInput extends React.Component<TextInputProps> {
       return;
     }
 
-    console.log(`Validating: ${value}`);
     // TODO: validate input value against regex provided in props
   }
 
