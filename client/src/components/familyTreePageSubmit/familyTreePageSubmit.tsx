@@ -32,6 +32,10 @@ class FamilyTreePageSubmitComponent extends React.Component<
     httpRequestInProgress: false
   };
 
+  clearStoredFamilyTreeData() {
+    localStorage.clear();
+  }
+
   returnButtonHandler() {
     this.props.history!.push("/family-tree/me");
   }
@@ -154,10 +158,15 @@ class FamilyTreePageSubmitComponent extends React.Component<
     });
 
     this.setState({ httpRequestInProgress: true });
-    axios.post("/api/family-tree/", familyTreeJson).finally(() => {
-      this.setState({ httpRequestInProgress: false });
-      this.props.history!.push("/thank-you");
-    });
+    axios
+      .post("/api/family-tree/", familyTreeJson)
+      .then(() => {
+        this.clearStoredFamilyTreeData();
+      })
+      .finally(() => {
+        this.setState({ httpRequestInProgress: false });
+        this.props.history!.push("/thank-you");
+      });
   }
 
   render() {
