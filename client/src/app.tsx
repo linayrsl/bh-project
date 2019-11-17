@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import "./app.css";
+import "react-toastify/dist/ReactToastify.css";
 import { HomePage } from "./components/homePage/homePage";
 import { RegisterPage } from "./components/registerPage/registerPage";
 import { VerificationPage } from "./components/verificationPage/verificationPage";
@@ -48,6 +50,14 @@ class App extends Component {
             <Route render={() => <div>Page Not Found</div>} />
           </Switch>
         </BrowserRouter>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={true}
+          draggable={false}
+        />
       </div>
     );
   }

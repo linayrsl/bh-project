@@ -1,5 +1,6 @@
 import * as React from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 import "./registerPage.css";
 import { ProceedButton } from "../proceedButton/proceedButton";
@@ -34,6 +35,14 @@ class RegisterPage extends React.Component<
       .post("/api/auth/register/", {
         email: this.state.email,
         phone: this.state.phone
+      })
+      .catch(error => {
+        if (error && error.response && error.response.status === 400) {
+          toast.error("מספר סלולרי ו/או דואר אלקטרוני שגויים");
+        } else {
+          toast.error("לא הצלחנו לשלוח קוד אימות. נא נסה שוב מאוחר יותר");
+        }
+        return Promise.reject(error);
       })
       .finally(() => {
         this.setState({ httpRequestInProgress: false });

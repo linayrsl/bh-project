@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as React from "react";
 import { withRouter, match } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { ProceedButton } from "../proceedButton/proceedButton";
 import { Header } from "../header/header";
@@ -41,6 +42,18 @@ class VerificationPageComponent extends React.Component<
         )}`,
         { verificationCode: this.state.verificationCode }
       )
+      .catch(error => {
+        if (error && error.response && error.response.status === 400) {
+          toast.error("יש להזין קוד אימות בן 5 ספרות");
+        } else if (error && error.response && error.response.status === 401) {
+          toast.error("קוד אימות שגוי. נא נסה שוב.");
+        } else if (error && error.response && error.response.status === 404) {
+          toast.error("קוד האימות לא קיים. נא נסה להירשם בשנית.");
+        } else {
+          toast.error("לא הצלחנו לאמת פרטים אישיים. נא נסה להירשם מחדש.");
+        }
+        return Promise.reject(error);
+      })
       .finally(() => {
         this.setState({ httpRequestInProgress: false });
       });

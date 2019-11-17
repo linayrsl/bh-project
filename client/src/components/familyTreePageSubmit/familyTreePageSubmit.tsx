@@ -2,6 +2,7 @@ import axios from "axios";
 import { History } from "history";
 import * as React from "react";
 import { withRouter } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Header } from "../header/header";
 import { PersonDetailsFormState } from "../personDetailsForm/personDetailsForm";
@@ -162,10 +163,14 @@ class FamilyTreePageSubmitComponent extends React.Component<
       .post("/api/family-tree/", familyTreeJson)
       .then(() => {
         this.clearStoredFamilyTreeData();
+        this.props.history!.push("/thank-you");
+      })
+      .catch(error => {
+        toast.error("השליחה נכשלה, נא צור קשר עם בית התפוצות");
+        return Promise.reject(error);
       })
       .finally(() => {
         this.setState({ httpRequestInProgress: false });
-        this.props.history!.push("/thank-you");
       });
   }
 
