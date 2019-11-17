@@ -17,4 +17,4 @@ COPY ./src ./src
 RUN mkdir ./static
 COPY --from=client-buider /client/build ./static
 
-CMD gunicorn --bind 0.0.0.0:$PORT --chdir src server
+CMD gunicorn --workers=3 --bind 0.0.0.0:$PORT --chdir src server

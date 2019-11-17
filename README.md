@@ -1,5 +1,20 @@
 # She-Codes-BH-Project
 
+## Run Client Locally
+
+* Install project dependencies
+
+```bash
+cd client
+npm install
+```
+
+* Start the project with webpack development server
+
+```bash
+npm start
+```
+
 ## Run Server Locally
 
 * Install project dependencies
