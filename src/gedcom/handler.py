@@ -10,7 +10,6 @@ def handler(data_dictionary):
     families = []  # list of family IDs
     list_families = []  # list of families data
     the_end = "\n0 TRLR"
-    names = []  # list of last names
     dict_image = {}  # collect images
     dict_for_csv = {}  # collect data dictionary for csv
 
@@ -22,12 +21,7 @@ def handler(data_dictionary):
         break
 
     # creating lastname list for define language
-    number_of_person = 0
-    for k in data_dictionary:
-        names.append(data_dictionary[k]["lastName"])
-        names_string = "".join(names)
-        # counting family persons
-        number_of_person += 1
+    number_of_person = len(data_dictionary.items())
 
     # create dictionary for csv use
     dict_for_csv["firstName"] = user_firstname
