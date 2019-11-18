@@ -9,6 +9,14 @@
   justify-content: space-between;
 }
 
+.text-input-container.invalid {
+  border-color: red;
+}
+
+.text-input-container.invalid input {
+  color: red;
+}
+
 .text-input-container input {
   border: 0;
   outline: none;

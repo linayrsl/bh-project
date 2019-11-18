@@ -224,6 +224,7 @@ class PersonDetailsForm extends React.Component<
                 </div>
               </div>
               <TextInput
+                validateRegex={/^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/}
                 defaultValue={this.state.birthDate ? this.state.birthDate : ""}
                 title="תאריך לידה"
                 id={`${this.props.idPrefix}_birthDate`}
@@ -265,6 +266,7 @@ class PersonDetailsForm extends React.Component<
               )}
               {!this.state.isAlive && (
                 <TextInput
+                  validateRegex={/^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/}
                   defaultValue={
                     this.state.deathDate ? this.state.deathDate : ""
                   }

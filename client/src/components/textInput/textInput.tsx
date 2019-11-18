@@ -13,18 +13,42 @@ export interface TextInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-class TextInput extends React.Component<TextInputProps> {
+export interface TextInputState {
+  isValid: boolean;
+}
+
+class TextInput extends React.Component<TextInputProps, TextInputState> {
+  constructor(props: TextInputProps) {
+    super(props);
+    this.state = {
+      isValid: true
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.defaultValue) {
+      this.validateInput(this.props.defaultValue);
+    }
+  }
+
   validateInput(value: string) {
     if (!this.props.validateRegex) {
       return;
     }
-
-    // TODO: validate input value against regex provided in props
+    if (value.match(this.props.validateRegex) || !value) {
+      this.setState({ isValid: true });
+    } else {
+      this.setState({ isValid: false });
+    }
   }
 
   render() {
     return (
-      <div className={`${this.props.className || ""} text-input-container`}>
+      <div
+        className={`${this.props.className || ""} ${
+          this.state.isValid ? "" : "invalid"
+        } text-input-container`}
+      >
         <label htmlFor={this.props.id}>{this.props.title}</label>
         <input
           defaultValue={this.props.defaultValue}

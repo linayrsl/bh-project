@@ -53,6 +53,7 @@ class FamilyTreePageSubmitter extends React.Component<
         </div>
         <div className="family-tree-body page-content-container ">
           <PersonDetailsForm
+            isSubmitter={true}
             defaults={this.state.submitterDetails}
             onFormChange={(state: PersonDetailsFormState) => {
               this.formChangeHandler("submitterDetails", state);
