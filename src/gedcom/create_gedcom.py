@@ -101,7 +101,6 @@ def create_individual_record(Person, Family):
                 Person.deathDate,
                 "\n2 DATE {}".format(format_date(Person.deathDate))) if hasattr(Person, "deathDate") else (None, "")
 
-
         result_place, lines_person_death_place =\
             check_no_empty_data(
                 Person.deathPlace,

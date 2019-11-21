@@ -35,7 +35,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
     if (!this.props.validateRegex) {
       return;
     }
-    if (value.match(this.props.validateRegex) || !value) {
+    if (!value || value.match(this.props.validateRegex)) {
       this.setState({ isValid: true });
     } else {
       this.setState({ isValid: false });

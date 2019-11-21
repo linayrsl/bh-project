@@ -44,10 +44,12 @@ class FamilyTreePageSubmitComponent extends React.Component<
   getStoredPersonDetails(key: string): PersonDetailsFormState | null {
     let item = localStorage.getItem(key);
     if (item) {
-      let bla: PersonDetailsFormState = JSON.parse(item);
-      delete bla.deathDate;
-      delete bla.deathPlace;
-      return bla;
+      let personDetails: PersonDetailsFormState = JSON.parse(item);
+      if (personDetails.isAlive) {
+        delete personDetails.deathDate;
+        delete personDetails.deathPlace;
+      }
+      return personDetails;
     }
     return null;
   }
