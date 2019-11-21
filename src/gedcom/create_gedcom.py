@@ -93,7 +93,7 @@ def create_individual_record(Person, Family):
     _result, lines_person_family = check_no_empty_data(Family.ID, "\n1 FAMC @F{}".format(Family.ID))
 
     # set DEATh data
-    if Person.isAlive is True:
+    if (hasattr(Person, "isAlive") and Person.isAlive) or not hasattr(Person, "isAlive") or Person.isAlive is None:
         lines_person_death = ""
     else:
         result_date, lines_person_death_date =\
