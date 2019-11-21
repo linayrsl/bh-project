@@ -64,8 +64,8 @@ def create_individual_record(Person, Family):
     lines_person = "\n0 @I{}@ INDI".format(Person.ID)
     if hasattr(Person, "firstName") or hasattr(Person, "lastName"):
         lines_person += "\n1 NAME {} /{}/".format(
-            Person.firstName if hasattr(Person, "firstName") else "",
-            Person.lastName if hasattr(Person, "lastName") else "")
+            Person.firstName if hasattr(Person, "firstName") and Person.firstName is not None else "",
+            Person.lastName if hasattr(Person, "lastName") and Person.lastName is not None else "")
 
     # set SURN data (maiden name)
     # _result, lines_person_maidenName = check_no_empty_data(Person.maidenName, "\n1 SURN {}".format(Person.maidenName))
@@ -75,10 +75,14 @@ def create_individual_record(Person, Family):
         if hasattr(Person, "gender") and Person.gender else ""
 
     # set BIRTh data
-    result_date, lines_person_birth_date = check_no_empty_data(Person.birthDate,
-                                                               "\n2 DATE {}".format(format_date(Person.birthDate)))
+    result_date, lines_person_birth_date =\
+        check_no_empty_data(Person.birthDate,
+                            "\n2 DATE {}".format(format_date(Person.birthDate))) \
+        if hasattr(Person, "birthDate") and Person.birthDate else (False, "")
+
     result_place, lines_person_birth_place = check_no_empty_data(Person.birthPlace,
-                                                                 "\n2 PLAC {}".format(Person.birthPlace))
+                                                                 "\n2 PLAC {}".format(Person.birthPlace))\
+        if hasattr(Person, "birthPlace") and Person.birthPlace else (False, "")
     if result_date or result_place:
         lines_birth = "\n1 BIRT"
     else:

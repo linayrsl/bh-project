@@ -103,6 +103,7 @@ class RegisterPage extends React.Component<
                 <span className="accept-conditions-full">
                   קראתי ואני מסכים/ה ל
                   <a
+                    target="_blank"
                     href="https://www.bh.org.il/he/%d7%9e%d7%90%d7%92%d7%a8%d7%99%d7%9d-%d7%95%d7%90%d7%95%d7%a1%d7%a4%d7%99%d7%9d/%d7%92%d7%a0%d7%90%d7%9c%d7%95%d7%92%d7%99%d7%94-%d7%99%d7%94%d7%95%d7%93%d7%99%d7%aa/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%95%d7%99%d7%aa%d7%95%d7%a8/"
                     className="accept-conditions"
                   >
