@@ -17,14 +17,21 @@ def log_family_tree_submission(db_connection, family_tree: Dict) -> bool:
         submitter = list_of_people[0]
 
         try:
+            birth_date = None
+            try:
+                birth_date = datetime.strptime(submitter['birthDate'], "%d/%m/%Y") if submitter['birthDate'] else None
+            except ValueError:
+                try:
+                    birth_date = datetime.strptime(submitter['birthDate'], "%Y") if submitter['birthDate'] else None
+                except ValueError:
+                    logger.error(f"Unsupported date format {submitter['birthDate']}")
+
             upload_log_record: Dict = {"email": '',
                                        "first_name": submitter['firstName'],
                                        "last_name": submitter['lastName'],
                                        "gender": submitter['gender'][0],
                                        "gedcom_language": "HE",
-                                       "date_of_birth":
-                                           datetime.strptime(submitter['birthDate'], "%d/%m/%Y")
-                                           if submitter['birthDate'] else None,
+                                       "date_of_birth": birth_date,
                                        "address": '',
                                        "country": '',
                                        "creation_time": datetime.now(),
