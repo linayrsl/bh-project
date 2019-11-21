@@ -31,7 +31,7 @@ family_tree_json_schema = {
                 "birthPlace": {"type": ["string", "null"]},
                 "isAlive": {"type": "boolean"},
                 "deathDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
-                "deathPlace": {"type": "string"},
+                "deathPlace": {"type": ["string", "null"]},
                 "motherID": {"type": ["string", "null"], "pattern": "^[0-9]+$"},
                 "fatherID": {"type": ["string", "null"], "pattern": "^[0-9]+$"},
                 "siblings": {
