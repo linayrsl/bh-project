@@ -60,5 +60,3 @@ with DatabaseConnection(DATABASE_URL) as connection:
             if not sent_successfully:
                 logger.error("Failed to send CSV weekly report by mail")
             logger.info("CSV report was sent successfully")
-
-

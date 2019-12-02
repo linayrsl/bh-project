@@ -1,3 +1,4 @@
 build:
   docker:
     web: Dockerfile
+    weekly_report: Dockerfile.weekly_report
