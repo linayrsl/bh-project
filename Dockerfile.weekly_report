@@ -5,6 +5,4 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 COPY ./src ./src
 
-ENV PYTHONPATH "${PYTHONPATH}:/server"
-
-CMD python src/weekly_report.py
+CMD PYTHONPATH="${PYTHONPATH}:/server" python src/weekly_report.py
