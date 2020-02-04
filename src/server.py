@@ -10,6 +10,7 @@ from src.handlers.auth import auth
 from src.handlers.family_tree import family_tree
 from src.handlers.resize_image import resize_image
 from src.logging.logging_setup import logging_setup
+from src.settings import CI
 
 logging_setup()
 logger = logging.getLogger(__name__)
@@ -34,8 +35,10 @@ extended_csp = GOOGLE_CSP_POLICY.copy()
 extended_csp["script-src"] += " 'unsafe-inline'"
 extended_csp["img-src"] = "'self' data:"
 
-CORS(application)
-Talisman(application, content_security_policy=extended_csp)
+if not CI:
+    CORS(application)
+    Talisman(application, content_security_policy=extended_csp)
+
 RequestID(application)
 
 

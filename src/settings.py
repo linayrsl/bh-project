@@ -1,6 +1,8 @@
 import os
 from typing import List
 
+CI = os.environ.get("CI", "False") == "true"
+
 DATABASE_URL = os.environ.get("DATABASE_URL",
                               "host=localhost dbname=bh_project user=postgres password=postgres")
 
