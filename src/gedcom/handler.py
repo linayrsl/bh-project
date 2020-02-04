@@ -34,6 +34,9 @@ def handler(data_dictionary):
     # writing the language data to the HEAD Record
     list_appended_strings.append(create_language_record("HE"))
 
+    parents_to_family_mapping = {}
+    person_id_to_individual_record = {}
+
     # creating persons
     for _key, details in data_dictionary.items():
         my_person = Person(details=details)
@@ -52,14 +55,27 @@ def handler(data_dictionary):
         my_parent_family = Family()  # create default object of Family class
         my_parent_family.create_parent_family(my_person)
 
+        if my_parent_family.fatherID:
+            parents_to_family_mapping[my_parent_family.fatherID] = my_parent_family.ID
+        if my_parent_family.motherID:
+            parents_to_family_mapping[my_parent_family.motherID] = my_parent_family.ID
+
         if my_parent_family.ID != None and my_parent_family.ID not in families:
             list_families.append(create_family_record(my_person, my_parent_family))
             families.append(my_parent_family.ID)
 
         # writing the INDIs data to the INDI data's list
-        list_appended_strings.append(create_individual_record(my_person, my_parent_family))
 
-        # writing the FAMCs data to list and transforming it to string
+        person_id_to_individual_record[my_person.ID] = create_individual_record(my_person, my_parent_family)
+
+    for person_id, gedcom_indi_record in person_id_to_individual_record.items():
+        if person_id in parents_to_family_mapping:
+            list_appended_strings.append(
+                gedcom_indi_record + "\n1 FAMS @F{}@".format(parents_to_family_mapping[person_id]))
+        else:
+            list_appended_strings.append(gedcom_indi_record)
+
+    # writing the FAMCs data to list and transforming it to string
     lines_families = "".join(list_families)
     list_appended_strings.append(lines_families)
     # transforming INDI data's list to string

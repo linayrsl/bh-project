@@ -33,7 +33,7 @@ def create_head_record(file_name):
 1 SOUR "Family Tree"
 2 VERS 1.0
 2 CORP Beit_Hatfutsot
-1 DATE {} 
+1 DATE {}
 2 TIME {}
 1 FILE {}
 1 GEDC
@@ -90,7 +90,7 @@ def create_individual_record(Person, Family):
     lines_person_birth = lines_birth + lines_person_birth_date + lines_person_birth_place
 
     # set FAMC data (parent family)
-    _result, lines_person_family = check_no_empty_data(Family.ID, "\n1 FAMC @F{}".format(Family.ID))
+    _result, lines_person_family = check_no_empty_data(Family.ID, "\n1 FAMC @F{}@".format(Family.ID))
 
     # set DEATh data
     if (hasattr(Person, "isAlive") and Person.isAlive) or not hasattr(Person, "isAlive") or Person.isAlive is None:
