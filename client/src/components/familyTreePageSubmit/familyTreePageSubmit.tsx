@@ -147,6 +147,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     };
 
     let nextId = 8;
+    let siblingsIds: string[] = ["1"];
     siblingsDetails.forEach((sibling, index) => {
       let key = `${nextId + index}`;
       familyTreeJson[key] = {
@@ -157,8 +158,13 @@ class FamilyTreePageSubmitComponent extends React.Component<
         fatherID: "5",
         siblings: []
       };
-      familyTreeJson["1"].siblings.push(key);
+      siblingsIds.push(key);
     });
+
+    for (let siblingId of siblingsIds) {
+      let siblingJson = familyTreeJson[siblingId];
+      siblingJson.siblings = siblingsIds.filter(id => id !== siblingId);
+    }
 
     this.setState({ httpRequestInProgress: true });
     axios
