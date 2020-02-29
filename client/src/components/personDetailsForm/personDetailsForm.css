@@ -29,6 +29,7 @@
   font-size: 18px;
   text-decoration: underline;
   z-index: 1;
+  line-height: 35px;
 }
 
 .image-input {
@@ -63,8 +64,11 @@
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
-  padding-bottom: 5px;
   border-bottom: 2px solid #cccbcb;
+}
+
+.gender .gender-options, .gender label {
+  line-height: 35px;
 }
 
 .gender-options-buttons label {
@@ -88,7 +92,6 @@
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
-  padding-bottom: 5px;
   border-bottom: 2px solid #cccbcb;
 }
 
@@ -96,4 +99,9 @@
   color: rgb(83, 83, 84);
   font-size: 20px;
   padding-left: 10px;
+  line-height: 35px;
+}
+
+.alive-checkbox input {
+  margin-top: 12px;
 }

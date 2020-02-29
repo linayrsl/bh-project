@@ -119,7 +119,10 @@ class RegisterPage extends React.Component<
                 this.state.phone && !isValidPhoneNumber(this.state.phone) ? 'invalid' : ''
               }`}>
                 <label htmlFor="phone"><span className={"mandatory-field-indicator"}>*</span>טלפון סלולרי</label>
-                <PhoneInput id="phone"
+                <PhoneInput
+                  id="phone"
+                  // @ts-ignore
+                  countrySelectProps={{ unicodeFlags: true }}
                   placeholder="הזינו מספר"
                   defaultCountry={'IL'}
                   value={''}
