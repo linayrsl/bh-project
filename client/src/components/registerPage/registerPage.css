@@ -28,7 +28,7 @@
 }
 
 .user-checkbox {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .accept-conditions-full {
@@ -56,11 +56,13 @@ input.invalid {
 
 .phone-input-container {
   display: flex;
+  position: relative;
   justify-content: space-between;
   margin-top: 15px;
   font-size: 20px;
   color: rgb(83, 83, 84);
   border-bottom: 2px solid #cccbcb;
+  padding-bottom: 5px;
 }
 
 .phone-input-container.invalid {
@@ -108,4 +110,13 @@ input.invalid {
 
 .phone-input-container input::-ms-input-placeholder {
   color: darkgrey;
+}
+
+.mandatory-field-indicator {
+  color: red;
+}
+
+.mandatory-fields-message {
+  color: red;
+  margin-top: 25px;
 }

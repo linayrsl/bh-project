@@ -7,6 +7,7 @@
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .text-input-container.invalid {
@@ -48,4 +49,12 @@
 
 .text-input-container input::-ms-input-placeholder {
   color: darkgrey;
+}
+
+.invalid-input-feedback {
+  font-size: 12px;
+  color: red;
+  position: absolute;
+  top: 32px;
+  right: 0;
 }

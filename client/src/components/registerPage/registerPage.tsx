@@ -85,6 +85,7 @@ class RegisterPage extends React.Component<
                 type="text"
                 title="שם פרטי"
                 placeholder="הזינו שם פרטי"
+                required={true}
                 onChange={event => {
                   this.setState({firstName: event.target.value});
                 }}
@@ -95,6 +96,7 @@ class RegisterPage extends React.Component<
                 type="text"
                 title="שם משפחה"
                 placeholder="הזינו שם משפחה"
+                required={true}
                 onChange={event => {
                   this.setState({lastName: event.target.value});
                 }}
@@ -106,6 +108,8 @@ class RegisterPage extends React.Component<
                 type="email"
                 title="דואר אלקטרוני"
                 placeholder="הזינו מייל"
+                required={true}
+                validationErrorMessage={"הפורמט של כתובת המייל אינו תקין"}
                 onChange={event => {
                   this.setState({ email: event.target.value });
                 }}
@@ -114,7 +118,7 @@ class RegisterPage extends React.Component<
               <div className={`phone-input-container ${
                 this.state.phone && !isValidPhoneNumber(this.state.phone) ? 'invalid' : ''
               }`}>
-                <label htmlFor="phone">טלפון סלולרי</label>
+                <label htmlFor="phone"><span className={"mandatory-field-indicator"}>*</span>טלפון סלולרי</label>
                 <PhoneInput id="phone"
                   placeholder="הזינו מספר"
                   defaultCountry={'IL'}
@@ -124,7 +128,9 @@ class RegisterPage extends React.Component<
                   }}
                   error={this.state.phone ? (isValidPhoneNumber(this.state.phone) ? undefined : 'Invalid phone number') : 'Phone number required'}
                 />
+                {(this.state.phone && !isValidPhoneNumber(this.state.phone)) && <div className={"invalid-input-feedback"}>"מספר טלפון לא תקין"</div>}
               </div>
+              <div className={"mandatory-fields-message"}>* שדות חובה למילוי</div>
               <div className="user-checkbox styled-checkbox ">
                 <input
                   onChange={event => {

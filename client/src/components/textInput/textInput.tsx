@@ -9,8 +9,10 @@ export interface TextInputProps {
   className?: string;
   type: string;
   placeholder: string;
+  required?: boolean;
   validateRegex?: RegExp;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  validationErrorMessage?: string;
 }
 
 export interface TextInputState {
@@ -49,7 +51,11 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
           this.state.isValid ? "" : "invalid"
         } text-input-container`}
       >
-        <label htmlFor={this.props.id}>{this.props.title}</label>
+        <label htmlFor={this.props.id}>
+          {this.props.required &&
+          <span className={"mandatory-field-indicator"}>*</span>}
+          {this.props.title}
+        </label>
         <input
           defaultValue={this.props.defaultValue}
           onChange={event => {
@@ -60,6 +66,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
           type={this.props.type}
           placeholder={this.props.placeholder}
         />
+        {!this.state.isValid && <div className={"invalid-input-feedback"}>{this.props.validationErrorMessage}</div>}
       </div>
     );
   }
