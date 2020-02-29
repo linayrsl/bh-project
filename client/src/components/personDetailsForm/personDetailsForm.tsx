@@ -197,8 +197,7 @@ class PersonDetailsForm extends React.Component<
                     value="male"
                     onChange={event => {
                       this.setState({ gender: event.target.value });
-                    }}
-                  ></input>
+                    }} />
                   <label htmlFor={`${this.props.idPrefix}_female`}>נקבה</label>
                   <input
                     checked={this.state.gender === "female"}
@@ -208,8 +207,7 @@ class PersonDetailsForm extends React.Component<
                     value="female"
                     onChange={event => {
                       this.setState({ gender: event.target.value });
-                    }}
-                  ></input>
+                    }} />
                   <label htmlFor={`${this.props.idPrefix}_other`}>אחר</label>
                   <input
                     checked={this.state.gender === "other"}
@@ -219,8 +217,7 @@ class PersonDetailsForm extends React.Component<
                     value="other"
                     onChange={event => {
                       this.setState({ gender: event.target.value });
-                    }}
-                  ></input>
+                    }} />
                 </div>
               </div>
               <TextInput
@@ -260,8 +257,7 @@ class PersonDetailsForm extends React.Component<
                     className="checkbox"
                     onChange={event => {
                       this.setState({ isAlive: event.target.checked });
-                    }}
-                  ></input>
+                    }} />
                 </div>
               )}
               {!this.state.isAlive && (

@@ -1,6 +1,8 @@
 import * as React from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import 'react-phone-number-input/style.css'
+import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 
 import "./registerPage.css";
 import { ProceedButton } from "../proceedButton/proceedButton";
@@ -59,9 +61,11 @@ class RegisterPage extends React.Component<
 
   validateForm(): boolean {
     return (
+      this.state.firstName.length > 0 &&
+      this.state.lastName.length > 0 &&
       this.state.disclaimer &&
       this.state.email.length > 0 &&
-      this.state.phone.length > 0
+      isValidPhoneNumber(this.state.phone)
     );
   }
 
@@ -107,16 +111,20 @@ class RegisterPage extends React.Component<
                 }}
                 className="ltr"
               />
-              <TextInput
-                id="phone"
-                type="phone"
-                title="טלפון סלולרי"
-                placeholder="הזינו מספר"
-                onChange={event => {
-                  this.setState({ phone: event.target.value });
-                }}
-                className="ltr"
-              />
+              <div className={`phone-input-container ${
+                this.state.phone && !isValidPhoneNumber(this.state.phone) ? 'invalid' : ''
+              }`}>
+                <label htmlFor="phone">טלפון סלולרי</label>
+                <PhoneInput id="phone"
+                  placeholder="הזינו מספר"
+                  defaultCountry={'IL'}
+                  value={''}
+                  onChange={value => {
+                    this.setState({ phone: value });
+                  }}
+                  error={this.state.phone ? (isValidPhoneNumber(this.state.phone) ? undefined : 'Invalid phone number') : 'Phone number required'}
+                />
+              </div>
               <div className="user-checkbox styled-checkbox ">
                 <input
                   onChange={event => {

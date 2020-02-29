@@ -53,3 +53,59 @@
 input.invalid {
   border: 1px solid red !important;
 }
+
+.phone-input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 20px;
+  color: rgb(83, 83, 84);
+  border-bottom: 2px solid #cccbcb;
+}
+
+.phone-input-container.invalid {
+  border-color: red;
+}
+
+.phone-input-container label {
+
+}
+
+.phone-input-container .PhoneInput {
+  direction: ltr;
+  width: 50%;
+}
+
+.phone-input-container .PhoneInput .PhoneInputInput {
+  border: 0;
+  outline: none;
+  background-color: #f9f9f9;
+  color: darkgrey;
+  font-size: 18px;
+  font-family: "Assistant", cursive;
+}
+
+.phone-input-container.invalid .PhoneInput .PhoneInputInput {
+  color: red;
+}
+
+.phone-input-container input:-webkit-autofill,
+.phone-input-container input:-webkit-autofill:hover,
+.phone-input-container input:-webkit-autofill:focus,
+.phone-input-container input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #f9f9f9 inset !important;
+  -webkit-text-fill-color: darkgrey !important;
+}
+
+.phone-input-container input::placeholder {
+  color: darkgrey;
+  opacity: 1;
+}
+
+.phone-input-container input:-ms-input-placeholder {
+  color: darkgrey;
+}
+
+.phone-input-container input::-ms-input-placeholder {
+  color: darkgrey;
+}
