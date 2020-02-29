@@ -131,7 +131,7 @@ class RegisterPage extends React.Component<
                   }}
                   error={this.state.phone ? (isValidPhoneNumber(this.state.phone) ? undefined : 'Invalid phone number') : 'Phone number required'}
                 />
-                {(this.state.phone && !isValidPhoneNumber(this.state.phone)) && <div className={"invalid-input-feedback"}>"מספר טלפון לא תקין"</div>}
+                {(this.state.phone && !isValidPhoneNumber(this.state.phone)) && <div className={"invalid-input-feedback"}>מספר טלפון לא תקין</div>}
               </div>
               <div className={"mandatory-fields-message"}>* שדות חובה למילוי</div>
               <div className="user-checkbox styled-checkbox ">
