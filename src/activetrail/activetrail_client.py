@@ -18,6 +18,8 @@ class ApiStatusTypes(Enum):
 class ActiveTrailContact:
     status: str
     sms_status: str
+    first_name: str
+    last_name: str
     email: str
     sms: str
     is_do_not_mail: bool
@@ -29,12 +31,14 @@ class ActiveTrailClient:
         self.base_url = base_url
         self.auth_token = auth_token
 
-    def create_contact(self, email: str, phone: str) -> int:
+    def create_contact(self, first_name: str, last_name: str, email: str, phone: str) -> int:
         full_url = "{}/api/contacts".format(self.base_url)
         headers = {"Authorization": "{}".format(self.auth_token),
                    "content-type": "application/json"}
         contact = ActiveTrailContact(status=ApiStatusTypes.Pending.name,
                                      sms_status=ApiStatusTypes.Pending.name,
+                                     first_name=first_name,
+                                     last_name=last_name,
                                      email=email,
                                      sms=phone,
                                      is_do_not_mail=False,

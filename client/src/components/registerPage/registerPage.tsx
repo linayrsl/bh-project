@@ -11,6 +11,8 @@ import { Loader } from "../loader/loader";
 export interface RegisterPageProps {}
 
 export interface RegisterPageState {
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   disclaimer: boolean;
@@ -22,6 +24,8 @@ class RegisterPage extends React.Component<
   RegisterPageState
 > {
   state = {
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     disclaimer: false,
@@ -33,6 +37,8 @@ class RegisterPage extends React.Component<
 
     let apiResponsePromise = axios
       .post("/api/auth/register/", {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
         email: this.state.email,
         phone: this.state.phone
       })
@@ -71,6 +77,26 @@ class RegisterPage extends React.Component<
           <div className="register-form">
             <form>
               <TextInput
+                id="firstName"
+                type="text"
+                title="שם פרטי"
+                placeholder="הזינו שם פרטי"
+                onChange={event => {
+                  this.setState({firstName: event.target.value});
+                }}
+              >
+              </TextInput>
+              <TextInput
+                id="lastName"
+                type="text"
+                title="שם משפחה"
+                placeholder="הזינו שם משפחה"
+                onChange={event => {
+                  this.setState({lastName: event.target.value});
+                }}
+              >
+              </TextInput>
+              <TextInput
                 validateRegex={/[^@]+@[^@]+/}
                 id="email"
                 type="email"
@@ -94,12 +120,11 @@ class RegisterPage extends React.Component<
               <div className="user-checkbox styled-checkbox ">
                 <input
                   onChange={event => {
-                    this.setState({ disclaimer: event.target.checked });
+                    this.setState({disclaimer: event.target.checked});
                   }}
                   defaultChecked={this.state.disclaimer}
                   type="checkbox"
-                  className="checkbox"
-                ></input>
+                  className="checkbox" />
                 <span className="accept-conditions-full">
                   קראתי ואני מסכים/ה ל
                   <a

@@ -76,11 +76,16 @@ def register_post():
     if not register_info_json:
         logger.info("Received invalid request. Request is missing body")
         return abort(400, description="Request is missing a valid JSON body")
-    if not register_info_json["email"] or not register_info_json["phone"]:
-        logger.info("Request missing email or phone values")
+    if not register_info_json["email"] or \
+       not register_info_json["phone"] or \
+       not register_info_json["firstName"] or \
+       not register_info_json["lastName"]:
+        logger.info("Request missing one or more of the following values: email, phone, first name or last name")
         return abort(400, description="Request missing one or more values")
 
     verification_code = generate_verification_code()
+    first_name = register_info_json["firstName"]
+    last_name = register_info_json["lastName"]
     email = register_info_json["email"]
     phone = register_info_json["phone"]
     logger.info("Generated verification code")
@@ -93,9 +98,11 @@ def register_post():
                                                ACTIVETRAIL_API_KEY)
 
     try:
-        activetrail_api_client.create_contact(email, phone)
+        activetrail_api_client.create_contact(first_name, last_name, email, phone)
     except Exception:
-        logger.exception("Failed to create contact in ActiveTrail (email: '{}', phone: '{}')".format(email, phone))
+        logger.exception("Failed to create contact in ActiveTrail "
+                         "(first_name: '{}', last_name: '{}', email: '{}', phone: '{}')"
+                         .format(first_name, last_name, email, phone))
 
     with DatabaseConnection(DATABASE_URL) as db_connection:
         if not db_connection:
