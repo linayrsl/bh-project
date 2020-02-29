@@ -4,6 +4,8 @@ import { TextInput } from "../textInput/textInput";
 import _ from "lodash";
 import "./personDetailsForm.css";
 
+export type Gender = "male" | "female" | "other";
+
 export interface PersonDetailsFormProps {
   idPrefix: string;
   displayIsAlive?: boolean;
@@ -12,6 +14,7 @@ export interface PersonDetailsFormProps {
   isSubmitter?: boolean;
 
   defaults?: PersonDetailsFormState;
+  defaultGender?: Gender;
   onFormChange: (state: PersonDetailsFormState) => void;
   onFormValidityChange: (isValid: boolean) => void;
 }
@@ -23,7 +26,7 @@ export interface PersonDetailsFormState {
   maidenName: string | null;
   birthDate: string | null;
   birthPlace: string | null;
-  gender: string | null;
+  gender: Gender | null;
   motherID: string | null;
   fatherID: string | null;
   isAlive: boolean | null;
@@ -44,7 +47,7 @@ class PersonDetailsForm extends React.Component<
       firstName: null,
       lastName: null,
       maidenName: null,
-      gender: null,
+      gender: props.defaultGender || null,
       birthDate: null,
       birthPlace: null,
       motherID: null,
@@ -196,7 +199,7 @@ class PersonDetailsForm extends React.Component<
                     name="gender"
                     value="male"
                     onChange={event => {
-                      this.setState({ gender: event.target.value });
+                      this.setState({ gender: event.target.value as Gender });
                     }} />
                   <label htmlFor={`${this.props.idPrefix}_female`}>נקבה</label>
                   <input
@@ -206,7 +209,7 @@ class PersonDetailsForm extends React.Component<
                     name="gender"
                     value="female"
                     onChange={event => {
-                      this.setState({ gender: event.target.value });
+                      this.setState({ gender: event.target.value as Gender });
                     }} />
                   <label htmlFor={`${this.props.idPrefix}_other`}>אחר</label>
                   <input
@@ -216,7 +219,7 @@ class PersonDetailsForm extends React.Component<
                     name="gender"
                     value="other"
                     onChange={event => {
-                      this.setState({ gender: event.target.value });
+                      this.setState({ gender: event.target.value as Gender });
                     }} />
                 </div>
               </div>

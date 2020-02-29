@@ -31,14 +31,14 @@ class FamilyTreeThankYouPage extends React.Component<
             <div className="information-boxes-upper">
               <a
                 className="upper-right-box information-box"
-                href="https://www.bh.org.il/"
+                href="https://www.bh.org.il/he/"
               >
                 בואו <span className="highlight"> לבקר </span> במוזיאון העם
                 היהודי
               </a>
               <a
                 className="upper-left-box information-box"
-                href="https://www.bh.org.il/shop/"
+                href="https://www.bh.org.il/he/shop/"
               >
                 מוזמנים להתרשם ממבחר הפריטים בחנות המוזיאון
               </a>
@@ -46,14 +46,14 @@ class FamilyTreeThankYouPage extends React.Component<
             <div className="information-boxes-lower">
               <a
                 className="lower-right-box information-box"
-                href="https://www.bh.org.il/education-homepage/"
+                href="https://www.bh.org.il/he/%d7%97%d7%99%d7%a0%d7%95%d7%9a-%d7%93%d7%a3-%d7%91%d7%99%d7%aa/"
               >
                 בואו <span className="highlight"> ללמוד </span> עם התוכניות
                 החינוכיות
               </a>
               <a
                 className="lower-left-box information-box"
-                href="https://dbs.bh.org.il/"
+                href="https://dbs.bh.org.il/he/"
               >
                 בואו <span className="highlight"> לגלות </span> על העולם היהודי
                 במאגרי המידע

@@ -73,6 +73,7 @@ class FamilyTreePageFather extends React.Component<
             displayIsAlive
             displayMaidenName
             defaults={this.state.fatherDetails}
+            defaultGender={"male"}
             onFormChange={(state: PersonDetailsFormState) => {
               this.formChangeHandler("fatherDetails", state);
             }}
@@ -86,6 +87,7 @@ class FamilyTreePageFather extends React.Component<
             displayIsAlive
             displayMaidenName
             defaults={this.state.motherOfFatherDetails}
+            defaultGender={"female"}
             onFormChange={(state: PersonDetailsFormState) => {
               this.formChangeHandler("motherOfFatherDetails", state);
             }}
@@ -99,6 +101,7 @@ class FamilyTreePageFather extends React.Component<
             displayIsAlive
             displayMaidenName
             defaults={this.state.fatherOfFatherDetails}
+            defaultGender={"male"}
             onFormChange={(state: PersonDetailsFormState) => {
               this.formChangeHandler("fatherOfFatherDetails", state);
             }}
