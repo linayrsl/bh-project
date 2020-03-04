@@ -101,3 +101,21 @@ a {
   border-bottom: 1px #e3e3e4 solid;
   padding-bottom: 10px;
 }
+
+.share-link-container {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.share-link-container a {
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+}
+
+

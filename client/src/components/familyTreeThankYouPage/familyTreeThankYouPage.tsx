@@ -1,7 +1,13 @@
 import * as React from "react";
+import ClipboardJS from "clipboard";
+import { toast } from "react-toastify";
+
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.css";
 import bhLogo from "../../assets/images/bh-logo-he.svg";
+import linkIcon from "../../assets/images/bx-link.svg";
+import facebookIcon from "../../assets/images/bxl-facebook.svg";
+
 
 export interface FamilyTreeThankYouPageProps {}
 
@@ -11,6 +17,18 @@ class FamilyTreeThankYouPage extends React.Component<
   FamilyTreeThankYouPageProps,
   FamilyTreeThankYouPageState
 > {
+  private readonly shareLinkButton: React.RefObject<any>;
+
+  constructor(props: Readonly<FamilyTreeThankYouPageProps>) {
+    super(props);
+    this.shareLinkButton = React.createRef();
+  }
+
+
+  componentDidMount(): void {
+    new ClipboardJS(this.shareLinkButton.current);
+  }
+
   render() {
     return (
       <div className="family-tree-thanks-page-container">
@@ -23,6 +41,22 @@ class FamilyTreeThankYouPage extends React.Component<
               אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד ,
               לחקור ולהיות חלק מסיפור.
             </p>
+            <div className={"share-link-container"}>
+              רוצה לשתף:
+              <a data-clipboard-text={"https://bh-project.herokuapp.com"}
+                 ref={this.shareLinkButton}
+                 href={"#"}
+                 onClick={
+                   (event) => {
+                      event.preventDefault();
+                      toast.info("הקישור הועתק בהצלחה",  { autoClose: 5000 });
+                    }}>
+                <img src={linkIcon} alt={"link icon"}/>
+              </a>
+              <a href={"https://www.facebook.com/sharer/sharer.php?u=https://bh-project.herokuapp.com"} target="_blank">
+                <img src={facebookIcon} alt={"facebook icon"}/>
+              </a>
+            </div>
           </div>
           <div className="page-content-container information">
             <div className="bh-logo-class">
