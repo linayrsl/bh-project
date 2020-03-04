@@ -52,8 +52,8 @@ class Email:
             return False
 
     def send_verification_code(self, to_email: str, verification_code: str):
-        subject = "קוד זיהוי עבור אתר בית התפוצות"
-        content = "קוד זיהוי שלך לאתר בית התפוצות הוא: {}".format(verification_code)
+        subject = "קוד הזיהוי עבור בניית עץ המשפחה"
+        content = "קוד הזיהוי עבור בניית עץ המשפחה: {}".format(verification_code)
         message = Mail(self.from_email, to_email, subject, content)
 
         # This code is for testing purposes.
