@@ -50,9 +50,6 @@ class FamilyTreeThankYouPage extends React.Component<
   }
 
   render() {
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return (
       <div className="family-tree-thanks-page-container">
         <Header title="העץ שלך נשמר" />
