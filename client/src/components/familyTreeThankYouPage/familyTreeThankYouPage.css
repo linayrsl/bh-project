@@ -107,6 +107,10 @@ a {
   margin-bottom: 30px;
 }
 
+.share-link-container button {
+  margin-right: 10px;
+}
+
 .share-link-container a {
   background-color: white;
   border-radius: 50%;
@@ -118,4 +122,8 @@ a {
   margin-right: 15px;
 }
 
+.share-link {
+  width: 20px;
+  height: 20px;
+}
 

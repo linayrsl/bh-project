@@ -2,16 +2,31 @@ import * as React from "react";
 import ClipboardJS from "clipboard";
 import { toast } from "react-toastify";
 
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.css";
 import bhLogo from "../../assets/images/bh-logo-he.svg";
 import linkIcon from "../../assets/images/bx-link.svg";
 import facebookIcon from "../../assets/images/bxl-facebook.svg";
-
+import shareIcon from "../../assets/images/Share.svg";
 
 export interface FamilyTreeThankYouPageProps {}
 
-export interface FamilyTreeThankYouPageState {}
+export interface FamilyTreeThankYouPageState {
+  isSharingSupported: boolean;
+}
 
 class FamilyTreeThankYouPage extends React.Component<
   FamilyTreeThankYouPageProps,
@@ -22,14 +37,22 @@ class FamilyTreeThankYouPage extends React.Component<
   constructor(props: Readonly<FamilyTreeThankYouPageProps>) {
     super(props);
     this.shareLinkButton = React.createRef();
+
+    this.state = {
+      isSharingSupported: !!navigator.share
+    }
   }
 
-
   componentDidMount(): void {
-    new ClipboardJS(this.shareLinkButton.current);
+    if (this.shareLinkButton.current) {
+      new ClipboardJS(this.shareLinkButton.current);
+    }
   }
 
   render() {
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
       <div className="family-tree-thanks-page-container">
         <Header title="העץ שלך נשמר" />
@@ -42,20 +65,37 @@ class FamilyTreeThankYouPage extends React.Component<
               לחקור ולהיות חלק מסיפור.
             </p>
             <div className={"share-link-container"}>
-              רוצה לשתף:
-              <a data-clipboard-text={"https://bh-project.herokuapp.com"}
-                 ref={this.shareLinkButton}
-                 href={"#"}
-                 onClick={
-                   (event) => {
-                      event.preventDefault();
-                      toast.info("הקישור הועתק בהצלחה",  { autoClose: 5000 });
-                    }}>
-                <img src={linkIcon} alt={"link icon"}/>
-              </a>
-              <a href={"https://www.facebook.com/sharer/sharer.php?u=https://bh-project.herokuapp.com"} target="_blank">
-                <img src={facebookIcon} alt={"facebook icon"}/>
-              </a>
+                רוצה לשתף:
+              {this.state.isSharingSupported
+              ? <a href={"#"}
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigator.share!({
+                    title: "אפליקציית בניית עץ משפחה",
+                    text: "אפליקציית בניית עץ משפחה של בית התפוצות",
+                    url: "https://bh-project.herokuapp.com",
+                  })
+                    .catch((error) => console.log('Error sharing', error));
+                }}>
+                  <img className={"share-link"} src={shareIcon} alt={"share icon"}/>
+                </a>
+              : <>
+                  <FacebookShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    <FacebookIcon path={undefined} crossOrigin={undefined} round={true} size={30}/>
+                  </FacebookShareButton>
+                  <EmailShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    <EmailIcon round={true} size={31} crossOrigin={undefined} path={undefined}/>
+                  </EmailShareButton>
+                  <TelegramShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    <TelegramIcon round={true} path={undefined} size={30} crossOrigin={undefined}/>
+                  </TelegramShareButton>
+                  <TwitterShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    <TwitterIcon crossOrigin={undefined} path={undefined} size={30} round={true}/>
+                  </TwitterShareButton>
+                  <WhatsappShareButton translate={undefined} url={"ttps://bh-project.herokuapp.com"}>
+                    <WhatsappIcon round={true} size={30} path={undefined} crossOrigin={undefined}/>
+                  </WhatsappShareButton>
+                </>}
             </div>
           </div>
           <div className="page-content-container information">
