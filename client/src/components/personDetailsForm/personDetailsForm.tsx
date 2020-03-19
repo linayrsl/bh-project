@@ -1,8 +1,10 @@
 import * as React from "react";
-import axios from "axios";
+import { toast } from "react-toastify";
 import { TextInput } from "../textInput/textInput";
 import _ from "lodash";
 import "./personDetailsForm.css";
+// @ts-ignore
+import {readAndCompressImage} from "browser-image-resizer";
 
 export type Gender = "male" | "female" | "other";
 
@@ -114,14 +116,29 @@ class PersonDetailsForm extends React.Component<
       let image = fileList[0];
       if (image) {
         this.setState({ image: "" });
-        axios
-          .post<{
-            resizedImageB64: string;
-          }>("/api/resize-image/", image)
-          .then(response => {
-            if (response && response.data && response.data.resizedImageB64) {
-              this.setState({ image: response.data.resizedImageB64 });
-            }
+
+        const configImage = {
+          quality: 0.8,
+          maxWidth: 800,
+          maxHeight: 600,
+          autoRotate: true,
+          debug: false
+        };
+        readAndCompressImage(image, configImage)
+          .then((resizedImage: Blob) => {
+            let reader = new FileReader();
+            reader.onload = () => {
+              if (reader.result) {
+                this.setState({ image: reader.result!.toString()});
+              }
+              else {
+                toast.error("לא ניתן להטעין את התמונה שנבחרה");
+              }
+            };
+            reader.onerror = () => {
+              toast.error("לא ניתן להטעין את התמונה שנבחרה");
+            };
+            reader.readAsDataURL(resizedImage);
           });
       }
     }
@@ -148,7 +165,7 @@ class PersonDetailsForm extends React.Component<
                 />
                 <div className="image-location">
                   {this.state.image && (
-                    <img src={`data:image/jpeg;base64,${this.state.image}`} />
+                    <img src={this.state.image} />
                   )}
                 </div>
               </div>
