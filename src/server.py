@@ -8,7 +8,6 @@ from flask_talisman import Talisman, GOOGLE_CSP_POLICY
 
 from src.handlers.auth import auth
 from src.handlers.family_tree import family_tree
-from src.handlers.resize_image import resize_image
 from src.logging.logging_setup import logging_setup
 from src.settings import CI
 
@@ -59,10 +58,6 @@ application.register_blueprint(
 application.register_blueprint(
     auth,
     url_prefix="/api/auth")
-
-application.register_blueprint(
-    resize_image,
-    url_prefix="/api/resize-image")
 
 
 @application.route('/<string:path_part1>')

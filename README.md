@@ -1,4 +1,4 @@
-# She-Codes-BH-Project
+# Family Tree Project
 
 ## Run Project In Production Environment
 
@@ -152,29 +152,6 @@ Possible responses:
 * 400 Bad Request - the request is malformed
 * 401 Unauthorized - verification code did not match the one that was sent to the user
 * 404 Not Found - verification code was never sent to the user
-
-
-### Resize Image
-
-#### Send resized image 
-
-**POST** `/api/resize-image/`
-
-
-Request body:
-
-The body of the request will contain image in form of non presentable series of bytes 
-
-
-Possible responses:
-
-* 200 Ok - The body of the response will contain JSON 
-
-```json
-{"resizedImageB64": "representation of the resized image in series of bytes" }
-```
-* 400 Bad Request - the request is malformed
-
 
 
 ### Family Tree
