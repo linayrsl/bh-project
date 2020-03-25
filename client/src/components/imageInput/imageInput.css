@@ -1,0 +1,27 @@
+input.image-input {
+  display: none;
+}
+
+.image-input-container {
+  width: 128px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-location {
+  width: 128px;
+  height: 128px;
+  background-size: 128px 128px;
+  background-position: center;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #cccbcb;
+  position: absolute;
+  z-index: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

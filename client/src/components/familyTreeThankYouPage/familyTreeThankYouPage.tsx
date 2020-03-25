@@ -18,8 +18,6 @@ import {
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.css";
 import bhLogo from "../../assets/images/bh-logo-he.svg";
-import linkIcon from "../../assets/images/bx-link.svg";
-import facebookIcon from "../../assets/images/bxl-facebook.svg";
 import shareIcon from "../../assets/images/Share.svg";
 
 export interface FamilyTreeThankYouPageProps {}
