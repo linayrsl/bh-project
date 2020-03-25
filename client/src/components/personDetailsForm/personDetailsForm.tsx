@@ -1,10 +1,8 @@
-import * as React from "react";
-import { toast } from "react-toastify";
-import { TextInput } from "../textInput/textInput";
 import _ from "lodash";
+import * as React from "react";
+import { TextInput } from "../textInput/textInput";
+import {ImageInput} from "../imageInput/imageInput";
 import "./personDetailsForm.css";
-// @ts-ignore
-import {readAndCompressImage} from "browser-image-resizer";
 
 export type Gender = "male" | "female" | "other";
 
@@ -84,10 +82,8 @@ class PersonDetailsForm extends React.Component<
     let pattern2 = /^[0-9]{4}$/g;
     let matchFullDate = date.match(pattern1);
     let matchYear = date.match(pattern2);
-    if (!matchFullDate && !matchYear) {
-      return false;
-    }
-    return true;
+
+    return !(!matchFullDate && !matchYear);
   }
 
   isFormValid(): boolean {
@@ -110,40 +106,6 @@ class PersonDetailsForm extends React.Component<
     return true;
   }
 
-  imageChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    let fileList = event.target.files;
-    if (fileList && fileList.length > 0) {
-      let image = fileList[0];
-      if (image) {
-        this.setState({ image: "" });
-
-        const configImage = {
-          quality: 0.8,
-          maxWidth: 800,
-          maxHeight: 600,
-          autoRotate: true,
-          debug: false
-        };
-        readAndCompressImage(image, configImage)
-          .then((resizedImage: Blob) => {
-            let reader = new FileReader();
-            reader.onload = () => {
-              if (reader.result) {
-                this.setState({ image: reader.result!.toString()});
-              }
-              else {
-                toast.error("לא ניתן להטעין את התמונה שנבחרה");
-              }
-            };
-            reader.onerror = () => {
-              toast.error("לא ניתן להטעין את התמונה שנבחרה");
-            };
-            reader.readAsDataURL(resizedImage);
-          });
-      }
-    }
-  }
-
   render() {
     return (
       <div className="person-details-container">
@@ -151,24 +113,10 @@ class PersonDetailsForm extends React.Component<
           <form>
             <div className="person-details-header">
               <span>{this.props.title}:</span>
-              <div className="image-input">
-                <label htmlFor={`${this.props.idPrefix}_person`}>
-                  הוסיפו תמונה
-                </label>
-                <input
-                  onChange={this.imageChangeHandler.bind(this)}
-                  id={`${this.props.idPrefix}_person`}
-                  className="person-details-image-input"
-                  type="file"
-                  placeholder="הוסיפו תמונה"
-                  accept="image/jpeg"
-                />
-                <div className="image-location">
-                  {this.state.image && (
-                    <img src={this.state.image} />
-                  )}
-                </div>
-              </div>
+              <ImageInput
+                id={`${this.props.idPrefix}_person`}
+                defaultValue={this.state.image || undefined}
+                onChange={image => this.setState({ image: image })}/>
             </div>
             <div className="person-details-inner-container">
               <TextInput

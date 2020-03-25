@@ -3,10 +3,6 @@
   padding-left: 10px;
 }
 
-.person-details input.person-details-image-input {
-  display: none;
-}
-
 .person-details-header {
   display: flex;
   justify-content: space-between;
@@ -30,34 +26,6 @@
   text-decoration: underline;
   z-index: 1;
   line-height: 35px;
-}
-
-.image-input {
-  width: 128px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-location {
-  width: 128px;
-  height: 128px;
-  background-size: 128px 128px;
-  background-position: center;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid #cccbcb;
-  position: absolute;
-  z-index: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-location img {
-  height: 128px;
 }
 
 .gender {
