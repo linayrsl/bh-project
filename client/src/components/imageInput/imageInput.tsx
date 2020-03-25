@@ -12,15 +12,34 @@ interface ImageInputProps {
 
 interface ImageInputState {
   image: string | null;
+  isWideImage: boolean;
 }
 
 class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
+
   constructor(props: Readonly<ImageInputProps>) {
     super(props);
 
     this.state = {
-      image: props.defaultValue || null
-    }
+      image: props.defaultValue || null,
+      isWideImage: false
+    };
+  }
+
+  getNaturalImageSize(image: string): Promise<{imageWidth: number, imageHeight: number}> {
+    return new Promise<{imageWidth: number, imageHeight: number}>(
+      (resolve, reject) => {
+        const img = new Image();
+        img.addEventListener("load", () => {
+          let imageWidth = img.naturalWidth;
+          let imageHeight = img.naturalHeight;
+          resolve({imageWidth, imageHeight});
+        });
+        img.addEventListener("error", () => {
+          reject();
+        });
+        img.src = image;
+      });
   }
 
   componentDidUpdate(prevProps: Readonly<ImageInputProps>, prevState: Readonly<ImageInputState>): void {
@@ -28,6 +47,19 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
       this.setState({ image: this.props.defaultValue! });
     }
     if (prevState.image !== this.state.image) {
+      if (this.state.image) {
+        this.getNaturalImageSize(this.state.image)
+          .then(
+            (naturalSize: {imageWidth: number, imageHeight: number}) => {
+              let {imageWidth, imageHeight} = naturalSize;
+              this.setState({isWideImage: imageWidth > imageHeight});
+            }
+          )
+          .catch(() => {
+            console.error("Failed to get image natural dimensions");
+          });
+      }
+
       this.props.onChange(this.state.image);
     }
   }
@@ -82,7 +114,9 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
         />
         <div className="image-location">
           {this.state.image && (
-            <img style={{}} src={this.state.image} />
+            <img
+              className={this.state.isWideImage ? "wide-image" : "high-image"}
+              src={this.state.image} />
           )}
         </div>
       </div>

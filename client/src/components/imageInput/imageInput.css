@@ -25,3 +25,11 @@ input.image-input {
   align-items: center;
   justify-content: center;
 }
+
+.image-location .high-image {
+  width: 128px;
+}
+
+.image-location .wide-image {
+  height: 128px;
+}
