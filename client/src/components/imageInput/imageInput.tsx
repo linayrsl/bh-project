@@ -38,7 +38,7 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
         img.addEventListener("error", () => {
           reject();
         });
-        img.src = image;
+        img.src = `data:image/jpeg;base64,${image}`;
       });
   }
 
@@ -83,7 +83,7 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
             let reader = new FileReader();
             reader.onload = () => {
               if (reader.result) {
-                this.setState({ image: reader.result!.toString()});
+                this.setState({ image: reader.result!.toString().replace("data:image/jpeg;base64,", "")});
               }
               else {
                 toast.error("לא ניתן להטעין את התמונה שנבחרה");
@@ -110,13 +110,13 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
           className="image-input"
           type="file"
           placeholder="הוסיפו תמונה"
-          accept="image/jpeg"
+          accept="image/jpeg,image/png"
         />
         <div className="image-location">
           {this.state.image && (
             <img
               className={this.state.isWideImage ? "wide-image" : "high-image"}
-              src={this.state.image} />
+              src={`data:image/jpeg;base64,${this.state.image}`} />
           )}
         </div>
       </div>
