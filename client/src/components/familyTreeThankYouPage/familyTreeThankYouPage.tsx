@@ -66,8 +66,8 @@ class FamilyTreeThankYouPage extends React.Component<
                 onClick={(event) => {
                   event.preventDefault();
                   navigator.share!({
-                    title: "אפליקציית בניית עץ משפחה",
-                    text: "אפליקציית בניית עץ משפחה של בית התפוצות",
+                    title: "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+                    text: "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
                     url: "https://bh-project.herokuapp.com",
                   })
                     .catch((error) => console.log('Error sharing', error));
@@ -75,20 +75,20 @@ class FamilyTreeThankYouPage extends React.Component<
                   <img className={"share-link"} src={shareIcon} alt={"share icon"}/>
                 </a>
               : <>
-                  <FacebookShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                  <FacebookShareButton hashtag={"#bhfamilytrees"} quote={"אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי"} translate={undefined} url={"https://bh-project.herokuapp.com"}>
                     <FacebookIcon path={undefined} crossOrigin={undefined} round={true} size={30}/>
                   </FacebookShareButton>
-                  <EmailShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                  <EmailShareButton  subject={"אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי"} translate={undefined} url={"https://bh-project.herokuapp.com"}>
                     <EmailIcon round={true} size={31} crossOrigin={undefined} path={undefined}/>
                   </EmailShareButton>
-                  <TelegramShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                  <TelegramShareButton title={"אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי"} translate={undefined} url={"https://bh-project.herokuapp.com"}>
                     <TelegramIcon round={true} path={undefined} size={30} crossOrigin={undefined}/>
                   </TelegramShareButton>
-                  <TwitterShareButton translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                  <TwitterShareButton title={"אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי"} translate={undefined} url={"https://bh-project.herokuapp.com"}>
                     <TwitterIcon crossOrigin={undefined} path={undefined} size={30} round={true}/>
                   </TwitterShareButton>
-                  <WhatsappShareButton translate={undefined} url={"ttps://bh-project.herokuapp.com"}>
-                    <WhatsappIcon round={true} size={30} path={undefined} crossOrigin={undefined}/>
+                  <WhatsappShareButton title={"אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי"} translate={undefined} url={"ttps://bh-project.herokuapp.com"}>
+                    <WhatsappIcon  round={true} size={30} path={undefined} crossOrigin={undefined}/>
                   </WhatsappShareButton>
                 </>}
             </div>

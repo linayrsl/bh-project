@@ -2,6 +2,7 @@ import _ from "lodash";
 import * as React from "react";
 import { TextInput } from "../textInput/textInput";
 import {ImageInput} from "../imageInput/imageInput";
+
 import "./personDetailsForm.css";
 
 export type Gender = "male" | "female" | "other";
