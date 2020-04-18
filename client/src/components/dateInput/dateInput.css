@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.date-input-container .DayPickerInput-Overlay {
+  z-index: 2;
+}
+
 .date-input-container.invalid {
   border-color: red;
 }
@@ -34,7 +38,7 @@
   align-items: center;
   font-size: 16px;
   font-weight: bolder;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .date-input-container .overlay-input input[type=number]::-webkit-inner-spin-button,
@@ -140,4 +144,15 @@
 
 .DayPicker-Caption select {
   margin: 0 5px;
+}
+
+#day-picker-close-button {
+  border: none;
+  font-size: 24px;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: darkgray;
 }

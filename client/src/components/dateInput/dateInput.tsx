@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import {CustomDayPickerCaption} from './customDayPickerCaption'
 
@@ -19,8 +19,27 @@ export interface DateInputProps {
 }
 
 const DateInput = (props: DateInputProps) => {
+
+  const validateDate = (value: string) => {
+    const dateInputRegex = /^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/;
+    if (dateInputRegex.test(value)) {
+      setIsValid(true);
+      return true;
+    }
+    setIsValid(false);
+    return false;
+  }
+
   const [isValid, setIsValid] = useState(true);
   const [month, setMonth] = useState(new Date());
+
+  useEffect(() => {
+    if (props.defaultValue) {
+      validateDate(props.defaultValue);
+    } else {
+      setIsValid(!props.required)
+    }
+  }, [props.defaultValue]);
 
   const dayPickerRef = useRef<DayPickerInput>(null);
 
@@ -29,6 +48,7 @@ const DateInput = (props: DateInputProps) => {
     props.onChange(year);
     dayPickerRef.current!.hideDayPicker();
   };
+
 
   return (
     <div
@@ -39,16 +59,16 @@ const DateInput = (props: DateInputProps) => {
         {props.title}
       </label>
       <DayPickerInput
-        showOverlay={true}
         ref={dayPickerRef}
         value={props.defaultValue}
         onDayChange={(selectedDay, modifiers, dayPickerInput) => {
           const input = dayPickerInput.getInput();
-          console.log(selectedDay, input.value);
           props.onChange(input.value);
         }}
         keepFocus={false}
-        overlayComponent={CustomOverlayFactory(yearChangeHandler)}
+        overlayComponent={CustomOverlayFactory(
+          yearChangeHandler,
+          () => dayPickerRef.current!.hideDayPicker())}
         formatDate={MomentLocaleUtils.formatDate}
         parseDate={MomentLocaleUtils.parseDate}
         format={'DD/MM/YYYY'}

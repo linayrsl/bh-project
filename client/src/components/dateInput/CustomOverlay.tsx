@@ -13,7 +13,7 @@ interface CustomOverlay {
   children: ReactNode
 }
 
-const CustomOverlayFactory = (yearChangeHandler: YearSelectionHandler) => {
+const CustomOverlayFactory = (yearChangeHandler: YearSelectionHandler, overlayCloseHandler: () => void) => {
   return ({ classNames, selectedDay, input, children, ...props }: CustomOverlay) => {
 
     const validateYearInput = (value: string) => {
@@ -41,6 +41,12 @@ const CustomOverlayFactory = (yearChangeHandler: YearSelectionHandler) => {
       >
         <div className={classNames.overlay}>
           <div className={'overlay-input'}>
+            <button
+              id={'day-picker-close-button'}
+              type={'button'}
+              onClick={overlayCloseHandler}
+            >&times;
+            </button>
             <div className={'year-only-input-text'}>הזן שנה אם לא ידוע תאריך מדויק</div>
             <div>
               <input
