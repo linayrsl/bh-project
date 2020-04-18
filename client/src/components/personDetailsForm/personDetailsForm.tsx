@@ -2,6 +2,7 @@ import _ from "lodash";
 import * as React from "react";
 import { TextInput } from "../textInput/textInput";
 import {ImageInput} from "../imageInput/imageInput";
+import {DateInput} from "../dateInput/dateInput";
 
 import "./personDetailsForm.css";
 
@@ -111,7 +112,7 @@ class PersonDetailsForm extends React.Component<
     return (
       <div className="person-details-container">
         <div className="person-details">
-          <form>
+          <form noValidate={true}>
             <div className="person-details-header">
               <span>{this.props.title}:</span>
               <ImageInput
@@ -189,15 +190,12 @@ class PersonDetailsForm extends React.Component<
                     }} />
                 </div>
               </div>
-              <TextInput
-                validateRegex={/^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/}
+              <DateInput
                 defaultValue={this.state.birthDate ? this.state.birthDate : ""}
                 title="תאריך לידה"
                 id={`${this.props.idPrefix}_birthDate`}
-                type="text"
-                placeholder="YYYY או DD/MM/YYYY"
-                onChange={event => {
-                  this.setState({ birthDate: event.target.value });
+                onChange={value => {
+                  this.setState({ birthDate: value });
                 }}
               />
               <TextInput

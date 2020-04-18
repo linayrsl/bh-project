@@ -58,6 +58,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
           {this.props.title}
         </label>
         <input
+          className={'person-details-form-style'}
           defaultValue={this.props.defaultValue}
           onChange={event => {
             this.validateInput(event.target.value);
