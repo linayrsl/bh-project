@@ -30,7 +30,6 @@ const CustomOverlayFactory = (yearChangeHandler: YearSelectionHandler, overlayCl
        } else {
 
          yearInputFieldErrorMessage!.style.display = 'block';
-         console.log('bla bla bla');
        }
     }
 
