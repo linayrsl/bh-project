@@ -1,0 +1,132 @@
+.date-input-container .DayPickerInput {
+  width: 50%;
+  line-height: 35px;
+}
+
+.date-input-container .DayPickerInput .DayPickerInput-OverlayWrapper {
+  line-height: normal;
+}
+
+.date-input-container {
+  font-size: 20px;
+  color: rgb(83, 83, 84);
+
+  border-bottom: 2px solid #cccbcb;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.date-input-container.invalid {
+  border-color: red;
+}
+
+.date-input-container.invalid input.date-input-input {
+  color: red;
+}
+
+
+.date-input-container .overlay-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bolder;
+  margin-top: 15px;
+}
+
+.date-input-container .overlay-input input[type=number]::-webkit-inner-spin-button,
+.date-input-container .overlay-input input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.date-input-container .overlay-input input[type=number] {
+  -moz-appearance:textfield;
+}
+
+.date-input-container .overlay-input .date-input-separator {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.date-input-container .overlay-input .date-input-separator:before {
+  content: ' ';
+  position: relative;
+  width: 80%;
+  height: 2px;
+  background-color: black;
+  display: block;
+  top: 12px;
+  margin: auto;
+  z-index: -2;
+}
+
+.date-input-container .overlay-input .date-input-separator:after {
+  content: ' ';
+  width: 16%;
+  position: absolute;
+  height: 16px;
+  background: white;
+  display: block;
+  z-index: -1;
+  top: 4px;
+  left: 42%;
+}
+
+.date-input-container .overlay-input .year-only-input-text {
+  margin-bottom: 10px;
+}
+
+.date-input-container .overlay-input button {
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+.date-input-container label {
+  line-height: 35px;
+}
+
+.date-input-container input.date-input-input {
+  border: 0;
+  outline: none;
+  width: 100%;
+  background-color: #f9f9f9;
+
+  text-align: left;
+  color: darkgrey;
+  font-size: 18px;
+  font-family: "Assistant", serif ;
+}
+
+.date-input-container input.date-input-input:-webkit-autofill,
+.date-input-container input.date-input-input:-webkit-autofill:hover,
+.date-input-container input.date-input-input:-webkit-autofill:focus,
+.date-input-container input.date-input-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #f9f9f9 inset !important;
+  -webkit-text-fill-color: darkgrey !important;
+}
+
+.date-input-container input.date-input-input::placeholder {
+  color: darkgrey;
+  opacity: 1;
+}
+
+.date-input-container input.date-input-input:-ms-input-placeholder {
+  color: darkgrey;
+}
+
+.date-input-container input.date-input-input::-ms-input-placeholder {
+  color: darkgrey;
+}
+
+.invalid-input-feedback {
+  font-size: 12px;
+  color: red;
+  position: absolute;
+  bottom: -18px;
+  right: 0;
+}
