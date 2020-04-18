@@ -39,6 +39,7 @@ const DateInput = (props: DateInputProps) => {
         {props.title}
       </label>
       <DayPickerInput
+        showOverlay={true}
         ref={dayPickerRef}
         value={props.defaultValue}
         onDayChange={(selectedDay, modifiers, dayPickerInput) => {

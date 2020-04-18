@@ -1,7 +1,7 @@
 import * as React from 'react';
+import {ReactNode} from "react";
 
 import 'react-day-picker/lib/style.css';
-import {ReactNode} from "react";
 
 
 export type YearSelectionHandler = (year: string) => void;
@@ -13,13 +13,25 @@ interface CustomOverlay {
   children: ReactNode
 }
 
-
 const CustomOverlayFactory = (yearChangeHandler: YearSelectionHandler) => {
   return ({ classNames, selectedDay, input, children, ...props }: CustomOverlay) => {
 
+    const validateYearInput = (value: string) => {
+      const valueRegex = /^[0-9]{4}$/;
+      return valueRegex.test(value) && parseInt(value) <= new Date().getFullYear();
+    }
+
     const activateHandler = () => {
+      const yearInputFieldErrorMessage = document.getElementById('year-input-error-message');
       const yearInput = document.getElementById('custom-overlay-year-input') as HTMLInputElement;
-      yearChangeHandler(yearInput.value);
+       if (validateYearInput(yearInput.value)) {
+         yearChangeHandler(yearInput.value);
+         yearInputFieldErrorMessage!.style.display = 'none';
+       } else {
+
+         yearInputFieldErrorMessage!.style.display = 'block';
+         console.log('bla bla bla');
+       }
     }
 
     return (
@@ -47,6 +59,7 @@ const CustomOverlayFactory = (yearChangeHandler: YearSelectionHandler) => {
                 onClick={() => {
                   activateHandler();
                 }}>שמור בחירה</button>
+              <div id={'year-input-error-message'}>* נא להזין שנה בת 4 ספרות (עד {new Date().getFullYear()})</div>
             </div>
             <div className={'date-input-separator'}>או</div>
             <div>בחר תאריך מדויק</div>

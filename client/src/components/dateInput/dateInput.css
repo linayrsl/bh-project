@@ -130,3 +130,14 @@
   bottom: -18px;
   right: 0;
 }
+
+#year-input-error-message {
+  color: red;
+  font-size: 14px;
+  display: none;
+  margin-top: -7px;
+}
+
+.DayPicker-Caption select {
+  margin: 0 5px;
+}
