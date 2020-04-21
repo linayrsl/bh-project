@@ -34,17 +34,17 @@ const CustomDayPickerCaption = ({ date, localeUtils, onChange}: CustomCaptionPro
 
   return (
     <div className="DayPicker-Caption">
-      <select ref={monthInputRef} name="month" onChange={handleChange} value={date.getMonth()}>
-        {months.map((month, i) => (
-          <option key={month} value={i}>
-            {month}
-          </option>
-        ))}
-      </select>
       <select ref={yearInputRef} name="year" onChange={handleChange} value={date.getFullYear()}>
         {years.map(year => (
           <option key={year} value={year}>
             {year}
+          </option>
+        ))}
+      </select>
+      <select ref={monthInputRef} name="month" onChange={handleChange} value={date.getMonth()}>
+        {months.map((month, i) => (
+          <option key={month} value={i}>
+            {month}
           </option>
         ))}
       </select>
