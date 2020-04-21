@@ -1,13 +1,12 @@
 import * as React from 'react';
-import {useEffect, useRef, useState} from "react";
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import {CustomDayPickerCaption} from './customDayPickerCaption'
+import {useEffect, useState} from "react";
+import moment from 'moment';
 
+import calenderLogo from "../../assets/images/bx-calendar.svg";
 import 'react-day-picker/lib/style.css';
 
-import MomentLocaleUtils from 'react-day-picker/moment';
-import './dateInput.css';
-import {CustomOverlayFactory, YearSelectionHandler} from "./CustomOverlay";
+import './dateInput.scss';
+import {CustomOverlay, YearSelectionHandler} from "./CustomOverlay";
 
 export interface DateInputProps {
   title: string;
@@ -30,8 +29,9 @@ const DateInput = (props: DateInputProps) => {
     return false;
   }
 
+  const [isCalendarDisplayed, setCalendarDisplayed] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const [month, setMonth] = useState(new Date());
+
 
   useEffect(() => {
     if (props.defaultValue) {
@@ -41,55 +41,39 @@ const DateInput = (props: DateInputProps) => {
     }
   }, [props.defaultValue]);
 
-  const dayPickerRef = useRef<DayPickerInput>(null);
 
   const yearChangeHandler: YearSelectionHandler = year => {
     console.log(year);
     props.onChange(year);
-    dayPickerRef.current!.hideDayPicker();
+    setCalendarDisplayed(false);
   };
-
 
   return (
     <div
+      onClick={(event => {
+        setCalendarDisplayed(!isCalendarDisplayed);
+      })}
       className={`${props.className || ""} ${isValid ? "" : "invalid"} date-input-container`}>
       <label htmlFor={props.id}>
         {props.required &&
         <span className={"mandatory-field-indicator"}>*</span>}
         {props.title}
       </label>
-      <DayPickerInput
-        ref={dayPickerRef}
-        value={props.defaultValue}
-        onDayChange={(selectedDay, modifiers, dayPickerInput) => {
-          const input = dayPickerInput.getInput();
-          props.onChange(input.value);
-        }}
-        keepFocus={false}
-        overlayComponent={CustomOverlayFactory(
-          yearChangeHandler,
-          () => dayPickerRef.current!.hideDayPicker())}
-        formatDate={MomentLocaleUtils.formatDate}
-        parseDate={MomentLocaleUtils.parseDate}
-        format={'DD/MM/YYYY'}
-        placeholder={'YYYY או DD/MM/YYYY'}
-        dayPickerProps={{
-          month: month,
-          canChangeMonth: true,
-          captionElement: (
-            { date, localeUtils }) => (
-              <CustomDayPickerCaption
-                date={date}
-                localeUtils={localeUtils}
-                onChange={(date) => setMonth(date)}
-                />)}}
-        inputProps={
-          {
-            id: props.id,
-            autoComplete: 'off',
-            className: 'date-input-input'
+      <div className={'date-input'}>
+        <button
+          type={'button'}>
+          <img src={calenderLogo} alt={'calender-logo'}/>
+        </button>
+        <div className={'date-calendar'}>{props.defaultValue}</div>
+        {isCalendarDisplayed &&
+        <CustomOverlay
+          dateChangeHandler={(date) => {
+            props.onChange(moment(date).format('DD/MM/YYYY'));
           }}
-      />
+          yearChangeHandler={yearChangeHandler}
+          overlayCloseHandler={() => setCalendarDisplayed(false)}
+        />}
+      </div>
       {!isValid && <div className={"invalid-input-feedback"}>נא להזין שנה או תאריך</div>}
     </div>
   );

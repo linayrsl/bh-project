@@ -3,8 +3,11 @@
   line-height: 35px;
 }
 
-.date-input-container .DayPickerInput .DayPickerInput-OverlayWrapper {
+.date-input-container .date-input .DayPickerInput-OverlayWrapper {
   line-height: normal;
+  position: absolute;
+  left: 0;
+  top: 37px;
 }
 
 .date-input-container {
@@ -39,6 +42,7 @@
   font-size: 16px;
   font-weight: bolder;
   margin-top: 25px;
+  color: black;
 }
 
 .date-input-container .overlay-input input[type=number]::-webkit-inner-spin-button,
@@ -55,6 +59,7 @@
   width: 100%;
   position: relative;
   text-align: center;
+  color: black;
 }
 
 .date-input-container .overlay-input .date-input-separator:before {
@@ -79,11 +84,16 @@
   z-index: -1;
   top: 4px;
   left: 42%;
+  color: black;
 }
 
 .date-input-container .overlay-input .year-only-input-text {
   margin-bottom: 10px;
+  margin-top: 5px;
+  color: black;
 }
+
+.date-input-container .overlay-input .year-only-input-text {}
 
 .date-input-container .overlay-input button {
   margin-bottom: 15px;
@@ -135,10 +145,13 @@
   right: 0;
 }
 
+.year-input {
+  direction: rtl;
+}
+
 #year-input-error-message {
   color: red;
   font-size: 14px;
-  display: none;
   margin-top: -7px;
 }
 
@@ -156,3 +169,30 @@
   background-color: transparent;
   color: darkgray;
 }
+
+.date-input {
+  display: flex;
+  justify-content: flex-start;
+  direction: ltr;
+  align-items: center;
+  color: darkgrey;
+  opacity: 1;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .year-input button {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+
+  .date-calendar {
+    margin-left: 10px;
+  }
+}
+
+
