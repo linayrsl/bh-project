@@ -23,6 +23,15 @@
 
 .date-input-container .DayPickerInput-Overlay {
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: darkslategray;
+
+  abbr {
+    color: #c95644;
+  }
 }
 
 .date-input-container.invalid {
@@ -43,6 +52,7 @@
   font-weight: bolder;
   margin-top: 25px;
   color: black;
+  min-width: 300px;
 }
 
 .date-input-container .overlay-input input[type=number]::-webkit-inner-spin-button,
@@ -195,4 +205,6 @@
   }
 }
 
+.DayPicker {
 
+}
