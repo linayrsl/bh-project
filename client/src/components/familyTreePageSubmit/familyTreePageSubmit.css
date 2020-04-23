@@ -8,13 +8,20 @@
 
 .choose-option {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.choose-option button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .option-button {
   border: none;
-  width: 160px;
-  height: 54px;
+  width: 150px;
+  height: 60px;
   line-height: 54px;
   border-radius: 10px;
   text-align: center;
@@ -23,6 +30,13 @@
   cursor: pointer;
 }
 
+@media only screen and (max-width: 360px) {
+  .option-button {
+    font-size: 24px;
+    width: 100px;
+    height: 50px;
+  }
+}
 .option-yes {
   background-color: #37b9c9;
   background-image: linear-gradient(to right, #238f9c, #37b9c9);
