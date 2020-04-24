@@ -13,7 +13,6 @@
 .date-input-container {
   font-size: 20px;
   color: rgb(83, 83, 84);
-
   border-bottom: 2px solid #cccbcb;
   margin-top: 15px;
   display: flex;
@@ -31,6 +30,29 @@
 
   abbr {
     color: #c95644;
+  }
+
+  .calendar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (max-width: 411px) {
+      border-radius: 10px;
+      background-color: white;
+    }
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  .date-input-container .DayPickerInput-Overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(222, 221, 221, 0.9);
   }
 }
 
@@ -178,6 +200,16 @@
   cursor: pointer;
   background-color: transparent;
   color: darkgray;
+
+  @media only screen and (max-width: 411px) {
+    font-size: 36px;
+    color: black;
+    border-radius: 50%;
+    right: 0;
+    top: 10px;
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .date-input {
