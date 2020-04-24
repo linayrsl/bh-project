@@ -41,6 +41,7 @@ const CustomOverlay = (props: CustomOverlay) => {
       className={'DayPickerInput-OverlayWrapper'}
       tabIndex={0}>
       <div className={'DayPickerInput-Overlay'}>
+        <div className={'calendar-container'}>
         <div className={'overlay-input'}>
           <button
             id={'day-picker-close-button'}
@@ -51,7 +52,7 @@ const CustomOverlay = (props: CustomOverlay) => {
           <div className={'year-only-input-text'}>במידה ולא ידוע תאריך מדויק הזינו שנה</div>
           <div className={'year-input'}>
             <input
-              placeholder={'הזן שנה'}
+              placeholder={'הזינו שנה'}
               id={'custom-overlay-year-input'}
               type="number"
               pattern="[0-9]{4}"
@@ -66,13 +67,13 @@ const CustomOverlay = (props: CustomOverlay) => {
               type={'button'}
               onClick={() => {
                 activateHandler();
-              }}>שמור בחירה
+              }}>אישור
             </button>
             {yearInputFieldErrorMessage &&
             <div id={'year-input-error-message'}>* נא להזין שנה בת 4 ספרות (עד {new Date().getFullYear()})</div>}
           </div>
           <div className={'date-input-separator'}>או</div>
-          <div id={'date-input-text'}>בחר תאריך מדויק</div>
+          <div id={'date-input-text'}>בחרו תאריך מדויק</div>
         </div>
         <DayPicker
           fromMonth={new Date(1900, 0)}
@@ -89,6 +90,7 @@ const CustomOverlay = (props: CustomOverlay) => {
                 localeUtils={localeUtils}
                 onChange={(date) => setMonth(date)}
               />)}/>
+        </div>
       </div>
     </div>
   );

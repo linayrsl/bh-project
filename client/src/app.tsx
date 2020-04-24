@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import "./app.css";
+import "./app.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { HomePage } from "./components/homePage/homePage";
 import { RegisterPage } from "./components/registerPage/registerPage";

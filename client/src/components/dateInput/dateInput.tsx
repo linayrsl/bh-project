@@ -32,6 +32,13 @@ const DateInput = (props: DateInputProps) => {
   const [isCalendarDisplayed, setCalendarDisplayed] = useState(false);
   const [isValid, setIsValid] = useState(true);
 
+  useEffect(() => {
+    if (isCalendarDisplayed) {
+      document.body.classList.add('mobile-no-scroll');
+    } else {
+      document.body.classList.remove('mobile-no-scroll');
+    }
+  }, [isCalendarDisplayed])
 
   useEffect(() => {
     if (props.defaultValue) {

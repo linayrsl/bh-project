@@ -228,17 +228,12 @@ class PersonDetailsForm extends React.Component<
                 </div>
               )}
               {!this.state.isAlive && (
-                <TextInput
-                  validateRegex={/^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/}
-                  defaultValue={
-                    this.state.deathDate ? this.state.deathDate : ""
-                  }
+                <DateInput
+                  defaultValue={this.state.deathDate ? this.state.deathDate : ""}
                   title="תאריך פטירה"
                   id={`${this.props.idPrefix}_deathDate`}
-                  type="text"
-                  placeholder="YYYY או DD/MM/YYYY"
-                  onChange={event => {
-                    this.setState({ deathDate: event.target.value });
+                  onChange={value => {
+                    this.setState({ deathDate: value });
                   }}
                 />
               )}

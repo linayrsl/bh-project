@@ -102,14 +102,16 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
     return (
       <div className="image-input-container">
         <label htmlFor={this.props.id}>
-          הוסיפו תמונה
+          {this.state.image ? "החליפו תמונה" : "הוסיפו תמונה"}
         </label>
         <input
-          onChange={this.imageChangeHandler.bind(this)}
+          onChange={
+            this.imageChangeHandler.bind(this)
+          }
           id={this.props.id}
           className="image-input"
           type="file"
-          placeholder="הוסיפו תמונה"
+          placeholder={this.state.image ? "החליפו תמונה" : "הוסיפו תמונה"}
           accept="image/jpeg,image/png"
         />
         <div className="image-location">
