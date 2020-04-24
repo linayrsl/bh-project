@@ -38,14 +38,14 @@
     justify-content: center;
     align-items: center;
 
-    @media only screen and (max-width: 411px) {
+    @media only screen and (max-width: 450px) {
       border-radius: 10px;
       background-color: white;
     }
   }
 }
 
-@media only screen and (max-width: 411px) {
+@media only screen and (max-width: 450px) {
   .date-input-container .DayPickerInput-Overlay {
     position: fixed;
     top: 0;
@@ -201,7 +201,7 @@
   background-color: transparent;
   color: darkgray;
 
-  @media only screen and (max-width: 411px) {
+  @media only screen and (max-width: 450px) {
     font-size: 36px;
     color: black;
     border-radius: 50%;
@@ -226,12 +226,21 @@
     cursor: pointer;
   }
 
-  .year-input button {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-left: 10px;
-  }
+  .year-input {
 
+    button {
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      margin-left: 10px;
+      height: 20px;
+      width: 75px;
+    }
+
+    input {
+      height: 20px;
+      border: 0.5px solid lightgray;
+    }
+  }
   .date-calendar {
     margin-left: 10px;
   }
