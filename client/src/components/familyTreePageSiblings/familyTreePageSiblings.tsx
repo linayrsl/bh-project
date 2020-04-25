@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
-import "./familyTreePageSiblings.css";
+import "./familyTreePageSiblings.scss";
 import {
   PersonDetailsForm,
   PersonDetailsFormState
@@ -32,7 +32,7 @@ class FamilyTreePageSiblings extends React.Component<
 
   componentDidMount() {
     let item = localStorage.getItem("numOfSiblings");
-    let numOfSiblings = 0;
+    let numOfSiblings = -1;
     if (item) {
       numOfSiblings = parseInt(item);
     }
@@ -41,14 +41,18 @@ class FamilyTreePageSiblings extends React.Component<
     let siblingsDetails = {} as {
       [key: string]: PersonDetailsFormState;
     };
-    for (let i = 0; i < numOfSiblings; i++) {
-      let siblingKey = `sibling${i}`;
-      item = localStorage.getItem(siblingKey);
-      if (item) {
-        let siblingFormData = JSON.parse(item);
-        siblingsDetails[siblingKey] = siblingFormData;
+
+    if (numOfSiblings >= 0) {
+      for (let i = 0; i < numOfSiblings; i++) {
+        let siblingKey = `sibling${i}`;
+        item = localStorage.getItem(siblingKey);
+        if (item) {
+          let siblingFormData = JSON.parse(item);
+          siblingsDetails[siblingKey] = siblingFormData;
+        }
       }
     }
+
     this.setState({ siblingsDetails: siblingsDetails });
 
     setTimeout(() => {
@@ -102,24 +106,35 @@ class FamilyTreePageSiblings extends React.Component<
           <div className="level active">4</div>
         </div>
         <div className="page-content-container">
-          <TextInput
-            className="numOfSiblings"
-            defaultValue={
-              this.state.numOfSiblings >= 0
-                ? this.state.numOfSiblings.toString()
-                : ""
-            }
-            type="number"
-            placeholder=""
-            title="כמה אחים ואחיות יש לך ?"
-            id="numOfSiblings"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              let numOfSiblings = parseInt(event.target.value);
-              if (!isNaN(numOfSiblings)) {
-                this.setState({ numOfSiblings: numOfSiblings });
-              }
-            }}
-          />
+          <div className={"siblings-container"}>
+            <div className={"siblings-body"}>
+              כמה אחים ואחיות יש לך ?
+              <div className={"siblings-buttons"}>
+                <button
+                  className={"increase-button"}
+                  tabIndex={0}
+                  type={"button"}
+                  title={"להגדיל מספר אחים או אחיות באחד"}
+                  onClick={(event) => {
+                    console.log(event.target);
+                    this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings+1}));
+                  }}
+                >+</button>
+                <div className={"number-of-siblings"}>{this.state.numOfSiblings < 0 ? '-' : this.state.numOfSiblings}</div>
+                <button
+                  className={`decrease-button ${this.state.numOfSiblings < 1 ? "disabled-button" : ""}`}
+                  tabIndex={1}
+                  type={"button"}
+                  title={"להפחית מספר אחים או אחיות באחד"}
+                  onClick={(event) => {
+                    if (this.state.numOfSiblings > 0) {
+                      this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings-1}));
+                    }
+                  }}
+                >-</button>
+              </div>
+            </div>
+          </div>
           <div className="family-tree-body">
             {Object.keys(this.state.formsValidity).map(siblingId => {
               return (
@@ -144,10 +159,11 @@ class FamilyTreePageSiblings extends React.Component<
               );
             })}
           </div>
+          <div className="vertical-spacer"></div>
           <div className="family-tree-footer">
             <ProceedButton
               disabled={
-                Object.values(this.state.formsValidity).indexOf(false) >= 0
+                Object.values(this.state.formsValidity).indexOf(false) >= 0 || this.state.numOfSiblings < 0
               } // This expression return true if at least 1 of values in formsValidity dict is falsey
               text="לסיום הקישו כאן"
               nextPageUrl="/family-tree/submit"

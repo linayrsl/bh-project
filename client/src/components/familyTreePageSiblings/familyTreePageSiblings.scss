@@ -1,0 +1,67 @@
+.numOfSiblings label {
+  padding-right: 10px;
+}
+
+.numOfSiblings input {
+  padding-left: 10px;
+  width: 30%;
+  direction: ltr;
+}
+
+.siblings-container {
+  border-bottom: 2px solid #cccbcb;
+  padding-bottom: 5px;
+  margin-top: 30px;
+
+  .siblings-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    color: rgb(83, 83, 84);
+    padding-right: 10px;
+    padding-left: 10px;
+
+    .siblings-buttons {
+      display: flex;
+      justify-content: flex-start;
+      direction: ltr;
+      width: 30%;
+
+      .number-of-siblings {
+        width: 50px;
+        text-align: center;
+      }
+
+      button {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        font-size: 18px;
+        color: white;
+        background-color: #37b9c9;
+        background-image: linear-gradient(to right, #238f9c, #37b9c9);
+        border: 0.5px solid darkgray;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 18px;
+        text-shadow: 1px 1px 2px gray;
+        box-shadow: 1px 1px 2px gray;
+        outline: none;
+
+        &.disabled-button {
+          background-color: #b3b2b2;
+          cursor: not-allowed;
+          background-image: none;
+        }
+      }
+
+    }
+  }
+}
+
+
+
