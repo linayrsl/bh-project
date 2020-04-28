@@ -98,7 +98,7 @@ class FamilyTreePageSiblings extends React.Component<
   render() {
     return (
       <div className="family-tree-container">
-        <Header title="אחים ואחיות  4/4" />
+        <Header title="אחים/אחיות  4/4" />
         <div className="progress-scale">
           <div className="level active">1</div>
           <div className="level active">2</div>
@@ -108,7 +108,7 @@ class FamilyTreePageSiblings extends React.Component<
         <div className="page-content-container">
           <div className={"siblings-container"}>
             <div className={"siblings-body"}>
-              כמה אחים ואחיות יש לך ?
+              כמה אחים/אחיות יש לך ?
               <div className={"siblings-buttons"}>
                 <button
                   className={"increase-button"}
