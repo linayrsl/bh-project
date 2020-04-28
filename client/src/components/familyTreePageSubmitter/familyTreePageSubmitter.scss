@@ -30,4 +30,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  .mandatory-fields-message {
+    padding-right: 10px;
+  }
 }
