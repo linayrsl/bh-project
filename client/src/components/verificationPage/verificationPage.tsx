@@ -43,7 +43,7 @@ class VerificationPageComponent extends React.Component<
         { verificationCode: this.state.verificationCode }
       )
       .then((response) => {
-        window.localStorage.setItem("submitterEmail", this.props.match!.params.email);
+        window.localStorage.setItem("submitterEmail", decodeURIComponent(this.props.match!.params.email));
         return response;
       })
       .catch(error => {
