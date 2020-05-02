@@ -19,6 +19,8 @@ export interface RegisterPageState {
   phone: string;
   disclaimer: boolean;
   httpRequestInProgress: boolean;
+  isPhoneValid: boolean;
+  wasPhoneInvalidBefore: boolean;
 }
 
 class RegisterPage extends React.Component<
@@ -31,7 +33,9 @@ class RegisterPage extends React.Component<
     email: "",
     phone: "",
     disclaimer: false,
-    httpRequestInProgress: false
+    httpRequestInProgress: false,
+    isPhoneValid: true,
+    wasPhoneInvalidBefore: false
   };
 
   register(): Promise<any> {
@@ -115,8 +119,18 @@ class RegisterPage extends React.Component<
                 }}
                 className="ltr"
               />
-              <div className={`phone-input-container ${
-                this.state.phone && !isValidPhoneNumber(this.state.phone) ? 'invalid' : ''
+              <div
+                onBlur={(event) => {
+                  if (event.target.id === "phone") {
+                    if (isValidPhoneNumber(this.state.phone)) {
+                      this.setState({isPhoneValid: true});
+                    } else {
+                      this.setState({isPhoneValid: false, wasPhoneInvalidBefore: true});
+                    }
+                  }
+                }}
+                className={`phone-input-container ${
+                this.state.phone && !this.state.isPhoneValid ? "invalid" : ''
               }`}>
                 <label htmlFor="phone"><span className={"mandatory-field-indicator"}>*</span>טלפון סלולרי</label>
                 <PhoneInput
@@ -127,11 +141,14 @@ class RegisterPage extends React.Component<
                   defaultCountry={'IL'}
                   value={''}
                   onChange={value => {
+                    if (this.state.wasPhoneInvalidBefore) {
+                      this.setState({isPhoneValid: isValidPhoneNumber(value)});
+                    }
                     this.setState({ phone: value });
                   }}
-                  error={this.state.phone ? (isValidPhoneNumber(this.state.phone) ? undefined : 'Invalid phone number') : 'Phone number required'}
+                  error={this.state.phone ? (this.state.isPhoneValid ? undefined : 'Invalid phone number') : 'Phone number required'}
                 />
-                {(this.state.phone && !isValidPhoneNumber(this.state.phone)) && <div className={"invalid-input-feedback"}>מספר טלפון לא תקין</div>}
+                {(this.state.phone && !this.state.isPhoneValid) && <div className={"invalid-input-feedback"}>מספר טלפון לא תקין</div>}
               </div>
               <div className={"mandatory-fields-message"}>* שדות חובה למילוי</div>
               <div className="user-checkbox styled-checkbox ">
