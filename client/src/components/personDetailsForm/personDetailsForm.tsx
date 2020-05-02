@@ -130,6 +130,7 @@ class PersonDetailsForm extends React.Component<
                 onChange={event => {
                   this.setState({ firstName: event.target.value });
                 }}
+                required={this.state.isSubmitter}
               />
               <TextInput
                 defaultValue={this.state.lastName ? this.state.lastName : ""}
@@ -140,6 +141,7 @@ class PersonDetailsForm extends React.Component<
                 onChange={event => {
                   this.setState({ lastName: event.target.value });
                 }}
+                required={this.state.isSubmitter}
               />
               {this.props.displayMaidenName && (
                 <TextInput
@@ -156,7 +158,11 @@ class PersonDetailsForm extends React.Component<
                 />
               )}
               <div className="gender">
-                <div className="gender-options">מין</div>
+                <div className="gender-options">
+                  {this.state.isSubmitter &&
+                  <span className={"mandatory-field-indicator"}>*</span>}
+                  מין
+                </div>
                 <div className="gender-options-buttons">
                   <label htmlFor={`${this.props.idPrefix}_male`}>זכר</label>
                   <input

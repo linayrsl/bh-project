@@ -70,7 +70,7 @@
 }
 
 .information-bar {
-  font-size: 24px;
+  font-size: 20px;
   padding: 10px 10px 10px 10px;
   border-top: 1px grey solid;
 }
@@ -100,6 +100,7 @@ a {
 .line-style {
   border-bottom: 1px #e3e3e4 solid;
   padding-bottom: 10px;
+  font-weight: bolder;
 }
 
 .share-link-container {

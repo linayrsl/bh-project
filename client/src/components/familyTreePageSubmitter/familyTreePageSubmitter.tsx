@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./familyTreePageSubmitter.css";
+import "./familyTreePageSubmitter.scss";
 import { Header } from "../header/header";
 import {
   PersonDetailsForm,
@@ -62,6 +62,7 @@ class FamilyTreePageSubmitter extends React.Component<
             idPrefix="me"
             title="אני"
           />
+          <div className={"mandatory-fields-message"}>* שדות חובה למילוי</div>
           <div className="vertical-spacer"></div>
           <div className="family-tree-footer">
             <ProceedButton

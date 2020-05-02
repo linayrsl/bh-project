@@ -28,8 +28,8 @@ class HomePage extends Component {
           <div className="vertical-spacer"></div>
           <div className="welcome-disclaimer" tabIndex={3}>
             העץ שתבנו יישמר במאגר עצי המשפחה
-            <br /> המאובטח של בית התפוצות ותוכלו לעיין בו
-            <br /> ולערוך אותו בעתיד באתר בית התפוצות.
+            <br /> המאובטח של מוזיאון העם היהודי ותוכלו לעיין בו
+            <br /> ולערוך אותו בעתיד באתר המוזיאון.
           </div>
           <div className="welcome-cta">
             <ProceedButton text="כניסה" nextPageUrl="/register" tabIndex={4} />

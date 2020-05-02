@@ -54,9 +54,9 @@ class FamilyTreeThankYouPage extends React.Component<
         <div className="family-tree-thanks-body">
           <div className="text-first-part">
             <p>תודה רבה!</p>
-            <p>העץ נשמר במאגר עצי משפחה של בית התפוצות.</p>
+            <p>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי.</p>
             <p>
-              אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד ,
+              אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד,
               לחקור ולהיות חלק מסיפור.
             </p>
             <div className={"share-link-container"}>
@@ -106,10 +106,11 @@ class FamilyTreeThankYouPage extends React.Component<
                 היהודי
               </a>
               <a
-                className="upper-left-box information-box"
-                href="https://www.bh.org.il/he/shop/"
+                className="lower-left-box information-box"
+                href="https://dbs.bh.org.il/he/"
               >
-                מוזמנים להתרשם ממבחר הפריטים בחנות המוזיאון
+                בואו <span className="highlight"> לגלות </span> את העולם היהודי
+                במאגרי המידע
               </a>
             </div>
             <div className="information-boxes-lower">
@@ -121,18 +122,17 @@ class FamilyTreeThankYouPage extends React.Component<
                 החינוכיות
               </a>
               <a
-                className="lower-left-box information-box"
-                href="https://dbs.bh.org.il/he/"
+                className="upper-left-box information-box"
+                href="https://www.bh.org.il/he/shop/"
               >
-                בואו <span className="highlight"> לגלות </span> על העולם היהודי
-                במאגרי המידע
+                בואו <span className={"highlight"}>לקנות</span> ממבחר הפריטים בחנות המוזיאון
               </a>
             </div>
             <div className="information-bar-body">
               <div className="information-bar">
                 <div className="line-style">
                   {" "}
-                  אודות מאגר עצי המשפחה במוזאון{" "}
+                  אודות מאגר עצי המשפחה במוזיאון{" "}
                 </div>
                 <div className="text-line1">
                   {" "}
@@ -144,7 +144,7 @@ class FamilyTreeThankYouPage extends React.Component<
                 </div>
               </div>
               <div className="information-bar">
-                <div className="line-style"> אודות מאגרי המידע של המוזאון</div>
+                <div className="line-style"> אודות מאגרי המידע של המוזיאון</div>
                 <div className="text-line2">
                   במוזיאון העם היהודי בבית התפוצות מאגרי מידע מגוונים ועשירים.
                   אילנות יוחסין (עצי משפחה), פירושים לשמות משפחה, תולדותיהן של
@@ -154,7 +154,7 @@ class FamilyTreeThankYouPage extends React.Component<
                 </div>
               </div>
               <div className="information-bar">
-                <div className="line-style">אודות מוזאון העם היהודי</div>
+                <div className="line-style">אודות מוזיאון העם היהודי</div>
                 <div className="text-line3">
                   מוזיאון העם היהודי בבית התפוצות הוא מוסד עולמי שמספר על תרבות
                   אחת רבת-פנים, עשירה ועתירת רבדים; הוא מספר על אנשים ונשים, על
@@ -173,7 +173,7 @@ class FamilyTreeThankYouPage extends React.Component<
                   העם היהודי ומתוך מטרה להנגיש את איסוף פרטי המשפחה בצורה נוחה
                   וידידותית למשתמשים דרך הטלפון הנייד. הפרויקט נעשה בשיתוף עם
                   ארגון she codes; ששם לו למטרה לקדם נשים במגזר ההייטק, ונוהל
-                  ע"י מחלקת הדיגיטל של מוזאון העם היהודי בבית התפוצות.
+                  ע"י מחלקת הדיגיטל של מוזיאון העם היהודי בבית התפוצות.
                 </div>
               </div>
             </div>
