@@ -42,6 +42,10 @@ class VerificationPageComponent extends React.Component<
         )}`,
         { verificationCode: this.state.verificationCode }
       )
+      .then((response) => {
+        window.localStorage.setItem("submitterEmail", this.props.match!.params.email);
+        return response;
+      })
       .catch(error => {
         if (error && error.response && error.response.status === 400) {
           toast.error("יש להזין קוד אימות בן 5 ספרות");

@@ -5,10 +5,13 @@ import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Header } from "../header/header";
-import { PersonDetailsFormState } from "../personDetailsForm/personDetailsForm";
 import { Loader } from "../loader/loader";
+import {PersonDetails} from "../../contracts/personDetails";
+import {FamilyTreeJson} from "../../contracts/familyTreeJson";
 
 import "./familyTreePageSubmit.css";
+import {FamilyTreeApiRequest} from "../../contracts/familyTreeApiRequest";
+
 
 export interface FamilyTreePageSubmitProps {
   history?: History;
@@ -17,13 +20,6 @@ export interface FamilyTreePageSubmitProps {
 export interface FamilyTreePageSubmitState {
   httpRequestInProgress: boolean;
 }
-
-interface FamilyTreePersonJson extends PersonDetailsFormState {
-  ID: string;
-  siblings: string[];
-}
-
-type FamilyTreeJson = { [key: string]: FamilyTreePersonJson };
 
 class FamilyTreePageSubmitComponent extends React.Component<
   FamilyTreePageSubmitProps,
@@ -41,10 +37,10 @@ class FamilyTreePageSubmitComponent extends React.Component<
     this.props.history!.push("/family-tree/me");
   }
 
-  getStoredPersonDetails(key: string): PersonDetailsFormState | null {
+  getStoredPersonDetails(key: string): PersonDetails | null {
     let item = localStorage.getItem(key);
     if (item) {
-      let personDetails: PersonDetailsFormState = JSON.parse(item);
+      let personDetails: PersonDetails = JSON.parse(item);
       if (personDetails.isAlive) {
         delete personDetails.deathDate;
         delete personDetails.deathPlace;
@@ -85,7 +81,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     );
 
     let numOfSiblings = this.getStoredNumOfSiblings();
-    let siblingsDetails: PersonDetailsFormState[] = [];
+    let siblingsDetails: PersonDetails[] = [];
     for (let i = 0; i < numOfSiblings; i++) {
       let siblingKey = `sibling${i}`;
       let sibling = this.getStoredPersonDetails(siblingKey);
@@ -166,9 +162,14 @@ class FamilyTreePageSubmitComponent extends React.Component<
       siblingJson.siblings = siblingsIds.filter(id => id !== siblingId);
     }
 
+    const requestBody: FamilyTreeApiRequest = {
+      submitterEmail: window.localStorage.getItem("submitterEmail") || "",
+      familyTree: familyTreeJson
+    };
+
     this.setState({ httpRequestInProgress: true });
     axios
-      .post("/api/family-tree/", familyTreeJson)
+      .post("/api/family-tree/", requestBody)
       .then(() => {
         this.clearStoredFamilyTreeData();
         this.props.history!.push("/thank-you");

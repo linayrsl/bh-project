@@ -3,10 +3,10 @@ import * as React from "react";
 import { TextInput } from "../textInput/textInput";
 import {ImageInput} from "../imageInput/imageInput";
 import {DateInput} from "../dateInput/dateInput";
+import {Gender} from "../../contracts/gender";
+import {PersonDetails} from "../../contracts/personDetails";
 
 import "./personDetailsForm.css";
-
-export type Gender = "male" | "female" | "other";
 
 export interface PersonDetailsFormProps {
   idPrefix: string;
@@ -21,20 +21,7 @@ export interface PersonDetailsFormProps {
   onFormValidityChange: (isValid: boolean) => void;
 }
 
-export interface PersonDetailsFormState {
-  image: string | null;
-  firstName: string | null;
-  lastName: string | null;
-  maidenName: string | null;
-  birthDate: string | null;
-  birthPlace: string | null;
-  gender: Gender | null;
-  motherID: string | null;
-  fatherID: string | null;
-  isAlive: boolean | null;
-  deathPlace: string | null;
-  deathDate: string | null;
-  isSubmitter: boolean;
+export interface PersonDetailsFormState extends PersonDetails {
 }
 
 class PersonDetailsForm extends React.Component<
