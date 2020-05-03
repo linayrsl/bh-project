@@ -6,7 +6,7 @@ from psycopg2 import sql
 logger = logging.getLogger(__name__)
 
 
-def log_family_tree_submission(db_connection, family_tree: Dict) -> bool:
+def log_family_tree_submission(db_connection, family_tree: Dict, submitter_email: str) -> bool:
     with db_connection.cursor() as cursor:
 
         if not family_tree:
@@ -26,7 +26,7 @@ def log_family_tree_submission(db_connection, family_tree: Dict) -> bool:
                 except ValueError:
                     logger.error(f"Unsupported date format {submitter['birthDate']}")
 
-            upload_log_record: Dict = {"email": '',
+            upload_log_record: Dict = {"email": submitter_email,
                                        "first_name": submitter['firstName'],
                                        "last_name": submitter['lastName'],
                                        "gender": submitter['gender'][0],

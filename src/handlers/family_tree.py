@@ -62,10 +62,17 @@ family_tree_json_schema = {
         }
     },
     "type": "object",
-    "patternProperties": {
-        "^[0-9]+$": {"$ref": "#/definitions/person"}
-    },
-    "additionalProperties": False
+    "properties": {
+        "submitterEmail": {"type": "string"},
+        "familyTree": {
+            "type": "object",
+            "patternProperties": {
+                "^[0-9]+$": {
+                    "$ref": "#/definitions/person"}
+            },
+            "additionalProperties": False
+        }
+    }
 }
 
 family_tree = Blueprint('family_tree', __name__)
@@ -86,7 +93,7 @@ def family_tree_post():
 
     try:
         image_dict: Dict[str, str]
-        gedcom_string, image_dict, _ = handler(family_tree_json)
+        gedcom_string, image_dict, _ = handler(family_tree_json["familyTree"])
     except Exception:
         logger.exception("Failed to generate gedcom from family tree json")
         return abort(500, description="Failed to generate gedcom")
@@ -108,12 +115,14 @@ def family_tree_post():
                        content,
                        content)
 
+    zip_file_data = create_zip_with_gedcom_and_images(
+        file_name,
+        gedcom_string.encode(),
+        {key: base64.b64decode(value) for (key, value) in image_dict.items()})
+
     if send_email.send_zip(
             zip_file_name,
-            create_zip_with_gedcom_and_images(
-                file_name,
-                gedcom_string.encode(),
-                {key: base64.b64decode(value) for (key, value) in image_dict.items()})):
+            zip_file_data):
 
         logger.info("Gedcom zip sent to email successfully")
 
@@ -122,9 +131,13 @@ def family_tree_post():
                 logger.error("Could not get connection to database")
                 return abort(500, description="Failed to connect to database")
 
-            log_family_tree_submission(db_connection, family_tree_json)
+            log_family_tree_submission(db_connection, family_tree_json["familyTree"], family_tree_json["submitterEmail"])
 
         logger.info("Family tree submission log saved to database")
+
+        if not send_email.send_zip_to_user(zip_file_name, zip_file_data, family_tree_json["submitterEmail"]):
+            logger.error("Gedcom wasn't sent to the user with email {}".format(family_tree_json["submitterEmail"]))
+
         return Response("{}", mimetype="application/json")
 
     logger.error("Failed to send Gedcom zip to email")
