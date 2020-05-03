@@ -52,12 +52,23 @@ class Email:
             return False
 
     def send_zip_to_user(self, file_name: str, data: bytes, to_email: str) -> bool:
+        text_to_user = '''
+                <p>
+                שמחים שהצטרפת למאגר עצי המשפחה המאובטח של מוזיאון העם היהודי.
+                העץ נשלח למרכז לגנאלוגיה יהודית ע"ש דגלס א. גולדמן. כשהעץ שלך ייכנס למאגר, תישלח הודעה בדואר
+                אלקטרוני ובו מספר הרישום של העץ.
+                מצורף קובץ העץ שיצרת ותמונות במידה וצירפת.
+                כדי לקרוא את הפרטים יש להשתמש בתוכנה גנאלוגית שמפעילה קבצי GEDCOM.
+                </p>
+                <a target="_blank" href="https://www.bh.org.il/he/%D7%9E%D7%90%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%90%D7%95%D7%A1%D7%A4%D7%99%D7%9D/%D7%92%D7%A0%D7%90%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA/%D7%90%D7%A8%D7%92%D7%96-%D7%94%D7%9B%D7%9C%D7%99%D7%9D-%D7%A9%D7%9C%D7%9B%D7%9D/">
+                לשאלות נוספות ראו באתר המאגרים > 
+                </a>
+            '''
         # create message
         message = Mail(
             self.from_email,
             to_email,
-            "קובץ הג׳דקום שלך",
-            "קובץ ג׳דקום לדוגמה")
+            "קובץ עץ המשפחה", html_content=text_to_user)
 
         # create attachment
         file_type = 'GED file'
