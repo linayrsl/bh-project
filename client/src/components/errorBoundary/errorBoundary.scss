@@ -1,0 +1,21 @@
+.ErrorBoundary {
+
+  h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 30px;
+    margin-top: 30%;
+
+    @media only screen and (max-width: 450px) {
+      font-size: 18px;
+    }
+  }
+
+  a {
+    color: blue;
+  }
+}
+
+
