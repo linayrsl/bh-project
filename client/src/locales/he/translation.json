@@ -1,0 +1,13 @@
+{
+  "homePage": {
+    "welcomeMessage": "ברוכים הבאים",
+    "welcomeMessagePart2": "<0>ל</0><1>פרויקט עצי המשפחה</1>",
+    "welcomeMessagePart3": "של מוזיאון העם היהודי בבית התפוצות.",
+    "theProjectObjective": "כאן תוכלו ליצור את עץ המשפחה שלכם",
+    "theProjectObjective2": "ב-4 צעדים פשוטים.",
+    "projectDisclaimer": "העץ שתבנו יישמר במאגר עצי המשפחה",
+    "projectDisclaimer2": "המאובטח של מוזיאון העם היהודי ותוכלו לעיין בו",
+    "projectDisclaimer3": "ולערוך אותו בעתיד באתר המוזיאון.",
+    "proceedButton": "כניסה "
+  }
+}
