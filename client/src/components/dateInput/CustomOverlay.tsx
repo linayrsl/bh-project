@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useState} from "react";
+import {Trans, useTranslation, WithTranslation, withTranslation} from 'react-i18next';
 
 import 'react-day-picker/lib/style.css';
 import {CustomDayPickerCaption} from "./customDayPickerCaption";
@@ -8,19 +9,19 @@ import DayPicker from "react-day-picker";
 
 export type YearSelectionHandler = (year: string) => void;
 
-interface CustomOverlay {
+interface CustomOverlayProps {
   yearChangeHandler: YearSelectionHandler;
   overlayCloseHandler: () => void;
   dateChangeHandler: (date: Date) => void;
 }
 
-const CustomOverlay = (props: CustomOverlay) => {
+const CustomOverlay = (props: CustomOverlayProps) => {
 
   const [yearInputValue, setYearInputValue] = useState('');
   const [yearInputFieldErrorMessage, setYearInputFieldErrorMessage] = useState(false);
 
   const [month, setMonth] = useState(new Date());
-
+  const {t, i18n} = useTranslation();
   const validateYearInput = (value: string) => {
     const valueRegex = /^[0-9]{4}$/;
     return valueRegex.test(value) && parseInt(value) <= new Date().getFullYear();
@@ -34,7 +35,6 @@ const CustomOverlay = (props: CustomOverlay) => {
       setYearInputFieldErrorMessage(true);
     }
   }
-
   return (
     <div
       onClick={(event) => event.stopPropagation()}
@@ -49,10 +49,12 @@ const CustomOverlay = (props: CustomOverlay) => {
             onClick={props.overlayCloseHandler}
           >&times;
           </button>
-          <div className={'year-only-input-text'}>במידה ולא ידוע תאריך מדויק הזינו שנה</div>
+          <div className={'year-only-input-text'}>
+            <Trans i18nKey={"customOverlay.yearOnlyInputText"}>במידה ולא ידוע תאריך מדויק הזינו שנה</Trans>
+          </div>
           <div className={'year-input'}>
             <input
-              placeholder={'הזינו שנה'}
+              placeholder={t("customOverlay.yearInoutPlaceholder", "הזינו שנה")}
               id={'custom-overlay-year-input'}
               type="number"
               pattern="[0-9]{4}"
@@ -67,13 +69,22 @@ const CustomOverlay = (props: CustomOverlay) => {
               type={'button'}
               onClick={() => {
                 activateHandler();
-              }}>אישור
+              }}>
+              <Trans i18nKey={"customOverlay.yearInputButtonText"}>אישור</Trans>
             </button>
             {yearInputFieldErrorMessage &&
-            <div id={'year-input-error-message'}>* נא להזין שנה בת 4 ספרות (עד {new Date().getFullYear()})</div>}
+            <div id={'year-input-error-message'}>
+              <Trans i18nKey={"customOverlay.yearInputErrorMessage"} values={{currentYear: new Date().getFullYear()}}>
+                * נא להזין שנה בת 4 ספרות (עד {new Date().getFullYear()})
+              </Trans>
+            </div>}
           </div>
-          <div className={'date-input-separator'}>או</div>
-          <div id={'date-input-text'}>בחרו תאריך מדויק</div>
+          <div className={'date-input-separator'}>
+            <Trans i18nKey={"customOverlay.dateInputSeparator"}>או</Trans>
+          </div>
+          <div id={'date-input-text'}>
+            <Trans i18nKey={"customOverlay.dateInputText"}>בחרו תאריך מדויק</Trans>
+          </div>
         </div>
         <DayPicker
           fromMonth={new Date(1900, 0)}

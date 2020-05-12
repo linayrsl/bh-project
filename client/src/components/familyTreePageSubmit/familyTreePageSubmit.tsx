@@ -3,6 +3,7 @@ import { History } from "history";
 import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
 import { Header } from "../header/header";
 import { Loader } from "../loader/loader";
@@ -13,7 +14,7 @@ import "./familyTreePageSubmit.css";
 import {FamilyTreeApiRequest} from "../../contracts/familyTreeApiRequest";
 
 
-export interface FamilyTreePageSubmitProps {
+export interface FamilyTreePageSubmitProps extends WithTranslation {
   history?: History;
 }
 
@@ -184,14 +185,15 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="family-tree-submit-container">
         {this.state.httpRequestInProgress && <Loader />}
-        <Header title="סיימת את בניית עץ המשפחה שלך" />
+        <Header title={t("familyTreePageSubmit.header", "סיימת את בניית עץ המשפחה שלך")} />
         <div className="family-tree-submit-body page-content-container">
           <div className="pre-submittion-text">
-            זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין
-            שגיאה?
+            <Trans i18nKey={"familyTreePageSubmit.familyTreePreSubmissionMessage"}>זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין </Trans>
+            <Trans i18nKey={"familyTreePageSubmit.familyTreePreSubmissionMessage2"}>שגיאה?</Trans>
           </div>
           <div className="choose-option">
             <button
@@ -205,7 +207,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
               onClick={this.submitButtonHandler.bind(this)}
               className="option-no option-button"
             >
-              שליחה
+              <Trans i18nKey={"familyTreePageSubmit.familyTreeSendFormButton"}>שליחה</Trans>
             </button>
           </div>
         </div>
@@ -214,7 +216,9 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 }
 
-const FamilyTreePageSubmit = (withRouter(
+const FamilyTreePageSubmit =
+  withTranslation()(
+    withRouter(
   FamilyTreePageSubmitComponent as any
-) as any) as React.ComponentClass<FamilyTreePageSubmitProps>;
+) as any as React.ComponentClass<FamilyTreePageSubmitProps>);
 export { FamilyTreePageSubmit };

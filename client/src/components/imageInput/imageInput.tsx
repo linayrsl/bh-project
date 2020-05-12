@@ -2,9 +2,10 @@ import * as React from "react";
 import {toast} from "react-toastify";
 // @ts-ignore
 import {readAndCompressImage} from "browser-image-resizer";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 import "./imageInput.css";
 
-interface ImageInputProps {
+interface ImageInputProps extends WithTranslation {
   id: string;
   onChange: (image: string | null) => void;
   defaultValue?: string; // In case of previously uploaded image, saved in localStorage
@@ -15,7 +16,7 @@ interface ImageInputState {
   isWideImage: boolean;
 }
 
-class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
+class ImageInputComponent extends React.Component<ImageInputProps, ImageInputState> {
 
   constructor(props: Readonly<ImageInputProps>) {
     super(props);
@@ -99,10 +100,11 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="image-input-container">
         <label htmlFor={this.props.id}>
-          {this.state.image ? "החליפו תמונה" : "הוסיפו תמונה"}
+          {this.state.image ? t("imageInput.imageInputDirectionsChange", "החליפו תמונה") : t("imageInput.imageInputDirectionsAdd", "הוסיפו תמונה")}
         </label>
         <input
           onChange={
@@ -126,4 +128,5 @@ class ImageInput extends React.Component<ImageInputProps, ImageInputState> {
   }
 }
 
+const ImageInput = withTranslation()(ImageInputComponent);
 export { ImageInput };

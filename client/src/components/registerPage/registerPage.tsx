@@ -3,14 +3,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import 'react-phone-number-input/style.css'
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
 import "./registerPage.css";
 import { ProceedButton } from "../proceedButton/proceedButton";
 import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
 import { Loader } from "../loader/loader";
+import {register} from "../../serviceWorker";
 
-export interface RegisterPageProps {}
+export interface RegisterPageProps extends WithTranslation {}
 
 export interface RegisterPageState {
   firstName: string;
@@ -23,7 +25,7 @@ export interface RegisterPageState {
   wasPhoneInvalidBefore: boolean;
 }
 
-class RegisterPage extends React.Component<
+class RegisterPageComponent extends React.Component<
   RegisterPageProps,
   RegisterPageState
 > {
@@ -74,21 +76,24 @@ class RegisterPage extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="register-page-container">
         {this.state.httpRequestInProgress && <Loader />}
-        <Header title="הרשמה" />
+        <Header title={t("registerPage.header", "הרשמה")} />
         <div className="register-body page-content-container ">
           <div className="register-message">
-            <div className="register-user">פרטי רישום</div>
+            <div className="register-user">
+              <Trans i18nKey={"registerPage.registerDetails"}>פרטי רישום</Trans>
+            </div>
           </div>
           <div className="register-form">
             <form>
               <TextInput
                 id="firstName"
                 type="text"
-                title="שם פרטי"
-                placeholder="הזינו שם פרטי"
+                title={t("registerPage.registerFormName", "שם פרטי")}
+                placeholder={t("registerPage.registerFormNamePlaceholder", "הזינו שם פרטי")}
                 required={true}
                 onChange={event => {
                   this.setState({firstName: event.target.value});
@@ -98,8 +103,8 @@ class RegisterPage extends React.Component<
               <TextInput
                 id="lastName"
                 type="text"
-                title="שם משפחה"
-                placeholder="הזינו שם משפחה"
+                title={t("registerPage.registerFormLastName", "שם משפחה")}
+                placeholder={t("registerPage.registerFormLastNamePlaceholder", "הזינו שם משפחה")}
                 required={true}
                 onChange={event => {
                   this.setState({lastName: event.target.value});
@@ -110,8 +115,8 @@ class RegisterPage extends React.Component<
                 validateRegex={/[^@]+@[^@]+/}
                 id="email"
                 type="email"
-                title="דואר אלקטרוני"
-                placeholder="הזינו מייל"
+                title={t("registerPage.registerFormEmail", "דואר אלקטרוני")}
+                placeholder={t("registerPage.registerFormEmailPlaceholder", "הזינו מייל")}
                 required={true}
                 validationErrorMessage={"הפורמט של כתובת המייל אינו תקין"}
                 onChange={event => {
@@ -132,12 +137,14 @@ class RegisterPage extends React.Component<
                 className={`phone-input-container ${
                 this.state.phone && !this.state.isPhoneValid ? "invalid" : ''
               }`}>
-                <label htmlFor="phone"><span className={"mandatory-field-indicator"}>*</span>טלפון סלולרי</label>
+                <label htmlFor="phone"><span className={"mandatory-field-indicator"}>*</span>
+                  <Trans i18nKey={"registerPage.registerFormPhone"}>טלפון סלולרי</Trans>
+                </label>
                 <PhoneInput
                   id="phone"
                   // @ts-ignore
                   countrySelectProps={{ unicodeFlags: true }}
-                  placeholder="הזינו מספר"
+                  placeholder={t("registerPage.registerFormPhonePlaceholder", "הזינו מספר")}
                   defaultCountry={'IL'}
                   value={''}
                   onChange={value => {
@@ -148,9 +155,13 @@ class RegisterPage extends React.Component<
                   }}
                   error={this.state.phone ? (this.state.isPhoneValid ? undefined : 'Invalid phone number') : 'Phone number required'}
                 />
-                {(this.state.phone && !this.state.isPhoneValid) && <div className={"invalid-input-feedback"}>מספר טלפון לא תקין</div>}
+                {(this.state.phone && !this.state.isPhoneValid) && <div className={"invalid-input-feedback"}>
+                  <Trans i18nKey={"registerPage.registerFormPhoneErrorMessage"}>מספר טלפון לא תקין</Trans>
+                </div>}
               </div>
-              <div className={"mandatory-fields-message"}>* שדות חובה למילוי</div>
+              <div className={"mandatory-fields-message"}>
+                <Trans i18nKey={"registerPage.registerFormMandatoryFieldsMessage"}>* שדות חובה למילוי</Trans>
+              </div>
               <div className="user-checkbox styled-checkbox ">
                 <input
                   onChange={event => {
@@ -160,13 +171,13 @@ class RegisterPage extends React.Component<
                   type="checkbox"
                   className="checkbox" />
                 <span className="accept-conditions-full">
-                  קראתי ואני מסכים/ה ל
+                  <Trans i18nKey={"registerPage.registerFormAcceptConditions"}>קראתי ואני מסכים/ה ל</Trans>
                   <a
                     target="_blank"
                     href="https://www.bh.org.il/he/%d7%9e%d7%90%d7%92%d7%a8%d7%99%d7%9d-%d7%95%d7%90%d7%95%d7%a1%d7%a4%d7%99%d7%9d/%d7%92%d7%a0%d7%90%d7%9c%d7%95%d7%92%d7%99%d7%94-%d7%99%d7%94%d7%95%d7%93%d7%99%d7%aa/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%95%d7%99%d7%aa%d7%95%d7%a8/"
                     className="accept-conditions"
                   >
-                    תנאי השימוש
+                    <Trans i18nKey={"registerPage.registerUseConditionsLink"}>תנאי השימוש</Trans>
                   </a>
                 </span>
               </div>
@@ -174,7 +185,7 @@ class RegisterPage extends React.Component<
           </div>
           <div className="vertical-spacer"></div>
           <div className="register-disclaimer">
-            לא לדאוג, לא נשלח הודעות ספאם!
+            <Trans i18nKey={"registerPage.registerDisclaimer"}>לא לדאוג, לא נשלח הודעות ספאם!</Trans>
           </div>
           <div className=""></div>
           <div className="register-cta">
@@ -182,7 +193,7 @@ class RegisterPage extends React.Component<
               disabled={
                 !this.validateForm() || this.state.httpRequestInProgress
               }
-              text="המשיכו"
+              text={t("registerPage.registerProceedButton", "המשיכו")}
               nextPageUrl={`/verification/${encodeURIComponent(
                 this.state.email
               )}`}
@@ -195,4 +206,5 @@ class RegisterPage extends React.Component<
   }
 }
 
+const RegisterPage = withTranslation()(RegisterPageComponent);
 export { RegisterPage };

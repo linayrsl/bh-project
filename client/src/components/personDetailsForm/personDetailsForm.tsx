@@ -5,10 +5,11 @@ import {ImageInput} from "../imageInput/imageInput";
 import {DateInput} from "../dateInput/dateInput";
 import {Gender} from "../../contracts/gender";
 import {PersonDetails} from "../../contracts/personDetails";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
 import "./personDetailsForm.css";
 
-export interface PersonDetailsFormProps {
+export interface PersonDetailsFormProps extends WithTranslation {
   idPrefix: string;
   displayIsAlive?: boolean;
   displayMaidenName?: boolean;
@@ -24,7 +25,7 @@ export interface PersonDetailsFormProps {
 export interface PersonDetailsFormState extends PersonDetails {
 }
 
-class PersonDetailsForm extends React.Component<
+class PersonDetailsFormComponent extends React.Component<
   PersonDetailsFormProps,
   PersonDetailsFormState
 > {
@@ -96,6 +97,7 @@ class PersonDetailsForm extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="person-details-container">
         <div className="person-details">
@@ -110,10 +112,10 @@ class PersonDetailsForm extends React.Component<
             <div className="person-details-inner-container">
               <TextInput
                 defaultValue={this.state.firstName ? this.state.firstName : ""}
-                title="שם פרטי"
+                title={t("personDetailsForm.personDetailsName", "שם פרטי")}
                 id={`${this.props.idPrefix}_firstName`}
                 type="text"
-                placeholder="לחצו להוספה"
+                placeholder={t("personDetailsForm.personDetailsNamePlaceholder", "לחצו להוספה")}
                 onChange={event => {
                   this.setState({ firstName: event.target.value });
                 }}
@@ -121,10 +123,10 @@ class PersonDetailsForm extends React.Component<
               />
               <TextInput
                 defaultValue={this.state.lastName ? this.state.lastName : ""}
-                title="שם משפחה"
+                title={t("personDetailsForm.personDetailsLastName", "שם משפחה")}
                 id={`${this.props.idPrefix}_lastName`}
                 type="text"
-                placeholder="לחצו להוספה"
+                placeholder={t("personDetailsForm.personDetailsLastNamePlaceholder", "לחצו להוספה")}
                 onChange={event => {
                   this.setState({ lastName: event.target.value });
                 }}
@@ -135,10 +137,10 @@ class PersonDetailsForm extends React.Component<
                   defaultValue={
                     this.state.maidenName ? this.state.maidenName : ""
                   }
-                  title="שם נעורים"
+                  title={t("personDetailsForm.personDetailsMaidenName", "שם נעורים")}
                   id={`${this.props.idPrefix}_maidenName`}
                   type="text"
-                  placeholder="לחצו להוספה"
+                  placeholder={t("personDetailsForm.personDetailsMaidenNamePlaceholder", "לחצו להוספה")}
                   onChange={event => {
                     this.setState({ maidenName: event.target.value });
                   }}
@@ -148,10 +150,12 @@ class PersonDetailsForm extends React.Component<
                 <div className="gender-options">
                   {this.state.isSubmitter &&
                   <span className={"mandatory-field-indicator"}>*</span>}
-                  מין
+                  <Trans i18nKey={"personDetailsForm.personDetailsGender"}>מין</Trans>
                 </div>
                 <div className="gender-options-buttons">
-                  <label htmlFor={`${this.props.idPrefix}_male`}>זכר</label>
+                  <label htmlFor={`${this.props.idPrefix}_male`}>
+                    <Trans i18nKey={"personDetailsForm.personDetailsMalePlaceholder"}>זכר</Trans>
+                  </label>
                   <input
                     checked={this.state.gender === "male"}
                     type="radio"
@@ -161,7 +165,9 @@ class PersonDetailsForm extends React.Component<
                     onChange={event => {
                       this.setState({ gender: event.target.value as Gender });
                     }} />
-                  <label htmlFor={`${this.props.idPrefix}_female`}>נקבה</label>
+                  <label htmlFor={`${this.props.idPrefix}_female`}>
+                   <Trans i18nKey={"personDetailsForm.personDetailsFemalePlaceholder"}> נקבה</Trans>
+                  </label>
                   <input
                     checked={this.state.gender === "female"}
                     type="radio"
@@ -171,7 +177,9 @@ class PersonDetailsForm extends React.Component<
                     onChange={event => {
                       this.setState({ gender: event.target.value as Gender });
                     }} />
-                  <label htmlFor={`${this.props.idPrefix}_other`}>אחר</label>
+                  <label htmlFor={`${this.props.idPrefix}_other`}>
+                    <Trans i18nKey={"personDetailsForm.personDetailsOtherPlaceholder"}>אחר</Trans>
+                  </label>
                   <input
                     checked={this.state.gender === "other"}
                     type="radio"
@@ -185,7 +193,7 @@ class PersonDetailsForm extends React.Component<
               </div>
               <DateInput
                 defaultValue={this.state.birthDate ? this.state.birthDate : ""}
-                title="תאריך לידה"
+                title={t("personDetailsForm.personDetailsBirthDate", "תאריך לידה")}
                 id={`${this.props.idPrefix}_birthDate`}
                 onChange={value => {
                   this.setState({ birthDate: value });
@@ -195,10 +203,10 @@ class PersonDetailsForm extends React.Component<
                 defaultValue={
                   this.state.birthPlace ? this.state.birthPlace : ""
                 }
-                title="מקום לידה"
+                title={t("personDetailsForm.personDetailsBirthPlace", "מקום לידה")}
                 id={`${this.props.idPrefix}_birthPlace`}
                 type="text"
-                placeholder="עיר או/ו מדינה"
+                placeholder={t("personDetailsForm.personDetailsBirthPlacePlaceholder", "עיר או/ו מדינה")}
                 onChange={event => {
                   this.setState({ birthPlace: event.target.value });
                 }}
@@ -206,7 +214,7 @@ class PersonDetailsForm extends React.Component<
               {this.props.displayIsAlive && (
                 <div className="alive-checkbox">
                   <label htmlFor={`${this.props.idPrefix}_isAlive`}>
-                    חי/חיה
+                    <Trans i18nKey={"personDetailsForm.personDetailsIsAlive"}>חי/חיה</Trans>
                   </label>
                   <input
                     checked={
@@ -223,7 +231,7 @@ class PersonDetailsForm extends React.Component<
               {!this.state.isAlive && (
                 <DateInput
                   defaultValue={this.state.deathDate ? this.state.deathDate : ""}
-                  title="תאריך פטירה"
+                  title={t("personDetailsForm.personDetailsDeathDate", "תאריך פטירה")}
                   id={`${this.props.idPrefix}_deathDate`}
                   onChange={value => {
                     this.setState({ deathDate: value });
@@ -235,10 +243,10 @@ class PersonDetailsForm extends React.Component<
                   defaultValue={
                     this.state.deathPlace ? this.state.deathPlace : ""
                   }
-                  title="מקום פטירה"
+                  title={t("personDetailsForm.personDetailsDeathPlace", "מקום פטירה")}
                   id={`${this.props.idPrefix}_deathPlace`}
                   type="text"
-                  placeholder="עיר או/ו מדינה"
+                  placeholder={t("personDetailsForm.personDetailsDeathPlacePlaceholder", "עיר או/ו מדינה")}
                   onChange={event => {
                     this.setState({ deathPlace: event.target.value });
                   }}
@@ -252,4 +260,5 @@ class PersonDetailsForm extends React.Component<
   }
 }
 
+const PersonDetailsForm = withTranslation()(PersonDetailsFormComponent);
 export { PersonDetailsForm };
