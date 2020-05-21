@@ -62,8 +62,8 @@ application.register_blueprint(
 
 @application.route('/<string:path_part1>')
 @application.route('/<string:path_part1>/<string:path_part2>')
-@application.route('/<string:path_part1>/<string:path_part2>/<string:path_part3>')
-def client_path_handler(path_part1: str, path_part2: str = None, path_part3: str = None):
+@application.route('/en/<string:path_part1>/<string:path_part2>')
+def client_path_handler(path_part1: str, path_part2: str = None):
     return application.send_static_file("index.html")
 
 
