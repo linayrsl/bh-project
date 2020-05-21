@@ -22,6 +22,11 @@
   padding-right: 10px;
 }
 
+[dir=ltr] .register-user {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
 .register-form {
   padding-left: 10px;
   padding-right: 10px;
