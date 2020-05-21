@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from "react";
-import {Trans, useTranslation, WithTranslation, withTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'react-i18next';
 
 import 'react-day-picker/lib/style.css';
 import {CustomDayPickerCaption} from "./customDayPickerCaption";

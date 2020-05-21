@@ -8,6 +8,7 @@
     "browser-image-resizer": "^2.1.0",
     "clipboard": "^2.0.5",
     "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^4.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "react": "^16.10.1",
@@ -49,7 +50,7 @@
     "@types/react-phone-number-input": "^3.0.2",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-toastify": "^4.1.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "react-scripts": "^3.4.0",
     "typescript": "3.6.3"
   }

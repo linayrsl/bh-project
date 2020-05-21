@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 import enTexts from "./locales/en/translation.json";
 import heTexts from "./locales/he/translation.json";
@@ -14,19 +15,24 @@ const resources = {
 };
 
 i18n
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    detection: {
+      order: ["path"],
+      lookupFromPathIndex: 0,
+      checkWhitelist: true,
+      checkForSimilarInWhitelist: false,
+    },
     resources,
 
     fallbackLng: "he",
     debug: true,
-    lng: "he",
-
     keySeparator: ".",
-
+    whitelist: ["he", "en"],
     interpolation: {
       escapeValue: false
     }
   });
 
-export default i18n;
+export {i18n};

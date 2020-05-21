@@ -79,6 +79,10 @@ input.invalid {
 .phone-input-container .PhoneInput {
   direction: ltr;
   width: 50%;
+  flex-direction: row;
+}
+
+[dir=ltr] .phone-input-container .PhoneInput {
   flex-direction: row-reverse;
 }
 
@@ -90,10 +94,18 @@ input.invalid {
   color: darkgrey;
   font-size: 18px;
   font-family: "Assistant", cursive;
+  text-align: left;
+}
+
+[dir=ltr] .phone-input-container .PhoneInput .PhoneInputInput {
   text-align: right;
 }
 
 .PhoneInputCountry {
+  margin-right: 5px;
+}
+
+[dir=ltr] .PhoneInputCountry {
   margin-right: 0;
   margin-left: 5px;
 }

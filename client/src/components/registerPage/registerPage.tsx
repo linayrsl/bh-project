@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 import 'react-phone-number-input/style.css'
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
-
-import "./registerPage.css";
 import { ProceedButton } from "../proceedButton/proceedButton";
 import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
 import { Loader } from "../loader/loader";
-import {register} from "../../serviceWorker";
+
+
+import "./registerPage.css";
 
 export interface RegisterPageProps extends WithTranslation {}
 
