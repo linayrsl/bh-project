@@ -19,6 +19,7 @@
     "registerFormLastNamePlaceholder": "הזינו שם משפחה",
     "registerFormEmail": "דואר אלקטרוני",
     "registerFormEmailPlaceholder": "הזינו מייל",
+    "registerFormEmailErrorMessage": "הפורמט של כתובת המייל אינו תקין",
     "registerFormPhone": "טלפון סלולרי",
     "registerFormPhonePlaceholder": "הזינו מספר",
     "registerFormPhoneErrorMessage": "מספר טלפון לא תקין",
@@ -92,6 +93,7 @@
     "header": "סיימת את בניית עץ המשפחה שלך",
     "familyTreePreSubmissionMessage": "זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין ",
     "familyTreePreSubmissionMessage2": "שגיאה?",
+    "familyTreeReturnFormButton": "חזרה",
     "familyTreeSendFormButton": "שליחה"
   },
   "familyTreeThankYouPage": {

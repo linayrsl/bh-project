@@ -200,7 +200,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
               onClick={this.returnButtonHandler.bind(this)}
               className="option-yes option-button"
             >
-              חזרה
+              <Trans i18nKey={"familyTreePageSubmit.familyTreeReturnFormButton"}>חזרה</Trans>
             </button>
             <button
               disabled={this.state.httpRequestInProgress}

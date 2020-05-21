@@ -110,6 +110,11 @@ a {
 
 .share-link-container button {
   margin-right: 10px;
+
+  [dir=ltr] & {
+    margin-right: 0;
+    margin-left: 10px;
+  }
 }
 
 .share-link-container a {
@@ -128,4 +133,5 @@ a {
   height: 20px;
   padding-right: 3px;
 }
+
 

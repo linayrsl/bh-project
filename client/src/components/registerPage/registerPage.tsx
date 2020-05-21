@@ -118,7 +118,7 @@ class RegisterPageComponent extends React.Component<
                 title={t("registerPage.registerFormEmail", "דואר אלקטרוני")}
                 placeholder={t("registerPage.registerFormEmailPlaceholder", "הזינו מייל")}
                 required={true}
-                validationErrorMessage={"הפורמט של כתובת המייל אינו תקין"}
+                validationErrorMessage={t("registerPage.registerFormEmailErrorMessage", "הפורמט של כתובת המייל אינו תקין")}
                 onChange={event => {
                   this.setState({ email: event.target.value });
                 }}

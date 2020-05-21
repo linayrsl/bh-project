@@ -17,7 +17,7 @@ import {
 } from "react-share";
 
 import { Header } from "../header/header";
-import "./familyTreeThankYouPage.css";
+import "./familyTreeThankYouPage.scss";
 import bhLogo from "../../assets/images/bh-logo-he.svg";
 import shareIcon from "../../assets/images/Share.svg";
 
@@ -125,7 +125,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                 href="https://dbs.bh.org.il/he/"
               >
                 <Trans i18nKey={"familyTreeThankYouPage.upperLeftRectangleText"}>
-                בואו
+                  <span>בואו</span>
                   <span className="highlight"> לגלות </span> את העולם היהודי
                 במאגרי המידע
                 </Trans>
@@ -137,7 +137,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                 href="https://www.bh.org.il/he/%d7%97%d7%99%d7%a0%d7%95%d7%9a-%d7%93%d7%a3-%d7%91%d7%99%d7%aa/"
               >
                 <Trans i18nKey={"familyTreeThankYouPage.lowerRightRectangleText"}>
-                בואו
+                  <span>בואו</span>
                 <span className="highlight"> ללמוד </span> עם התוכניות
                 החינוכיות
                 </Trans>
@@ -147,7 +147,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                 href="https://www.bh.org.il/he/shop/"
               >
                 <Trans i18nKey={"familyTreeThankYouPage.lowerLeftRectangleText"}>
-                בואו
+                  <span>בואו</span>
                 <span className={"highlight"}>לקנות</span> ממבחר הפריטים בחנות המוזיאון
                 </Trans>
               </a>
