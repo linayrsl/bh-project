@@ -6,15 +6,16 @@ import {
   PersonDetailsFormState
 } from "../personDetailsForm/personDetailsForm";
 import { ProceedButton } from "../proceedButton/proceedButton";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
-export interface FamilyTreePageSubmitterProps {}
+export interface FamilyTreePageSubmitterProps extends WithTranslation {}
 
 export interface FamilyTreePageSubmitterState {
   submitterDetails?: PersonDetailsFormState;
   allFormsValid: boolean;
 }
 
-class FamilyTreePageSubmitter extends React.Component<
+class FamilyTreePageSubmitterComponent extends React.Component<
   FamilyTreePageSubmitterProps,
   FamilyTreePageSubmitterState
 > {
@@ -42,9 +43,10 @@ class FamilyTreePageSubmitter extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="family-tree-container">
-        <Header title="הפרטים שלי - 1/4" />
+        <Header title={t("familyTreePageSubmitter.header", "הפרטים שלי - 1/4")} />
         <div className="progress-scale">
           <div className="level active">1</div>
           <div className="level">2</div>
@@ -60,14 +62,16 @@ class FamilyTreePageSubmitter extends React.Component<
             }}
             onFormValidityChange={this.formValidityHandler.bind(this)}
             idPrefix="me"
-            title="אני"
+            title={t("familyTreePageSubmitter.familyTreeCurrentEntity", "אני")}
           />
-          <div className={"mandatory-fields-message"}>* שדות חובה למילוי</div>
+          <div className={"mandatory-fields-message"}>
+            <Trans i18nKey={"familyTreePageSubmitter.familyTreeMandatoryFieldsMessage"}>* שדות חובה למילוי</Trans>
+          </div>
           <div className="vertical-spacer"></div>
           <div className="family-tree-footer">
             <ProceedButton
               disabled={!this.state.allFormsValid}
-              text="המשיכו"
+              text={t("familyTreePageSubmitter.familyTreeProceedButton", "המשיכו")}
               nextPageUrl="/family-tree/mother"
             />
           </div>
@@ -77,4 +81,5 @@ class FamilyTreePageSubmitter extends React.Component<
   }
 }
 
+const FamilyTreePageSubmitter = withTranslation()(FamilyTreePageSubmitterComponent);
 export { FamilyTreePageSubmitter };

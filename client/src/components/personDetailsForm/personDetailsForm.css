@@ -39,6 +39,15 @@
   line-height: 35px;
 }
 
+/*[dir=ltr] .gender-options-buttons {*/
+/*  direction: rtl;*/
+/*}*/
+
+[dir=ltr] .gender-options-buttons label {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
 .gender-options-buttons label {
   color: grey;
   font-size: 18px;
@@ -68,6 +77,11 @@
   font-size: 20px;
   padding-left: 10px;
   line-height: 35px;
+}
+
+[dir=ltr] .alive-checkbox label {
+  padding-left: 0;
+  padding-right: 10px;
 }
 
 .alive-checkbox input {

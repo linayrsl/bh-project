@@ -179,6 +179,18 @@
 
 .year-input {
   direction: rtl;
+
+  [dir=ltr] & {
+    direction: ltr;
+  }
+  input[placeholder] {
+    padding-right: 4px;
+
+    [dir=ltr] & {
+      padding-right: 0;
+      padding-left: 4px;
+    }
+  }
 }
 
 #year-input-error-message {

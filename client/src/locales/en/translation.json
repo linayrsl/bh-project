@@ -1,0 +1,143 @@
+{
+  "homePage": {
+    "welcomeMessage": "Welcome",
+    "welcomeMessagePart2": "<0>to the</0><1> Family tree project</1> of the",
+    "welcomeMessagePart3": "Museum of the Jewish People at Beit Hatfutsot.",
+    "theProjectObjective": "This is where you'll be able to build your family tree",
+    "theProjectObjective2": "in 4 simple steps.",
+    "projectDisclaimer": "The tree you build will be saved in the secure family tree",
+    "projectDisclaimer2": "database at the Museum of the Jewish People, enabling you",
+    "projectDisclaimer3": "to view and edit it on the Museum's website in the future.",
+    "proceedButton": "Enter"
+  },
+  "registerPage": {
+    "header": "Registration",
+    "registerDetails": "Registration information",
+    "registerFormName": "First name",
+    "registerFormNamePlaceholder": "Enter your first name",
+    "registerFormLastName": "Last name",
+    "registerFormLastNamePlaceholder": "Enter your last name",
+    "registerFormEmail": "Email",
+    "registerFormEmailPlaceholder": "Enter your email address",
+    "registerFormEmailErrorMessage": "Invalid email address",
+    "registerFormPhone": "Cell phone",
+    "registerFormPhonePlaceholder": "Enter your cell phone number",
+    "registerFormPhoneErrorMessage": "Invalid cell phone number",
+    "registerFormMandatoryFieldsMessage": "* Mandatory fields",
+    "registerFormAcceptConditions": "I have read and agree to the ",
+    "registerUseConditionsLink": "Terms of Use",
+    "registerDisclaimer": "Don't worry. Spam messages will not be sent to you!",
+    "registerProceedButton": "Continue"
+  },
+  "verificationPage": {
+    "header": "Email verification",
+    "verificationMessage": "Check your mailbox. A message containing a verification code will be sent in the next few minutes.",
+    "verificationMessage2": "Copy the code here:",
+    "verificationCode": "Verification code",
+    "verificationCodePlaceholder": "Enter the code",
+    "verificationCodeMessage": "If a message is not received, check your junk mailbox",
+    "verificationProceedButton": "Confirm"
+  },
+  "familyTreePageSubmitter": {
+    "header": "My information 1/4",
+    "familyTreeCurrentEntity": "Me",
+    "familyTreeMandatoryFieldsMessage": "* Mandatory fields",
+    "familyTreeProceedButton": "Next"
+  },
+  "imageInput": {
+    "imageInputDirectionsAdd": "Add a photo",
+    "imageInputDirectionsChange": "Replace a photo"
+  },
+  "personDetailsForm": {
+    "personDetailsName": "First name",
+    "personDetailsNamePlaceholder": "Click to add",
+    "personDetailsLastName": "Last name",
+    "personDetailsLastNamePlaceholder": "Click to add",
+    "personDetailsMaidenName": "Maiden name",
+    "personDetailsMaidenNamePlaceholder": "Click to add",
+    "personDetailsGender": "Sex",
+    "personDetailsMalePlaceholder": "Male",
+    "personDetailsFemalePlaceholder": "Female",
+    "personDetailsOtherPlaceholder": "Other",
+    "personDetailsBirthDate": "Date of birth",
+    "personDetailsBirthPlace": "Place of birth",
+    "personDetailsBirthPlacePlaceholder": "City and/or country",
+    "personDetailsIsAlive": "Alive",
+    "personDetailsDeathDate": "Date of death",
+    "personDetailsDeathPlace": "Place of death",
+    "personDetailsDeathPlacePlaceholder": "City and/or country"
+  },
+  "familyTreePageMother" : {
+    "header": "Your mother's side 2/4",
+    "familyTreeCurrentEntity": "Your mother",
+    "familyTreeMothersMother": "Your mother's mother",
+    "familyTreeMothersFather": "Your mother's father",
+    "familyTreeProceedButton": "Next"
+  },
+  "familyTreePageFather": {
+    "header": "Your father's side 3/4",
+    "familyTreeCurrentEntity": "Your father",
+    "familyTreeFathersMother": "Your father's mother",
+    "familyTreeFathersFather": "Your father's father",
+    "familyTreeProceedButton": "Next"
+  },
+  "familyTreePageSiblings": {
+    "header": "Siblings 4/4",
+    "familyTreeSiblingsMessage": "How many siblings do you have?",
+    "familyTreeSiblingsIncreaseNumber": "Increase the number of brothers or sisters by one",
+    "familyTreeSiblingsDecreaseNumber": "Decrease the number of brothers or sisters by one",
+    "familyTreeCurrentEntity": "Brother/sister",
+    "familyTreeSiblingsProceedButton": "Click here to finish"
+  },
+  "familyTreePageSubmit": {
+    "header": "You have finished building your family tree",
+    "familyTreePreSubmissionMessage": "That's it. You've finished building the tree. Would you like to review the information you filled out ",
+    "familyTreePreSubmissionMessage2": "and check for errors??",
+    "familyTreeReturnFormButton": "Back",
+    "familyTreeSendFormButton": "Send"
+  },
+  "familyTreeThankYouPage": {
+    "header": "Your tree has been saved",
+    "thankYouMessage": "<0>Thank you!</0>",
+    "thankYouMessage2": "<0>The tree has been saved in the secure family tree database at the Museum of the Jewish People.</0>",
+    "thankYouMessage3": "A file containing the information will be sent to you by email in the next few minutes. ",
+    "thankYouMessage4": "You're welcome to visit the Museum of the Jewish People at Beit Hatfutsot and continue studying, researching and being part of the story",
+    "linkSharingOptionsMessage": "Would you like to share:",
+    "linkShareSentTitle": "The Museum of the Jewish People's tree building application",
+    "linkShareSentContent": "The Museum of the Jewish People's tree building application",
+    "facebookLinkShareMessage": "The Museum of the Jewish People's tree building application",
+    "emailLinkShareMessage": "The Museum of the Jewish People's tree building application",
+    "telegramLinkShareMessage": "The Museum of the Jewish People's tree building application",
+    "twitterLinkShareMessage": "The Museum of the Jewish People's tree building application",
+    "whats'upLinkShareMessage": "The Museum of the Jewish People's tree building application",
+    "upperRightRectangleText": "<0>Come and </0> <1>visit </1> the Museum of the Jewish People",
+    "upperLeftRectangleText": "<0>Come and </0> <1>discover</1> the Jewish world in our databases",
+    "lowerRightRectangleText": "<0>Come and</0> <1>take part</1> in our educational programs",
+    "lowerLeftRectangleText": "<0>Come and </0> <1>buy</1> something from our gift shop collection",
+    "thankYouInformationHeader": "About the family tree database at the Museum",
+    "thankYouInformationText": "Over 5 million people are already registered at the Jewish Genealogy Center at the Museum of the Jewish People. The database is growing every day and every hour. Visitors from a variety of places and societies life come to trace their roots, record and preserve their family trees for the next generations. By doing so, they are adding another branch to the large family tree of the Jewish people.",
+    "thankYouInformationHeader2": "About the Museum's databases",
+    "thankYouInformationText2": "The Museum of the Jewish People at Beit Hatfutsot is home to diverse and rich databases: family trees, meanings of last names, histories of Jewish communities across the globe, photographs, images and films, musical compositions, and information about concepts and people. All the materials can be found on a single website, where a search pools the various types of content and also connects them using internal links.",
+    "thankYouInformationHeader3": "About the Museum of the Jewish People",
+    "thankYouInformationText3": "The Museum of the Jewish People at Beit Hatfutsot is a global institution that tells the story of one, multifaceted culture that is rich and comprised of multiple layers. It tells the stories of men and women, adults and children, families and communities, the Jewish calendar and its holidays, sufferings and joys, fruits of the spirit, education and creative works, traditions and ways of life of the Jewish people that evolved in a variety of countries and in many different periods under various rulers and regimes, in seventy languages and over thousands of years. At the Museum, the Jewish people are depicted as a people who have lived and still live among other peoples and continue to preserve and cultivate a special bond with the Land of Israel and the State of Israel.",
+    "thankYouInformationHeader4": "About this project",
+    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry. The project is managed by the Digital Department at the Museum of the Jewish People at Beit Hatfutsot..</2>"
+  },
+  "errorBoundary": {
+    "header": "family tree project",
+    "errorMessage": "<0>An error has occurred on the requested page. You can ask for <1>support at the Museum of the Jewish People</1> or <3>try again</3>.</0>"
+  },
+  "customOverlay": {
+    "yearOnlyInputText": "If you don't know the exact date, enter a year",
+    "yearInoutPlaceholder": "Enter a year",
+    "yearInputButtonText": "Confirm",
+    "yearInputErrorMessage": "* Please enter a four-digit year (up to the {{currentYear}})",
+    "dateInputSeparator": "Or",
+    "dateInputText": "Choose an exact date"
+  },
+  "pageNotFoundError": {
+    "header": "family tree project",
+    "pageNotFoundErrorMessage": "<0>The requested information was not found.  You can go back to the  <1>homepage</1></0>"
+  }
+}
+

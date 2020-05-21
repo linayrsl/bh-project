@@ -1,0 +1,143 @@
+{
+  "homePage": {
+    "welcomeMessage": "ברוכים הבאים",
+    "welcomeMessagePart2": "<0>ל</0><1>פרויקט עצי המשפחה</1>",
+    "welcomeMessagePart3": "של מוזיאון העם היהודי בבית התפוצות.",
+    "theProjectObjective": "כאן תוכלו ליצור את עץ המשפחה שלכם",
+    "theProjectObjective2": "ב-4 צעדים פשוטים.",
+    "projectDisclaimer": "העץ שתבנו יישמר במאגר עצי המשפחה",
+    "projectDisclaimer2": "המאובטח של מוזיאון העם היהודי ותוכלו לעיין בו",
+    "projectDisclaimer3": "ולערוך אותו בעתיד באתר המוזיאון.",
+    "proceedButton": "כניסה "
+  },
+  "registerPage": {
+    "header": "הרשמה",
+    "registerDetails": "פרטי רישום",
+    "registerFormName": "שם פרטי",
+    "registerFormNamePlaceholder": "הזינו שם פרטי",
+    "registerFormLastName": "שם משפחה",
+    "registerFormLastNamePlaceholder": "הזינו שם משפחה",
+    "registerFormEmail": "דואר אלקטרוני",
+    "registerFormEmailPlaceholder": "הזינו מייל",
+    "registerFormEmailErrorMessage": "הפורמט של כתובת המייל אינו תקין",
+    "registerFormPhone": "טלפון סלולרי",
+    "registerFormPhonePlaceholder": "הזינו מספר",
+    "registerFormPhoneErrorMessage": "מספר טלפון לא תקין",
+    "registerFormMandatoryFieldsMessage": "* שדות חובה למילוי",
+    "registerFormAcceptConditions": "קראתי ואני מסכים/ה ל",
+    "registerUseConditionsLink": "תנאי השימוש",
+    "registerDisclaimer": "לא לדאוג, לא נשלח הודעות ספאם!",
+    "registerProceedButton": "המשיכו"
+  },
+  "verificationPage": {
+    "header": "אימות דואר אלקטרוני",
+    "verificationMessage": "בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה",
+    "verificationMessage2": "ובה קוד אימות, יש להעתיק את הקוד לכאן:",
+    "verificationCode": "קוד אימות",
+    "verificationCodePlaceholder": "הזינו קוד",
+    "verificationCodeMessage": "במידה ולא התקבלה הודעה, בדקו את תיבת דואר הזבל",
+    "verificationProceedButton": "אישור"
+  },
+  "familyTreePageSubmitter": {
+    "header": "הפרטים שלי - 1/4",
+    "familyTreeCurrentEntity": "אני",
+    "familyTreeMandatoryFieldsMessage": "* שדות חובה למילוי",
+    "familyTreeProceedButton": "המשיכו"
+  },
+  "imageInput": {
+    "imageInputDirectionsAdd": "הוסיפו תמונה",
+    "imageInputDirectionsChange": "החליפו תמונה"
+  },
+  "personDetailsForm": {
+    "personDetailsName": "שם פרטי",
+    "personDetailsNamePlaceholder": "לחצו להוספה",
+    "personDetailsLastName": "שם משפחה",
+    "personDetailsLastNamePlaceholder": "לחצו להוספה",
+    "personDetailsMaidenName": "שם נעורים",
+    "personDetailsMaidenNamePlaceholder": "לחצו להוספה",
+    "personDetailsGender": "מין",
+    "personDetailsMalePlaceholder": "זכר",
+    "personDetailsFemalePlaceholder": "נקבה",
+    "personDetailsOtherPlaceholder": "אחר",
+    "personDetailsBirthDate": "תאריך לידה",
+    "personDetailsBirthPlace": "מקום לידה",
+    "personDetailsBirthPlacePlaceholder": "עיר או/ו מדינה",
+    "personDetailsIsAlive": "חי/חיה",
+    "personDetailsDeathDate": "תאריך פטירה",
+    "personDetailsDeathPlace": "מקום פטירה",
+    "personDetailsDeathPlacePlaceholder": "עיר או/ו מדינה"
+  },
+  "familyTreePageMother" : {
+    "header": "הצד של אמא  2/4",
+    "familyTreeCurrentEntity": "אמא",
+    "familyTreeMothersMother": "אמא של אמא",
+    "familyTreeMothersFather": "אבא של אמא",
+    "familyTreeProceedButton": "המשיכו"
+  },
+  "familyTreePageFather": {
+    "header": "הצד של אבא  3/4",
+    "familyTreeCurrentEntity": "אבא",
+    "familyTreeFathersMother": "אמא של אבא",
+    "familyTreeFathersFather": "אבא של אבא",
+    "familyTreeProceedButton": "המשיכו"
+  },
+  "familyTreePageSiblings": {
+    "header": "אחים/אחיות  4/4",
+    "familyTreeSiblingsMessage": "כמה אחים/אחיות יש לך ?",
+    "familyTreeSiblingsIncreaseNumber": "להגדיל מספר אחים או אחיות באחד",
+    "familyTreeSiblingsDecreaseNumber": "להפחית מספר אחים או אחיות באחד",
+    "familyTreeCurrentEntity": "אח/אחות",
+    "familyTreeSiblingsProceedButton": "לסיום הקישו כאן"
+  },
+  "familyTreePageSubmit": {
+    "header": "סיימת את בניית עץ המשפחה שלך",
+    "familyTreePreSubmissionMessage": "זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין ",
+    "familyTreePreSubmissionMessage2": "שגיאה?",
+    "familyTreeReturnFormButton": "חזרה",
+    "familyTreeSendFormButton": "שליחה"
+  },
+  "familyTreeThankYouPage": {
+    "header": "העץ שלך נשמר",
+    "thankYouMessage": "<0>תודה רבה!</0>",
+    "thankYouMessage2": "<0>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי. ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.</0>",
+    "thankYouMessage3": "אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד, ",
+    "thankYouMessage4": "לחקור ולהיות חלק מהסיפור.",
+    "linkSharingOptionsMessage": "רוצה לשתף:",
+    "linkShareSentTitle": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "linkShareSentContent": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "facebookLinkShareMessage": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "emailLinkShareMessage": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "telegramLinkShareMessage": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "twitterLinkShareMessage": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "whats'upLinkShareMessage": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
+    "upperRightRectangleText": "<0>בואו</0> <1>לבקר</1> במוזיאון העם היהודי",
+    "upperLeftRectangleText": "<0>בואו</0> <1>לגלות</1> את העולם היהודי במאגרי המידע",
+    "lowerRightRectangleText": "<0>בואו</0> <1>ללמוד</1> עם התוכניות החינוכיות",
+    "lowerLeftRectangleText": "<0>בואו</0> <1>לקנות</1> ממבחר הפריטים בחנות המוזיאון",
+    "thankYouInformationHeader": "אודות מאגר עצי המשפחה במוזיאון",
+    "thankYouInformationText": "מעל ל-5 מיליוני בני אדם כבר רשומים במרכז לגנאלוגיה יהודית במוזיאון העם היהודי, והמאגר גדל מדי יום ומדי שעה. מבקרים ממגוון מקומות ואורחות חיים באים להתחקות אחר שורשיהם, לתעד ולהנציח את אילן משפחתם עבור הדורות הבאים, ובכך הם מוסיפים עוד ענף לאילן המשפחתי הגדול של העם היהודי.",
+    "thankYouInformationHeader2": "אודות מאגרי המידע של המוזיאון",
+    "thankYouInformationText2": "במוזיאון העם היהודי בבית התפוצות מאגרי מידע מגוונים ועשירים. אילנות יוחסין (עצי משפחה), פירושים לשמות משפחה, תולדותיהן של קהילות ברחבי העולם, צילומים, תמונות וסרטים, קטעי מוזיקה, מידע על מושגים ואישים – כל החומרים נמצאים באתר אחד, עם חיפוש שמאגם את סוגי התוכן וגם מקשר ביניהם בקישורים פנימיים.",
+    "thankYouInformationHeader3": "אודות מוזיאון העם היהודי",
+    "thankYouInformationText3": "מוזיאון העם היהודי בבית התפוצות הוא מוסד עולמי שמספר על תרבות אחת רבת-פנים, עשירה ועתירת רבדים; הוא מספר על אנשים ונשים, על מבוגרים וילדים, על משפחות וקהילות, על השנה העברית ומועדיה, על תלאות ושמחות, ועל פירות הרוח, החינוך והיצירה, המסורות ואורחות החיים של העם היהודי, אשר נוצרו במגוון ארצות, בכל מיני תקופות, תחת שליטים ומשטרים שונים, ובשבעים לשונות, במשך אלפי שנים. במוזיאון העם היהודי מתואר העם היהודי, עם בקרב עמים אחרים, אשר שומר ומטפח גם קשר מיוחד אל ארץ ישראל ואל מדינת ישראל.",
+    "thankYouInformationHeader4": "אודות פרויקט זה",
+    "thankYouInformationText4": "<0>פרויקט עצי המשפחה הוקם ע\"מ לאפשר את הגדלת מאגר עצי המשפחה של העם היהודי ומתוך מטרה להנגיש את איסוף פרטי המשפחה בצורה נוחה וידידותית למשתמשים דרך הטלפון הנייד. הפרויקט נעשה בשיתוף עם ארגון</0> <1>;she codes</1> <2>ששם לו למטרה לקדם נשים במגזר ההייטק, ונוהל ע\"י מחלקת הדיגיטל של מוזיאון העם היהודי בבית התפוצות.</2>"
+  },
+  "errorBoundary": {
+    "header": "פרויקט עצי המשפחה",
+    "errorMessage": "<0>אירעה שגיאה בדף המבוקש, ניתן לפנות <1>לתמיכה של המוזיאון העם היהודי</1> או <3>לנסות בשנית</3></0>"
+  },
+  "customOverlay": {
+    "yearOnlyInputText": "במידה ולא ידוע תאריך מדויק הזינו שנה",
+    "yearInoutPlaceholder": "הזינו שנה",
+    "yearInputButtonText": "אישור",
+    "yearInputErrorMessage": "* נא להזין שנה בת 4 ספרות (עד {{currentYear}})",
+    "dateInputSeparator": "או",
+    "dateInputText": "בחרו תאריך מדויק"
+  },
+  "pageNotFoundError": {
+    "header": "פרויקט עצי המשפחה",
+    "pageNotFoundErrorMessage": "<0>הדף המבוקש לא נמצא, ניתן לפנות ל<1>דף הבית</1></0>"
+  }
+}
+

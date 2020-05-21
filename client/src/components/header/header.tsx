@@ -1,6 +1,6 @@
 import * as React from "react";
 import bhLogo from "../../assets/images/bh-logo-he.svg";
-import "./header.css";
+import "./header.scss";
 
 export interface HeaderProps {
   title: string;

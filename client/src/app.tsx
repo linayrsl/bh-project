@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import {i18n} from "i18next";
 
-import "./app.scss";
-import "react-toastify/dist/ReactToastify.css";
 import { HomePage } from "./components/homePage/homePage";
 import { RegisterPage } from "./components/registerPage/registerPage";
 import { VerificationPage } from "./components/verificationPage/verificationPage";
@@ -16,11 +15,26 @@ import { FamilyTreeThankYouPage } from "./components/familyTreeThankYouPage/fami
 import {PageNotFoundError} from "./components/pageNotFoundError/pageNotFoundError";
 import {ErrorBoundary} from "./components/errorBoundary/errorBoundary";
 
-class App extends Component {
+import "./app.scss";
+import "react-toastify/dist/ReactToastify.css";
+
+
+interface AppProps {
+  i18n: i18n
+}
+
+class App extends Component<AppProps> {
   render() {
+    const language = this.props.i18n.language;
+
+    let direction = "rtl";
+    if (language === "en") {
+      direction = "ltr";
+    }
+
     return (
-      <div className="bh-app">
-        <BrowserRouter>
+      <div dir={direction} className="bh-app">
+        <BrowserRouter basename={language === "en" ? "/en" : "/"}>
           <ErrorBoundary>
             <Switch>
               <Route exact path="/">

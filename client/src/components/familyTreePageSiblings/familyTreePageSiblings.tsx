@@ -7,8 +7,10 @@ import {
   PersonDetailsFormState
 } from "../personDetailsForm/personDetailsForm";
 import { ProceedButton } from "../proceedButton/proceedButton";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
-export interface FamilyTreePageSiblingsProps {}
+
+export interface FamilyTreePageSiblingsProps extends WithTranslation {}
 
 export interface FamilyTreePageSiblingsState {
   formsValidity: { [key: string]: boolean }; // dictionary with key of type string and value of type boolean
@@ -16,7 +18,7 @@ export interface FamilyTreePageSiblingsState {
   siblingsDetails: { [key: string]: PersonDetailsFormState };
 }
 
-class FamilyTreePageSiblings extends React.Component<
+class FamilyTreePageSiblingsComponent extends React.Component<
   FamilyTreePageSiblingsProps,
   FamilyTreePageSiblingsState
 > {
@@ -96,9 +98,10 @@ class FamilyTreePageSiblings extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="family-tree-container">
-        <Header title="אחים/אחיות  4/4" />
+        <Header title={t("familyTreePageSiblings.header", "אחים/אחיות  4/4")} />
         <div className="progress-scale">
           <div className="level active">1</div>
           <div className="level active">2</div>
@@ -108,13 +111,13 @@ class FamilyTreePageSiblings extends React.Component<
         <div className="page-content-container">
           <div className={"siblings-container"}>
             <div className={"siblings-body"}>
-              כמה אחים/אחיות יש לך ?
+              <Trans i18nKey={"familyTreePageSiblings.familyTreeSiblingsMessage"}>כמה אחים/אחיות יש לך ?</Trans>
               <div className={"siblings-buttons"}>
                 <button
                   className={"increase-button"}
                   tabIndex={0}
                   type={"button"}
-                  title={"להגדיל מספר אחים או אחיות באחד"}
+                  title={t("familyTreePageSiblings.familyTreeSiblingsIncreaseNumber", "להגדיל מספר אחים או אחיות באחד")}
                   onClick={(event) => {
                     console.log(event.target);
                     this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings+1}));
@@ -125,7 +128,7 @@ class FamilyTreePageSiblings extends React.Component<
                   className={`decrease-button ${this.state.numOfSiblings < 1 ? "disabled-button" : ""}`}
                   tabIndex={1}
                   type={"button"}
-                  title={"להפחית מספר אחים או אחיות באחד"}
+                  title={t("familyTreePageSiblings.familyTreeSiblingsDecreaseNumber", "להפחית מספר אחים או אחיות באחד")}
                   onClick={(event) => {
                     if (this.state.numOfSiblings > 0) {
                       this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings-1}));
@@ -141,7 +144,7 @@ class FamilyTreePageSiblings extends React.Component<
                 <PersonDetailsForm
                   key={siblingId}
                   idPrefix={siblingId}
-                  title="אח/אחות"
+                  title={t("familyTreePageSiblings.familyTreeCurrentEntity", "אח/אחות")}
                   displayIsAlive
                   displayMaidenName
                   defaults={this.state.siblingsDetails[siblingId]}
@@ -165,7 +168,7 @@ class FamilyTreePageSiblings extends React.Component<
               disabled={
                 Object.values(this.state.formsValidity).indexOf(false) >= 0 || this.state.numOfSiblings < 0
               } // This expression return true if at least 1 of values in formsValidity dict is falsey
-              text="לסיום הקישו כאן"
+              text={t("familyTreePageSiblings.familyTreeSiblingsProceedButton", "לסיום הקישו כאן")}
               nextPageUrl="/family-tree/submit"
             />
           </div>
@@ -175,4 +178,5 @@ class FamilyTreePageSiblings extends React.Component<
   }
 }
 
+const FamilyTreePageSiblings = withTranslation()(FamilyTreePageSiblingsComponent);
 export { FamilyTreePageSiblings };
