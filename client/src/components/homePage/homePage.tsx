@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Component } from "react";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
-
-import bhLogo from "../../assets/images/bh-logo-he.svg";
-import "./homePage.css";
+import { i18n } from "../../i18n";
+import bhLogoHe from "../../assets/images/bh-logo-he.svg";
+import bhLogoEn from "../../assets/images/bh-logo-en.svg";
+import languageButton from "../../assets/images/lang-button.svg";
+import "./homePage.scss";
 import { ProceedButton } from "../proceedButton/proceedButton";
 
 interface HomePageProps extends WithTranslation {}
@@ -14,7 +16,10 @@ class HomePageComponent extends Component<HomePageProps> {
     return (
       <div className="home-page-container">
         <div className="home-header">
-          <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
+          <img className="bh-logo" alt="Beit Hatfutzot Logo" src={i18n.language === "he" ? bhLogoHe : bhLogoEn} />
+          <a className={"languageButton"} href={i18n.language === "he" ? "/en" : "/"}>
+            <img alt={"choose language"} src={languageButton} />
+          </a>
         </div>
         <div className="home-page-body">
           <div className="welcome-message" tabIndex={1}>

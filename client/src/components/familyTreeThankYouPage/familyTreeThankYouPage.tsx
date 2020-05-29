@@ -1,6 +1,6 @@
 import * as React from "react";
 import ClipboardJS from "clipboard";
-import { toast } from "react-toastify";
+import { i18n } from "../../i18n";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
 import {
@@ -18,7 +18,8 @@ import {
 
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.scss";
-import bhLogo from "../../assets/images/bh-logo-he.svg";
+import bhLogoHe from "../../assets/images/bh-logo-he.svg";
+import bhLogoEn from "../../assets/images/bh-logo-en.svg";
 import shareIcon from "../../assets/images/Share.svg";
 
 export interface FamilyTreeThankYouPageProps extends WithTranslation {}
@@ -108,7 +109,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
           </div>
           <div className="page-content-container information">
             <div className="bh-logo-class">
-              <img className="bh-logo" alt="Beit Hatfutzot Logo" src={bhLogo} />
+              <img className="bh-logo" alt="Beit Hatfutzot Logo" src={i18n.language === "he" ? bhLogoHe : bhLogoEn} />
             </div>
             <div className="information-boxes-upper">
               <a
