@@ -36,6 +36,11 @@
 .upper-right-box {
   background-color: #199cac;
   margin-left: 20px;
+
+  [dir=ltr] & {
+    margin-left: 0;
+    margin-right: 20px;
+  }
 }
 
 .upper-left-box {
@@ -58,6 +63,11 @@
 .lower-right-box {
   background-color: #7590cf;
   margin-left: 20px;
+
+  [dir=ltr] & {
+    margin-left: 0;
+    margin-right: 20px;
+  }
 }
 
 .lower-left-box {

@@ -214,7 +214,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                       וידידותית למשתמשים דרך הטלפון הנייד. הפרויקט נעשה בשיתוף עם
                       ארגון
                     </span>
-                    <a href={"https://she-codes.org/"} target={"_blank"}> ;she codes </a>
+                    <a href={i18n.language === "he" ? "https://she-codes.org/he/home-heb/" : "https://she-codes.org/"} target={"_blank"}> ;she codes </a>
                     <span>
                       ששם לו למטרה לקדם נשים במגזר ההייטק, ונוהל
                       ע"י מחלקת הדיגיטל של מוזיאון העם היהודי בבית התפוצות.

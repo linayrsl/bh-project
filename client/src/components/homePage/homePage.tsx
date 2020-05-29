@@ -34,6 +34,8 @@ class HomePageComponent extends Component<HomePageProps> {
             <Trans i18nKey={"homePage.welcomeMessagePart3"}>
               של מוזיאון העם היהודי בבית התפוצות.
             </Trans>
+          <br />
+          <Trans i18nKey={"homePage.welcomeMessagePart4"}></Trans>
           </div>
           <div className="welcome-explanation" tabIndex={2}>
             <Trans i18nKey={"homePage.theProjectObjective"}>

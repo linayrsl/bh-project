@@ -64,6 +64,7 @@ family_tree_json_schema = {
     "type": "object",
     "properties": {
         "submitterEmail": {"type": "string"},
+        "language": {"type": "string"},
         "familyTree": {
             "type": "object",
             "patternProperties": {
@@ -113,7 +114,8 @@ def family_tree_post():
                        GEDCOM_EMAIL_FROM,
                        GEDCOM_EMAIL_TO,
                        content,
-                       content)
+                       content,
+                       language=family_tree_json["language"])
 
     zip_file_data = create_zip_with_gedcom_and_images(
         file_name,
