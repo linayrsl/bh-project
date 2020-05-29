@@ -30,7 +30,8 @@ test_family_tree: dict = {
             "image": blank_image,
             "siblings": ["1000", "2000", "3000"]
         }
-    }
+    },
+    "language": "he"
 }
 
 

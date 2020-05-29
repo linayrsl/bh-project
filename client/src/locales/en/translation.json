@@ -1,8 +1,9 @@
 {
   "homePage": {
-    "welcomeMessage": "Welcome",
-    "welcomeMessagePart2": "<0>to the</0><1> Family tree project</1> of the",
-    "welcomeMessagePart3": "Museum of the Jewish People at Beit Hatfutsot.",
+    "welcomeMessage": "Welcome to the",
+    "welcomeMessagePart2": "<0></0><1> Family tree project</1>",
+    "welcomeMessagePart3": " of the Museum of the Jewish People ",
+    "welcomeMessagePart4": " at Beit Hatfutsot.",
     "theProjectObjective": "This is where you'll be able to build your family tree",
     "theProjectObjective2": "in 4 simple steps.",
     "projectDisclaimer": "The tree you build will be saved in the secure family tree",

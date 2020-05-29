@@ -4,6 +4,7 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
+import { i18n } from "../../i18n";
 
 import { Header } from "../header/header";
 import { Loader } from "../loader/loader";
@@ -165,7 +166,8 @@ class FamilyTreePageSubmitComponent extends React.Component<
 
     const requestBody: FamilyTreeApiRequest = {
       submitterEmail: window.localStorage.getItem("submitterEmail") || "",
-      familyTree: familyTreeJson
+      familyTree: familyTreeJson,
+      language: i18n.language
     };
 
     this.setState({ httpRequestInProgress: true });

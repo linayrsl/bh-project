@@ -55,7 +55,8 @@ with DatabaseConnection(DATABASE_URL) as connection:
                                REPORT_EMAIL_FROM,
                                REPORT_EMAIL_TO,
                                "Family Tree Submitter Weekly CSV Report",
-                               "Family Tree Submitter Weekly CSV Report")
+                               "Family Tree Submitter Weekly CSV Report",
+                               language=None)
             sent_successfully = send_email.send_csv("weekly-csv-report.csv", csv_str.encode("utf-8"))
             if not sent_successfully:
                 logger.error("Failed to send CSV weekly report by mail")
