@@ -160,7 +160,7 @@ class Email:
 
     def send_verification_code(self, to_email: str, verification_code: str):
         subject = send_verification_code_subject_he if self.language == "he" else send_verification_code_subject_en
-        content = send_verification_code_body_he.format(verification_code if self.language == "he" else send_verification_code_body_en.format(verification_code))
+        content = (send_verification_code_body_he if self.language == "he" else send_verification_code_body_en).format(verification_code) 
         message = Mail(self.from_email, to_email, subject, content)
 
         # This code is for testing purposes.
