@@ -51,7 +51,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
 
   render() {
     const t = this.props.t;
-    const shareUrl = "https://bh-project.herokuapp.com"
+    const shareUrl = `https://bh-project.herokuapp.com${i18n.language === "he" ? "" : "/en"}`
     return (
       <div className="family-tree-thanks-page-container">
         <Header title={t("familyTreeThankYouPage.header", "העץ שלך נשמר")} />
@@ -82,27 +82,27 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                   <FacebookShareButton
                     hashtag={"#bhfamilytrees"}
                     quote={t("familyTreeThankYouPage.facebookLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={i18n.language === "he" ? shareUrl : shareUrl+"/en"}>
+                    translate={undefined} url={shareUrl}>
                     <FacebookIcon path={undefined} crossOrigin={undefined} round={true} size={30}/>
                   </FacebookShareButton>
                   <EmailShareButton
                     subject={t("familyTreeThankYouPage.emailLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={i18n.language === "he" ? shareUrl : shareUrl+"/en"}>
+                    translate={undefined} url={shareUrl}>
                     <EmailIcon round={true} size={31} crossOrigin={undefined} path={undefined}/>
                   </EmailShareButton>
                   <TelegramShareButton
                     title={t("familyTreeThankYouPage.telegramLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={i18n.language === "he" ? shareUrl : shareUrl+"/en"}>
+                    translate={undefined} url={shareUrl}>
                     <TelegramIcon round={true} path={undefined} size={30} crossOrigin={undefined}/>
                   </TelegramShareButton>
                   <TwitterShareButton
                     title={t("familyTreeThankYouPage.twitterLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={i18n.language === "he" ? shareUrl : shareUrl+"/en"}>
+                    translate={undefined} url={shareUrl}>
                     <TwitterIcon crossOrigin={undefined} path={undefined} size={30} round={true}/>
                   </TwitterShareButton>
                   <WhatsappShareButton
                     title={t("familyTreeThankYouPage.whats'upLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={i18n.language === "he" ? shareUrl : shareUrl+"/en"}>
+                    translate={undefined} url={shareUrl}>
                     <WhatsappIcon  round={true} size={30} path={undefined} crossOrigin={undefined}/>
                   </WhatsappShareButton>
                 </>}
