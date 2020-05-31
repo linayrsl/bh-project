@@ -5,7 +5,7 @@ from .class_family import Family
 from .create_gedcom import *
 
 
-def handler(data_dictionary):
+def handler(data_dictionary, language="he"):
     list_appended_strings = []
     families = []  # list of family IDs
     list_families = []  # list of families data
@@ -32,7 +32,7 @@ def handler(data_dictionary):
     # writing the HEAD Record
     list_appended_strings.append(create_head_record(dict_for_csv["filenameGedcom"]))
     # writing the language data to the HEAD Record
-    list_appended_strings.append(create_language_record("HE"))
+    list_appended_strings.append(create_language_record(language.upper()))
 
     parents_to_family_mapping = {}
     person_id_to_individual_record = {}

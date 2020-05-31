@@ -93,7 +93,7 @@
   "familyTreePageSubmit": {
     "header": "You have finished building your family tree",
     "familyTreePreSubmissionMessage": "That's it. You've finished building the tree. Would you like to review the information you filled out ",
-    "familyTreePreSubmissionMessage2": "and check for errors??",
+    "familyTreePreSubmissionMessage2": "and check for errors?",
     "familyTreeReturnFormButton": "Back",
     "familyTreeSendFormButton": "Send"
   },
