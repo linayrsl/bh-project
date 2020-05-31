@@ -94,7 +94,7 @@ def family_tree_post():
 
     try:
         image_dict: Dict[str, str]
-        gedcom_string, image_dict, _ = handler(family_tree_json["familyTree"])
+        gedcom_string, image_dict, _ = handler(family_tree_json["familyTree"], family_tree_json["language"])
     except Exception:
         logger.exception("Failed to generate gedcom from family tree json")
         return abort(500, description="Failed to generate gedcom")

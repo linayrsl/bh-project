@@ -46,7 +46,7 @@ send_verification_code_body_he = "קוד הזיהוי עבור בניית עץ �
 
 send_zip_to_user_body_en = '''
     <!DOCTYPE html>
-    <html dir="rtl" lang="he">
+    <html dir="ltr" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
