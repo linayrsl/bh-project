@@ -51,7 +51,7 @@ send_zip_to_user_body_en = '''
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
     <body>
-        <div dir="rtl">
+        <div dir="ltr">
             <p>
                 We're glad that you have joined the secure family tree database at the Museum of the Jewish People.
             </p>
