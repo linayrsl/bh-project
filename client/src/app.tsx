@@ -24,6 +24,14 @@ interface AppProps {
 }
 
 class App extends Component<AppProps> {
+  constructor(props: Readonly<AppProps>) {
+    super(props);
+    const language = props.i18n.language;
+    if (language === "en" && typeof window !== "undefined") {
+      window.document.title = "Family tree project of the Museum of the Jewish People at Beit Hatfutsot"
+    }
+  }
+
   render() {
     const language = this.props.i18n.language;
 

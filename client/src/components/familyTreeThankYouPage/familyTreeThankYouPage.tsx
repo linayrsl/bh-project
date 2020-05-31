@@ -51,6 +51,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
 
   render() {
     const t = this.props.t;
+    const shareUrl = `https://bh-project.herokuapp.com${i18n.language === "he" ? "" : "/en"}`
     return (
       <div className="family-tree-thanks-page-container">
         <Header title={t("familyTreeThankYouPage.header", "העץ שלך נשמר")} />
@@ -81,27 +82,27 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                   <FacebookShareButton
                     hashtag={"#bhfamilytrees"}
                     quote={t("familyTreeThankYouPage.facebookLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    translate={undefined} url={shareUrl}>
                     <FacebookIcon path={undefined} crossOrigin={undefined} round={true} size={30}/>
                   </FacebookShareButton>
                   <EmailShareButton
                     subject={t("familyTreeThankYouPage.emailLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    translate={undefined} url={shareUrl}>
                     <EmailIcon round={true} size={31} crossOrigin={undefined} path={undefined}/>
                   </EmailShareButton>
                   <TelegramShareButton
                     title={t("familyTreeThankYouPage.telegramLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    translate={undefined} url={shareUrl}>
                     <TelegramIcon round={true} path={undefined} size={30} crossOrigin={undefined}/>
                   </TelegramShareButton>
                   <TwitterShareButton
                     title={t("familyTreeThankYouPage.twitterLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={"https://bh-project.herokuapp.com"}>
+                    translate={undefined} url={shareUrl}>
                     <TwitterIcon crossOrigin={undefined} path={undefined} size={30} round={true}/>
                   </TwitterShareButton>
                   <WhatsappShareButton
                     title={t("familyTreeThankYouPage.whats'upLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={"ttps://bh-project.herokuapp.com"}>
+                    translate={undefined} url={shareUrl}>
                     <WhatsappIcon  round={true} size={30} path={undefined} crossOrigin={undefined}/>
                   </WhatsappShareButton>
                 </>}
@@ -114,7 +115,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
             <div className="information-boxes-upper">
               <a
                 className="upper-right-box information-box"
-                href="https://www.bh.org.il/he/"
+                href={i18n.language === "he" ? "https://www.bh.org.il/he/" : "https://www.bh.org.il/"}
               >
                 <Trans i18nKey={"familyTreeThankYouPage.upperRightRectangleText"}>
                   <span>בואו</span>
@@ -123,7 +124,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
               </a>
               <a
                 className="lower-left-box information-box"
-                href="https://dbs.bh.org.il/he/"
+                href={i18n.language === "he" ? "https://dbs.bh.org.il/he/" : "https://dbs.bh.org.il/"}
               >
                 <Trans i18nKey={"familyTreeThankYouPage.upperLeftRectangleText"}>
                   <span>בואו</span>
@@ -135,7 +136,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
             <div className="information-boxes-lower">
               <a
                 className="lower-right-box information-box"
-                href="https://www.bh.org.il/he/%d7%97%d7%99%d7%a0%d7%95%d7%9a-%d7%93%d7%a3-%d7%91%d7%99%d7%aa/"
+                href={i18n.language === "he" ? "https://www.bh.org.il/he/%d7%97%d7%99%d7%a0%d7%95%d7%9a-%d7%93%d7%a3-%d7%91%d7%99%d7%aa/" : "https://www.bh.org.il/education-homepage/"}
               >
                 <Trans i18nKey={"familyTreeThankYouPage.lowerRightRectangleText"}>
                   <span>בואו</span>
@@ -145,7 +146,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
               </a>
               <a
                 className="upper-left-box information-box"
-                href="https://www.bh.org.il/he/shop/"
+                href={i18n.language === "he" ? "https://www.bh.org.il/he/shop/" : "https://www.bh.org.il/shop/"}
               >
                 <Trans i18nKey={"familyTreeThankYouPage.lowerLeftRectangleText"}>
                   <span>בואו</span>
