@@ -114,6 +114,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
             </div>
             <div className="information-boxes-upper">
               <a
+                target={"_blank"}
                 className="upper-right-box information-box"
                 href={i18n.language === "he" ? "https://www.bh.org.il/he/" : "https://www.bh.org.il/"}
               >
@@ -123,6 +124,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                 </Trans>
               </a>
               <a
+                target={"_blank"}
                 className="lower-left-box information-box"
                 href={i18n.language === "he" ? "https://dbs.bh.org.il/he/" : "https://dbs.bh.org.il/"}
               >
@@ -135,6 +137,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
             </div>
             <div className="information-boxes-lower">
               <a
+                target={"_blank"}
                 className="lower-right-box information-box"
                 href={i18n.language === "he" ? "https://www.bh.org.il/he/%d7%97%d7%99%d7%a0%d7%95%d7%9a-%d7%93%d7%a3-%d7%91%d7%99%d7%aa/" : "https://www.bh.org.il/education-homepage/"}
               >
@@ -145,6 +148,7 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                 </Trans>
               </a>
               <a
+                target={"_blank"}
                 className="upper-left-box information-box"
                 href={i18n.language === "he" ? "https://www.bh.org.il/he/shop/" : "https://www.bh.org.il/shop/"}
               >
