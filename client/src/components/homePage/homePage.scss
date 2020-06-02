@@ -17,12 +17,41 @@
 .home-header {
   border-bottom: 7px solid #37b9c9;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 768px){
+    justify-content: space-between;
+  }
+}
+
+.languageButton {
+  position: absolute;
+  right: 0;
+  padding-right: 10px;
+
+  [dir=rtl]  & {
+    left: 0;
+    right: auto;
+    padding-right: 0;
+    padding-left: 10px;
+  }
 }
 
 .home-header .bh-logo {
   width: 210px;
   margin-top: 30px;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 768px){
+    padding-left: 10px;
+
+    [dir=rtl] & {
+      padding-left: 0;
+      padding-right: 10px;
+    }
+  }
 }
 
 .welcome-message {
@@ -54,9 +83,11 @@
   text-align: center;
   font-size: 18px;
   color: #604118;
+  margin-bottom: 20px;
 }
 
 .welcome-cta {
   margin-top: 58px;
   margin-bottom: 30px;
 }
+

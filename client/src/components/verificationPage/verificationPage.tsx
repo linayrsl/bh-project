@@ -2,6 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { withRouter, match } from "react-router-dom";
 import { toast } from "react-toastify";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
 import { ProceedButton } from "../proceedButton/proceedButton";
 import { Header } from "../header/header";
@@ -10,7 +11,7 @@ import { Loader } from "../loader/loader";
 
 import "./verificationPage.css";
 
-export interface VerificationPageProps {
+export interface VerificationPageProps extends WithTranslation {
   match?: match<{ email: string }>;
 }
 
@@ -42,6 +43,10 @@ class VerificationPageComponent extends React.Component<
         )}`,
         { verificationCode: this.state.verificationCode }
       )
+      .then((response) => {
+        window.localStorage.setItem("submitterEmail", decodeURIComponent(this.props.match!.params.email));
+        return response;
+      })
       .catch(error => {
         if (error && error.response && error.response.status === 400) {
           toast.error("יש להזין קוד אימות בן 5 ספרות");
@@ -62,17 +67,18 @@ class VerificationPageComponent extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="verification-page-container">
         {this.state.httpRequestInProgress && <Loader />}
-        <Header title="אימות דואר אלקטרוני" />
+        <Header title={t("verificationPage.header", "אימות דואר אלקטרוני")} />
         <div className="verification-body page-content-container ">
           <div className="verification-message">
             <div className="verification-message1">
-              בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה
+             <Trans i18nKey={"verificationPage.verificationMessage"}> בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה</Trans>
             </div>
             <div className="verification-message2">
-              ובה קוד אימות, יש להעתיק את הקוד לכאן:
+              <Trans i18nKey={"verificationPage.verificationMessage2"}>ובה קוד אימות, יש להעתיק את הקוד לכאן:</Trans>
             </div>
           </div>
 
@@ -81,15 +87,15 @@ class VerificationPageComponent extends React.Component<
               <TextInput
                 id="code"
                 type="text"
-                placeholder="הזינו קוד"
-                title="קוד אימות"
+                placeholder={t("verificationPage.verificationCodePlaceholder", "הזינו קוד")}
+                title={t("verificationPage.verificationCode", "קוד אימות")}
                 onChange={event => {
                   this.setState({ verificationCode: event.target.value });
                 }}
                 className="verification-code-input"
               />
               <div className="verification-message3">
-                במידה ולא התקבלה הודעה, בדקו את תיבת דואר הזבל
+                <Trans i18nKey={"verificationPage.verificationCodeMessage"}>במידה ולא התקבלה הודעה, בדקו את תיבת דואר הזבל</Trans>
               </div>
             </form>
           </div>
@@ -99,7 +105,7 @@ class VerificationPageComponent extends React.Component<
               disabled={
                 !this.validateForm() || this.state.httpRequestInProgress
               }
-              text="אישור"
+              text={t("verificationPage.verificationProceedButton", "אישור")}
               nextPageUrl="/family-tree/me"
               callback={this.verifyCode.bind(this)}
             />
@@ -110,8 +116,10 @@ class VerificationPageComponent extends React.Component<
   }
 }
 
-const VerificationPage = (withRouter(
-  VerificationPageComponent as any
-) as any) as React.ComponentClass<VerificationPageProps>;
+const VerificationPage =
+  withTranslation()(
+    withRouter(
+      VerificationPageComponent as any
+    ) as any as React.ComponentClass<VerificationPageProps>);
 
 export { VerificationPage };

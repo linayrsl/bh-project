@@ -1,14 +1,16 @@
 import * as React from "react";
 import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
-import "./familyTreePageSiblings.css";
+import "./familyTreePageSiblings.scss";
 import {
   PersonDetailsForm,
   PersonDetailsFormState
 } from "../personDetailsForm/personDetailsForm";
 import { ProceedButton } from "../proceedButton/proceedButton";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
-export interface FamilyTreePageSiblingsProps {}
+
+export interface FamilyTreePageSiblingsProps extends WithTranslation {}
 
 export interface FamilyTreePageSiblingsState {
   formsValidity: { [key: string]: boolean }; // dictionary with key of type string and value of type boolean
@@ -16,7 +18,7 @@ export interface FamilyTreePageSiblingsState {
   siblingsDetails: { [key: string]: PersonDetailsFormState };
 }
 
-class FamilyTreePageSiblings extends React.Component<
+class FamilyTreePageSiblingsComponent extends React.Component<
   FamilyTreePageSiblingsProps,
   FamilyTreePageSiblingsState
 > {
@@ -32,7 +34,7 @@ class FamilyTreePageSiblings extends React.Component<
 
   componentDidMount() {
     let item = localStorage.getItem("numOfSiblings");
-    let numOfSiblings = 0;
+    let numOfSiblings = -1;
     if (item) {
       numOfSiblings = parseInt(item);
     }
@@ -41,14 +43,18 @@ class FamilyTreePageSiblings extends React.Component<
     let siblingsDetails = {} as {
       [key: string]: PersonDetailsFormState;
     };
-    for (let i = 0; i < numOfSiblings; i++) {
-      let siblingKey = `sibling${i}`;
-      item = localStorage.getItem(siblingKey);
-      if (item) {
-        let siblingFormData = JSON.parse(item);
-        siblingsDetails[siblingKey] = siblingFormData;
+
+    if (numOfSiblings >= 0) {
+      for (let i = 0; i < numOfSiblings; i++) {
+        let siblingKey = `sibling${i}`;
+        item = localStorage.getItem(siblingKey);
+        if (item) {
+          let siblingFormData = JSON.parse(item);
+          siblingsDetails[siblingKey] = siblingFormData;
+        }
       }
     }
+
     this.setState({ siblingsDetails: siblingsDetails });
 
     setTimeout(() => {
@@ -92,9 +98,10 @@ class FamilyTreePageSiblings extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="family-tree-container">
-        <Header title="אחים ואחיות  4/4" />
+        <Header title={t("familyTreePageSiblings.header", "אחים/אחיות  4/4")} />
         <div className="progress-scale">
           <div className="level active">1</div>
           <div className="level active">2</div>
@@ -102,31 +109,42 @@ class FamilyTreePageSiblings extends React.Component<
           <div className="level active">4</div>
         </div>
         <div className="page-content-container">
-          <TextInput
-            className="numOfSiblings"
-            defaultValue={
-              this.state.numOfSiblings >= 0
-                ? this.state.numOfSiblings.toString()
-                : ""
-            }
-            type="number"
-            placeholder=""
-            title="כמה אחים ואחיות יש לך ?"
-            id="numOfSiblings"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              let numOfSiblings = parseInt(event.target.value);
-              if (!isNaN(numOfSiblings)) {
-                this.setState({ numOfSiblings: numOfSiblings });
-              }
-            }}
-          />
+          <div className={"siblings-container"}>
+            <div className={"siblings-body"}>
+              <Trans i18nKey={"familyTreePageSiblings.familyTreeSiblingsMessage"}>כמה אחים/אחיות יש לך ?</Trans>
+              <div className={"siblings-buttons"}>
+                <button
+                  className={"increase-button"}
+                  tabIndex={0}
+                  type={"button"}
+                  title={t("familyTreePageSiblings.familyTreeSiblingsIncreaseNumber", "להגדיל מספר אחים או אחיות באחד")}
+                  onClick={(event) => {
+                    console.log(event.target);
+                    this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings+1}));
+                  }}
+                >+</button>
+                <div className={"number-of-siblings"}>{this.state.numOfSiblings < 0 ? '-' : this.state.numOfSiblings}</div>
+                <button
+                  className={`decrease-button ${this.state.numOfSiblings < 1 ? "disabled-button" : ""}`}
+                  tabIndex={1}
+                  type={"button"}
+                  title={t("familyTreePageSiblings.familyTreeSiblingsDecreaseNumber", "להפחית מספר אחים או אחיות באחד")}
+                  onClick={(event) => {
+                    if (this.state.numOfSiblings > 0) {
+                      this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings-1}));
+                    }
+                  }}
+                >-</button>
+              </div>
+            </div>
+          </div>
           <div className="family-tree-body">
             {Object.keys(this.state.formsValidity).map(siblingId => {
               return (
                 <PersonDetailsForm
                   key={siblingId}
                   idPrefix={siblingId}
-                  title="אח/אחות"
+                  title={t("familyTreePageSiblings.familyTreeCurrentEntity", "אח/אחות")}
                   displayIsAlive
                   displayMaidenName
                   defaults={this.state.siblingsDetails[siblingId]}
@@ -144,12 +162,13 @@ class FamilyTreePageSiblings extends React.Component<
               );
             })}
           </div>
+          <div className="vertical-spacer"></div>
           <div className="family-tree-footer">
             <ProceedButton
               disabled={
-                Object.values(this.state.formsValidity).indexOf(false) >= 0
+                Object.values(this.state.formsValidity).indexOf(false) >= 0 || this.state.numOfSiblings < 0
               } // This expression return true if at least 1 of values in formsValidity dict is falsey
-              text="לסיום הקישו כאן"
+              text={t("familyTreePageSiblings.familyTreeSiblingsProceedButton", "לסיום הקישו כאן")}
               nextPageUrl="/family-tree/submit"
             />
           </div>
@@ -159,4 +178,5 @@ class FamilyTreePageSiblings extends React.Component<
   }
 }
 
+const FamilyTreePageSiblings = withTranslation()(FamilyTreePageSiblingsComponent);
 export { FamilyTreePageSiblings };

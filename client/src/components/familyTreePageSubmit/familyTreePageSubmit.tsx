@@ -3,27 +3,25 @@ import { History } from "history";
 import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
+import { i18n } from "../../i18n";
 
 import { Header } from "../header/header";
-import { PersonDetailsFormState } from "../personDetailsForm/personDetailsForm";
 import { Loader } from "../loader/loader";
+import {PersonDetails} from "../../contracts/personDetails";
+import {FamilyTreeJson} from "../../contracts/familyTreeJson";
 
 import "./familyTreePageSubmit.css";
+import {FamilyTreeApiRequest} from "../../contracts/familyTreeApiRequest";
 
-export interface FamilyTreePageSubmitProps {
+
+export interface FamilyTreePageSubmitProps extends WithTranslation {
   history?: History;
 }
 
 export interface FamilyTreePageSubmitState {
   httpRequestInProgress: boolean;
 }
-
-interface FamilyTreePersonJson extends PersonDetailsFormState {
-  ID: string;
-  siblings: string[];
-}
-
-type FamilyTreeJson = { [key: string]: FamilyTreePersonJson };
 
 class FamilyTreePageSubmitComponent extends React.Component<
   FamilyTreePageSubmitProps,
@@ -41,10 +39,10 @@ class FamilyTreePageSubmitComponent extends React.Component<
     this.props.history!.push("/family-tree/me");
   }
 
-  getStoredPersonDetails(key: string): PersonDetailsFormState | null {
+  getStoredPersonDetails(key: string): PersonDetails | null {
     let item = localStorage.getItem(key);
     if (item) {
-      let personDetails: PersonDetailsFormState = JSON.parse(item);
+      let personDetails: PersonDetails = JSON.parse(item);
       if (personDetails.isAlive) {
         delete personDetails.deathDate;
         delete personDetails.deathPlace;
@@ -85,7 +83,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     );
 
     let numOfSiblings = this.getStoredNumOfSiblings();
-    let siblingsDetails: PersonDetailsFormState[] = [];
+    let siblingsDetails: PersonDetails[] = [];
     for (let i = 0; i < numOfSiblings; i++) {
       let siblingKey = `sibling${i}`;
       let sibling = this.getStoredPersonDetails(siblingKey);
@@ -166,9 +164,15 @@ class FamilyTreePageSubmitComponent extends React.Component<
       siblingJson.siblings = siblingsIds.filter(id => id !== siblingId);
     }
 
+    const requestBody: FamilyTreeApiRequest = {
+      submitterEmail: window.localStorage.getItem("submitterEmail") || "",
+      familyTree: familyTreeJson,
+      language: i18n.language
+    };
+
     this.setState({ httpRequestInProgress: true });
     axios
-      .post("/api/family-tree/", familyTreeJson)
+      .post("/api/family-tree/", requestBody)
       .then(() => {
         this.clearStoredFamilyTreeData();
         this.props.history!.push("/thank-you");
@@ -183,28 +187,29 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="family-tree-submit-container">
         {this.state.httpRequestInProgress && <Loader />}
-        <Header title="סיימת את בניית עץ המשפחה שלך" />
+        <Header title={t("familyTreePageSubmit.header", "סיימת את בניית עץ המשפחה שלך")} />
         <div className="family-tree-submit-body page-content-container">
           <div className="pre-submittion-text">
-            זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין
-            שגיאה?
+            <Trans i18nKey={"familyTreePageSubmit.familyTreePreSubmissionMessage"}>זהו סיימת את בניית העץ, רוצה לעבור על הפרטים שמילאת, ולבדוק שאין </Trans>
+            <Trans i18nKey={"familyTreePageSubmit.familyTreePreSubmissionMessage2"}>שגיאה?</Trans>
           </div>
           <div className="choose-option">
             <button
               onClick={this.returnButtonHandler.bind(this)}
               className="option-yes option-button"
             >
-              חזרה
+              <Trans i18nKey={"familyTreePageSubmit.familyTreeReturnFormButton"}>חזרה</Trans>
             </button>
             <button
               disabled={this.state.httpRequestInProgress}
               onClick={this.submitButtonHandler.bind(this)}
               className="option-no option-button"
             >
-              שליחה
+              <Trans i18nKey={"familyTreePageSubmit.familyTreeSendFormButton"}>שליחה</Trans>
             </button>
           </div>
         </div>
@@ -213,7 +218,9 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 }
 
-const FamilyTreePageSubmit = (withRouter(
+const FamilyTreePageSubmit =
+  withTranslation()(
+    withRouter(
   FamilyTreePageSubmitComponent as any
-) as any) as React.ComponentClass<FamilyTreePageSubmitProps>;
+) as any as React.ComponentClass<FamilyTreePageSubmitProps>);
 export { FamilyTreePageSubmit };

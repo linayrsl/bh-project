@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import {i18n} from "i18next";
 
-import "./app.css";
-import "react-toastify/dist/ReactToastify.css";
 import { HomePage } from "./components/homePage/homePage";
 import { RegisterPage } from "./components/registerPage/registerPage";
 import { VerificationPage } from "./components/verificationPage/verificationPage";
@@ -13,42 +12,69 @@ import { FamilyTreePageFather } from "./components/familyTreePageFather/familyTr
 import { FamilyTreePageSiblings } from "./components/familyTreePageSiblings/familyTreePageSiblings";
 import { FamilyTreePageSubmit } from "./components/familyTreePageSubmit/familyTreePageSubmit";
 import { FamilyTreeThankYouPage } from "./components/familyTreeThankYouPage/familyTreeThankYouPage";
+import {PageNotFoundError} from "./components/pageNotFoundError/pageNotFoundError";
+import {ErrorBoundary} from "./components/errorBoundary/errorBoundary";
 
-class App extends Component {
+import "./app.scss";
+import "react-toastify/dist/ReactToastify.css";
+
+
+interface AppProps {
+  i18n: i18n
+}
+
+class App extends Component<AppProps> {
+  constructor(props: Readonly<AppProps>) {
+    super(props);
+    const language = props.i18n.language;
+    if (language === "en" && typeof window !== "undefined") {
+      window.document.title = "Family tree project of the Museum of the Jewish People at Beit Hatfutsot"
+    }
+  }
+
   render() {
+    const language = this.props.i18n.language;
+
+    let direction = "rtl";
+    if (language === "en") {
+      direction = "ltr";
+    }
+
     return (
-      <div className="bh-app">
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route exact path="/register">
-              <RegisterPage />
-            </Route>
-            <Route path="/verification/:email">
-              <VerificationPage />
-            </Route>
-            <Route exact path="/family-tree/me">
-              <FamilyTreePageSubmitter />
-            </Route>
-            <Route exact path="/family-tree/mother">
-              <FamilyTreePageMother />
-            </Route>
-            <Route exact path="/family-tree/father">
-              <FamilyTreePageFather />
-            </Route>
-            <Route exact path="/family-tree/siblings">
-              <FamilyTreePageSiblings />
-            </Route>
-            <Route exact path="/family-tree/submit">
-              <FamilyTreePageSubmit />
-            </Route>
-            <Route exact path="/thank-you">
-              <FamilyTreeThankYouPage />
-            </Route>
-            <Route render={() => <div>Page Not Found</div>} />
-          </Switch>
+      <div dir={direction} className="bh-app">
+        <BrowserRouter basename={language === "en" ? "/en" : "/"}>
+          <ErrorBoundary>
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route exact path="/register">
+                <RegisterPage />
+              </Route>
+              <Route path="/verification/:email">
+                <VerificationPage />
+              </Route>
+              <Route exact path="/family-tree/me">
+                <FamilyTreePageSubmitter />
+              </Route>
+              <Route exact path="/family-tree/mother">
+                <FamilyTreePageMother />
+              </Route>
+              <Route exact path="/family-tree/father">
+                <FamilyTreePageFather />
+              </Route>
+              <Route exact path="/family-tree/siblings">
+                <FamilyTreePageSiblings />
+              </Route>
+              <Route exact path="/family-tree/submit">
+                <FamilyTreePageSubmit />
+              </Route>
+              <Route exact path="/thank-you">
+                <FamilyTreeThankYouPage />
+              </Route>
+              <Route render={() => <PageNotFoundError />} />
+            </Switch>
+          </ErrorBoundary>
         </BrowserRouter>
         <ToastContainer
           position="bottom-right"

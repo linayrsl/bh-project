@@ -33,6 +33,10 @@
   font-family: "Assistant", cursive;
 }
 
+[dir=ltr] .text-input-container input {
+  text-align: right;
+}
+
 .text-input-container input:-webkit-autofill,
 .text-input-container input:-webkit-autofill:hover,
 .text-input-container input:-webkit-autofill:focus,

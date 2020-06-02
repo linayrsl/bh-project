@@ -1,12 +1,15 @@
-import * as React from "react";
-import axios from "axios";
-import { TextInput } from "../textInput/textInput";
 import _ from "lodash";
+import * as React from "react";
+import { TextInput } from "../textInput/textInput";
+import {ImageInput} from "../imageInput/imageInput";
+import {DateInput} from "../dateInput/dateInput";
+import {Gender} from "../../contracts/gender";
+import {PersonDetails} from "../../contracts/personDetails";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
+
 import "./personDetailsForm.css";
 
-export type Gender = "male" | "female" | "other";
-
-export interface PersonDetailsFormProps {
+export interface PersonDetailsFormProps extends WithTranslation {
   idPrefix: string;
   displayIsAlive?: boolean;
   displayMaidenName?: boolean;
@@ -19,23 +22,10 @@ export interface PersonDetailsFormProps {
   onFormValidityChange: (isValid: boolean) => void;
 }
 
-export interface PersonDetailsFormState {
-  image: string | null;
-  firstName: string | null;
-  lastName: string | null;
-  maidenName: string | null;
-  birthDate: string | null;
-  birthPlace: string | null;
-  gender: Gender | null;
-  motherID: string | null;
-  fatherID: string | null;
-  isAlive: boolean | null;
-  deathPlace: string | null;
-  deathDate: string | null;
-  isSubmitter: boolean;
+export interface PersonDetailsFormState extends PersonDetails {
 }
 
-class PersonDetailsForm extends React.Component<
+class PersonDetailsFormComponent extends React.Component<
   PersonDetailsFormProps,
   PersonDetailsFormState
 > {
@@ -82,10 +72,8 @@ class PersonDetailsForm extends React.Component<
     let pattern2 = /^[0-9]{4}$/g;
     let matchFullDate = date.match(pattern1);
     let matchYear = date.match(pattern2);
-    if (!matchFullDate && !matchYear) {
-      return false;
-    }
-    return true;
+
+    return !(!matchFullDate && !matchYear);
   }
 
   isFormValid(): boolean {
@@ -108,90 +96,66 @@ class PersonDetailsForm extends React.Component<
     return true;
   }
 
-  imageChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    let fileList = event.target.files;
-    if (fileList && fileList.length > 0) {
-      let image = fileList[0];
-      if (image) {
-        this.setState({ image: "" });
-        axios
-          .post<{
-            resizedImageB64: string;
-          }>("/api/resize-image/", image)
-          .then(response => {
-            if (response && response.data && response.data.resizedImageB64) {
-              this.setState({ image: response.data.resizedImageB64 });
-            }
-          });
-      }
-    }
-  }
-
   render() {
+    const t = this.props.t;
     return (
       <div className="person-details-container">
         <div className="person-details">
-          <form>
+          <form noValidate={true}>
             <div className="person-details-header">
               <span>{this.props.title}:</span>
-              <div className="image-input">
-                <label htmlFor={`${this.props.idPrefix}_person`}>
-                  הוסיפו תמונה
-                </label>
-                <input
-                  onChange={this.imageChangeHandler.bind(this)}
-                  id={`${this.props.idPrefix}_person`}
-                  className="person-details-image-input"
-                  type="file"
-                  placeholder="הוסיפו תמונה"
-                  accept="image/jpeg"
-                />
-                <div className="image-location">
-                  {this.state.image && (
-                    <img src={`data:image/jpeg;base64,${this.state.image}`} />
-                  )}
-                </div>
-              </div>
+              <ImageInput
+                id={`${this.props.idPrefix}_person`}
+                defaultValue={this.state.image || undefined}
+                onChange={image => this.setState({ image: image })}/>
             </div>
             <div className="person-details-inner-container">
               <TextInput
                 defaultValue={this.state.firstName ? this.state.firstName : ""}
-                title="שם פרטי"
+                title={t("personDetailsForm.personDetailsName", "שם פרטי")}
                 id={`${this.props.idPrefix}_firstName`}
                 type="text"
-                placeholder="לחצו להוספה"
+                placeholder={t("personDetailsForm.personDetailsNamePlaceholder", "לחצו להוספה")}
                 onChange={event => {
                   this.setState({ firstName: event.target.value });
                 }}
+                required={this.state.isSubmitter}
               />
               <TextInput
                 defaultValue={this.state.lastName ? this.state.lastName : ""}
-                title="שם משפחה"
+                title={t("personDetailsForm.personDetailsLastName", "שם משפחה")}
                 id={`${this.props.idPrefix}_lastName`}
                 type="text"
-                placeholder="לחצו להוספה"
+                placeholder={t("personDetailsForm.personDetailsLastNamePlaceholder", "לחצו להוספה")}
                 onChange={event => {
                   this.setState({ lastName: event.target.value });
                 }}
+                required={this.state.isSubmitter}
               />
               {this.props.displayMaidenName && (
                 <TextInput
                   defaultValue={
                     this.state.maidenName ? this.state.maidenName : ""
                   }
-                  title="שם נעורים"
+                  title={t("personDetailsForm.personDetailsMaidenName", "שם נעורים")}
                   id={`${this.props.idPrefix}_maidenName`}
                   type="text"
-                  placeholder="לחצו להוספה"
+                  placeholder={t("personDetailsForm.personDetailsMaidenNamePlaceholder", "לחצו להוספה")}
                   onChange={event => {
                     this.setState({ maidenName: event.target.value });
                   }}
                 />
               )}
               <div className="gender">
-                <div className="gender-options">מין</div>
+                <div className="gender-options">
+                  {this.state.isSubmitter &&
+                  <span className={"mandatory-field-indicator"}>*</span>}
+                  <Trans i18nKey={"personDetailsForm.personDetailsGender"}>מין</Trans>
+                </div>
                 <div className="gender-options-buttons">
-                  <label htmlFor={`${this.props.idPrefix}_male`}>זכר</label>
+                  <label htmlFor={`${this.props.idPrefix}_male`}>
+                    <Trans i18nKey={"personDetailsForm.personDetailsMalePlaceholder"}>זכר</Trans>
+                  </label>
                   <input
                     checked={this.state.gender === "male"}
                     type="radio"
@@ -201,7 +165,9 @@ class PersonDetailsForm extends React.Component<
                     onChange={event => {
                       this.setState({ gender: event.target.value as Gender });
                     }} />
-                  <label htmlFor={`${this.props.idPrefix}_female`}>נקבה</label>
+                  <label htmlFor={`${this.props.idPrefix}_female`}>
+                   <Trans i18nKey={"personDetailsForm.personDetailsFemalePlaceholder"}> נקבה</Trans>
+                  </label>
                   <input
                     checked={this.state.gender === "female"}
                     type="radio"
@@ -211,7 +177,9 @@ class PersonDetailsForm extends React.Component<
                     onChange={event => {
                       this.setState({ gender: event.target.value as Gender });
                     }} />
-                  <label htmlFor={`${this.props.idPrefix}_other`}>אחר</label>
+                  <label htmlFor={`${this.props.idPrefix}_other`}>
+                    <Trans i18nKey={"personDetailsForm.personDetailsOtherPlaceholder"}>אחר</Trans>
+                  </label>
                   <input
                     checked={this.state.gender === "other"}
                     type="radio"
@@ -223,25 +191,22 @@ class PersonDetailsForm extends React.Component<
                     }} />
                 </div>
               </div>
-              <TextInput
-                validateRegex={/^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/}
+              <DateInput
                 defaultValue={this.state.birthDate ? this.state.birthDate : ""}
-                title="תאריך לידה"
+                title={t("personDetailsForm.personDetailsBirthDate", "תאריך לידה")}
                 id={`${this.props.idPrefix}_birthDate`}
-                type="text"
-                placeholder="YYYY או DD/MM/YYYY"
-                onChange={event => {
-                  this.setState({ birthDate: event.target.value });
+                onChange={value => {
+                  this.setState({ birthDate: value });
                 }}
               />
               <TextInput
                 defaultValue={
                   this.state.birthPlace ? this.state.birthPlace : ""
                 }
-                title="מקום לידה"
+                title={t("personDetailsForm.personDetailsBirthPlace", "מקום לידה")}
                 id={`${this.props.idPrefix}_birthPlace`}
                 type="text"
-                placeholder="עיר או/ו מדינה"
+                placeholder={t("personDetailsForm.personDetailsBirthPlacePlaceholder", "עיר או/ו מדינה")}
                 onChange={event => {
                   this.setState({ birthPlace: event.target.value });
                 }}
@@ -249,7 +214,7 @@ class PersonDetailsForm extends React.Component<
               {this.props.displayIsAlive && (
                 <div className="alive-checkbox">
                   <label htmlFor={`${this.props.idPrefix}_isAlive`}>
-                    חי/חיה
+                    <Trans i18nKey={"personDetailsForm.personDetailsIsAlive"}>חי/חיה</Trans>
                   </label>
                   <input
                     checked={
@@ -264,17 +229,12 @@ class PersonDetailsForm extends React.Component<
                 </div>
               )}
               {!this.state.isAlive && (
-                <TextInput
-                  validateRegex={/^(\d{2}\/\d{2}\/\d{4}|[0-9]{4})$/}
-                  defaultValue={
-                    this.state.deathDate ? this.state.deathDate : ""
-                  }
-                  title="תאריך פטירה"
+                <DateInput
+                  defaultValue={this.state.deathDate ? this.state.deathDate : ""}
+                  title={t("personDetailsForm.personDetailsDeathDate", "תאריך פטירה")}
                   id={`${this.props.idPrefix}_deathDate`}
-                  type="text"
-                  placeholder="YYYY או DD/MM/YYYY"
-                  onChange={event => {
-                    this.setState({ deathDate: event.target.value });
+                  onChange={value => {
+                    this.setState({ deathDate: value });
                   }}
                 />
               )}
@@ -283,10 +243,10 @@ class PersonDetailsForm extends React.Component<
                   defaultValue={
                     this.state.deathPlace ? this.state.deathPlace : ""
                   }
-                  title="מקום פטירה"
+                  title={t("personDetailsForm.personDetailsDeathPlace", "מקום פטירה")}
                   id={`${this.props.idPrefix}_deathPlace`}
                   type="text"
-                  placeholder="עיר או/ו מדינה"
+                  placeholder={t("personDetailsForm.personDetailsDeathPlacePlaceholder", "עיר או/ו מדינה")}
                   onChange={event => {
                     this.setState({ deathPlace: event.target.value });
                   }}
@@ -300,4 +260,5 @@ class PersonDetailsForm extends React.Component<
   }
 }
 
+const PersonDetailsForm = withTranslation()(PersonDetailsFormComponent);
 export { PersonDetailsForm };

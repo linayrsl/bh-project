@@ -1,5 +1,6 @@
 import * as React from "react";
 
+
 import "./textInput.css";
 
 export interface TextInputProps {
@@ -17,13 +18,15 @@ export interface TextInputProps {
 
 export interface TextInputState {
   isValid: boolean;
+  wasInvalidBefore: boolean;
 }
 
 class TextInput extends React.Component<TextInputProps, TextInputState> {
   constructor(props: TextInputProps) {
     super(props);
     this.state = {
-      isValid: true
+      isValid: true,
+      wasInvalidBefore: false
     };
   }
 
@@ -40,7 +43,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
     if (!value || value.match(this.props.validateRegex)) {
       this.setState({ isValid: true });
     } else {
-      this.setState({ isValid: false });
+      this.setState({ isValid: false, wasInvalidBefore: true});
     }
   }
 
@@ -57,9 +60,15 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
           {this.props.title}
         </label>
         <input
+          className={'person-details-form-style'}
           defaultValue={this.props.defaultValue}
-          onChange={event => {
+          onBlur={event => {
             this.validateInput(event.target.value);
+          }}
+          onChange={event => {
+            if (this.state.wasInvalidBefore) {
+              this.validateInput(event.target.value);
+            }
             this.props.onChange(event);
           }}
           id={this.props.id}

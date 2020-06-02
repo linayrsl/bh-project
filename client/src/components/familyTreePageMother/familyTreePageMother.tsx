@@ -4,9 +4,10 @@ import {
   PersonDetailsForm,
   PersonDetailsFormState
 } from "../personDetailsForm/personDetailsForm";
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 import { ProceedButton } from "../proceedButton/proceedButton";
 
-export interface FamilyTreePageMotherProps {}
+export interface FamilyTreePageMotherProps  extends WithTranslation {}
 
 export interface FamilyTreePageMotherState {
   motherDetails?: PersonDetailsFormState;
@@ -17,7 +18,7 @@ export interface FamilyTreePageMotherState {
   fatherOfMotherFormValid: boolean;
 }
 
-class FamilyTreePageMother extends React.Component<
+class FamilyTreePageMotherComponent extends React.Component<
   FamilyTreePageMotherProps,
   FamilyTreePageMotherState
 > {
@@ -57,9 +58,10 @@ class FamilyTreePageMother extends React.Component<
   }
 
   render() {
+    const t = this.props.t;
     return (
       <div className="family-tree-container">
-        <Header title="הצד של אמא  2/4" />
+        <Header title={t("familyTreePageMother.header", "הצד של אמא  2/4")} />
         <div className="progress-scale">
           <div className="level active">1</div>
           <div className="level active">2</div>
@@ -69,7 +71,7 @@ class FamilyTreePageMother extends React.Component<
         <div className="family-tree-body page-content-container ">
           <PersonDetailsForm
             idPrefix="mother"
-            title="אמא"
+            title={t("familyTreePageMother.familyTreeCurrentEntity", "אמא")}
             displayIsAlive
             displayMaidenName
             defaults={this.state.motherDetails}
@@ -83,7 +85,7 @@ class FamilyTreePageMother extends React.Component<
           />
           <PersonDetailsForm
             idPrefix="mother-of-mother"
-            title="אמא של אמא"
+            title={t("familyTreePageMother.familyTreeMothersMother", "אמא של אמא")}
             displayIsAlive
             displayMaidenName
             defaults={this.state.motherOfMotherDetails}
@@ -97,7 +99,7 @@ class FamilyTreePageMother extends React.Component<
           />
           <PersonDetailsForm
             idPrefix="father-of-mother"
-            title="אבא של אמא"
+            title={t("familyTreePageMother.familyTreeMothersFather", "אבא של אמא")}
             displayIsAlive
             displayMaidenName
             defaults={this.state.fatherOfMotherDetails}
@@ -116,7 +118,7 @@ class FamilyTreePageMother extends React.Component<
                 !this.state.motherOfMotherFormValid ||
                 !this.state.fatherOfMotherFormValid
               }
-              text="המשיכו"
+              text={t("familyTreePageMother.familyTreeProceedButton", "המשיכו")}
               nextPageUrl="/family-tree/father"
             />
           </div>
@@ -126,4 +128,5 @@ class FamilyTreePageMother extends React.Component<
   }
 }
 
+const FamilyTreePageMother = withTranslation()(FamilyTreePageMotherComponent);
 export { FamilyTreePageMother };

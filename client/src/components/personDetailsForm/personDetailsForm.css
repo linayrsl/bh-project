@@ -3,10 +3,6 @@
   padding-left: 10px;
 }
 
-.person-details input.person-details-image-input {
-  display: none;
-}
-
 .person-details-header {
   display: flex;
   justify-content: space-between;
@@ -32,34 +28,6 @@
   line-height: 35px;
 }
 
-.image-input {
-  width: 128px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-location {
-  width: 128px;
-  height: 128px;
-  background-size: 128px 128px;
-  background-position: center;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid #cccbcb;
-  position: absolute;
-  z-index: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-location img {
-  height: 128px;
-}
-
 .gender {
   display: flex;
   justify-content: space-between;
@@ -69,6 +37,15 @@
 
 .gender .gender-options, .gender label {
   line-height: 35px;
+}
+
+/*[dir=ltr] .gender-options-buttons {*/
+/*  direction: rtl;*/
+/*}*/
+
+[dir=ltr] .gender-options-buttons label {
+  margin-left: 10px;
+  margin-right: 0;
 }
 
 .gender-options-buttons label {
@@ -100,6 +77,11 @@
   font-size: 20px;
   padding-left: 10px;
   line-height: 35px;
+}
+
+[dir=ltr] .alive-checkbox label {
+  padding-left: 0;
+  padding-right: 10px;
 }
 
 .alive-checkbox input {

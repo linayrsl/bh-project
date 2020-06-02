@@ -79,7 +79,8 @@ def register_post():
     if not register_info_json["email"] or \
        not register_info_json["phone"] or \
        not register_info_json["firstName"] or \
-       not register_info_json["lastName"]:
+       not register_info_json["lastName"] or \
+       not register_info_json["language"]:
         logger.info("Request missing one or more of the following values: email, phone, first name or last name")
         return abort(400, description="Request missing one or more values")
 
@@ -88,9 +89,10 @@ def register_post():
     last_name = register_info_json["lastName"]
     email = register_info_json["email"]
     phone = register_info_json["phone"]
+    language = register_info_json["language"]
     logger.info("Generated verification code")
 
-    if not send_verification_code_to_mail(verification_code, email):
+    if not send_verification_code_to_mail(verification_code, email, language):
         logger.error("Failed to send email with verification code: {}".format(email))
         return abort(500, description="Wasn't able to send email to {}".format(email))
 
@@ -125,12 +127,13 @@ def generate_verification_code() -> str:
     return verification_code
 
 
-def send_verification_code_to_mail(verification_code: str, to_email: str) -> bool:
+def send_verification_code_to_mail(verification_code: str, to_email: str, language: str) -> bool:
     email = Email(SENDGRID_API_KEY,
                   GEDCOM_EMAIL_FROM,
                   None,
                   None,
-                  None)
+                  None,
+                  language=language)
 
     return email.send_verification_code(to_email, verification_code)
 

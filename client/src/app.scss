@@ -1,5 +1,11 @@
 body {
   background-color: #f9f9f9;
+
+  &.mobile-no-scroll {
+    @media only screen and (max-width: 450px) {
+      overflow: hidden;
+    }
+  }
 }
 
 .bh-app {
@@ -13,11 +19,15 @@ body {
   flex: 1;
 }
 
+.page-content-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 @media only screen and (min-width: 768px) {
   .page-content-container {
     width: 768px;
-    display: flex;
     align-self: center;
-    flex-direction: column;
   }
 }
