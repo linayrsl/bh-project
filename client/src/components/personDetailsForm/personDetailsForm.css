@@ -21,7 +21,7 @@
 }
 
 .person-details-header label {
-  color: darkgrey;
+  color: #686868;
   font-size: 18px;
   text-decoration: underline;
   z-index: 1;
@@ -39,23 +39,19 @@
   line-height: 35px;
 }
 
-/*[dir=ltr] .gender-options-buttons {*/
-/*  direction: rtl;*/
-/*}*/
-
 [dir=ltr] .gender-options-buttons label {
   margin-left: 10px;
   margin-right: 0;
 }
 
 .gender-options-buttons label {
-  color: grey;
+  color: #686868;
   font-size: 18px;
   margin-right: 10px;
 }
 
 .gender-options-buttons .gender-text {
-  color: darkgrey;
+  color: #686868;
   font-size: 18px;
   padding-left: 10px;
 }
