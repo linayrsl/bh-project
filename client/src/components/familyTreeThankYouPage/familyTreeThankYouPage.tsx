@@ -58,7 +58,15 @@ class FamilyTreeThankYouPageComponent extends React.Component<
         <div className="family-tree-thanks-body">
           <div className="text-first-part">
             <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage"}><p>תודה רבה!</p></Trans>
-            <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage2"}><p>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי. ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.</p></Trans>
+            <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage2"}>
+              <p>
+                העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי.
+              <span className={"thank-you-page-highlight"}>
+                ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.
+              </span>
+              </p>
+            </Trans>
+            <span className={"thank-you-page-highlight"}><Trans i18nKey={"familyTreeThankYouPage.thankYouMessage2_5"}></Trans></span>
             <p>
               <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage3"}>אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד, </Trans>
               <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage4"}>לחקור ולהיות חלק מהסיפור.</Trans>

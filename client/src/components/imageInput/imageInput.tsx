@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 // @ts-ignore
 import {readAndCompressImage} from "browser-image-resizer";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
-import "./imageInput.css";
+import "./imageInput.scss";
 
 interface ImageInputProps extends WithTranslation {
   id: string;

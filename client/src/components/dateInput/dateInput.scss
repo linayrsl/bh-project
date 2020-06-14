@@ -143,7 +143,7 @@
   background-color: #f9f9f9;
 
   text-align: left;
-  color: darkgrey;
+  color: #686868;
   font-size: 18px;
   font-family: "Assistant", serif ;
 }
@@ -157,7 +157,7 @@
 }
 
 .date-input-container input.date-input-input::placeholder {
-  color: darkgrey;
+  color: #686868;
   opacity: 1;
 }
 
@@ -251,6 +251,10 @@
     input {
       height: 20px;
       border: 0.5px solid lightgray;
+
+      &::placeholder {
+        color: #686868;
+      }
     }
   }
   .date-calendar {

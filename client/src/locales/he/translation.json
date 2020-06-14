@@ -55,6 +55,8 @@
     "personDetailsLastName": "שם משפחה",
     "personDetailsLastNamePlaceholder": "לחצו להוספה",
     "personDetailsMaidenName": "שם נעורים",
+    "personDetailsFormerName": "שם קודם",
+    "personDetailsDefaultName": "שם נעורים/שם קודם",
     "personDetailsMaidenNamePlaceholder": "לחצו להוספה",
     "personDetailsGender": "מין",
     "personDetailsMalePlaceholder": "זכר",
@@ -100,7 +102,8 @@
   "familyTreeThankYouPage": {
     "header": "העץ שלך נשמר",
     "thankYouMessage": "<0>תודה רבה!</0>",
-    "thankYouMessage2": "<0>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי. ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.</0>",
+    "thankYouMessage2": "<0>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי. <1> ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.</1></0>",
+    "thankYouMessage2_5": "",
     "thankYouMessage3": "אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד, ",
     "thankYouMessage4": "לחקור ולהיות חלק מהסיפור.",
     "linkSharingOptionsMessage": "רוצה לשתף:",
