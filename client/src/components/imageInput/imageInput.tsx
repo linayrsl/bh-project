@@ -4,6 +4,7 @@ import {toast} from "react-toastify";
 import {readAndCompressImage} from "browser-image-resizer";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 import "./imageInput.scss";
+import ImageManipulation from "./imageManipulation/imageManipulation";
 
 interface ImageInputProps extends WithTranslation {
   id: string;
@@ -12,6 +13,7 @@ interface ImageInputProps extends WithTranslation {
 }
 
 interface ImageInputState {
+  rawImage: string | null;
   image: string | null;
   isWideImage: boolean;
 }
@@ -22,6 +24,7 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     super(props);
 
     this.state = {
+      rawImage: null,
       image: props.defaultValue || null,
       isWideImage: false
     };
@@ -84,7 +87,7 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
             let reader = new FileReader();
             reader.onload = () => {
               if (reader.result) {
-                this.setState({ image: reader.result!.toString().replace("data:image/jpeg;base64,", "")});
+                this.setState({ rawImage: reader.result!.toString()});
               }
               else {
                 toast.error("לא ניתן להטעין את התמונה שנבחרה");
@@ -123,6 +126,10 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
               src={`data:image/jpeg;base64,${this.state.image}`} />
           )}
         </div>
+        {this.state.rawImage &&
+        <ImageManipulation
+          rawImage={this.state.rawImage}
+          onFinished={(image) => this.setState({ image: image.replace("data:image/jpeg;base64,", ""), rawImage: null}) }/>}
       </div>
     );
   }
