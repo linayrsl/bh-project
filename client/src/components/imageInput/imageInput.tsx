@@ -75,7 +75,6 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     if (fileList && fileList.length > 0) {
       let image = fileList[0];
       if (image) {
-        //this.setState({ image: "" });
 
         const configImage = {
           quality: 0.8,
