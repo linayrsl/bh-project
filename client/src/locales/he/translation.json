@@ -47,7 +47,11 @@
   },
   "imageInput": {
     "imageInputDirectionsAdd": "הוסיפו תמונה",
-    "imageInputDirectionsChange": "החליפו תמונה"
+    "imageInputDirectionsChange": "החליפו תמונה",
+    "ImageCropText": "ניתן לחתוך את התמונה אם צריך",
+    "ImageCropAcceptButton": "אישור",
+    "ImageCropCancelButton": "ביטול"
+
   },
   "personDetailsForm": {
     "personDetailsName": "שם פרטי",
