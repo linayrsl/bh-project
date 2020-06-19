@@ -16,6 +16,7 @@ interface ImageInputState {
   rawImage: string | null;
   image: string | null;
   isWideImage: boolean;
+  isProcessingImage: boolean;
 }
 
 class ImageInputComponent extends React.Component<ImageInputProps, ImageInputState> {
@@ -26,7 +27,8 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     this.state = {
       rawImage: null,
       image: props.defaultValue || null,
-      isWideImage: false
+      isWideImage: false,
+      isProcessingImage: false
     };
   }
 
@@ -73,7 +75,6 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     if (fileList && fileList.length > 0) {
       let image = fileList[0];
       if (image) {
-        this.setState({ image: "" });
 
         const configImage = {
           quality: 0.8,
@@ -82,6 +83,7 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
           autoRotate: true,
           debug: false
         };
+        this.setState({isProcessingImage: true});
         readAndCompressImage(image, configImage)
           .then((resizedImage: Blob) => {
             let reader = new FileReader();
@@ -110,6 +112,7 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
           {this.state.image ? t("imageInput.imageInputDirectionsChange", "החליפו תמונה") : t("imageInput.imageInputDirectionsAdd", "הוסיפו תמונה")}
         </label>
         <input
+          disabled={this.state.isProcessingImage}
           onChange={
             this.imageChangeHandler.bind(this)
           }
@@ -129,7 +132,9 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
         {this.state.rawImage &&
         <ImageManipulation
           rawImage={this.state.rawImage}
-          onFinished={(image) => this.setState({ image: image.replace("data:image/jpeg;base64,", ""), rawImage: null}) }/>}
+          onFinished={(image: string) => this.setState({ image: image.replace("data:image/jpeg;base64,", ""), rawImage: null, isProcessingImage:  false}) }
+          onCanceled={() => this.setState({rawImage: null, isProcessingImage:  false})}
+        />}
       </div>
     );
   }

@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
+import {Trans, WithTranslation, withTranslation} from 'react-i18next';
+
 import "./imageManipulation.scss";
 import 'react-image-crop/lib/ReactCrop.scss';
 
 interface ImageManipulationProps {
   rawImage: string;
   onFinished: (resizedImage: string) => void;
+  onCanceled: (rawImage: string) => void;
 }
 
 function getCroppedImg(image: HTMLImageElement , crop: Crop): string {
@@ -33,26 +36,47 @@ function getCroppedImg(image: HTMLImageElement , crop: Crop): string {
   return canvas.toDataURL("image/jpeg");
 }
 
+
+
 function ImageManipulation(props: ImageManipulationProps) {
   const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null);
   const [crop, setCrop] = useState<Crop>({
     unit: '%',
-    width: 30,
-    aspect: 16 / 9,
+    width: 100,
+    height: 100,
   });
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className={"imageManipulation"}>
+      <div className={"imageContainer"}>
+      <div className={"imageEditingText"}>
+        <Trans i18nKey={"imageInput.ImageCropText"}>ניתן לחתוך את התמונה אם צריך</Trans>
+      </div>
       <ReactCrop
         src={props.rawImage}
         crop={crop}
         onChange={(newCrop) => setCrop(newCrop)}
         onImageLoaded={(image) => setImageRef(image)}/>
-      {imageRef && <button onClick={() => {
-        const resizedImage = getCroppedImg(imageRef, crop);
-        console.log(resizedImage);
-        props.onFinished(resizedImage);
-      }}>Accept</button>}
+
+        <div className={"editImageButtons"}>{imageRef && <button className={"accept"} onClick={() => {
+          const resizedImage = getCroppedImg(imageRef, crop);
+          console.log(resizedImage);
+          props.onFinished(resizedImage);
+        }}>
+          <Trans i18nKey={"imageInput.ImageCropAcceptButton"}>אישור</Trans>
+        </button>}
+          <button onClick={() => props.onCanceled(props.rawImage)}>
+            <Trans i18nKey={"imageInput.ImageCropCancelButton"}>ביטול</Trans>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

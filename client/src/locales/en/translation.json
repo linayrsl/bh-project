@@ -47,7 +47,10 @@
   },
   "imageInput": {
     "imageInputDirectionsAdd": "Add a photo",
-    "imageInputDirectionsChange": "Replace a photo"
+    "imageInputDirectionsChange": "Replace a photo",
+    "ImageCropText": "You can crop the image if necessary",
+    "ImageCropAcceptButton": "Accept",
+    "ImageCropCancelButton": "Cancel"
   },
   "personDetailsForm": {
     "personDetailsName": "First name",
