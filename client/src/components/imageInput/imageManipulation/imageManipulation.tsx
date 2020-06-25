@@ -67,7 +67,6 @@ function ImageManipulation(props: ImageManipulationProps) {
 
         <div className={"editImageButtons"}>{imageRef && <button className={"accept"} onClick={() => {
           const resizedImage = getCroppedImg(imageRef, crop);
-          console.log(resizedImage);
           props.onFinished(resizedImage);
         }}>
           <Trans i18nKey={"imageInput.ImageCropAcceptButton"}>אישור</Trans>
