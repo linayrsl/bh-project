@@ -54,22 +54,22 @@ def manifest():
 
 @application.route("/favicon.ico")
 def favicon():
-    return application.send_static_file("favicon.ico")@application.route("/favicon.ico")
+    return application.send_static_file("favicon.ico")
 
 
 @application.route("/logo192.png")
 def logo192():
-    return application.send_static_file("/logo192.png")
+    return application.send_static_file("logo192.png")
 
 
 @application.route("/logo512.png")
 def logo512():
-    return application.send_static_file("/logo512.png")
+    return application.send_static_file("logo512.png")
 
 
 @application.route("/robots.txt")
 def robots():
-    return application.send_static_file("/robots.txt")
+    return application.send_static_file("robots.txt")
 
 
 application.register_blueprint(
