@@ -42,14 +42,34 @@ if not CI:
 RequestID(application)
 
 
-@application.route('/')
+@application.route("/")
 def root():
     return application.send_static_file("index.html")
 
 
-@application.route('/manifest.json')
+@application.route("/manifest.json")
 def manifest():
     return application.send_static_file("manifest.json")
+
+
+@application.route("/favicon.ico")
+def favicon():
+    return application.send_static_file("favicon.ico")
+
+
+@application.route("/logo192.png")
+def logo192():
+    return application.send_static_file("logo192.png")
+
+
+@application.route("/logo512.png")
+def logo512():
+    return application.send_static_file("logo512.png")
+
+
+@application.route("/robots.txt")
+def robots():
+    return application.send_static_file("robots.txt")
 
 
 application.register_blueprint(
