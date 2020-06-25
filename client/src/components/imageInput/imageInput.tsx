@@ -1,10 +1,9 @@
 import * as React from "react";
-import {toast} from "react-toastify";
-// @ts-ignore
-import {readAndCompressImage} from "browser-image-resizer";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 import "./imageInput.scss";
 import ImageManipulation from "./imageManipulation/imageManipulation";
+import loadImage from "blueimp-load-image";
+
 
 interface ImageInputProps extends WithTranslation {
   id: string;
@@ -76,30 +75,21 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
       let image = fileList[0];
       if (image) {
 
-        const configImage = {
-          quality: 0.8,
+        const configImage: any = {
           maxWidth: 800,
           maxHeight: 600,
-          autoRotate: true,
-          debug: false
+          canvas: true
         };
         this.setState({isProcessingImage: true});
-        readAndCompressImage(image, configImage)
-          .then((resizedImage: Blob) => {
-            let reader = new FileReader();
-            reader.onload = () => {
-              if (reader.result) {
-                this.setState({ rawImage: reader.result!.toString()});
-              }
-              else {
-                toast.error("לא ניתן להטעין את התמונה שנבחרה");
-              }
-            };
-            reader.onerror = () => {
-              toast.error("לא ניתן להטעין את התמונה שנבחרה");
-            };
-            reader.readAsDataURL(resizedImage);
-          });
+
+
+        loadImage(
+          image,
+          // @ts-ignore
+          (canvas: HTMLCanvasElement) => {
+            this.setState({ rawImage: canvas.toDataURL()});
+          },
+          configImage);
       }
     }
   }
