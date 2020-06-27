@@ -33,7 +33,7 @@ application.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 extended_csp = GOOGLE_CSP_POLICY.copy()
 extended_csp["script-src"] += " 'unsafe-inline'"
 extended_csp["style-src"] += " 'unsafe-inline'"
-extended_csp["img-src"] = "'self' data:"
+extended_csp["img-src"] = "'self' blob: data:"
 
 if not CI:
     CORS(application)
