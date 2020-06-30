@@ -50,7 +50,8 @@
     "imageInputDirectionsChange": "החליפו תמונה",
     "ImageCropText": "ניתן לחתוך את התמונה אם צריך",
     "ImageCropAcceptButton": "אישור",
-    "ImageCropCancelButton": "ביטול"
+    "ImageCropCancelButton": "ביטול",
+    "ImageRotateButton": "סובב"
 
   },
   "personDetailsForm": {

@@ -11,6 +11,38 @@ interface ImageManipulationProps {
   onCanceled: (rawImage: string) => void;
 }
 
+function rotateImage(rawImage: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+
+      const width = canvas.width;
+      const height = canvas.height;
+
+      canvas.width = height;
+      canvas.height = width;
+
+      ctx!.translate(canvas.width, canvas.height / canvas.width);
+      ctx!.rotate(Math.PI / 2);
+      ctx!.drawImage(image,0,0);
+
+      resolve(canvas.toDataURL());
+    };
+
+    image.onerror = function(error) {
+      reject(error);
+    }
+
+    image.src = rawImage;
+  });
+}
+
 function getCroppedImg(image: HTMLImageElement , crop: Crop): string {
   const canvas: HTMLCanvasElement = document.createElement('canvas');
   const scaleX = image.naturalWidth / image.width;
@@ -36,10 +68,9 @@ function getCroppedImg(image: HTMLImageElement , crop: Crop): string {
   return canvas.toDataURL("image/jpeg");
 }
 
-
-
 function ImageManipulation(props: ImageManipulationProps) {
   const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null);
+  const [rawImage, setRawImage] = useState(props.rawImage);
   const [crop, setCrop] = useState<Crop>({
     unit: '%',
     width: 100,
@@ -60,19 +91,37 @@ function ImageManipulation(props: ImageManipulationProps) {
         <Trans i18nKey={"imageInput.ImageCropText"}>ניתן לחתוך את התמונה אם צריך</Trans>
       </div>
       <ReactCrop
-        src={props.rawImage}
+        className={"componentContainer"}
+        src={rawImage}
         crop={crop}
         onChange={(newCrop) => setCrop(newCrop)}
         onImageLoaded={(image) => setImageRef(image)}/>
 
-        <div className={"editImageButtons"}>{imageRef && <button className={"accept"} onClick={() => {
-          const resizedImage = getCroppedImg(imageRef, crop);
-          props.onFinished(resizedImage);
-        }}>
-          <Trans i18nKey={"imageInput.ImageCropAcceptButton"}>אישור</Trans>
-        </button>}
-          <button onClick={() => props.onCanceled(props.rawImage)}>
+        <div className={"editImageButtons"}>
+          {imageRef &&
+          <button type={"button"} className={"accept"} onClick={() => {
+            const resizedImage = getCroppedImg(imageRef, crop);
+            props.onFinished(resizedImage);
+          }}>
+            <Trans i18nKey={"imageInput.ImageCropAcceptButton"}>אישור</Trans>
+          </button>}
+          <button type={"button"} onClick={() => props.onCanceled(rawImage)}>
             <Trans i18nKey={"imageInput.ImageCropCancelButton"}>ביטול</Trans>
+          </button>
+          <button type={"button"} onClick={(event) => {
+            rotateImage(rawImage)
+              .then((imageDataUrl) => {
+                setRawImage(imageDataUrl);
+                setCrop({
+                  unit: '%',
+                  width: 100,
+                  height: 100,
+                });
+              });
+          }}>
+            <Trans i18nKey={"imageInput.ImageRotateButton"}>
+              סובב
+            </Trans>
           </button>
         </div>
       </div>
