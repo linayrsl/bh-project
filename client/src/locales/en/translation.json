@@ -50,7 +50,8 @@
     "imageInputDirectionsChange": "Replace a photo",
     "ImageCropText": "You can crop the image if necessary",
     "ImageCropAcceptButton": "Accept",
-    "ImageCropCancelButton": "Cancel"
+    "ImageCropCancelButton": "Cancel",
+    "ImageRotateButton": "Rotate"
   },
   "personDetailsForm": {
     "personDetailsName": "First name",

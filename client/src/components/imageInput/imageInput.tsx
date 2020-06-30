@@ -82,7 +82,6 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
         };
         this.setState({isProcessingImage: true});
 
-
         loadImage(
           image,
           // @ts-ignore
@@ -122,7 +121,12 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
         {this.state.rawImage &&
         <ImageManipulation
           rawImage={this.state.rawImage}
-          onFinished={(image: string) => this.setState({ image: image.replace("data:image/jpeg;base64,", ""), rawImage: null, isProcessingImage:  false}) }
+          onFinished={(image: string) =>
+            this.setState(
+              {
+                image: image.replace("data:image/jpeg;base64,", ""),
+                rawImage: null,
+                isProcessingImage:  false}) }
           onCanceled={() => this.setState({rawImage: null, isProcessingImage:  false})}
         />}
       </div>

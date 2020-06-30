@@ -28,6 +28,10 @@
   }
 
   .ReactCrop {
+    &.componentContainer {
+      max-width: calc(100vw - 50px);
+      max-height: calc(100vh - 90px);
+    }
 
     .ReactCrop__crop-selection {
       border-width: 3px;
@@ -59,7 +63,8 @@
 }
 
 .editImageButtons {
-  width: 300px;
+  width: 500px;
+  max-width: 100vw;
   display: flex;
   justify-content: space-between;
 }
