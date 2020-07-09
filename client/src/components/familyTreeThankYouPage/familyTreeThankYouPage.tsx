@@ -15,6 +15,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import ReactTooltip from 'react-tooltip';
 
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.scss";
@@ -58,7 +59,15 @@ class FamilyTreeThankYouPageComponent extends React.Component<
         <div className="family-tree-thanks-body">
           <div className="text-first-part">
             <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage"}><p>תודה רבה!</p></Trans>
-            <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage2"}><p>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי. ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.</p></Trans>
+            <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage2"}>
+              <p>
+                העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי.
+              <span className={"thank-you-page-highlight"}>
+                ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.
+              </span>
+              </p>
+            </Trans>
+            <span className={"thank-you-page-highlight"}><Trans i18nKey={"familyTreeThankYouPage.thankYouMessage2_5"}></Trans></span>
             <p>
               <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage3"}>אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד, </Trans>
               <Trans i18nKey={"familyTreeThankYouPage.thankYouMessage4"}>לחקור ולהיות חלק מהסיפור.</Trans>
@@ -79,32 +88,57 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                   <img className={"share-link"} src={shareIcon} alt={"share icon"}/>
                 </a>
               : <>
-                  <FacebookShareButton
-                    hashtag={"#bhfamilytrees"}
-                    quote={t("familyTreeThankYouPage.facebookLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={shareUrl}>
-                    <FacebookIcon path={undefined} crossOrigin={undefined} round={true} size={30}/>
-                  </FacebookShareButton>
-                  <EmailShareButton
-                    subject={t("familyTreeThankYouPage.emailLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={shareUrl}>
-                    <EmailIcon round={true} size={31} crossOrigin={undefined} path={undefined}/>
-                  </EmailShareButton>
-                  <TelegramShareButton
-                    title={t("familyTreeThankYouPage.telegramLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={shareUrl}>
-                    <TelegramIcon round={true} path={undefined} size={30} crossOrigin={undefined}/>
-                  </TelegramShareButton>
-                  <TwitterShareButton
-                    title={t("familyTreeThankYouPage.twitterLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
-                    translate={undefined} url={shareUrl}>
-                    <TwitterIcon crossOrigin={undefined} path={undefined} size={30} round={true}/>
-                  </TwitterShareButton>
-                  <WhatsappShareButton
+                  <div data-tip data-for={"whatsApp"}>
+                    <WhatsappShareButton
                     title={t("familyTreeThankYouPage.whats'upLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
                     translate={undefined} url={shareUrl}>
                     <WhatsappIcon  round={true} size={30} path={undefined} crossOrigin={undefined}/>
                   </WhatsappShareButton>
+                  </div>
+                  <ReactTooltip id="whatsApp" type="light" effect={"solid"}>
+                    <span className={"tooltip"}><Trans i18nKey={"familyTreeThankYouPage.toolTipWhatsApp"}>וואטסאפ</Trans></span>
+                  </ReactTooltip>
+                  <div data-tip data-for={"facebook"}>
+                    <FacebookShareButton
+                      hashtag={"#bhfamilytrees"}
+                      quote={t("familyTreeThankYouPage.facebookLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
+                      translate={undefined} url={shareUrl}>
+                      <FacebookIcon path={undefined} crossOrigin={undefined} round={true} size={30}/>
+                    </FacebookShareButton>
+                  </div>
+                  <ReactTooltip id="facebook" type="light" effect={"solid"}>
+                    <span className={"tooltip"}><Trans i18nKey={"familyTreeThankYouPage.toolTipFacebook"}>פייסבוק</Trans></span>
+                  </ReactTooltip>
+                  <div data-tip data-for={"telegram"}>
+                    <TelegramShareButton
+                      title={t("familyTreeThankYouPage.telegramLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
+                      translate={undefined} url={shareUrl}>
+                      <TelegramIcon round={true} path={undefined} size={30} crossOrigin={undefined}/>
+                    </TelegramShareButton>
+                  </div>
+                  <ReactTooltip id="telegram" type="light" effect={"solid"}>
+                    <span className={"tooltip"}><Trans i18nKey={"familyTreeThankYouPage.toolTipTelegram"}>טלגרם</Trans></span>
+                  </ReactTooltip>
+                  <div data-tip data-for={"twitter"}>
+                    <TwitterShareButton
+                      title={t("familyTreeThankYouPage.twitterLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
+                      translate={undefined} url={shareUrl}>
+                      <TwitterIcon crossOrigin={undefined} path={undefined} size={30} round={true}/>
+                    </TwitterShareButton>
+                  </div>
+                  <ReactTooltip id="twitter" type="light" effect={"solid"}>
+                    <span className={"tooltip"}><Trans i18nKey={"familyTreeThankYouPage.toolTipTwitter"}>טוויטר</Trans></span>
+                  </ReactTooltip>
+                  <div data-tip data-for={"email"}>
+                    <EmailShareButton
+                      subject={t("familyTreeThankYouPage.emailLinkShareMessage", "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי")}
+                      translate={undefined} url={shareUrl}>
+                      <EmailIcon round={true} size={31} crossOrigin={undefined} path={undefined}/>
+                    </EmailShareButton>
+                  </div>
+                  <ReactTooltip id="email" type="light" effect={"solid"}>
+                    <span className={"tooltip"}><Trans i18nKey={"familyTreeThankYouPage.toolTipEmail"}>אימייל</Trans></span>
+                  </ReactTooltip>
                 </>}
             </div>
           </div>

@@ -1,9 +1,9 @@
 import * as React from "react";
-import {toast} from "react-toastify";
-// @ts-ignore
-import {readAndCompressImage} from "browser-image-resizer";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
-import "./imageInput.css";
+import "./imageInput.scss";
+import ImageManipulation from "./imageManipulation/imageManipulation";
+import loadImage from "blueimp-load-image";
+
 
 interface ImageInputProps extends WithTranslation {
   id: string;
@@ -12,8 +12,10 @@ interface ImageInputProps extends WithTranslation {
 }
 
 interface ImageInputState {
+  rawImage: string | null;
   image: string | null;
   isWideImage: boolean;
+  isProcessingImage: boolean;
 }
 
 class ImageInputComponent extends React.Component<ImageInputProps, ImageInputState> {
@@ -22,8 +24,10 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     super(props);
 
     this.state = {
+      rawImage: null,
       image: props.defaultValue || null,
-      isWideImage: false
+      isWideImage: false,
+      isProcessingImage: false
     };
   }
 
@@ -70,31 +74,21 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     if (fileList && fileList.length > 0) {
       let image = fileList[0];
       if (image) {
-        this.setState({ image: "" });
 
-        const configImage = {
-          quality: 0.8,
+        const configImage: any = {
           maxWidth: 800,
           maxHeight: 600,
-          autoRotate: true,
-          debug: false
+          canvas: true
         };
-        readAndCompressImage(image, configImage)
-          .then((resizedImage: Blob) => {
-            let reader = new FileReader();
-            reader.onload = () => {
-              if (reader.result) {
-                this.setState({ image: reader.result!.toString().replace("data:image/jpeg;base64,", "")});
-              }
-              else {
-                toast.error("לא ניתן להטעין את התמונה שנבחרה");
-              }
-            };
-            reader.onerror = () => {
-              toast.error("לא ניתן להטעין את התמונה שנבחרה");
-            };
-            reader.readAsDataURL(resizedImage);
-          });
+        this.setState({isProcessingImage: true});
+
+        loadImage(
+          image,
+          // @ts-ignore
+          (canvas: HTMLCanvasElement) => {
+            this.setState({ rawImage: canvas.toDataURL()});
+          },
+          configImage);
       }
     }
   }
@@ -107,6 +101,7 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
           {this.state.image ? t("imageInput.imageInputDirectionsChange", "החליפו תמונה") : t("imageInput.imageInputDirectionsAdd", "הוסיפו תמונה")}
         </label>
         <input
+          disabled={this.state.isProcessingImage}
           onChange={
             this.imageChangeHandler.bind(this)
           }
@@ -123,6 +118,17 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
               src={`data:image/jpeg;base64,${this.state.image}`} />
           )}
         </div>
+        {this.state.rawImage &&
+        <ImageManipulation
+          rawImage={this.state.rawImage}
+          onFinished={(image: string) =>
+            this.setState(
+              {
+                image: image.replace("data:image/jpeg;base64,", ""),
+                rawImage: null,
+                isProcessingImage:  false}) }
+          onCanceled={() => this.setState({rawImage: null, isProcessingImage:  false})}
+        />}
       </div>
     );
   }

@@ -46,7 +46,7 @@
 }
 
 .text-input-container input::placeholder {
-  color: darkgrey;
+  color: #686868;
   opacity: 1;
 }
 

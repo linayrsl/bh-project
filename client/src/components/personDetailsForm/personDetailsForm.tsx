@@ -98,6 +98,7 @@ class PersonDetailsFormComponent extends React.Component<
 
   render() {
     const t = this.props.t;
+
     return (
       <div className="person-details-container">
         <div className="person-details">
@@ -137,7 +138,12 @@ class PersonDetailsFormComponent extends React.Component<
                   defaultValue={
                     this.state.maidenName ? this.state.maidenName : ""
                   }
-                  title={t("personDetailsForm.personDetailsMaidenName", "שם נעורים")}
+                  title={
+                    this.state.gender === "male" ?
+                      t("personDetailsForm.personDetailsFormerName", "שם קודם") :
+                      (this.state.gender === "female" ?
+                        t("personDetailsForm.personDetailsMaidenName" , "שם נעורים") :
+                        t("personDetailsForm.personDetailsDefaultName", "שם נעורים/שם קודם"))}
                   id={`${this.props.idPrefix}_maidenName`}
                   type="text"
                   placeholder={t("personDetailsForm.personDetailsMaidenNamePlaceholder", "לחצו להוספה")}
