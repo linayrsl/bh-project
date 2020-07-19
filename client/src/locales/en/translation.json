@@ -1,7 +1,8 @@
 {
   "homePage": {
+    "changeLanguage": "לעבור לגרסה בעברית",
     "welcomeMessage": "Welcome to the",
-    "welcomeMessagePart2": "<0></0><1> Family tree project</1>",
+    "welcomeMessagePart2": "<0></0><1> Family Tree Project</1>",
     "welcomeMessagePart3": " of the Museum of the Jewish People ",
     "welcomeMessagePart4": " at Beit Hatfutsot.",
     "theProjectObjective": "This is where you'll be able to build your family tree",
