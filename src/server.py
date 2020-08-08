@@ -1,11 +1,13 @@
 import os
 import logging
+import json
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 from flask_log_request_id import RequestID
 from flask_talisman import Talisman, GOOGLE_CSP_POLICY
 
+from src.client_config import client_config
 from src.handlers.auth import auth
 from src.handlers.family_tree import family_tree
 from src.logging.logging_setup import logging_setup
@@ -25,6 +27,7 @@ logger.info("Serving static files from {}".format(client_files_directory_path))
 
 application = Flask(
     __name__,
+    template_folder=client_files_directory_path,
     static_folder=client_files_directory_path,
     static_url_path='')
 
@@ -44,7 +47,9 @@ RequestID(application)
 
 @application.route("/")
 def root():
-    return application.send_static_file("index.html")
+    return render_template(
+        "index.html",
+        clientConfigOverride=json.dumps(client_config()).replace('"', '\\"'))
 
 
 @application.route("/manifest.json")
@@ -85,7 +90,9 @@ application.register_blueprint(
 @application.route('/<string:path_part1>/<string:path_part2>')
 @application.route('/en/<string:path_part1>/<string:path_part2>')
 def client_path_handler(path_part1: str, path_part2: str = None):
-    return application.send_static_file("index.html")
+    return render_template(
+        "index.html",
+        clientConfigOverride=json.dumps(client_config()).replace('"', '\\"'))
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.144",
     "@types/react-image-crop": "^8.1.2",
+    "autotrack": "^2.4.1",
     "axios": "^0.19.0",
     "blueimp-load-image": "^5.13.0",
     "browser-image-resizer": "^2.1.0",
