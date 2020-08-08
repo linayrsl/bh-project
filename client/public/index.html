@@ -33,7 +33,7 @@
     <script async src="https://www.google-analytics.com/analytics.js"></script>
     <script type="text/javascript">
       try {
-        window.clientConfigOverride = JSON.parse("{{ clientConfigOverride }}");
+        window.clientConfigOverride = JSON.parse("{{ clientConfigOverride|safe }}");
       } catch(e) {}
     </script>
   </head>
