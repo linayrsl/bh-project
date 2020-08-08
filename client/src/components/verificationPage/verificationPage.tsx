@@ -9,10 +9,14 @@ import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
 import { Loader } from "../loader/loader";
 
+
 import "./verificationPage.css";
+import {AppConfig} from "../../contracts/appConfig";
+import {withAppConfig} from "../hoc/withAppConfig";
 
 export interface VerificationPageProps extends WithTranslation {
   match?: match<{ email: string }>;
+  config: AppConfig;
 }
 
 export interface VerificationPageState {
@@ -38,7 +42,7 @@ class VerificationPageComponent extends React.Component<
 
     let apiResponsePromise = axios
       .post(
-        `/api/auth/verification-code/${decodeURIComponent(
+        `${this.props.config.apiBaseUrl}/api/auth/verification-code/${decodeURIComponent(
           this.props.match!.params.email
         )}`,
         { verificationCode: this.state.verificationCode }
@@ -117,9 +121,10 @@ class VerificationPageComponent extends React.Component<
 }
 
 const VerificationPage =
-  withTranslation()(
-    withRouter(
-      VerificationPageComponent as any
-    ) as any as React.ComponentClass<VerificationPageProps>);
+  withAppConfig(
+    withTranslation()(
+      withRouter(
+        VerificationPageComponent as any
+      ) as any as React.ComponentClass<VerificationPageProps>));
 
 export { VerificationPage };
