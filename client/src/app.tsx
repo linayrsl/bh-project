@@ -42,7 +42,7 @@ class App extends Component<AppProps, AppState> {
     this.state = {
       config: {
         ...config,
-        ...((window as any).configOverride || {})
+        ...((window as any).clientConfigOverride || {})
       }
     }
   }
