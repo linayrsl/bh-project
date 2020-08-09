@@ -37,7 +37,7 @@ extended_csp = GOOGLE_CSP_POLICY.copy()
 extended_csp["script-src"] += " 'unsafe-inline' *.google-analytics.com"
 extended_csp["style-src"] += " 'unsafe-inline'"
 extended_csp["img-src"] = "'self' blob: data: *.google-analytics.com"
-extended_csp["connect-src"] = "*.google-analytics.com"
+extended_csp["connect-src"] = "'self' *.google-analytics.com"
 
 if not CI:
     CORS(application)
