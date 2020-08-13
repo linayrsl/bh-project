@@ -14,21 +14,36 @@ import { FamilyTreePageSubmit } from "./components/familyTreePageSubmit/familyTr
 import { FamilyTreeThankYouPage } from "./components/familyTreeThankYouPage/familyTreeThankYouPage";
 import {PageNotFoundError} from "./components/pageNotFoundError/pageNotFoundError";
 import {ErrorBoundary} from "./components/errorBoundary/errorBoundary";
+import {AppConfig} from "./contracts/appConfig";
+import config from "./config";
+import {appConfigContext} from "./context/appConfigContext";
 
 import "./app.scss";
 import "react-toastify/dist/ReactToastify.css";
+import ReportAnalyticsPageView from "./components/reportAnalyticsPageView/reportAnalyticsPageView";
 
 
 interface AppProps {
-  i18n: i18n
+  i18n: i18n;
 }
 
-class App extends Component<AppProps> {
+interface AppState {
+  config: AppConfig;
+}
+
+class App extends Component<AppProps, AppState> {
   constructor(props: Readonly<AppProps>) {
     super(props);
     const language = props.i18n.language;
     if (language === "en" && typeof window !== "undefined") {
       window.document.title = "Family tree project of the Museum of the Jewish People at Beit Hatfutsot"
+    }
+
+    this.state = {
+      config: {
+        ...config,
+        ...((window as any).clientConfigOverride || {})
+      }
     }
   }
 
@@ -41,50 +56,54 @@ class App extends Component<AppProps> {
     }
 
     return (
-      <div dir={direction} className="bh-app">
-        <BrowserRouter basename={language === "en" ? "/en" : "/"}>
-          <ErrorBoundary>
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route exact path="/register">
-                <RegisterPage />
-              </Route>
-              <Route path="/verification/:email">
-                <VerificationPage />
-              </Route>
-              <Route exact path="/family-tree/me">
-                <FamilyTreePageSubmitter />
-              </Route>
-              <Route exact path="/family-tree/mother">
-                <FamilyTreePageMother />
-              </Route>
-              <Route exact path="/family-tree/father">
-                <FamilyTreePageFather />
-              </Route>
-              <Route exact path="/family-tree/siblings">
-                <FamilyTreePageSiblings />
-              </Route>
-              <Route exact path="/family-tree/submit">
-                <FamilyTreePageSubmit />
-              </Route>
-              <Route exact path="/thank-you">
-                <FamilyTreeThankYouPage />
-              </Route>
-              <Route render={() => <PageNotFoundError />} />
-            </Switch>
-          </ErrorBoundary>
-        </BrowserRouter>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={true}
-          draggable={false}
-        />
-      </div>
+      <appConfigContext.Provider
+        value={this.state.config}>
+        <div dir={direction} className="bh-app">
+          <BrowserRouter basename={language === "en" ? "/en" : "/"}>
+            <ReportAnalyticsPageView />
+            <ErrorBoundary>
+              <Switch>
+                <Route exact path="/">
+                  <HomePage />
+                </Route>
+                <Route exact path="/register">
+                  <RegisterPage />
+                </Route>
+                <Route path="/verification/:email">
+                  <VerificationPage />
+                </Route>
+                <Route exact path="/family-tree/me">
+                  <FamilyTreePageSubmitter />
+                </Route>
+                <Route exact path="/family-tree/mother">
+                  <FamilyTreePageMother />
+                </Route>
+                <Route exact path="/family-tree/father">
+                  <FamilyTreePageFather />
+                </Route>
+                <Route exact path="/family-tree/siblings">
+                  <FamilyTreePageSiblings />
+                </Route>
+                <Route exact path="/family-tree/submit">
+                  <FamilyTreePageSubmit />
+                </Route>
+                <Route exact path="/thank-you">
+                  <FamilyTreeThankYouPage />
+                </Route>
+                <Route render={() => <PageNotFoundError />} />
+              </Switch>
+            </ErrorBoundary>
+          </BrowserRouter>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={true}
+            draggable={false}
+          />
+        </div>
+      </appConfigContext.Provider>
     );
   }
 }

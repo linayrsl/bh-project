@@ -13,10 +13,13 @@ import {FamilyTreeJson} from "../../contracts/familyTreeJson";
 
 import "./familyTreePageSubmit.css";
 import {FamilyTreeApiRequest} from "../../contracts/familyTreeApiRequest";
+import {AppConfig} from "../../contracts/appConfig";
+import {withAppConfig} from "../hoc/withAppConfig";
 
 
 export interface FamilyTreePageSubmitProps extends WithTranslation {
   history?: History;
+  config: AppConfig;
 }
 
 export interface FamilyTreePageSubmitState {
@@ -36,7 +39,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 
   returnButtonHandler() {
-    this.props.history!.push("/family-tree/me");
+    this.props.history!.push(`${this.props.config.apiBaseUrl}/family-tree/me`);
   }
 
   getStoredPersonDetails(key: string): PersonDetails | null {
@@ -219,8 +222,9 @@ class FamilyTreePageSubmitComponent extends React.Component<
 }
 
 const FamilyTreePageSubmit =
-  withTranslation()(
-    withRouter(
-  FamilyTreePageSubmitComponent as any
-) as any as React.ComponentClass<FamilyTreePageSubmitProps>);
+  withAppConfig(
+    withTranslation()(
+      withRouter(
+        FamilyTreePageSubmitComponent as any
+) as any as React.ComponentClass<FamilyTreePageSubmitProps>));
 export { FamilyTreePageSubmit };

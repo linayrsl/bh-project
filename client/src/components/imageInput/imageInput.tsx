@@ -97,7 +97,7 @@ class ImageInputComponent extends React.Component<ImageInputProps, ImageInputSta
     const t = this.props.t;
     return (
       <div className="image-input-container">
-        <label htmlFor={this.props.id}>
+        <label htmlFor={this.props.id} tabIndex={0}>
           {this.state.image ? t("imageInput.imageInputDirectionsChange", "החליפו תמונה") : t("imageInput.imageInputDirectionsAdd", "הוסיפו תמונה")}
         </label>
         <input

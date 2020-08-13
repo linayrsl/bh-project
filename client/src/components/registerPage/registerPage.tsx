@@ -9,11 +9,14 @@ import { Header } from "../header/header";
 import { TextInput } from "../textInput/textInput";
 import { Loader } from "../loader/loader";
 import { i18n } from "../../i18n";
-
+import {AppConfig} from "../../contracts/appConfig";
 
 import "./registerPage.css";
+import {withAppConfig} from "../hoc/withAppConfig";
 
-export interface RegisterPageProps extends WithTranslation {}
+export interface RegisterPageProps extends WithTranslation {
+  config: AppConfig;
+}
 
 export interface RegisterPageState {
   firstName: string;
@@ -45,7 +48,7 @@ class RegisterPageComponent extends React.Component<
     this.setState({ httpRequestInProgress: true });
 
     let apiResponsePromise = axios
-      .post("/api/auth/register/", {
+      .post(`${this.props.config.apiBaseUrl}/api/auth/register/`, {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email,
@@ -208,5 +211,10 @@ class RegisterPageComponent extends React.Component<
   }
 }
 
-const RegisterPage = withTranslation()(RegisterPageComponent);
+const withTranslationHoc = withTranslation();
+const RegisterPage =
+  withAppConfig(
+    withTranslationHoc(
+      RegisterPageComponent));
+
 export { RegisterPage };

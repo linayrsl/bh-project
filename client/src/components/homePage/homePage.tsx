@@ -17,12 +17,12 @@ class HomePageComponent extends Component<HomePageProps> {
       <div className="home-page-container">
         <div className="home-header">
           <img className="bh-logo" alt="Beit Hatfutzot Logo" src={i18n.language === "he" ? bhLogoHe : bhLogoEn} />
-          <a className={"languageButton"} href={i18n.language === "he" ? "/en" : "/"}>
-            <img alt={"choose language"} src={languageButton} />
+          <a aria-label={t("homePage.changeLanguage", "Go to English version")} className={"languageButton"} href={i18n.language === "he" ? "/en" : "/"}>
+            <img aria-hidden alt={"choose language"} src={languageButton} />
           </a>
         </div>
         <div className="home-page-body">
-          <div className="welcome-message" tabIndex={1}>
+          <div className="welcome-message" tabIndex={0}>
             <span className="part1"><Trans i18nKey={"homePage.welcomeMessage"}> ברוכים הבאים</Trans></span>
             <br />
             <span className="part2">
@@ -37,7 +37,7 @@ class HomePageComponent extends Component<HomePageProps> {
           <br />
           <Trans i18nKey={"homePage.welcomeMessagePart4"}></Trans>
           </div>
-          <div className="welcome-explanation" tabIndex={2}>
+          <div className="welcome-explanation" tabIndex={0}>
             <Trans i18nKey={"homePage.theProjectObjective"}>
               כאן תוכלו ליצור את עץ המשפחה שלכם
             </Trans>
@@ -45,7 +45,7 @@ class HomePageComponent extends Component<HomePageProps> {
             <Trans i18nKey={"homePage.theProjectObjective2"}>ב-4 צעדים פשוטים.</Trans>
           </div>
           <div className="vertical-spacer"></div>
-          <div className="welcome-disclaimer" tabIndex={3}>
+          <div className="welcome-disclaimer" tabIndex={0}>
             <Trans i18nKey={"homePage.projectDisclaimer"}>העץ שתבנו יישמר במאגר עצי המשפחה</Trans>
             <br />
             <Trans i18nKey={"homePage.projectDisclaimer2"}>המאובטח של מוזיאון העם היהודי ותוכלו לעיין בו</Trans>
@@ -53,7 +53,7 @@ class HomePageComponent extends Component<HomePageProps> {
             <Trans i18nKey={"homePage.projectDisclaimer3"}>ולערוך אותו בעתיד באתר המוזיאון.</Trans>
           </div>
           <div className="welcome-cta">
-            <ProceedButton text={t("homePage.proceedButton", "כניסה")} nextPageUrl="/register" tabIndex={4} />
+            <ProceedButton text={t("homePage.proceedButton", "כניסה")} nextPageUrl="/register" tabIndex={0} />
           </div>
         </div>
       </div>
