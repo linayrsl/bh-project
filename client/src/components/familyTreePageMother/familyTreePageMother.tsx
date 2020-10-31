@@ -6,13 +6,18 @@ import {
 } from "../personDetailsForm/personDetailsForm";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 import { ProceedButton } from "../proceedButton/proceedButton";
+import {loadOrCreateTree, saveTree} from "../../familyTreeService";
+import {FamilyTree} from "../../contracts/familyTree";
+import {
+  FamilyTreePageSubmitterProps,
+  FamilyTreePageSubmitterState
+} from "../familyTreePageSubmitter/familyTreePageSubmitter";
+import {PersonNode} from "../../contracts/personNode";
 
 export interface FamilyTreePageMotherProps  extends WithTranslation {}
 
 export interface FamilyTreePageMotherState {
-  motherDetails?: PersonDetailsFormState;
-  motherOfMotherDetails?: PersonDetailsFormState;
-  fatherOfMotherDetails?: PersonDetailsFormState;
+  familyTree?: FamilyTree;
   motherFormValid: boolean;
   motherOfMotherFormValid: boolean;
   fatherOfMotherFormValid: boolean;
@@ -32,29 +37,25 @@ class FamilyTreePageMotherComponent extends React.Component<
   }
 
   componentDidMount() {
-    let item = localStorage.getItem("motherDetails");
-    if (item) {
-      let motherDetails = JSON.parse(item);
-      this.setState({ motherDetails: motherDetails });
-    }
-    item = localStorage.getItem("motherOfMotherDetails");
-    if (item) {
-      let motherOfMotherDetails = JSON.parse(item);
-      this.setState({ motherOfMotherDetails: motherOfMotherDetails });
-    }
-    item = localStorage.getItem("fatherOfMotherDetails");
-    if (item) {
-      let fatherOfMotherDetails = JSON.parse(item);
-      this.setState({ fatherOfMotherDetails: fatherOfMotherDetails });
-    }
+    this.setState({ familyTree: loadOrCreateTree() });
 
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
-  formChangeHandler(formName: string, state: PersonDetailsFormState) {
-    localStorage.setItem(formName, JSON.stringify(state));
+  componentDidUpdate(prevProps: Readonly<FamilyTreePageMotherProps>, prevState: Readonly<FamilyTreePageMotherState>) {
+    if (prevState.familyTree !== this.state.familyTree && this.state.familyTree) {
+      saveTree(this.state.familyTree);
+    }
+  }
+
+  formChangeHandler(person: PersonNode, formData: PersonDetailsFormState) {
+    const familyTree = {...this.state.familyTree} as FamilyTree;
+    Object.assign(person, formData);
+    this.setState({
+      familyTree
+    });
   }
 
   render() {
@@ -68,16 +69,16 @@ class FamilyTreePageMotherComponent extends React.Component<
           <div className="level">3</div>
           <div className="level">4</div>
         </div>
-        <div className="family-tree-body page-content-container ">
+        {this.state.familyTree && <div className="family-tree-body page-content-container ">
           <PersonDetailsForm
             idPrefix="mother"
             title={t("familyTreePageMother.familyTreeCurrentEntity", "אמא")}
             displayIsAlive
             displayMaidenName
-            defaults={this.state.motherDetails}
+            defaults={this.state.familyTree.submitter.mother!}
             defaultGender="female"
             onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler("motherDetails", state);
+              this.formChangeHandler(this.state.familyTree!.submitter.mother!, state);
             }}
             onFormValidityChange={(isValid: boolean) => {
               this.setState({ motherFormValid: isValid });
@@ -88,10 +89,10 @@ class FamilyTreePageMotherComponent extends React.Component<
             title={t("familyTreePageMother.familyTreeMothersMother", "אמא של אמא")}
             displayIsAlive
             displayMaidenName
-            defaults={this.state.motherOfMotherDetails}
+            defaults={this.state.familyTree.submitter.mother?.mother!}
             defaultGender={"female"}
             onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler("motherOfMotherDetails", state);
+              this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother!, state);
             }}
             onFormValidityChange={(isValid: boolean) => {
               this.setState({ motherOfMotherFormValid: isValid });
@@ -102,10 +103,10 @@ class FamilyTreePageMotherComponent extends React.Component<
             title={t("familyTreePageMother.familyTreeMothersFather", "אבא של אמא")}
             displayIsAlive
             displayMaidenName
-            defaults={this.state.fatherOfMotherDetails}
+            defaults={this.state.familyTree.submitter.mother?.father!}
             defaultGender={"male"}
             onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler("fatherOfMotherDetails", state);
+              this.formChangeHandler(this.state.familyTree!.submitter.mother?.father!, state);
             }}
             onFormValidityChange={(isValid: boolean) => {
               this.setState({ fatherOfMotherFormValid: isValid });
@@ -122,7 +123,7 @@ class FamilyTreePageMotherComponent extends React.Component<
               nextPageUrl="/family-tree/father"
             />
           </div>
-        </div>
+        </div>}
       </div>
     );
   }

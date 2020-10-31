@@ -99,51 +99,36 @@ class FamilyTreePageSubmitComponent extends React.Component<
     familyTreeJson["1"] = {
       ...submitterDetails!,
       ID: "1",
-      motherID: "2",
-      fatherID: "5",
       siblings: []
     };
     familyTreeJson["2"] = {
       ...motherDetails!,
       ID: "2",
-      motherID: "3",
-      fatherID: "4",
       siblings: []
     };
     familyTreeJson["3"] = {
       ...motherOfMotherDetails!,
       ID: "3",
-      motherID: null,
-      fatherID: null,
-
       siblings: []
     };
     familyTreeJson["4"] = {
       ...fatherOfMotherDetails!,
       ID: "4",
-      motherID: null,
-      fatherID: null,
       siblings: []
     };
     familyTreeJson["5"] = {
       ...fatherDetails!,
       ID: "5",
-      motherID: "6",
-      fatherID: "7",
       siblings: []
     };
     familyTreeJson["6"] = {
       ...motherOfFatherDetails!,
       ID: "6",
-      motherID: null,
-      fatherID: null,
       siblings: []
     };
     familyTreeJson["7"] = {
       ...fatherOfFatherDetails!,
       ID: "7",
-      motherID: null,
-      fatherID: null,
       siblings: []
     };
 
@@ -154,9 +139,6 @@ class FamilyTreePageSubmitComponent extends React.Component<
       familyTreeJson[key] = {
         ...sibling,
         ID: key,
-
-        motherID: "2",
-        fatherID: "5",
         siblings: []
       };
       siblingsIds.push(key);

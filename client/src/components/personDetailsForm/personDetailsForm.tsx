@@ -40,8 +40,6 @@ class PersonDetailsFormComponent extends React.Component<
       gender: props.defaultGender || null,
       birthDate: null,
       birthPlace: null,
-      motherID: null,
-      fatherID: null,
       isAlive: true,
       deathDate: null,
       deathPlace: null,
