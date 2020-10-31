@@ -78,8 +78,14 @@
   "familyTreePageMother" : {
     "header": "Your mother's side 2/4",
     "familyTreeCurrentEntity": "Your mother",
+    "familyTreeGrandParentsTitle": "Mother's parents(grandfather and grandmother)",
     "familyTreeMothersMother": "Your mother's mother",
     "familyTreeMothersFather": "Your mother's father",
+    "familyTreeGrandGrandParentsTitle": "Mother's grandparents(grand grandfather and grand grandmother)",
+    "familyTreeMotherOfGrandmother": "Your grandmother's mother",
+    "familyTreeFatherOfGrandmother": "Your grandmother's father",
+    "familyTreeMotherOfGrandfather": "Your grandfather's mother",
+    "familyTreeFatherOfGrandfather": "Your grandfather's father",
     "familyTreeProceedButton": "Next"
   },
   "familyTreePageFather": {
