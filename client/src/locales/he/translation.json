@@ -92,16 +92,24 @@
   "familyTreePageFather": {
     "header": "הצד של אבא  3/4",
     "familyTreeCurrentEntity": "אבא",
+    "familyTreeGrandparentsTitle": "ההורים של אבא(סבא וסבתא)",
     "familyTreeFathersMother": "אמא של אבא",
     "familyTreeFathersFather": "אבא של אבא",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אבא(סבא רבא וסבתא רבא)",
+    "familyTreeMotherOfGrandmother": "אמא של סבתא(מצד אבא)",
+    "familyTreeFatherOfGrandmother": "אבא של סבתא(מצד אבא)",
+    "familyTreeMotherOfGrandfather": "אמא של סבא(מצד אבא)",
+    "familyTreeFatherOfGrandfather": "אבא של סבא(מצד אבא)",
     "familyTreeProceedButton": "המשיכו"
   },
   "familyTreePageSiblings": {
-    "header": "אחים/אחיות  4/4",
+    "header": "אחים/אחיות, ילדים/ילדות  4/4",
     "familyTreeSiblingsMessage": "כמה אחים/אחיות יש לך ?",
+    "familyTreeChildrenMessage": "כמה ילדים יש לך ?",
     "familyTreeSiblingsIncreaseNumber": "להגדיל מספר אחים או אחיות באחד",
     "familyTreeSiblingsDecreaseNumber": "להפחית מספר אחים או אחיות באחד",
     "familyTreeCurrentEntity": "אח/אחות",
+    "familyTreeCurrentEntityChild": "ילד/ילדה",
     "familyTreeSiblingsProceedButton": "לסיום הקישו כאן"
   },
   "familyTreePageSubmit": {

@@ -2,7 +2,7 @@ import {FamilyTree} from "./contracts/familyTree";
 import {i18n} from "./i18n";
 import {PersonNode} from "./contracts/personNode";
 
-const createPersonDetails = () => ({
+export const createPersonDetails = () => ({
   image: null,
   firstName: null,
   lastName: null,
@@ -57,7 +57,8 @@ export const loadOrCreateTree = (): FamilyTree => {
         father: createLevel3Person(),
         siblings: []
       },
-      siblings: []
+      siblings: [],
+      children: [],
     },
     submitterEmail: window.localStorage.getItem("submitterEmail") || "",
   };

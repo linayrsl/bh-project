@@ -9,6 +9,7 @@ import { ProceedButton } from "../proceedButton/proceedButton";
 import {loadOrCreateTree, saveTree} from "../../familyTreeService";
 import {FamilyTree} from "../../contracts/familyTree";
 import {PersonNode} from "../../contracts/personNode";
+import arrowIcon from "../../assets/images/arrow-up.svg";
 import "./familyTreePageMother.css"
 
 export interface FamilyTreePageMotherProps  extends WithTranslation {}
@@ -22,6 +23,8 @@ export interface FamilyTreePageMotherState {
   fatherOfGrandmotherFormValid: boolean;
   motherOfGrandfatherFormValid: boolean;
   fatherOfGrandfatherFormValid: boolean;
+  showParents: boolean;
+  showGrandparents: boolean;
 }
 
 class FamilyTreePageMotherComponent extends React.Component<
@@ -38,6 +41,8 @@ class FamilyTreePageMotherComponent extends React.Component<
       fatherOfGrandmotherFormValid: false,
       motherOfGrandfatherFormValid: false,
       fatherOfGrandfatherFormValid: false,
+      showParents: false,
+      showGrandparents: false,
     };
   }
 
@@ -89,95 +94,116 @@ class FamilyTreePageMotherComponent extends React.Component<
               this.setState({ motherFormValid: isValid });
             }}
           />
-          <div className="motherParentsTitle"><Trans i18nKey={"familyTreePageMother.familyTreeGrandParentsTitle"}>ההורים של אמא(סבא וסבתא)</Trans></div>
-          <PersonDetailsForm
-            idPrefix="mother-of-mother"
-            title={t("familyTreePageMother.familyTreeMothersMother", "אמא של אמא")}
-            displayIsAlive
-            displayMaidenName
-            defaults={this.state.familyTree.submitter.mother?.mother!}
-            defaultGender={"female"}
-            onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother!, state);
-            }}
-            onFormValidityChange={(isValid: boolean) => {
-              this.setState({ motherOfMotherFormValid: isValid });
-            }}
-          />
-          <PersonDetailsForm
-            idPrefix="father-of-mother"
-            title={t("familyTreePageMother.familyTreeMothersFather", "אבא של אמא")}
-            displayIsAlive
-            displayMaidenName
-            defaults={this.state.familyTree.submitter.mother?.father!}
-            defaultGender={"male"}
-            onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler(this.state.familyTree!.submitter.mother?.father!, state);
-            }}
-            onFormValidityChange={(isValid: boolean) => {
-              this.setState({ fatherOfMotherFormValid: isValid });
-            }}
-          />
+          <div
+            role="button"
+            className="motherParentsTitle"
+            onClick={() => this.setState({showParents: !this.state.showParents})}
+          >
+            <div className="parentsLabel">
+              <img src={arrowIcon} alt ="" style={{transform: this.state.showParents ? "rotate(180deg)" : "rotate(0deg)"}}/>
+            </div>
+            <Trans i18nKey={"familyTreePageMother.familyTreeGrandParentsTitle"}>ההורים של אמא(סבא וסבתא)</Trans>
+          </div>
+          {this.state.showParents &&
+          <>
+            <PersonDetailsForm
+              idPrefix="mother-of-mother"
+              title={t("familyTreePageMother.familyTreeMothersMother", "אמא של אמא")}
+              displayIsAlive
+              displayMaidenName
+              defaults={this.state.familyTree.submitter.mother?.mother!}
+              defaultGender={"female"}
+              onFormChange={(state: PersonDetailsFormState) => {
+                this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother!, state);
+              }}
+              onFormValidityChange={(isValid: boolean) => {
+                this.setState({ motherOfMotherFormValid: isValid });
+              }}
+            />
+            <PersonDetailsForm
+              idPrefix="father-of-mother"
+              title={t("familyTreePageMother.familyTreeMothersFather", "אבא של אמא")}
+              displayIsAlive
+              displayMaidenName
+              defaults={this.state.familyTree.submitter.mother?.father!}
+              defaultGender={"male"}
+              onFormChange={(state: PersonDetailsFormState) => {
+                this.formChangeHandler(this.state.familyTree!.submitter.mother?.father!, state);
+              }}
+              onFormValidityChange={(isValid: boolean) => {
+                this.setState({ fatherOfMotherFormValid: isValid });
+              }}
+            />
+          </>}
 
-          <div className="motherGrandParentsTitle">
+          <div className="motherGrandParentsTitle"
+          role="button"
+          onClick={() => this.setState({showGrandparents: !this.state.showGrandparents})}
+          >
+            <div className="parentsLabel">
+              <img src={arrowIcon} alt ="" style={{transform: this.state.showGrandparents ? "rotate(180deg)" : "rotate(0deg)"}}/>
+            </div>
             <Trans i18nKey={"familyTreePageMother.familyTreeGrandGrandParentsTitle"}>סבא וסבתא של אמא(סבא רבא וסבתא רבא)</Trans>
           </div>
-          <PersonDetailsForm
-            idPrefix="mother-of-grandmother"
-            title={t("familyTreePageMother.familyTreeMotherOfGrandmother", "אמא של סבתא(מצד אמא)")}
-            displayIsAlive
-            displayMaidenName
-            defaults={this.state.familyTree.submitter.mother?.mother?.mother!}
-            defaultGender={"female"}
-            onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother?.mother!, state);
-            }}
-            onFormValidityChange={(isValid: boolean) => {
-              this.setState({ motherOfGrandmotherFormValid: isValid });
-            }}
-          />
-          <PersonDetailsForm
-            idPrefix="father-of-grandmother"
-            title={t("familyTreePageMother.familyTreeFatherOfGrandmother", "אבא של סבתא(מצד אמא)")}
-            displayIsAlive
-            displayMaidenName
-            defaults={this.state.familyTree.submitter.mother?.mother?.father!}
-            defaultGender={"male"}
-            onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother?.father!, state);
-            }}
-            onFormValidityChange={(isValid: boolean) => {
-              this.setState({ fatherOfGrandmotherFormValid: isValid });
-            }}
-          />
-          <PersonDetailsForm
-            idPrefix="mother-of-grandfather"
-            title={t("familyTreePageMother.familyTreeMotherOfGrandfather", "אמא של סבא(מצד אמא)")}
-            displayIsAlive
-            displayMaidenName
-            defaults={this.state.familyTree.submitter.mother?.father?.mother!}
-            defaultGender={"female"}
-            onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler(this.state.familyTree!.submitter.mother?.father?.mother!, state);
-            }}
-            onFormValidityChange={(isValid: boolean) => {
-              this.setState({ motherOfGrandfatherFormValid: isValid });
-            }}
-          />
-          <PersonDetailsForm
-            idPrefix="father-of-grandfather"
-            title={t("familyTreePageMother.familyTreeFatherOfGrandfather", "אבא של סבא(מצד אמא)")}
-            displayIsAlive
-            displayMaidenName
-            defaults={this.state.familyTree.submitter.mother?.father?.father!}
-            defaultGender={"male"}
-            onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler(this.state.familyTree!.submitter.mother?.father?.father!, state);
-            }}
-            onFormValidityChange={(isValid: boolean) => {
-              this.setState({ fatherOfGrandfatherFormValid: isValid });
-            }}
-          />
+          {this.state.showGrandparents &&
+          <>
+            <PersonDetailsForm
+              idPrefix="mother-of-grandmother"
+              title={t("familyTreePageMother.familyTreeMotherOfGrandmother", "אמא של סבתא(מצד אמא)")}
+              displayIsAlive
+              displayMaidenName
+              defaults={this.state.familyTree.submitter.mother?.mother?.mother!}
+              defaultGender={"female"}
+              onFormChange={(state: PersonDetailsFormState) => {
+                this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother?.mother!, state);
+              }}
+              onFormValidityChange={(isValid: boolean) => {
+                this.setState({ motherOfGrandmotherFormValid: isValid });
+              }}
+            />
+            <PersonDetailsForm
+              idPrefix="father-of-grandmother"
+              title={t("familyTreePageMother.familyTreeFatherOfGrandmother", "אבא של סבתא(מצד אמא)")}
+              displayIsAlive
+              displayMaidenName
+              defaults={this.state.familyTree.submitter.mother?.mother?.father!}
+              defaultGender={"male"}
+              onFormChange={(state: PersonDetailsFormState) => {
+                this.formChangeHandler(this.state.familyTree!.submitter.mother?.mother?.father!, state);
+              }}
+              onFormValidityChange={(isValid: boolean) => {
+                this.setState({ fatherOfGrandmotherFormValid: isValid });
+              }}
+            />
+            <PersonDetailsForm
+              idPrefix="mother-of-grandfather"
+              title={t("familyTreePageMother.familyTreeMotherOfGrandfather", "אמא של סבא(מצד אמא)")}
+              displayIsAlive
+              displayMaidenName
+              defaults={this.state.familyTree.submitter.mother?.father?.mother!}
+              defaultGender={"female"}
+              onFormChange={(state: PersonDetailsFormState) => {
+                this.formChangeHandler(this.state.familyTree!.submitter.mother?.father?.mother!, state);
+              }}
+              onFormValidityChange={(isValid: boolean) => {
+                this.setState({ motherOfGrandfatherFormValid: isValid });
+              }}
+            />
+            <PersonDetailsForm
+              idPrefix="father-of-grandfather"
+              title={t("familyTreePageMother.familyTreeFatherOfGrandfather", "אבא של סבא(מצד אמא)")}
+              displayIsAlive
+              displayMaidenName
+              defaults={this.state.familyTree.submitter.mother?.father?.father!}
+              defaultGender={"male"}
+              onFormChange={(state: PersonDetailsFormState) => {
+                this.formChangeHandler(this.state.familyTree!.submitter.mother?.father?.father!, state);
+              }}
+              onFormValidityChange={(isValid: boolean) => {
+                this.setState({ fatherOfGrandfatherFormValid: isValid });
+              }}
+            />
+          </>}
 
           <div className="family-tree-footer">
             <ProceedButton

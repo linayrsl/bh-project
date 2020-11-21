@@ -8,13 +8,12 @@ import { i18n } from "../../i18n";
 
 import { Header } from "../header/header";
 import { Loader } from "../loader/loader";
-import {PersonDetails} from "../../contracts/personDetails";
-import {FamilyTreeJson} from "../../contracts/familyTreeJson";
 
 import "./familyTreePageSubmit.css";
 import {FamilyTreeApiRequest} from "../../contracts/familyTreeApiRequest";
 import {AppConfig} from "../../contracts/appConfig";
 import {withAppConfig} from "../hoc/withAppConfig";
+import {loadOrCreateTree} from "../../familyTreeService";
 
 
 export interface FamilyTreePageSubmitProps extends WithTranslation {
@@ -42,122 +41,16 @@ class FamilyTreePageSubmitComponent extends React.Component<
     this.props.history!.push(`${this.props.config.apiBaseUrl}/family-tree/me`);
   }
 
-  getStoredPersonDetails(key: string): PersonDetails | null {
-    let item = localStorage.getItem(key);
-    if (item) {
-      let personDetails: PersonDetails = JSON.parse(item);
-      if (personDetails.isAlive) {
-        delete personDetails.deathDate;
-        delete personDetails.deathPlace;
-      }
-      return personDetails;
-    }
-    return null;
-  }
-
-  getStoredNumOfSiblings(): number {
-    let item = localStorage.getItem("numOfSiblings");
-    let numOfSiblings = 0;
-    if (item) {
-      numOfSiblings = parseInt(item);
-    }
-    return numOfSiblings;
-  }
-
   submitButtonHandler() {
     if (this.state.httpRequestInProgress) {
       return;
     }
 
-    let submitterDetails = this.getStoredPersonDetails("submitterDetails");
-    let motherDetails = this.getStoredPersonDetails("motherDetails");
-    let motherOfMotherDetails = this.getStoredPersonDetails(
-      "motherOfMotherDetails"
-    );
-    let fatherOfMotherDetails = this.getStoredPersonDetails(
-      "fatherOfMotherDetails"
-    );
-    let fatherDetails = this.getStoredPersonDetails("fatherDetails");
-    let motherOfFatherDetails = this.getStoredPersonDetails(
-      "motherOfFatherDetails"
-    );
-    let fatherOfFatherDetails = this.getStoredPersonDetails(
-      "fatherOfFatherDetails"
-    );
-
-    let numOfSiblings = this.getStoredNumOfSiblings();
-    let siblingsDetails: PersonDetails[] = [];
-    for (let i = 0; i < numOfSiblings; i++) {
-      let siblingKey = `sibling${i}`;
-      let sibling = this.getStoredPersonDetails(siblingKey);
-      if (sibling) {
-        siblingsDetails.push(sibling);
-      }
-    }
-
-    let familyTreeJson: FamilyTreeJson = {};
-    familyTreeJson["1"] = {
-      ...submitterDetails!,
-      ID: "1",
-      siblings: []
-    };
-    familyTreeJson["2"] = {
-      ...motherDetails!,
-      ID: "2",
-      siblings: []
-    };
-    familyTreeJson["3"] = {
-      ...motherOfMotherDetails!,
-      ID: "3",
-      siblings: []
-    };
-    familyTreeJson["4"] = {
-      ...fatherOfMotherDetails!,
-      ID: "4",
-      siblings: []
-    };
-    familyTreeJson["5"] = {
-      ...fatherDetails!,
-      ID: "5",
-      siblings: []
-    };
-    familyTreeJson["6"] = {
-      ...motherOfFatherDetails!,
-      ID: "6",
-      siblings: []
-    };
-    familyTreeJson["7"] = {
-      ...fatherOfFatherDetails!,
-      ID: "7",
-      siblings: []
-    };
-
-    let nextId = 8;
-    let siblingsIds: string[] = ["1"];
-    siblingsDetails.forEach((sibling, index) => {
-      let key = `${nextId + index}`;
-      familyTreeJson[key] = {
-        ...sibling,
-        ID: key,
-        siblings: []
-      };
-      siblingsIds.push(key);
-    });
-
-    for (let siblingId of siblingsIds) {
-      let siblingJson = familyTreeJson[siblingId];
-      siblingJson.siblings = siblingsIds.filter(id => id !== siblingId);
-    }
-
-    const requestBody: FamilyTreeApiRequest = {
-      submitterEmail: window.localStorage.getItem("submitterEmail") || "",
-      familyTree: familyTreeJson,
-      language: i18n.language
-    };
+    const familyTree = loadOrCreateTree();
 
     this.setState({ httpRequestInProgress: true });
     axios
-      .post("/api/family-tree/", requestBody)
+      .post("/api/family-tree/", familyTree)
       .then(() => {
         this.clearStoredFamilyTreeData();
         this.props.history!.push("/thank-you");

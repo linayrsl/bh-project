@@ -23,3 +23,13 @@
   padding-right: 10px;
   padding-top: 10px;
 }
+
+.motherParentsTitle, .motherGrandParentsTitle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.parentsLabel {
+  display: flex;
+}
