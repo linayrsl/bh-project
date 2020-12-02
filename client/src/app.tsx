@@ -47,6 +47,10 @@ class App extends Component<AppProps, AppState> {
     }
   }
 
+  componentDidMount() {
+    console.log("app did mount");
+  }
+
   render() {
     const language = this.props.i18n.language;
 

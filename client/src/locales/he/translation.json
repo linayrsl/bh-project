@@ -79,23 +79,37 @@
   "familyTreePageMother" : {
     "header": "הצד של אמא  2/4",
     "familyTreeCurrentEntity": "אמא",
+    "familyTreeGrandparentsTitle": "ההורים של אמא(סבא וסבתא)",
     "familyTreeMothersMother": "אמא של אמא",
     "familyTreeMothersFather": "אבא של אמא",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אמא(סבא רבא וסבתא רבא)",
+    "familyTreeMotherOfGrandmother": "אמא של סבתא(מצד אמא)",
+    "familyTreeFatherOfGrandmother": "אבא של סבתא(מצד אמא)",
+    "familyTreeMotherOfGrandfather": "אמא של סבא(מצד אמא)",
+    "familyTreeFatherOfGrandfather": "אבא של סבא(מצד אמא)",
     "familyTreeProceedButton": "המשיכו"
   },
   "familyTreePageFather": {
     "header": "הצד של אבא  3/4",
     "familyTreeCurrentEntity": "אבא",
+    "familyTreeGrandparentsTitle": "ההורים של אבא(סבא וסבתא)",
     "familyTreeFathersMother": "אמא של אבא",
     "familyTreeFathersFather": "אבא של אבא",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אבא(סבא רבא וסבתא רבא)",
+    "familyTreeMotherOfGrandmother": "אמא של סבתא(מצד אבא)",
+    "familyTreeFatherOfGrandmother": "אבא של סבתא(מצד אבא)",
+    "familyTreeMotherOfGrandfather": "אמא של סבא(מצד אבא)",
+    "familyTreeFatherOfGrandfather": "אבא של סבא(מצד אבא)",
     "familyTreeProceedButton": "המשיכו"
   },
   "familyTreePageSiblings": {
-    "header": "אחים/אחיות  4/4",
+    "header": "אחים/אחיות, ילדים/ילדות  4/4",
     "familyTreeSiblingsMessage": "כמה אחים/אחיות יש לך ?",
+    "familyTreeChildrenMessage": "כמה ילדים יש לך ?",
     "familyTreeSiblingsIncreaseNumber": "להגדיל מספר אחים או אחיות באחד",
     "familyTreeSiblingsDecreaseNumber": "להפחית מספר אחים או אחיות באחד",
     "familyTreeCurrentEntity": "אח/אחות",
+    "familyTreeCurrentEntityChild": "ילד/ילדה",
     "familyTreeSiblingsProceedButton": "לסיום הקישו כאן"
   },
   "familyTreePageSubmit": {
@@ -153,6 +167,9 @@
   "pageNotFoundError": {
     "header": "פרויקט עצי המשפחה",
     "pageNotFoundErrorMessage": "<0>הדף המבוקש לא נמצא, ניתן לפנות ל<1>דף הבית</1></0>"
+  },
+  "listOfPersons" : {
+    "secondParentLabel": "הורה נוסף"
   }
 }
 

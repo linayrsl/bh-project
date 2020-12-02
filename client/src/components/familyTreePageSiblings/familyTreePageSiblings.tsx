@@ -1,20 +1,22 @@
 import * as React from "react";
 import { Header } from "../header/header";
-import { TextInput } from "../textInput/textInput";
 import "./familyTreePageSiblings.scss";
 import {
-  PersonDetailsForm,
   PersonDetailsFormState
 } from "../personDetailsForm/personDetailsForm";
 import { ProceedButton } from "../proceedButton/proceedButton";
-import {Trans, WithTranslation, withTranslation} from 'react-i18next';
+import {WithTranslation, withTranslation} from 'react-i18next';
+import { ListOfPersons } from "../listOfPersons/listOfPersons";
+import {loadOrCreateTree, saveTree} from "../../familyTreeService";
+import {FamilyTree} from "../../contracts/familyTree";
 
 
 export interface FamilyTreePageSiblingsProps extends WithTranslation {}
 
 export interface FamilyTreePageSiblingsState {
-  formsValidity: { [key: string]: boolean }; // dictionary with key of type string and value of type boolean
-  numOfSiblings: number;
+  familyTree?: FamilyTree;
+  siblingsFormValid: boolean;
+  childrenFormValid: boolean;
   siblingsDetails: { [key: string]: PersonDetailsFormState };
 }
 
@@ -22,79 +24,29 @@ class FamilyTreePageSiblingsComponent extends React.Component<
   FamilyTreePageSiblingsProps,
   FamilyTreePageSiblingsState
 > {
-  state = {
-    formsValidity: {} as {
-      [key: string]: boolean;
-    } /* default value is empty dict */,
-    numOfSiblings: -1,
-    siblingsDetails: {} as {
-      [key: string]: PersonDetailsFormState;
-    }
-  };
-
-  componentDidMount() {
-    let item = localStorage.getItem("numOfSiblings");
-    let numOfSiblings = -1;
-    if (item) {
-      numOfSiblings = parseInt(item);
-    }
-    this.setState({ numOfSiblings: numOfSiblings });
-
-    let siblingsDetails = {} as {
-      [key: string]: PersonDetailsFormState;
-    };
-
-    if (numOfSiblings >= 0) {
-      for (let i = 0; i < numOfSiblings; i++) {
-        let siblingKey = `sibling${i}`;
-        item = localStorage.getItem(siblingKey);
-        if (item) {
-          let siblingFormData = JSON.parse(item);
-          siblingsDetails[siblingKey] = siblingFormData;
-        }
+  constructor(props: FamilyTreePageSiblingsProps) {
+    super(props);
+    this.state = {
+      siblingsFormValid: true,
+      childrenFormValid: true,
+      siblingsDetails: {} as {
+        [key: string]: PersonDetailsFormState;
       }
     }
+  }
 
-    this.setState({ siblingsDetails: siblingsDetails });
+  componentDidMount() {
+    this.setState({ familyTree: loadOrCreateTree() });
 
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
-  componentDidUpdate(
-    prevProps: FamilyTreePageSiblingsProps,
-    prevState: FamilyTreePageSiblingsState
-  ) {
-    if (prevState.numOfSiblings !== this.state.numOfSiblings) {
-      localStorage.setItem(
-        "numOfSiblings",
-        this.state.numOfSiblings.toString()
-      ); // Saving current number of siblings to local storage
-
-      let numOfSiblings = this.state.numOfSiblings;
-      let newFormsValidity = { ...this.state.formsValidity }; // Making copy of dict in state with all data
-
-      if (prevState.numOfSiblings < numOfSiblings) {
-        for (let i = 0; i < numOfSiblings; i++) {
-          let siblingId = `sibling${i}`;
-          if (!(siblingId in newFormsValidity)) {
-            newFormsValidity[siblingId] = false;
-          }
-        }
-      } else {
-        for (let i = numOfSiblings; i < prevState.numOfSiblings; i++) {
-          let siblingId = `sibling${i}`;
-          delete newFormsValidity[siblingId];
-        }
-      }
-
-      this.setState({ formsValidity: newFormsValidity });
+  componentDidUpdate(prevProps: Readonly<FamilyTreePageSiblingsProps>, prevState: Readonly<FamilyTreePageSiblingsState>) {
+    if (prevState.familyTree !== this.state.familyTree && this.state.familyTree) {
+      saveTree(this.state.familyTree);
     }
-  }
-
-  formChangeHandler(formName: string, state: PersonDetailsFormState) {
-    localStorage.setItem(formName, JSON.stringify(state));
   }
 
   render() {
@@ -109,65 +61,53 @@ class FamilyTreePageSiblingsComponent extends React.Component<
           <div className="level active">4</div>
         </div>
         <div className="page-content-container">
-          <div className={"siblings-container"}>
-            <div className={"siblings-body"}>
-              <Trans i18nKey={"familyTreePageSiblings.familyTreeSiblingsMessage"}>כמה אחים/אחיות יש לך ?</Trans>
-              <div className={"siblings-buttons"}>
-                <button
-                  className={"increase-button"}
-                  tabIndex={0}
-                  type={"button"}
-                  title={t("familyTreePageSiblings.familyTreeSiblingsIncreaseNumber", "להגדיל מספר אחים או אחיות באחד")}
-                  onClick={(event) => {
-                    console.log(event.target);
-                    this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings+1}));
-                  }}
-                >+</button>
-                <div className={"number-of-siblings"}>{this.state.numOfSiblings < 0 ? '-' : this.state.numOfSiblings}</div>
-                <button
-                  className={`decrease-button ${this.state.numOfSiblings < 1 ? "disabled-button" : ""}`}
-                  tabIndex={1}
-                  type={"button"}
-                  title={t("familyTreePageSiblings.familyTreeSiblingsDecreaseNumber", "להפחית מספר אחים או אחיות באחד")}
-                  onClick={(event) => {
-                    if (this.state.numOfSiblings > 0) {
-                      this.setState((prevState) => ({numOfSiblings: prevState.numOfSiblings-1}));
-                    }
-                  }}
-                >-</button>
-              </div>
-            </div>
-          </div>
-          <div className="family-tree-body">
-            {Object.keys(this.state.formsValidity).map(siblingId => {
-              return (
-                <PersonDetailsForm
-                  key={siblingId}
-                  idPrefix={siblingId}
-                  title={t("familyTreePageSiblings.familyTreeCurrentEntity", "אח/אחות")}
-                  displayIsAlive
-                  displayMaidenName
-                  defaults={this.state.siblingsDetails[siblingId]}
-                  onFormChange={(state: PersonDetailsFormState) => {
-                    this.formChangeHandler(siblingId, state);
-                  }}
-                  onFormValidityChange={(isValid: boolean) => {
-                    let newFormsValidity = { ...this.state.formsValidity }; // Making copy of dict in state with all data
-                    newFormsValidity[siblingId] = isValid;
-                    this.setState({
-                      formsValidity: newFormsValidity
-                    });
-                  }}
-                />
-              );
-            })}
-          </div>
+          {this.state.familyTree && <ListOfPersons
+            label={t("familyTreePageSiblings.familyTreeSiblingsMessage", "כמה אחים/אחיות יש לך ?")}
+            formLabel={t("familyTreePageSiblings.familyTreeCurrentEntity", "אח/אחות")}
+            idPrefix="siblings"
+            displaySecondParent={false}
+            onChange={(siblings) => {
+              const familyTree = {...this.state.familyTree} as FamilyTree;
+              familyTree.submitter.siblings =
+                siblings.map(sibling => ({...sibling, mother: null, father: null, siblings: null}));
+              this.setState({
+                familyTree
+              });
+            }}
+            onValidityChanged={(validity) => {
+              this.setState({
+                siblingsFormValid: validity
+              });
+            }}
+            persons={this.state.familyTree?.submitter.siblings!}
+          />}
+          <div className="vertical-space" />
+          {this.state.familyTree && <ListOfPersons
+            label={t("familyTreePageSiblings.familyTreeChildrenMessage", "כמה ילדים יש לך ?")}
+            formLabel={t("familyTreePageSiblings.familyTreeCurrentEntityChild", "ילד/ילדה")}
+            idPrefix="children"
+            displaySecondParent={true}
+            onChange={(children) => {
+              const familyTree = {...this.state.familyTree} as FamilyTree;
+              familyTree.submitter.children =
+                children.map(child => ({...child, mother: null, father: null, siblings: null}));
+              this.setState({
+                familyTree
+              });
+            }}
+            onValidityChanged={(validity) => {
+              this.setState({
+                childrenFormValid: validity
+              });
+            }}
+            persons={[]}
+          />}
           <div className="vertical-spacer"></div>
           <div className="family-tree-footer">
             <ProceedButton
               disabled={
-                Object.values(this.state.formsValidity).indexOf(false) >= 0 || this.state.numOfSiblings < 0
-              } // This expression return true if at least 1 of values in formsValidity dict is falsey
+                !this.state.siblingsFormValid || !this.state.childrenFormValid
+              }
               text={t("familyTreePageSiblings.familyTreeSiblingsProceedButton", "לסיום הקישו כאן")}
               nextPageUrl="/family-tree/submit"
             />

@@ -78,23 +78,37 @@
   "familyTreePageMother" : {
     "header": "Your mother's side 2/4",
     "familyTreeCurrentEntity": "Your mother",
+    "familyTreeGrandParentsTitle": "Mother's parents(grandfather and grandmother)",
     "familyTreeMothersMother": "Your mother's mother",
     "familyTreeMothersFather": "Your mother's father",
+    "familyTreeGrandGrandParentsTitle": "Mother's grandparents(grand grandfather and grand grandmother)",
+    "familyTreeMotherOfGrandmother": "Your grandmother's mother",
+    "familyTreeFatherOfGrandmother": "Your grandmother's father",
+    "familyTreeMotherOfGrandfather": "Your grandfather's mother",
+    "familyTreeFatherOfGrandfather": "Your grandfather's father",
     "familyTreeProceedButton": "Next"
   },
   "familyTreePageFather": {
     "header": "Your father's side 3/4",
     "familyTreeCurrentEntity": "Your father",
+    "familyTreeGrandParentsTitle": "Father's parents(grandfather and grandmother)",
     "familyTreeFathersMother": "Your father's mother",
     "familyTreeFathersFather": "Your father's father",
+    "familyTreeGrandGrandParentsTitle": "Father's grandparents(grand grandfather and grand grandmother)",
+    "familyTreeMotherOfGrandmother": "Your grandmother's mother",
+    "familyTreeFatherOfGrandmother": "Your grandmother's father",
+    "familyTreeMotherOfGrandfather": "Your grandfather's mother",
+    "familyTreeFatherOfGrandfather": "Your grandfather's father",
     "familyTreeProceedButton": "Next"
   },
   "familyTreePageSiblings": {
-    "header": "Siblings 4/4",
+    "header": "Siblings, Children 4/4",
     "familyTreeSiblingsMessage": "How many siblings do you have?",
+    "familyTreeChildrenMessage": "How many children do you have?",
     "familyTreeSiblingsIncreaseNumber": "Increase the number of brothers or sisters by one",
     "familyTreeSiblingsDecreaseNumber": "Decrease the number of brothers or sisters by one",
     "familyTreeCurrentEntity": "Brother/sister",
+    "familyTreeCurrentEntityChild": "Child",
     "familyTreeSiblingsProceedButton": "Click here to finish"
   },
   "familyTreePageSubmit": {
@@ -152,6 +166,9 @@
   "pageNotFoundError": {
     "header": "family tree project",
     "pageNotFoundErrorMessage": "<0>The requested information was not found.  You can go back to the  <1>homepage</1></0>"
+  },
+  "listOfPersons": {
+    "secondParentLabel": "Second Parent"
   }
 }
 
