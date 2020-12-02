@@ -167,6 +167,9 @@
   "pageNotFoundError": {
     "header": "פרויקט עצי המשפחה",
     "pageNotFoundErrorMessage": "<0>הדף המבוקש לא נמצא, ניתן לפנות ל<1>דף הבית</1></0>"
+  },
+  "listOfPersons" : {
+    "secondParentLabel": "הורה נוסף"
   }
 }
 

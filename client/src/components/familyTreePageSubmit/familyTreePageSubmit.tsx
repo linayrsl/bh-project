@@ -38,7 +38,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
   }
 
   returnButtonHandler() {
-    this.props.history!.push(`${this.props.config.apiBaseUrl}/family-tree/me`);
+    this.props.history!.push(`/family-tree/me`);
   }
 
   submitButtonHandler() {

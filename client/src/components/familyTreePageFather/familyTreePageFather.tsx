@@ -35,12 +35,12 @@ class FamilyTreePageFatherComponent extends React.Component<
     super(props);
     this.state = {
       fatherFormValid: false,
-      motherOfFatherFormValid: false,
-      fatherOfFatherFormValid: false,
-      motherOfGrandmotherFormValid: false,
-      fatherOfGrandmotherFormValid: false,
-      motherOfGrandfatherFormValid: false,
-      fatherOfGrandfatherFormValid: false,
+      motherOfFatherFormValid: true,
+      fatherOfFatherFormValid: true,
+      motherOfGrandmotherFormValid: true,
+      fatherOfGrandmotherFormValid: true,
+      motherOfGrandfatherFormValid: true,
+      fatherOfGrandfatherFormValid: true,
       showParents:false,
       showGrandparents: false,
     };

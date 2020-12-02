@@ -12,4 +12,6 @@ export interface PersonDetails {
   deathPlace?: string | null;
   deathDate?: string | null;
   isSubmitter: boolean;
+
+  relatedPerson?: PersonDetails;
 }

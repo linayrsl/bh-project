@@ -166,6 +166,9 @@
   "pageNotFoundError": {
     "header": "family tree project",
     "pageNotFoundErrorMessage": "<0>The requested information was not found.  You can go back to the  <1>homepage</1></0>"
+  },
+  "listOfPersons": {
+    "secondParentLabel": "Second Parent"
   }
 }
 

@@ -10,6 +10,7 @@ export interface ListOfPersonsProps extends WithTranslation {
   persons: PersonDetailsFormState[];
   onValidityChanged: (validity: boolean) => void;
   onChange: (persons: PersonDetailsFormState[]) => void;
+  displaySecondParent: boolean;
 }
 
 export interface ListOfPersonsState {
@@ -79,28 +80,50 @@ class ListOfPersonsComponent extends Component<ListOfPersonsProps, ListOfPersons
         <div className="family-tree-body">
           {this.state.personsDetails.map((personDetails, index) => {
             return (
-              <PersonDetailsForm
-                key={`${this.props.idPrefix}${index}`}
-                idPrefix={`${this.props.idPrefix}${index}`}
-                title={this.props.formLabel}
-                displayIsAlive
-                displayMaidenName
-                defaults={personDetails}
-                onFormChange={(state: PersonDetailsFormState) => {
-                  let newPersonsState = [...this.state.personsDetails];
-                  newPersonsState[index] = state;
-                  this.setState(
-                    {personsDetails: newPersonsState}
-                  );
-                }}
-                onFormValidityChange={(isValid: boolean) => {
-                  let newFormValidity = [...this.state.formsValidity];
-                  newFormValidity[index] = isValid;
-                  this.setState({
-                    formsValidity: newFormValidity
-                  });
-                }}
-              />
+              <React.Fragment
+                key={`${this.props.idPrefix}${index}`}>
+                <PersonDetailsForm
+                  idPrefix={`${this.props.idPrefix}${index}`}
+                  title={this.props.formLabel}
+                  displayIsAlive
+                  displayMaidenName
+                  defaults={personDetails}
+                  onFormChange={(state: PersonDetailsFormState) => {
+                    let newPersonsState = [...this.state.personsDetails];
+                    newPersonsState[index] = state;
+                    this.setState(
+                      {personsDetails: newPersonsState}
+                    );
+                  }}
+                  onFormValidityChange={(isValid: boolean) => {
+                    let newFormValidity = [...this.state.formsValidity];
+                    newFormValidity[index] = isValid;
+                    this.setState({
+                      formsValidity: newFormValidity
+                    });
+                  }}
+                />
+                {this.props.displaySecondParent &&
+                <>
+                  <PersonDetailsForm
+                    idPrefix={`${this.props.idPrefix}${index}_relatedPerson`}
+                    // title={this.props.formLabel}
+                    title={t("listOfPersons.secondParentLabel", "הורה נוסף")}
+                    displayIsAlive
+                    displayMaidenName
+                    defaults={personDetails.relatedPerson}
+                    onFormChange={(state: PersonDetailsFormState) => {
+                      let newPersonsState = [...this.state.personsDetails];
+                      newPersonsState[index] = {...newPersonsState[index]};
+                      newPersonsState[index].relatedPerson = state;
+                      this.setState({personsDetails: newPersonsState});
+                    }}
+                    onFormValidityChange={() => {
+                      // Future implementation
+                    }}
+                  />
+                </>}
+              </React.Fragment>
             );
           })}
         </div>

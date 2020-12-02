@@ -65,6 +65,7 @@ class FamilyTreePageSiblingsComponent extends React.Component<
             label={t("familyTreePageSiblings.familyTreeSiblingsMessage", "כמה אחים/אחיות יש לך ?")}
             formLabel={t("familyTreePageSiblings.familyTreeCurrentEntity", "אח/אחות")}
             idPrefix="siblings"
+            displaySecondParent={false}
             onChange={(siblings) => {
               const familyTree = {...this.state.familyTree} as FamilyTree;
               familyTree.submitter.siblings =
@@ -85,6 +86,7 @@ class FamilyTreePageSiblingsComponent extends React.Component<
             label={t("familyTreePageSiblings.familyTreeChildrenMessage", "כמה ילדים יש לך ?")}
             formLabel={t("familyTreePageSiblings.familyTreeCurrentEntityChild", "ילד/ילדה")}
             idPrefix="children"
+            displaySecondParent={true}
             onChange={(children) => {
               const familyTree = {...this.state.familyTree} as FamilyTree;
               familyTree.submitter.children =
