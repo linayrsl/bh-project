@@ -24,6 +24,7 @@
 @media only screen and (max-width: 400px) {
   .bh-app .proceed-button {
     width: 80%;
+    font-size: 26px;
   }
 }
 

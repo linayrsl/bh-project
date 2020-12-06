@@ -33,7 +33,7 @@
   },
   "verificationPage": {
     "header": "Email verification",
-    "verificationMessage": "Check your mailbox. A message containing a verification code will be sent in the next few minutes.",
+    "verificationMessage": "Check your mailbox <1>{{userEmail}}</1>. A message containing a verification code will be sent in the next few minutes.",
     "verificationMessage2": "Copy the code here:",
     "verificationCode": "Verification code",
     "verificationCodePlaceholder": "Enter the code",

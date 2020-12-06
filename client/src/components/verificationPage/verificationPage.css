@@ -17,6 +17,10 @@
   padding-top: 15px;
 }
 
+.verification-message1 span {
+  font-weight: bolder;
+}
+
 .verification-message3 {
   color: rgb(83, 83, 84);
   text-align: center;
