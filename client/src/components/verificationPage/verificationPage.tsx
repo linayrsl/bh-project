@@ -79,7 +79,9 @@ class VerificationPageComponent extends React.Component<
         <div className="verification-body page-content-container ">
           <div className="verification-message">
             <div className="verification-message1">
-             <Trans i18nKey={"verificationPage.verificationMessage"}> בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה</Trans>
+             <Trans i18nKey={"verificationPage.verificationMessage"}> בדקו את תיבת הדואר
+               <span>{{userEmail: decodeURIComponent(this.props.match!.params.email)}}</span>
+               . בדקות הקרובות תתקבל הודעה</Trans>
             </div>
             <div className="verification-message2">
               <Trans i18nKey={"verificationPage.verificationMessage2"}>ובה קוד אימות, יש להעתיק את הקוד לכאן:</Trans>

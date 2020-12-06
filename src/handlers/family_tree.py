@@ -22,7 +22,6 @@ family_tree_json_schema = {
         "person": {
             "type": "object",
             "properties": {
-                "ID": {"type": "string", "pattern": "^[0-9]+$"},
                 "firstName": {"type": ["string", "null"]},
                 "lastName": {"type": ["string", "null"]},
                 "maidenName": {"type": ["string", "null"]},
@@ -30,47 +29,87 @@ family_tree_json_schema = {
                 "birthDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
                 "birthPlace": {"type": ["string", "null"]},
                 "isAlive": {"type": "boolean"},
-                "deathDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
-                "deathPlace": {"type": ["string", "null"]},
-                "motherID": {"type": ["string", "null"], "pattern": "^[0-9]+$"},
-                "fatherID": {"type": ["string", "null"], "pattern": "^[0-9]+$"},
-                "siblings": {
-                    "type": "array",
-                    "items": {"type": "string", "pattern": "^[0-9]+$"}
+                # "deathDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
+                # "deathPlace": {"type": ["string", "null"]},
+                "mother": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/person",
+                            "additionalProperties": False
+                         },
+                        {"type": "null"}
+                    ],
                 },
+                "father": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/person",
+                            "additionalProperties": False
+                        },
+                        {"type": "null"}
+                    ],
+                },
+                "siblings": {
+                    "type": ["array", "null"],
+                    "items": {
+                        "$ref": "#/definitions/person",
+                        "additionalProperties": False
+                    }
+                },
+                "isSubmitter": {"type": "boolean"},
                 "image": {"type": ["string", "null"]}
             },
-            "required": ["fatherID",
-                         "motherID",
-                         "ID"],
-            "dependencies": {
-                "deathDate": {
+            "oneOf": [
+                {
                     "properties": {
+                        "deathDate": {"type": "string", "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
+                        "deathPlace": {"type": "string"},
+                        "isAlive": {
+                            "enum": [False]
+                        }
+                    }
+                },{
+                    "properties": {
+                        "deathDate": {"enum": [None]},
+                        "deathPlace": {"type": "string"},
                         "isAlive": {
                             "enum": [False]
                         }
                     }
                 },
-                "deathPlace": {
+                {
                     "properties": {
+                        "deathDate": {"type": "string", "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
+                        "deathPlace": {"enum": [None]},
                         "isAlive": {
                             "enum": [False]
                         }
                     }
+                },
+                {
+                    "properties": {
+                        "deathDate": {"enum": [None]},
+                        "deathPlace": {"enum": [None]},
+                        "isAlive": {"enum": [False, True]}
+                    }
                 }
-            }
+            ],
+        },
+        "submitter": {
+            "allOf": [
+                    {"$ref": "#/definitions/person"},
+                ],
+            "required": ["firstName",
+                         "lastName",
+                         "gender"],
         }
     },
     "type": "object",
     "properties": {
         "submitterEmail": {"type": "string"},
         "language": {"type": "string"},
-        "familyTree": {
-            "type": "object",
-            "patternProperties": {
-                "^[0-9]+$": {
-                    "$ref": "#/definitions/person"}
-            },
+        "submitter": {
+            "$ref": "#/definitions/submitter",
             "additionalProperties": False
         }
     }
