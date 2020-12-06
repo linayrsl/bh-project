@@ -76,7 +76,8 @@ family_tree_json_schema = {
                             "enum": [False]
                         }
                     }
-                },{
+                },
+                {
                     "properties": {
                         "deathDate": {"type": "string", "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
                         "deathPlace": {"enum": [None]},
@@ -93,21 +94,6 @@ family_tree_json_schema = {
                     }
                 }
             ],
-#             "oneOf": [
-# {
-#                     "properties": {
-#                         "isAlive": {
-#                             "enum": [False]
-#                         }
-#                     }
-#                 },
-#                 {
-#                     "properties": {
-#                         "isAlive": {"enum": [False, True]}
-#                     }
-#                 }
-#
-#             ],
         },
         "submitter": {
             "allOf": [

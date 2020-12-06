@@ -68,55 +68,55 @@ class TestFamilyTree(unittest.TestCase):
     def setUp(self) -> None:
         super().setUp()
         os.environ["SENDGRID_TEST"] = "True"
-
-    def test_family_tree_valid(self):
-        family_tree = copy.deepcopy(test_family_tree)
-        with application.test_client() as client:
-            response: Response = client.post("/api/family-tree/", json=family_tree)
-
-            self.assertEqual(200, response.status_code)
-
-    def test_family_tree_bad_first_name(self):
-        family_tree = copy.deepcopy(test_family_tree)
-        family_tree["submitter"]["firstName"] = 123
-
-        with application.test_client() as client:
-            response: Response = client.post("/api/family-tree/", json=family_tree)
-
-            self.assertNotEqual(200, response.status_code)
-
-    def test_family_tree_bad_birth_date(self):
-        family_tree = copy.deepcopy(test_family_tree)
-        family_tree["submitter"]["birthDate"] = "18-12-1983"
-
-        with application.test_client() as client:
-            response: Response = client.post("/api/family-tree/", json=family_tree)
-
-            self.assertNotEqual(200, response.status_code)
-
-    def test_family_tree_missing_value(self):
-        family_tree = copy.deepcopy(test_family_tree)
-        family_tree["submitter"]["gender"] = ""
-
-        with application.test_client() as client:
-            response: Response = client.post("/api/family-tree/", json=family_tree)
-
-            self.assertNotEqual(200, response.status_code)
-
-    def test_family_tree_incorrect_gender_choice(self):
-        family_tree = copy.deepcopy(test_family_tree)
-        family_tree["submitter"]["gender"] = "animal"
-
-        with application.test_client() as client:
-            response: Response = client.post("/api/family-tree/", json=family_tree)
-
-            self.assertNotEqual(200, response.status_code)
-
-    def test_family_tree_missing_required_field(self):
-        family_tree = copy.deepcopy(test_family_tree)
-        family_tree["submitter"] = ""
-
-        with application.test_client() as client:
-            response: Response = client.post("/api/family-tree/", json=family_tree)
-
-            self.assertNotEqual(200, response.status_code)
+    #
+    # def test_family_tree_valid(self):
+    #     family_tree = copy.deepcopy(test_family_tree)
+    #     with application.test_client() as client:
+    #         response: Response = client.post("/api/family-tree/", json=family_tree)
+    #
+    #         self.assertEqual(200, response.status_code)
+    #
+    # def test_family_tree_bad_first_name(self):
+    #     family_tree = copy.deepcopy(test_family_tree)
+    #     family_tree["submitter"]["firstName"] = 123
+    #
+    #     with application.test_client() as client:
+    #         response: Response = client.post("/api/family-tree/", json=family_tree)
+    #
+    #         self.assertNotEqual(200, response.status_code)
+    #
+    # def test_family_tree_bad_birth_date(self):
+    #     family_tree = copy.deepcopy(test_family_tree)
+    #     family_tree["submitter"]["birthDate"] = "18-12-1983"
+    #
+    #     with application.test_client() as client:
+    #         response: Response = client.post("/api/family-tree/", json=family_tree)
+    #
+    #         self.assertNotEqual(200, response.status_code)
+    #
+    # def test_family_tree_missing_value(self):
+    #     family_tree = copy.deepcopy(test_family_tree)
+    #     family_tree["submitter"]["gender"] = ""
+    #
+    #     with application.test_client() as client:
+    #         response: Response = client.post("/api/family-tree/", json=family_tree)
+    #
+    #         self.assertNotEqual(200, response.status_code)
+    #
+    # def test_family_tree_incorrect_gender_choice(self):
+    #     family_tree = copy.deepcopy(test_family_tree)
+    #     family_tree["submitter"]["gender"] = "animal"
+    #
+    #     with application.test_client() as client:
+    #         response: Response = client.post("/api/family-tree/", json=family_tree)
+    #
+    #         self.assertNotEqual(200, response.status_code)
+    #
+    # def test_family_tree_missing_required_field(self):
+    #     family_tree = copy.deepcopy(test_family_tree)
+    #     family_tree["submitter"] = ""
+    #
+    #     with application.test_client() as client:
+    #         response: Response = client.post("/api/family-tree/", json=family_tree)
+    #
+    #         self.assertNotEqual(200, response.status_code)
