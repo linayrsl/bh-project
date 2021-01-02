@@ -4,6 +4,7 @@ from typing import Optional
 
 @dataclass
 class PersonDetails:
+    id: int
     image: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]

@@ -3,7 +3,7 @@ import io
 import logging
 import re
 import zipfile
-from typing import Dict, Optional
+from typing import Dict, Optional, Generator, Any
 
 from flask import Blueprint, request, Response, abort
 from jsonschema import validate, ValidationError, FormatChecker
@@ -200,13 +200,21 @@ def create_zip_with_gedcom_and_images(file_name: str, data: bytes, images: Dict[
     return zip_buffer.getvalue()
 
 
-def map_person_json_to_model(person_json: Dict) -> Optional[PersonNode]:
+def sequential_id_generator():
+    next_id = 1
+    while True:
+        yield next_id
+        next_id += 1
+
+
+def map_person_json_to_model(person_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[PersonNode]:
     if not person_json:
         return None
     person_node = PersonNode(
-        father=map_person_json_to_model(person_json["father"]) if "father" in person_json else None,
-        mother=map_person_json_to_model(person_json["mother"]) if "mother" in person_json else None,
-        siblings=[map_person_json_to_model(sibling) for sibling in
+        id=next(id_generator),
+        father=map_person_json_to_model(person_json["father"], id_generator) if "father" in person_json else None,
+        mother=map_person_json_to_model(person_json["mother"], id_generator) if "mother" in person_json else None,
+        siblings=[map_person_json_to_model(sibling, id_generator) for sibling in
                   person_json["siblings"]] if "siblings" in person_json and person_json["siblings"] else None,
         image=person_json["image"] if "image" in person_json else None,
         first_name=person_json["firstName"] if "firstName" in person_json else None,
@@ -223,15 +231,16 @@ def map_person_json_to_model(person_json: Dict) -> Optional[PersonNode]:
     return person_node
 
 
-def map_submitter_json_to_model(submitter_json: Dict) -> Optional[Submitter]:
+def map_submitter_json_to_model(submitter_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[Submitter]:
     if not submitter_json:
         return None
     submitter = Submitter(
-        father=map_person_json_to_model(submitter_json["father"]),
-        mother=map_person_json_to_model(submitter_json["mother"]),
-        siblings=[map_person_json_to_model(sibling) for sibling in
+        id=next(id_generator),
+        father=map_person_json_to_model(submitter_json["father"], id_generator),
+        mother=map_person_json_to_model(submitter_json["mother"], id_generator),
+        siblings=[map_person_json_to_model(sibling, id_generator) for sibling in
                   submitter_json["siblings"]] if "siblings" in submitter_json and submitter_json["siblings"] else None,
-        children=[map_person_json_to_model(child) for child in
+        children=[map_person_json_to_model(child, id_generator) for child in
                   submitter_json["children"]] if "children" in submitter_json and submitter_json["children"] else None,
         image=submitter_json["image"] if "image" in submitter_json else None,
         first_name=submitter_json["firstName"] if "firstName" in submitter_json else None,
@@ -252,6 +261,6 @@ def map_family_tree_json_to_model(family_tree_json: Dict) -> FamilyTree:
     family_tree_model = FamilyTree(
         submitter_email=family_tree_json["submitterEmail"],
         language=family_tree_json["language"],
-        submitter=map_submitter_json_to_model(family_tree_json["submitter"])
+        submitter=map_submitter_json_to_model(family_tree_json["submitter"], sequential_id_generator())
     )
     return family_tree_model
