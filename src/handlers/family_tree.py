@@ -3,7 +3,7 @@ import io
 import logging
 import re
 import zipfile
-from typing import Dict
+from typing import Dict, Optional
 
 from flask import Blueprint, request, Response, abort
 from jsonschema import validate, ValidationError, FormatChecker
@@ -13,6 +13,9 @@ from src.database.family_tree_db import log_family_tree_submission
 
 from src.gedcom.handler import handler
 from src.mail.email import Email
+from src.models.family_tree import FamilyTree
+from src.models.person_node import PersonNode
+from src.models.submitter import Submitter
 from src.settings import SENDGRID_API_KEY, GEDCOM_EMAIL_FROM, GEDCOM_EMAIL_TO, DATABASE_URL
 
 logger = logging.getLogger(__name__)
@@ -36,7 +39,7 @@ family_tree_json_schema = {
                         {
                             "$ref": "#/definitions/person",
                             "additionalProperties": False
-                         },
+                        },
                         {"type": "null"}
                     ],
                 },
@@ -68,7 +71,7 @@ family_tree_json_schema = {
                             "enum": [False]
                         }
                     }
-                },{
+                }, {
                     "properties": {
                         "deathDate": {"enum": [None]},
                         "deathPlace": {"type": "string"},
@@ -97,8 +100,8 @@ family_tree_json_schema = {
         },
         "submitter": {
             "allOf": [
-                    {"$ref": "#/definitions/person"},
-                ],
+                {"$ref": "#/definitions/person"},
+            ],
             "required": ["firstName",
                          "lastName",
                          "gender"],
@@ -130,6 +133,8 @@ def family_tree_post():
     except ValidationError as e:
         logger.exception("Family tree json validation has failed")
         return abort(400, e.message)
+
+    family_tree_model: FamilyTree = map_family_tree_json_to_model(family_tree_json)
 
     try:
         image_dict: Dict[str, str]
@@ -172,7 +177,8 @@ def family_tree_post():
                 logger.error("Could not get connection to database")
                 return abort(500, description="Failed to connect to database")
 
-            log_family_tree_submission(db_connection, family_tree_json["familyTree"], family_tree_json["submitterEmail"])
+            log_family_tree_submission(db_connection, family_tree_json["familyTree"],
+                                       family_tree_json["submitterEmail"])
 
         logger.info("Family tree submission log saved to database")
 
@@ -192,3 +198,60 @@ def create_zip_with_gedcom_and_images(file_name: str, data: bytes, images: Dict[
         for image_name, image_data in images.items():
             zip_file.writestr(image_name, image_data)
     return zip_buffer.getvalue()
+
+
+def map_person_json_to_model(person_json: Dict) -> Optional[PersonNode]:
+    if not person_json:
+        return None
+    person_node = PersonNode(
+        father=map_person_json_to_model(person_json["father"]) if "father" in person_json else None,
+        mother=map_person_json_to_model(person_json["mother"]) if "mother" in person_json else None,
+        siblings=[map_person_json_to_model(sibling) for sibling in
+                  person_json["siblings"]] if "siblings" in person_json and person_json["siblings"] else None,
+        image=person_json["image"] if "image" in person_json else None,
+        first_name=person_json["firstName"] if "firstName" in person_json else None,
+        last_name=person_json["lastName"] if "lastName" in person_json else None,
+        maiden_name=person_json["maidenName"] if "maidenName" in person_json else None,
+        birth_date=person_json["birthDate"] if "birthDate" in person_json else None,
+        birth_place=person_json["birthPlace"] if "birthPlace" in person_json else None,
+        gender=person_json["gender"] if "gender" in person_json else None,
+        is_alive=person_json["isAlive"] if "isAlive" in person_json else None,
+        death_date=person_json["deathDate"] if "deathDate" in person_json else None,
+        death_place=person_json["deathDate"] if "deathPlace" in person_json else None,
+        related_person=person_json["relatedPerson"] if "relatedPerson" in person_json else None
+    )
+    return person_node
+
+
+def map_submitter_json_to_model(submitter_json: Dict) -> Optional[Submitter]:
+    if not submitter_json:
+        return None
+    submitter = Submitter(
+        father=map_person_json_to_model(submitter_json["father"]),
+        mother=map_person_json_to_model(submitter_json["mother"]),
+        siblings=[map_person_json_to_model(sibling) for sibling in
+                  submitter_json["siblings"]] if "siblings" in submitter_json and submitter_json["siblings"] else None,
+        children=[map_person_json_to_model(child) for child in
+                  submitter_json["children"]] if "children" in submitter_json and submitter_json["children"] else None,
+        image=submitter_json["image"] if "image" in submitter_json else None,
+        first_name=submitter_json["firstName"] if "firstName" in submitter_json else None,
+        last_name=submitter_json["lastName"] if "lastName" in submitter_json else None,
+        maiden_name=submitter_json["maidenName"] if "maidenName" in submitter_json else None,
+        birth_date=submitter_json["birthDate"] if "birthDate" in submitter_json else None,
+        birth_place=submitter_json["birthPlace"] if "birthPlace" in submitter_json else None,
+        gender=submitter_json["gender"] if "gender" in submitter_json else None,
+        is_alive=submitter_json["isAlive"] if "isAlive" in submitter_json else None,
+        death_date=submitter_json["deathDate"] if "deathDate" in submitter_json else None,
+        death_place=submitter_json["deathDate"] if "deathPlace" in submitter_json else None,
+        related_person=submitter_json["relatedPerson"] if "relatedPerson" in submitter_json else None
+    )
+    return submitter
+
+
+def map_family_tree_json_to_model(family_tree_json: Dict) -> FamilyTree:
+    family_tree_model = FamilyTree(
+        submitter_email=family_tree_json["submitterEmail"],
+        language=family_tree_json["language"],
+        submitter=map_submitter_json_to_model(family_tree_json["submitter"])
+    )
+    return family_tree_model

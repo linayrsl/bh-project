@@ -5,7 +5,7 @@ from langdetect import detect
 
 
 def format_date(string_date):
-    if string_date != None:
+    if string_date is not None:
         if len(string_date) == 10:
             temp_date = datetime.strptime(string_date, "%d/%m/%Y")
             new_format_date = datetime.strftime(temp_date, "%d %b %Y").upper()
