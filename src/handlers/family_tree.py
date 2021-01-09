@@ -10,6 +10,7 @@ from jsonschema import validate, ValidationError, FormatChecker
 
 from src.database.database_connection import DatabaseConnection
 from src.database.family_tree_db import log_family_tree_submission
+from src.gedcom.gedcom_builder import GedcomBuilder
 
 from src.gedcom.handler import handler
 from src.mail.email import Email
@@ -134,21 +135,25 @@ def family_tree_post():
         logger.exception("Family tree json validation has failed")
         return abort(400, e.message)
 
-    family_tree_model: FamilyTree = map_family_tree_json_to_model(family_tree_json)
+    try:
+        family_tree_model: FamilyTree = map_family_tree_json_to_model(family_tree_json)
+    except Exception:
+        logger.exception("Failed to map family tree model from family tree json")
+        return abort(500, description="Failed to parse family tree json")
 
     try:
-        image_dict: Dict[str, str]
-        gedcom_string, image_dict, _ = handler(family_tree_json["familyTree"], family_tree_json["language"])
+        gedcom = GedcomBuilder(family_tree_model)
+        gedcom_string, images = gedcom.get_gedcom_string()
     except Exception:
         logger.exception("Failed to generate gedcom from family tree json")
         return abort(500, description="Failed to generate gedcom")
 
     try:
-        user_id = re.findall(r'I[0-9]+', gedcom_string, re.UNICODE)[0][1:]
+        user_id = family_tree_model.submitter.id
         file_name = 'user{}.ged'.format(user_id)
         zip_file_name = 'user{}.zip'.format(user_id)
 
-        user_last_name = re.findall(r'/\w+', gedcom_string, re.UNICODE)[0][1:]
+        user_last_name = family_tree_model.submitter.last_name
         content = str(b'{} family tree', 'utf-8').format(user_last_name)
     except Exception:
         logger.exception("Failed to extract user name and user last name from gedcom string")
@@ -164,7 +169,7 @@ def family_tree_post():
     zip_file_data = create_zip_with_gedcom_and_images(
         file_name,
         gedcom_string.encode(),
-        {key: base64.b64decode(value) for (key, value) in image_dict.items()})
+        {key: base64.b64decode(value) for (key, value) in images.items()})
 
     if send_email.send_zip(
             zip_file_name,
@@ -177,13 +182,13 @@ def family_tree_post():
                 logger.error("Could not get connection to database")
                 return abort(500, description="Failed to connect to database")
 
-            log_family_tree_submission(db_connection, family_tree_json["familyTree"],
-                                       family_tree_json["submitterEmail"])
+            # log_family_tree_submission(db_connection, family_tree_json["familyTree"],
+            #                            family_tree_json["submitterEmail"])
 
         logger.info("Family tree submission log saved to database")
 
-        if not send_email.send_zip_to_user(zip_file_name, zip_file_data, family_tree_json["submitterEmail"]):
-            logger.error("Gedcom wasn't sent to the user with email {}".format(family_tree_json["submitterEmail"]))
+        if not send_email.send_zip_to_user(zip_file_name, zip_file_data, family_tree_model.submitter_email):
+            logger.error("Gedcom wasn't sent to the user with email {}".format(family_tree_model.submitter_email))
 
         return Response("{}", mimetype="application/json")
 
@@ -251,7 +256,7 @@ def map_submitter_json_to_model(submitter_json: Dict, id_generator: Generator[in
         gender=submitter_json["gender"] if "gender" in submitter_json else None,
         is_alive=submitter_json["isAlive"] if "isAlive" in submitter_json else None,
         death_date=submitter_json["deathDate"] if "deathDate" in submitter_json else None,
-        death_place=submitter_json["deathDate"] if "deathPlace" in submitter_json else None,
+        death_place=submitter_json["deathPlace"] if "deathPlace" in submitter_json else None,
         related_person=submitter_json["relatedPerson"] if "relatedPerson" in submitter_json else None
     )
     return submitter
