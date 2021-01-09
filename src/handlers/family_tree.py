@@ -3,7 +3,7 @@ import io
 import logging
 import re
 import zipfile
-from typing import Dict, Optional, Generator, Any
+from typing import Dict, Optional, Generator, Any, Union
 
 from flask import Blueprint, request, Response, abort
 from jsonschema import validate, ValidationError, FormatChecker
@@ -15,6 +15,7 @@ from src.gedcom.gedcom_builder import GedcomBuilder
 from src.gedcom.handler import handler
 from src.mail.email import Email
 from src.models.family_tree import FamilyTree
+from src.models.person import Person
 from src.models.person_node import PersonNode
 from src.models.submitter import Submitter
 from src.settings import SENDGRID_API_KEY, GEDCOM_EMAIL_FROM, GEDCOM_EMAIL_TO, DATABASE_URL
@@ -182,8 +183,11 @@ def family_tree_post():
                 logger.error("Could not get connection to database")
                 return abort(500, description="Failed to connect to database")
 
-            # log_family_tree_submission(db_connection, family_tree_json["familyTree"],
-            #                            family_tree_json["submitterEmail"])
+            log_family_tree_submission(
+                db_connection,
+                family_tree_model,
+                count_family_tree_individuals(family_tree_model.submitter),
+                len(images.values()))
 
         logger.info("Family tree submission log saved to database")
 
@@ -257,7 +261,7 @@ def map_submitter_json_to_model(submitter_json: Dict, id_generator: Generator[in
         is_alive=submitter_json["isAlive"] if "isAlive" in submitter_json else None,
         death_date=submitter_json["deathDate"] if "deathDate" in submitter_json else None,
         death_place=submitter_json["deathPlace"] if "deathPlace" in submitter_json else None,
-        related_person=submitter_json["relatedPerson"] if "relatedPerson" in submitter_json else None
+        related_person=map_person_json_to_model(submitter_json["relatedPerson"], id_generator) if "relatedPerson" in submitter_json else None
     )
     return submitter
 
@@ -269,3 +273,13 @@ def map_family_tree_json_to_model(family_tree_json: Dict) -> FamilyTree:
         submitter=map_submitter_json_to_model(family_tree_json["submitter"], sequential_id_generator())
     )
     return family_tree_model
+
+
+def count_family_tree_individuals(person: Union[Submitter, Person, None]):
+    if not person:
+        return 0
+    return 1 + \
+        count_family_tree_individuals(person.mother) + \
+        count_family_tree_individuals(person.father) + \
+        (len(person.siblings) if person.siblings else 0) + \
+        (len(person.children) * 2 if isinstance(person, Submitter) and person.children else 0)   # Multiply by 2 because each child has 2 parents
