@@ -20,6 +20,7 @@ blank_image = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEB
 
 class TestCreateGedcom(unittest.TestCase):
     def test_create_gedcom_simple(self):
+        self.maxDiff = None
         # Setup test
         data_dict = {
                               "language": "he",
@@ -265,7 +266,60 @@ class TestCreateGedcom(unittest.TestCase):
                                     "siblings": None
                                   },
                                 ],
-                                "children": []
+                                "children": [
+                                    {
+                                        "image": None,
+                                        "firstName": "ben",
+                                        "lastName": "Geller",
+                                        "maidenName": None,
+                                        "gender": "male",
+                                        "birthDate": "1985",
+                                        "birthPlace": "NewYork",
+                                        "isAlive": True,
+                                        "deathDate": None,
+                                        "deathPlace": None,
+                                        "isSubmitter": False,
+                                        "relatedPerson": {
+                                            "image": None,
+                                            "firstName": "Chandler",
+                                            "lastName": "Bing",
+                                            "maidenName": None,
+                                            "gender": "male",
+                                            "birthDate": "1985",
+                                            "birthPlace": "NewYork",
+                                            "isAlive": True,
+                                            "deathDate": None,
+                                            "deathPlace": None,
+                                            "isSubmitter": False
+                                          }
+                                    },
+                                    {
+                                        "image": None,
+                                        "firstName": "ben",
+                                        "lastName": "Geller",
+                                        "maidenName": None,
+                                        "gender": "male",
+                                        "birthDate": "1985",
+                                        "birthPlace": "NewYork",
+                                        "isAlive": True,
+                                        "deathDate": None,
+                                        "deathPlace": None,
+                                        "isSubmitter": False,
+                                        "relatedPerson": {
+                                            "image": None,
+                                            "firstName": "Chandler",
+                                            "lastName": "Bing",
+                                            "maidenName": None,
+                                            "gender": "male",
+                                            "birthDate": "1985",
+                                            "birthPlace": "NewYork",
+                                            "isAlive": True,
+                                            "deathDate": None,
+                                            "deathPlace": None,
+                                            "isSubmitter": False
+                                          }
+                                    }
+                                ]
                               },
                               "submitterEmail": "friends@gmail.com"
         }
