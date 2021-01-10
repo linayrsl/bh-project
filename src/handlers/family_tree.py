@@ -235,7 +235,7 @@ def map_person_json_to_model(person_json: Dict, id_generator: Generator[int, Any
         is_alive=person_json["isAlive"] if "isAlive" in person_json else None,
         death_date=person_json["deathDate"] if "deathDate" in person_json else None,
         death_place=person_json["deathDate"] if "deathPlace" in person_json else None,
-        related_person=person_json["relatedPerson"] if "relatedPerson" in person_json else None
+        related_person=map_person_json_to_model(person_json["relatedPerson"], id_generator) if "relatedPerson" in person_json else None
     )
     return person_node
 
