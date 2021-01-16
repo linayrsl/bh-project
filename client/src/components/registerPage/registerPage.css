@@ -69,6 +69,13 @@ input.invalid {
   border-bottom: 1px solid #000000;
 }
 
+@media only screen and (max-width: 400px) {
+  .phone-input-container {
+    font-size: 16px;
+    /*justify-content: unset;*/
+  }
+}
+
 .phone-input-container label {
   line-height: 35px;
 }
@@ -78,7 +85,7 @@ input.invalid {
 }
 
 .phone-input-container label {
-
+  font-family: 'ploni-bold';
 }
 
 .phone-input-container .PhoneInput {
@@ -98,7 +105,7 @@ input.invalid {
   background-color: #f9f9f9;
   color: #000000;
   font-size: 18px;
-  font-family: "Assistant", cursive;
+  font-family: 'ploni-regular';
   text-align: left;
 }
 
@@ -108,6 +115,7 @@ input.invalid {
 
 .PhoneInputCountry {
   margin-right: 5px;
+  font-family: 'ploni-regular';
 }
 
 [dir=ltr] .PhoneInputCountry {
@@ -130,6 +138,15 @@ input.invalid {
 .phone-input-container input::placeholder {
   color: #000000;
   opacity: 1;
+}
+
+@media only screen and (max-width: 400px) {
+  .phone-input-container input::placeholder  {
+    font-size: 16px;
+  }
+  .phone-input-container .PhoneInput {
+    width: 60%;
+  }
 }
 
 .phone-input-container input:-ms-input-placeholder {

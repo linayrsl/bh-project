@@ -61,7 +61,7 @@ class RegisterPageComponent extends React.Component<
         if (error && error.response && error.response.status === 400) {
           toast.error(t("ToastNotifications.registerNotification", "מספר סלולרי ו/או דואר אלקטרוני שגויים"));
         } else {
-          toast.error("לא הצלחנו לשלוח קוד אימות. נא נסה שוב מאוחר יותר");
+          toast.error(t("ToastNotifications.registerNotification2", "לא הצלחנו לשלוח קוד אימות. נא נסה שוב מאוחר יותר"));
         }
         return Promise.reject(error);
       })
