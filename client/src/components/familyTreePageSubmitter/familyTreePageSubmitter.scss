@@ -1,3 +1,5 @@
+$base-color: #2814FF;
+
 .family-tree-footer {
   margin-top: 35px;
   margin-bottom: 30px;
@@ -9,7 +11,7 @@
 .progress-scale .level {
   height: 30px;
   width: 25%;
-  background-color: #b3b2b2;
+  background-color: $base-color;
   color: white;
   text-align: center;
   font-size: 20px;
@@ -17,7 +19,7 @@
 }
 
 .progress-scale .level.active {
-  background-color: #37b9c9;
+  background-color: $base-color !important;
 }
 
 .family-tree-body {
@@ -31,7 +33,11 @@
   display: flex;
   flex-direction: column;
 
+
   .mandatory-fields-message {
     padding-right: 10px;
   }
+}
+
+.page-content-container {
 }

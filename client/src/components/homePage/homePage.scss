@@ -1,3 +1,5 @@
+@import 'src/vars';
+
 .home-page-container {
   min-height: 100vh;
   display: flex;
@@ -6,20 +8,20 @@
 
 .home-page-body {
   flex: 1;
-  background-color: #feab3f;
-  background-image: linear-gradient(to bottom right, #fe9d1f, #fec171);
+  background-color: #EFEFEF;
   padding-top: 45px;
-  font-family: unset;
   display: flex;
   flex-direction: column;
+
 }
 
 .home-header {
-  border-bottom: 7px solid #37b9c9;
+  border-bottom: 7px solid $base-color;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #FFFFFF;
 
   @media screen and (max-width: 768px){
     justify-content: space-between;
@@ -42,7 +44,7 @@
 .home-header .bh-logo {
   width: 210px;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   @media screen and (max-width: 768px){
     padding-left: 10px;
@@ -55,7 +57,7 @@
 }
 
 .welcome-message {
-  color: #fff;
+  color: $font-and-borders-color;
   text-align: center;
   font-size: 18px;
 }
@@ -82,7 +84,7 @@
 .welcome-disclaimer {
   text-align: center;
   font-size: 18px;
-  color: #604118;
+  color: $font-and-borders-color;
   margin-bottom: 20px;
 }
 

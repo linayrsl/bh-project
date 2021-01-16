@@ -17,7 +17,7 @@
 
 .register-user {
   font-size: 30px;
-  color: rgb(83, 83, 84);
+  color: #000000;
   margin-bottom: 30px;
   padding-right: 10px;
 }
@@ -39,19 +39,19 @@
 .accept-conditions-full {
   margin-right: 5px;
   font-size: 18px;
-  color: rgb(83, 83, 84);
+  color: #000000;
 }
 
 .user-checkbox .accept-conditions {
   text-decoration: underline;
-  color: rgb(83, 83, 84);
+  color: #000000;
 }
 
 .register-disclaimer {
   margin-bottom: 50px;
   margin-top: 50px;
   font-size: 20px;
-  color: rgb(83, 83, 84);
+  color: #000000;
   text-align: center;
 }
 
@@ -65,8 +65,8 @@ input.invalid {
   justify-content: space-between;
   margin-top: 15px;
   font-size: 20px;
-  color: rgb(83, 83, 84);
-  border-bottom: 2px solid #cccbcb;
+  color: #000000;
+  border-bottom: 1px solid #000000;
 }
 
 .phone-input-container label {
@@ -96,7 +96,7 @@ input.invalid {
   border: 0;
   outline: none;
   background-color: #f9f9f9;
-  color: darkgrey;
+  color: #000000;
   font-size: 18px;
   font-family: "Assistant", cursive;
   text-align: left;
@@ -128,7 +128,7 @@ input.invalid {
 }
 
 .phone-input-container input::placeholder {
-  color: #686868;
+  color: #000000;
   opacity: 1;
 }
 

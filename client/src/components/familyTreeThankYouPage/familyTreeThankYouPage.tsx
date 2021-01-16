@@ -19,8 +19,8 @@ import ReactTooltip from 'react-tooltip';
 
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.scss";
-import bhLogoHe from "../../assets/images/bh-logo-he.svg";
-import bhLogoEn from "../../assets/images/bh-logo-en.svg";
+import bhLogoHe from "../../assets/images/new-logo-hebrew.svg";
+import bhLogoEn from "../../assets/images/new-logo-english.svg";
 import shareIcon from "../../assets/images/Share.svg";
 
 export interface FamilyTreeThankYouPageProps extends WithTranslation {}

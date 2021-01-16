@@ -8,6 +8,10 @@ input.image-input {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'ploni-bold';
+  label {
+    color: #000000;
+  }
 }
 
 .image-location {
@@ -17,7 +21,7 @@ input.image-input {
   background-position: center;
   background-color: white;
   border-radius: 50%;
-  border: 2px solid #cccbcb;
+  border: 1px solid #000000;
   position: absolute;
   z-index: 0;
   overflow: hidden;

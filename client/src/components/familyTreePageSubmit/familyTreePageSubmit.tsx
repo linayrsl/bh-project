@@ -48,6 +48,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
     }
 
     const familyTree = loadOrCreateTree();
+    const t = this.props.t;
 
     this.setState({ httpRequestInProgress: true });
     axios
@@ -57,7 +58,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
         this.props.history!.push("/thank-you");
       })
       .catch(error => {
-        toast.error("השליחה נכשלה, נא צור קשר עם בית התפוצות");
+        toast.error(t("ToastNotifications.submitNotification", " השליחה נכשלה, נא צור קשר עם בית התפוצות info@bh.org.il"));
         return Promise.reject(error);
       })
       .finally(() => {
