@@ -23,7 +23,7 @@
     "registerFormEmailPlaceholder": "Enter your email address",
     "registerFormEmailErrorMessage": "Invalid email address",
     "registerFormPhone": "Mobile phone",
-    "registerFormPhonePlaceholder": "Enter your cell phone number",
+    "registerFormPhonePlaceholder": "Enter your mobile phone number",
     "registerFormPhoneErrorMessage": "Invalid cell phone number",
     "registerFormMandatoryFieldsMessage": "* Mandatory fields",
     "registerFormAcceptConditions": "I have read and agree to the ",
@@ -174,6 +174,7 @@
   "ToastNotifications": {
     "submitNotification": "The information was not processed. Please contact: info@bh.org.il",
     "registerNotification": "Incorrect Mobile phone number and/or email",
+    "registerNotification2": "Failing to send verification code, please try again later",
     "verificationNotification": "Please insert 5 digit verification code",
     "verificationNotification2": "Incorrect verification code, please try again",
     "verificationNotification3": "No such verification code, please register again",
