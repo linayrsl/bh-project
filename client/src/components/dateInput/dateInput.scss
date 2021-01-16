@@ -13,11 +13,16 @@
 .date-input-container {
   font-size: 20px;
   color: rgb(83, 83, 84);
-  border-bottom: 2px solid #cccbcb;
+  border-bottom: 1px solid #000000;
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
   position: relative;
+  font-family: 'ploni-bold';
+
+  .date-input {
+    font-family: 'ploni-regular';
+  }
 }
 
 .date-input-container .DayPickerInput-Overlay {
@@ -134,6 +139,7 @@
 
 .date-input-container label {
   line-height: 35px;
+  color: #000000;
 }
 
 .date-input-container input.date-input-input {

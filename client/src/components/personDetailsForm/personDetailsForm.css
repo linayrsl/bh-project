@@ -9,49 +9,56 @@
   align-items: flex-end;
   padding-right: 10px;
   padding-left: 10px;
-  border-bottom: 2px solid #cccbcb;
+  border-bottom: 2px solid #000000;
   height: 150px;
   position: relative;
+  font-family: 'ploni-regular';
 }
 
 .person-details-header span {
   font-size: 22px;
-  color: rgb(83, 83, 84);
+  color: #000000;
   padding-bottom: 10px;
+  font-family: 'ploni-bold';
 }
 
 .person-details-header label {
-  color: #686868;
+  color: #000000;
   font-size: 18px;
   text-decoration: underline;
   z-index: 1;
   line-height: 35px;
+
 }
 
 .gender {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
-  border-bottom: 2px solid #cccbcb;
+  border-bottom: 1px solid #000000;
 }
 
 .gender .gender-options, .gender label {
   line-height: 35px;
+  color: #000000;
+  font-family: 'ploni-bold';
 }
 
 [dir=ltr] .gender-options-buttons label {
   margin-left: 10px;
   margin-right: 0;
+  color: #000000;
 }
 
 .gender-options-buttons label {
-  color: #686868;
+  color: #000000;
   font-size: 18px;
   margin-right: 10px;
+  font-family: 'ploni-regular';
 }
 
 .gender-options-buttons .gender-text {
-  color: #686868;
+  color: #000000;
   font-size: 18px;
   padding-left: 10px;
 }
@@ -65,11 +72,12 @@
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
-  border-bottom: 2px solid #cccbcb;
+  border-bottom: 1px solid #000000;
+  font-family: 'ploni-bold';
 }
 
 .alive-checkbox label {
-  color: rgb(83, 83, 84);
+  color: #000000;
   font-size: 20px;
   padding-left: 10px;
   line-height: 35px;

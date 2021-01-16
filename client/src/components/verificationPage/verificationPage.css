@@ -11,7 +11,7 @@
 }
 
 .verification-message {
-  color: rgb(83, 83, 84);
+  color: #000000;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 15px;
@@ -22,13 +22,13 @@
 }
 
 .verification-message3 {
-  color: rgb(83, 83, 84);
+  color: #000000;
   text-align: center;
   margin-top: 20px;
 }
 
 .verification-code-input label {
-  color: #feab3f;
+  color: #000000;
 }
 
 .verification-form {

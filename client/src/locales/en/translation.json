@@ -4,12 +4,12 @@
     "welcomeMessage": "Welcome to the",
     "welcomeMessagePart2": "<0></0><1> Family Tree Project</1>",
     "welcomeMessagePart3": " of the Museum of the Jewish People ",
-    "welcomeMessagePart4": " at Beit Hatfutsot.",
-    "theProjectObjective": "This is where you'll be able to build your family tree",
-    "theProjectObjective2": "in 4 simple steps.",
+    "welcomeMessagePart4": "",
+    "theProjectObjective": "Build your family tree in 4 simple steps",
+    "theProjectObjective2": "in 4 simple steps",
     "projectDisclaimer": "The tree you build will be saved in the secure family tree",
     "projectDisclaimer2": "database at the Museum of the Jewish People, enabling you",
-    "projectDisclaimer3": "to view and edit it on the Museum's website in the future.",
+    "projectDisclaimer3": "to view and edit it on the Museum's website in the future",
     "proceedButton": "Enter"
   },
   "registerPage": {
@@ -22,7 +22,7 @@
     "registerFormEmail": "Email",
     "registerFormEmailPlaceholder": "Enter your email address",
     "registerFormEmailErrorMessage": "Invalid email address",
-    "registerFormPhone": "Cell phone",
+    "registerFormPhone": "Mobile phone",
     "registerFormPhonePlaceholder": "Enter your cell phone number",
     "registerFormPhoneErrorMessage": "Invalid cell phone number",
     "registerFormMandatoryFieldsMessage": "* Mandatory fields",
@@ -63,7 +63,7 @@
     "personDetailsFormerName": "Former name",
     "personDetailsDefaultName": "Former name/Maiden name",
     "personDetailsMaidenNamePlaceholder": "Click to add",
-    "personDetailsGender": "Sex",
+    "personDetailsGender": "Select",
     "personDetailsMalePlaceholder": "Male",
     "personDetailsFemalePlaceholder": "Female",
     "personDetailsOtherPlaceholder": "Other",
@@ -123,7 +123,7 @@
     "thankYouMessage": "<0>Thank you!</0>",
     "thankYouMessage2": "<0>The tree has been saved in the secure family tree database at the Museum of the Jewish People.</0>",
     "thankYouMessage2_5": "A file containing the information will be sent to you by email in the next few minutes. ",
-    "thankYouMessage3": "You're welcome to visit the Museum of the Jewish People at Beit Hatfutsot and continue studying,",
+    "thankYouMessage3": "You're welcome to visit the Museum of the Jewish People and continue studying,",
     "thankYouMessage4": " researching and being part of the story",
     "linkSharingOptionsMessage": "Would you like to share:",
     "linkShareSentTitle": "The Museum of the Jewish People's tree building application",
@@ -145,11 +145,11 @@
     "thankYouInformationHeader": "About the family tree database at the Museum",
     "thankYouInformationText": "Over 5 million people are already registered at the Jewish Genealogy Center at the Museum of the Jewish People. The database is growing every day and every hour. Visitors from a variety of places and societies life come to trace their roots, record and preserve their family trees for the next generations. By doing so, they are adding another branch to the large family tree of the Jewish people.",
     "thankYouInformationHeader2": "About the Museum's databases",
-    "thankYouInformationText2": "The Museum of the Jewish People at Beit Hatfutsot is home to diverse and rich databases: family trees, meanings of last names, histories of Jewish communities across the globe, photographs, images and films, musical compositions, and information about concepts and people. All the materials can be found on a single website, where a search pools the various types of content and also connects them using internal links.",
+    "thankYouInformationText2": "The Museum of the Jewish People at is home to diverse and rich databases: family trees, meanings of last names, histories of Jewish communities across the globe, photographs, images and films, musical compositions, and information about concepts and people. All the materials can be found on a single website, where a search pools the various types of content and also connects them using internal links.",
     "thankYouInformationHeader3": "About the Museum of the Jewish People",
-    "thankYouInformationText3": "The Museum of the Jewish People at Beit Hatfutsot is a global institution that tells the story of one, multifaceted culture that is rich and comprised of multiple layers. It tells the stories of men and women, adults and children, families and communities, the Jewish calendar and its holidays, sufferings and joys, fruits of the spirit, education and creative works, traditions and ways of life of the Jewish people that evolved in a variety of countries and in many different periods under various rulers and regimes, in seventy languages and over thousands of years. At the Museum, the Jewish people are depicted as a people who have lived and still live among other peoples and continue to preserve and cultivate a special bond with the Land of Israel and the State of Israel.",
+    "thankYouInformationText3": "The Museum of the Jewish People is a global institution that tells the story of one, multifaceted culture that is rich and comprised of multiple layers. It tells the stories of men and women, adults and children, families and communities, the Jewish calendar and its holidays, sufferings and joys, fruits of the spirit, education and creative works, traditions and ways of life of the Jewish people that evolved in a variety of countries and in many different periods under various rulers and regimes, in seventy languages and over thousands of years. At the Museum, the Jewish people are depicted as a people who have lived and still live among other peoples and continue to preserve and cultivate a special bond with the Land of Israel and the State of Israel.",
     "thankYouInformationHeader4": "About this project",
-    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry. The project is managed by the Digital Department at the Museum of the Jewish People at Beit Hatfutsot..</2>"
+    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry.</2>"
   },
   "errorBoundary": {
     "header": "family tree project",
@@ -168,7 +168,16 @@
     "pageNotFoundErrorMessage": "<0>The requested information was not found.  You can go back to the  <1>homepage</1></0>"
   },
   "listOfPersons": {
-    "secondParentLabel": "Second Parent"
+    "secondParentLabel": "Partner/Child’s second parent"
+  },
+
+  "ToastNotifications": {
+    "submitNotification": "The information was not processed. Please contact: info@bh.org.il",
+    "registerNotification": "Incorrect Mobile phone number and/or email",
+    "verificationNotification": "Please insert 5 digit verification code",
+    "verificationNotification2": "Incorrect verification code, please try again",
+    "verificationNotification3": "No such verification code, please register again",
+    "verificationNotification4": "Personal detail confirmation failed, please try register again"
   }
 }
 

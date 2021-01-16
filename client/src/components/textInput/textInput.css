@@ -2,7 +2,7 @@
   font-size: 20px;
   color: rgb(83, 83, 84);
 
-  border-bottom: 2px solid #cccbcb;
+  border-bottom: 1px solid #000000;
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
@@ -19,6 +19,8 @@
 
 .text-input-container label {
   line-height: 35px;
+  color: #000000;
+  font-family: 'ploni-bold';
 }
 
 .text-input-container input {
@@ -30,7 +32,7 @@
   text-align: left;
   color: darkgrey;
   font-size: 18px;
-  font-family: "Assistant", cursive;
+  font-family: 'ploni-regular';
 }
 
 [dir=ltr] .text-input-container input {
@@ -46,16 +48,16 @@
 }
 
 .text-input-container input::placeholder {
-  color: #686868;
+  color: #000000;
   opacity: 1;
 }
 
 .text-input-container input:-ms-input-placeholder {
-  color: darkgrey;
+  color: #000000;
 }
 
 .text-input-container input::-ms-input-placeholder {
-  color: darkgrey;
+  color: #000000;
 }
 
 .invalid-input-feedback {
