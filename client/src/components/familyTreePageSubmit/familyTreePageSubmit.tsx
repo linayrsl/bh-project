@@ -4,17 +4,13 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
-import { i18n } from "../../i18n";
-import config from "../../config";
 import { Header } from "../header/header";
 import { Loader } from "../loader/loader";
 
 import "./familyTreePageSubmit.css";
-import {FamilyTreeApiRequest} from "../../contracts/familyTreeApiRequest";
 import {AppConfig} from "../../contracts/appConfig";
 import {withAppConfig} from "../hoc/withAppConfig";
 import {loadOrCreateTree} from "../../familyTreeService";
-import {appConfigContext} from "../../context/appConfigContext";
 
 
 export interface FamilyTreePageSubmitProps extends WithTranslation {
@@ -52,7 +48,7 @@ class FamilyTreePageSubmitComponent extends React.Component<
 
     this.setState({ httpRequestInProgress: true });
     axios
-      .post(`${config.apiBaseUrl}/api/family-tree/`, familyTree)
+      .post(`${this.props.config.apiBaseUrl}/api/family-tree/`, familyTree)
       .then(() => {
         this.clearStoredFamilyTreeData();
         this.props.history!.push("/thank-you");
