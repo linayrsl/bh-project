@@ -19,6 +19,9 @@
   justify-content: space-between;
   position: relative;
   font-family: 'ploni-bold';
+  @media only screen and (max-width: 400px) {
+  font-size: 16px;
+}
 
   .date-input {
     font-family: 'ploni-regular';

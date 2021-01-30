@@ -24,20 +24,23 @@
   background-color: #FFFFFF;
 
   @media screen and (max-width: 768px){
-    justify-content: space-between;
+    justify-content: center;
+    display: flex;
   }
 }
 
 .languageButton {
   position: absolute;
   right: 0;
-  padding-right: 10px;
+  top: 0;
 
   [dir=rtl]  & {
-    left: 0;
-    right: auto;
+    right: 0;
+    top: 0;
     padding-right: 0;
-    padding-left: 10px;
+    img {
+      height: 4rem;
+    }
   }
 }
 
@@ -72,11 +75,12 @@
 
 .welcome-message .part2-inner {
   font-weight: bold;
+  font-family: 'anomalia-regular';
 }
 
 .welcome-explanation {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 15px;
   margin-bottom: 30px;
   font-size: 18px;
 }
@@ -85,7 +89,7 @@
   text-align: center;
   font-size: 18px;
   color: $font-and-borders-color;
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
 }
 
 .welcome-cta {
