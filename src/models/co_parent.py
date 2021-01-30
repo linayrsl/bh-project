@@ -9,3 +9,8 @@ from dataclasses import dataclass
 class CoParent(PersonDetails):
     shared_children: List[PersonNode]
 
+
+def make_co_parent_from_person_details(person_details: PersonDetails) -> CoParent:
+    return CoParent(
+        shared_children=[],
+        **person_details.__dict__)
