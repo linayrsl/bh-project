@@ -58,7 +58,7 @@ export const loadOrCreateTree = (): FamilyTree => {
         siblings: []
       },
       siblings: [],
-      children: [],
+      coParents: [],
     },
     submitterEmail: window.localStorage.getItem("submitterEmail") || "",
   };

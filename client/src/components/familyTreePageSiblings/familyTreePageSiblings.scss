@@ -68,5 +68,43 @@
 .vertical-space {
   margin-top: 20px;
 }
+.sharedChildrenLabel {
+  display: flex;
+  padding-right: 10px;
+  align-items: center;
+  color: #000000;
+  font-size: 22px;
+  font-family: 'ploni-bold';
+  justify-content: space-between;
+  padding-left: 10px;
+}
 
+.sharedChildrenDifferentFamilyButton {
+  text-shadow: 1px 1px 2px grey;
+  box-shadow: 1px 1px 2px grey;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  background-color: #2814FF;
+  /* background-image: linear-gradient(to right, #238f9c, #37b9c9); */
+  width: 360px;
+  height: 54px;
+  line-height: 54px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size:20px;
+  font-family: 'ploni-bold';
+  @media only screen and (max-width: 400px) {
+    width: 80%;
+    font-size: 16px;
+  }
+}
 
+.sharedChildrenDifferentFamilyLabel {
+  text-align: center;
+  padding-top: 2rem;
+}

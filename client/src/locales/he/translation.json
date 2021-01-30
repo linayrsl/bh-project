@@ -79,10 +79,10 @@
   "familyTreePageMother" : {
     "header": "הצד של אמא  2/4",
     "familyTreeCurrentEntity": "אמא",
-    "familyTreeGrandparentsTitle": "ההורים של אמא(סבא וסבתא)",
+    "familyTreeGrandparentsTitle": "ההורים של אמא (סבא וסבתא)",
     "familyTreeMothersMother": "אמא של אמא",
     "familyTreeMothersFather": "אבא של אמא",
-    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אמא(סבא רבא וסבתא רבא)",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אמא (סבא רבא וסבתא רבא)",
     "familyTreeMotherOfGrandmother": "אמא של סבתא",
     "familyTreeFatherOfGrandmother": "אבא של סבתא",
     "familyTreeMotherOfGrandfather": "אמא של סבא",
@@ -92,10 +92,10 @@
   "familyTreePageFather": {
     "header": "הצד של אבא  3/4",
     "familyTreeCurrentEntity": "אבא",
-    "familyTreeGrandparentsTitle": "ההורים של אבא(סבא וסבתא)",
+    "familyTreeGrandparentsTitle": "ההורים של אבא (סבא וסבתא)",
     "familyTreeFathersMother": "אמא של אבא",
     "familyTreeFathersFather": "אבא של אבא",
-    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אבא(סבא רבא וסבתא רבא)",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אבא (סבא רבא וסבתא רבא)",
     "familyTreeMotherOfGrandmother": "אמא של סבתא",
     "familyTreeFatherOfGrandmother": "אבא של סבתא",
     "familyTreeMotherOfGrandfather": "אמא של סבא",
@@ -110,7 +110,9 @@
     "familyTreeSiblingsDecreaseNumber": "להפחית מספר אחים או אחיות באחד",
     "familyTreeCurrentEntity": "אח/אחות",
     "familyTreeCurrentEntityChild": "ילד/ילדה",
-    "familyTreeSiblingsProceedButton": "לסיום הקישו כאן"
+    "familyTreeSiblingsProceedButton": "לסיום הקישו כאן",
+    "sharedChildrenLabel": "האם יש לך ילדים/ות ?",
+    "sharedChildrenDifferentFamilyLabel": "יש לי עוד ילדים/ות מהורה אחר"
   },
   "familyTreePageSubmit": {
     "header": "סיימת את בניית עץ המשפחה שלך",
@@ -179,6 +181,11 @@
     "verificationNotification2": "קוד אימות שגוי. נא נסה שוב.",
     "verificationNotification3": "קוד האימות לא קיים. נא נסה להירשם בשנית.",
     "verificationNotification4": "לא הצלחנו לאמת פרטים אישיים. נא נסה להירשם מחדש."
+  },
+  "coParents": {
+    "coParentFormTitle": "הורה נוסף",
+    "sharedChildrenLabel": "?כמה ילדים/ות משותפים/ות יש לכם/ן",
+    "sharedChildrenFormLabel": "ילד/ילדה"
   }
 }
 

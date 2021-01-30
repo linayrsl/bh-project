@@ -78,10 +78,10 @@
   "familyTreePageMother" : {
     "header": "Your mother's side 2/4",
     "familyTreeCurrentEntity": "Your mother",
-    "familyTreeGrandParentsTitle": "Mother's parents(grandfather and grandmother)",
+    "familyTreeGrandParentsTitle": "Mother's parents (grandfather and grandmother)",
     "familyTreeMothersMother": "Your mother's mother",
     "familyTreeMothersFather": "Your mother's father",
-    "familyTreeGrandGrandParentsTitle": "Mother's grandparents(grand grandfather and grand grandmother)",
+    "familyTreeGrandGrandParentsTitle": "Mother's grandparents (grand grandfather and grand grandmother)",
     "familyTreeMotherOfGrandmother": "Your grandmother's mother",
     "familyTreeFatherOfGrandmother": "Your grandmother's father",
     "familyTreeMotherOfGrandfather": "Your grandfather's mother",
@@ -91,10 +91,10 @@
   "familyTreePageFather": {
     "header": "Your father's side 3/4",
     "familyTreeCurrentEntity": "Your father",
-    "familyTreeGrandParentsTitle": "Father's parents(grandfather and grandmother)",
+    "familyTreeGrandParentsTitle": "Father's parents (grandfather and grandmother)",
     "familyTreeFathersMother": "Your father's mother",
     "familyTreeFathersFather": "Your father's father",
-    "familyTreeGrandGrandParentsTitle": "Father's grandparents(grand grandfather and grand grandmother)",
+    "familyTreeGrandGrandParentsTitle": "Father's grandparents (grand grandfather and grand grandmother)",
     "familyTreeMotherOfGrandmother": "Your grandmother's mother",
     "familyTreeFatherOfGrandmother": "Your grandmother's father",
     "familyTreeMotherOfGrandfather": "Your grandfather's mother",
@@ -109,7 +109,9 @@
     "familyTreeSiblingsDecreaseNumber": "Decrease the number of brothers or sisters by one",
     "familyTreeCurrentEntity": "Brother/sister",
     "familyTreeCurrentEntityChild": "Child",
-    "familyTreeSiblingsProceedButton": "Click here to finish"
+    "familyTreeSiblingsProceedButton": "Click here to finish",
+    "sharedChildrenLabel": "Do you have children?",
+    "sharedChildrenDifferentFamilyLabel": "I have children from different parent"
   },
   "familyTreePageSubmit": {
     "header": "You have finished building your family tree",
@@ -179,6 +181,11 @@
     "verificationNotification2": "Incorrect verification code, please try again",
     "verificationNotification3": "No such verification code, please register again",
     "verificationNotification4": "Personal detail confirmation failed, please try register again"
+  },
+  "coParents": {
+    "coParentFormTitle": "Other parent",
+    "sharedChildrenLabel": "How many children?",
+    "sharedChildrenFormLabel": "Child"
   }
 }
 

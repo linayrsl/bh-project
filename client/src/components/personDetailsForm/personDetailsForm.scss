@@ -66,6 +66,9 @@
 .gender-options {
   font-size: 20px;
   color: rgb(83, 83, 84);
+  @media only screen and (max-width: 400px) {
+    font-size: 16px;
+  }
 }
 
 .alive-checkbox {
@@ -81,6 +84,9 @@
   font-size: 20px;
   padding-left: 10px;
   line-height: 35px;
+  @media only screen and (max-width: 400px) {
+  font-size: 16px;
+  }
 }
 
 [dir=ltr] .alive-checkbox label {
@@ -91,3 +97,5 @@
 .alive-checkbox input {
   margin-top: 12px;
 }
+
+

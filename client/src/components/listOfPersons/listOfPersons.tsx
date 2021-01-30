@@ -10,7 +10,6 @@ export interface ListOfPersonsProps extends WithTranslation {
   persons: PersonDetailsFormState[];
   onValidityChanged: (validity: boolean) => void;
   onChange: (persons: PersonDetailsFormState[]) => void;
-  displaySecondParent: boolean;
 }
 
 export interface ListOfPersonsState {
@@ -103,26 +102,6 @@ class ListOfPersonsComponent extends Component<ListOfPersonsProps, ListOfPersons
                     });
                   }}
                 />
-                {this.props.displaySecondParent &&
-                <>
-                  <PersonDetailsForm
-                    idPrefix={`${this.props.idPrefix}${index}_relatedPerson`}
-                    // title={this.props.formLabel}
-                    title={t("listOfPersons.secondParentLabel", "הורה נוסף")}
-                    displayIsAlive
-                    displayMaidenName
-                    defaults={personDetails.relatedPerson}
-                    onFormChange={(state: PersonDetailsFormState) => {
-                      let newPersonsState = [...this.state.personsDetails];
-                      newPersonsState[index] = {...newPersonsState[index]};
-                      newPersonsState[index].relatedPerson = state;
-                      this.setState({personsDetails: newPersonsState});
-                    }}
-                    onFormValidityChange={() => {
-                      // Future implementation
-                    }}
-                  />
-                </>}
               </React.Fragment>
             );
           })}
