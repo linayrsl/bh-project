@@ -12,12 +12,12 @@ from src.database.database_connection import DatabaseConnection
 from src.database.family_tree_db import log_family_tree_submission
 from src.gedcom.gedcom_builder import GedcomBuilder
 
-from src.gedcom.handler import handler
 from src.mail.email import Email
+from src.models.co_parent import CoParent, make_co_parent_from_person_details
 from src.models.family_tree import FamilyTree
-from src.models.person import Person
-from src.models.person_node import PersonNode
-from src.models.submitter import Submitter
+from src.models.person_details import PersonDetails
+from src.models.person_node import PersonNode, make_person_node_from_person_details
+from src.models.submitter import Submitter, make_submitter_from_person_node
 from src.settings import SENDGRID_API_KEY, GEDCOM_EMAIL_FROM, GEDCOM_EMAIL_TO, DATABASE_URL
 
 logger = logging.getLogger(__name__)
@@ -34,8 +34,6 @@ family_tree_json_schema = {
                 "birthDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
                 "birthPlace": {"type": ["string", "null"]},
                 "isAlive": {"type": "boolean"},
-                # "deathDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
-                # "deathPlace": {"type": ["string", "null"]},
                 "mother": {
                     "oneOf": [
                         {
@@ -103,6 +101,30 @@ family_tree_json_schema = {
         "submitter": {
             "allOf": [
                 {"$ref": "#/definitions/person"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "coParents": {
+                            "type": ["array", "null"],
+                            "items": {
+                                "allOf": [
+                                    {"$ref": "#/definitions/person"},
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "sharedChildren": {
+                                                 "type": ["array"],
+                                                 "items": {
+                                                    "$ref": "#/definitions/person"
+                                                 }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
             ],
             "required": ["firstName",
                          "lastName",
@@ -216,15 +238,11 @@ def sequential_id_generator():
         next_id += 1
 
 
-def map_person_json_to_model(person_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[PersonNode]:
+def map_person_details_json_to_model(person_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[PersonDetails]:
     if not person_json:
         return None
-    person_node = PersonNode(
+    person_node = PersonDetails(
         id=next(id_generator),
-        father=map_person_json_to_model(person_json["father"], id_generator) if "father" in person_json else None,
-        mother=map_person_json_to_model(person_json["mother"], id_generator) if "mother" in person_json else None,
-        siblings=[map_person_json_to_model(sibling, id_generator) for sibling in
-                  person_json["siblings"]] if "siblings" in person_json and person_json["siblings"] else None,
         image=person_json["image"] if "image" in person_json else None,
         first_name=person_json["firstName"] if "firstName" in person_json else None,
         last_name=person_json["lastName"] if "lastName" in person_json else None,
@@ -234,35 +252,33 @@ def map_person_json_to_model(person_json: Dict, id_generator: Generator[int, Any
         gender=person_json["gender"] if "gender" in person_json else None,
         is_alive=person_json["isAlive"] if "isAlive" in person_json else None,
         death_date=person_json["deathDate"] if "deathDate" in person_json else None,
-        death_place=person_json["deathDate"] if "deathPlace" in person_json else None,
-        related_person=map_person_json_to_model(person_json["relatedPerson"], id_generator) if "relatedPerson" in person_json else None
-    )
+        death_place=person_json["deathDate"] if "deathPlace" in person_json else None)
+    return person_node
+
+
+def map_person_node_json_to_model(person_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[PersonNode]:
+    if not person_json:
+        return None
+    person_node = make_person_node_from_person_details(
+        map_person_details_json_to_model(person_json, id_generator))
+
+    person_node.mother = map_person_node_json_to_model(person_json["mother"], id_generator) if "mother" in person_json else None
+    person_node.father = map_person_node_json_to_model(person_json["father"], id_generator) if "father" in person_json else None
+    person_node.siblings = [map_person_node_json_to_model(sibling, id_generator) for sibling in
+                            person_json["siblings"]] if "siblings" in person_json and person_json["siblings"] else None
+
     return person_node
 
 
 def map_submitter_json_to_model(submitter_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[Submitter]:
     if not submitter_json:
         return None
-    submitter = Submitter(
-        id=next(id_generator),
-        father=map_person_json_to_model(submitter_json["father"], id_generator),
-        mother=map_person_json_to_model(submitter_json["mother"], id_generator),
-        siblings=[map_person_json_to_model(sibling, id_generator) for sibling in
-                  submitter_json["siblings"]] if "siblings" in submitter_json and submitter_json["siblings"] else None,
-        children=[map_person_json_to_model(child, id_generator) for child in
-                  submitter_json["children"]] if "children" in submitter_json and submitter_json["children"] else None,
-        image=submitter_json["image"] if "image" in submitter_json else None,
-        first_name=submitter_json["firstName"] if "firstName" in submitter_json else None,
-        last_name=submitter_json["lastName"] if "lastName" in submitter_json else None,
-        maiden_name=submitter_json["maidenName"] if "maidenName" in submitter_json else None,
-        birth_date=submitter_json["birthDate"] if "birthDate" in submitter_json else None,
-        birth_place=submitter_json["birthPlace"] if "birthPlace" in submitter_json else None,
-        gender=submitter_json["gender"] if "gender" in submitter_json else None,
-        is_alive=submitter_json["isAlive"] if "isAlive" in submitter_json else None,
-        death_date=submitter_json["deathDate"] if "deathDate" in submitter_json else None,
-        death_place=submitter_json["deathPlace"] if "deathPlace" in submitter_json else None,
-        related_person=map_person_json_to_model(submitter_json["relatedPerson"], id_generator) if "relatedPerson" in submitter_json else None
-    )
+    submitter = make_submitter_from_person_node(
+        map_person_node_json_to_model(submitter_json, id_generator))
+
+    submitter.co_parents = [map_co_parent_json_to_model(co_parent_json, id_generator) for co_parent_json in
+                            submitter_json["coParents"]] if "coParents" in submitter_json else None
+
     return submitter
 
 
@@ -275,11 +291,19 @@ def map_family_tree_json_to_model(family_tree_json: Dict) -> FamilyTree:
     return family_tree_model
 
 
-def count_family_tree_individuals(person: Union[Submitter, Person, None]):
+def map_co_parent_json_to_model(co_parent_json: Dict, id_generator: Generator[int, Any, None]) -> CoParent:
+    person = map_person_details_json_to_model(co_parent_json, id_generator)
+    co_parent = make_co_parent_from_person_details(person)
+    co_parent.shared_children = [map_person_node_json_to_model(shared_child_json, id_generator) for shared_child_json in co_parent_json["sharedChildren"]]
+    return co_parent
+
+
+def count_family_tree_individuals(person: Union[Submitter, PersonNode, None]):
     if not person:
         return 0
     return 1 + \
         count_family_tree_individuals(person.mother) + \
         count_family_tree_individuals(person.father) + \
         (len(person.siblings) if person.siblings else 0) + \
-        (len(person.children) * 2 if isinstance(person, Submitter) and person.children else 0)   # Multiply by 2 because each child has 2 parents
+        (len(person.co_parents) if isinstance(person, Submitter) and person.co_parents else 0) + \
+        sum([len(co_parent.shared_children) for co_parent in person.co_parents]) if isinstance(person, Submitter) and person.co_parents else 0

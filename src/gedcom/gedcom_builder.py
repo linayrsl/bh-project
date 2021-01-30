@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, List, Optional, Union
+from typing import Tuple, Dict, List, Union
 from datetime import datetime
 
 from src.models.family_tree import FamilyTree
@@ -15,7 +15,7 @@ class GedcomBuilder:
         images = {}
         gedcom_string = self._create_gedcom_header()
         gedcom_string += self._create_individual_record(self.family_tree_model.submitter, None, None, images)
-        gedcom_string += self._create_children_records(self.family_tree_model.submitter, images)
+        gedcom_string += self._create_co_parents_records(self.family_tree_model.submitter, images)
         gedcom_string += "\n0 TRLR"
         return gedcom_string, images
 
@@ -64,7 +64,7 @@ class GedcomBuilder:
         indi_record += self._generate_record(2, "DATE {}", self._format_date(person.birth_date))
         indi_record += self._generate_record(2, "PLAC {}", person.birth_place)
         family_id = famc
-        if person.mother or person.father:
+        if isinstance(person, PersonNode) and (person.mother or person.father):
             family_id = self._generate_family_record_id(person.mother, person.father)
             indi_record_mother = self._create_individual_record(person.mother, family_id, None, images)
             indi_record_father = self._create_individual_record(person.father, family_id, None, images)
@@ -75,7 +75,7 @@ class GedcomBuilder:
                 ([sibling.id for sibling in person.siblings] if person.siblings else []) + [person.id])
         indi_record += self._generate_record(1, "FAMC @{}@", family_id)
         indi_record_sibling = ""
-        if person.siblings:
+        if isinstance(person, PersonNode) and person.siblings:
             for sibling in person.siblings:
                 indi_record_sibling += self._create_individual_record(sibling, None, family_id, images)
 
@@ -105,32 +105,25 @@ class GedcomBuilder:
             family_record += self._generate_record(1, "CHIL @{}@", child_id)
         return family_record
 
-    def _create_children_records(self, submitter: Submitter, images: Dict[str, str]) -> str:
-        if not submitter or not submitter.children:
+    def _create_co_parents_records(self, submitter: Submitter, images: Dict[str, str]) -> str:
+        if not submitter or not submitter.co_parents:
             return ""
         gedcom_string = ""
-        children_to_family_relation: Dict[str, Tuple[List[int], Union[PersonDetails, None]]] = {}
-        for child in submitter.children:
-            family_id = ""
-            if child.related_person:
-                if submitter.gender == "female":
-                    family_id = self._generate_family_record_id(submitter, child.related_person)
-                else:
-                    family_id = self._generate_family_record_id(child.related_person, submitter)
-                gedcom_string += self._create_individual_record(child.related_person, family_id, None, images)
+        is_submitter_female = submitter.gender == "female"
+        for co_parent in submitter.co_parents:
+            if is_submitter_female:
+                mother = submitter
+                father = co_parent
             else:
-                family_id = self._generate_family_record_id(submitter, None)
-            if family_id not in children_to_family_relation:
-                children_to_family_relation[family_id] = ([], None)
-            children_to_family_relation[family_id][0].append(child.id)
-            children_to_family_relation[family_id] = (children_to_family_relation[family_id][0], child.related_person)
-            gedcom_string += self._create_individual_record(child, None, family_id, images)
-
-        for key, value in children_to_family_relation.items():
-            if submitter.gender == "female":
-                gedcom_string += self._create_family_record(key, submitter, value[1], value[0])
-            else:
-                gedcom_string += self._create_family_record(key, value[1], submitter, value[0])
+                mother = co_parent
+                father = submitter
+            family_id = self._generate_family_record_id(mother, father)
+            gedcom_string += self._create_individual_record(co_parent, family_id, None, images)
+            children_ids = []
+            for child in co_parent.shared_children:
+                children_ids.append(child.id)
+                gedcom_string += self._create_individual_record(child, None, family_id, images)
+            gedcom_string += self._create_family_record(family_id, mother, father, children_ids)
         return gedcom_string
 
     def _format_date(self, string_date):

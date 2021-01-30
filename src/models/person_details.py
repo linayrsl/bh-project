@@ -15,4 +15,4 @@ class PersonDetails:
     is_alive: Optional[bool]
     death_place: Optional[str]
     death_date: Optional[str]
-    related_person: Optional['PersonDetails']
+
