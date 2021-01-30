@@ -115,48 +115,4 @@
 1 WIFE @9@
 1 CHIL @16@
 1 CHIL @1@
-0 @18@ INDI
-1 NAME Chandler /Bing/
-2 GIVN Chandler
-2 SURN Bing
-1 SEX male
-1 BIRT
-2 DATE 1985
-2 PLAC NewYork
-1 FAMS @M1F18@
-0 @17@ INDI
-1 NAME ben /Geller/
-2 GIVN ben
-2 SURN Geller
-1 SEX male
-1 BIRT
-2 DATE 1985
-2 PLAC NewYork
-1 FAMC @M1F18@
-0 @20@ INDI
-1 NAME Chandler /Bing/
-2 GIVN Chandler
-2 SURN Bing
-1 SEX male
-1 BIRT
-2 DATE 1985
-2 PLAC NewYork
-1 FAMS @M1F20@
-0 @19@ INDI
-1 NAME ben /Geller/
-2 GIVN ben
-2 SURN Geller
-1 SEX male
-1 BIRT
-2 DATE 1985
-2 PLAC NewYork
-1 FAMC @M1F20@
-0 @M1F18@ FAM
-1 HUSB @18@
-1 WIFE @1@
-1 CHIL @17@
-0 @M1F20@ FAM
-1 HUSB @20@
-1 WIFE @1@
-1 CHIL @19@
 0 TRLR

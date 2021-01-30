@@ -266,60 +266,60 @@ class TestCreateGedcom(unittest.TestCase):
                                     "siblings": None
                                   },
                                 ],
-                                "children": [
-                                    {
-                                        "image": None,
-                                        "firstName": "ben",
-                                        "lastName": "Geller",
-                                        "maidenName": None,
-                                        "gender": "male",
-                                        "birthDate": "1985",
-                                        "birthPlace": "NewYork",
-                                        "isAlive": True,
-                                        "deathDate": None,
-                                        "deathPlace": None,
-                                        "isSubmitter": False,
-                                        "relatedPerson": {
-                                            "image": None,
-                                            "firstName": "Chandler",
-                                            "lastName": "Bing",
-                                            "maidenName": None,
-                                            "gender": "male",
-                                            "birthDate": "1985",
-                                            "birthPlace": "NewYork",
-                                            "isAlive": True,
-                                            "deathDate": None,
-                                            "deathPlace": None,
-                                            "isSubmitter": False
-                                          }
-                                    },
-                                    {
-                                        "image": None,
-                                        "firstName": "ben",
-                                        "lastName": "Geller",
-                                        "maidenName": None,
-                                        "gender": "male",
-                                        "birthDate": "1985",
-                                        "birthPlace": "NewYork",
-                                        "isAlive": True,
-                                        "deathDate": None,
-                                        "deathPlace": None,
-                                        "isSubmitter": False,
-                                        "relatedPerson": {
-                                            "image": None,
-                                            "firstName": "Chandler",
-                                            "lastName": "Bing",
-                                            "maidenName": None,
-                                            "gender": "male",
-                                            "birthDate": "1985",
-                                            "birthPlace": "NewYork",
-                                            "isAlive": True,
-                                            "deathDate": None,
-                                            "deathPlace": None,
-                                            "isSubmitter": False
-                                          }
-                                    }
-                                ]
+                                # "children": [
+                                #     {
+                                #         "image": None,
+                                #         "firstName": "ben",
+                                #         "lastName": "Geller",
+                                #         "maidenName": None,
+                                #         "gender": "male",
+                                #         "birthDate": "1985",
+                                #         "birthPlace": "NewYork",
+                                #         "isAlive": True,
+                                #         "deathDate": None,
+                                #         "deathPlace": None,
+                                #         "isSubmitter": False,
+                                #         "relatedPerson": {
+                                #             "image": None,
+                                #             "firstName": "Chandler",
+                                #             "lastName": "Bing",
+                                #             "maidenName": None,
+                                #             "gender": "male",
+                                #             "birthDate": "1985",
+                                #             "birthPlace": "NewYork",
+                                #             "isAlive": True,
+                                #             "deathDate": None,
+                                #             "deathPlace": None,
+                                #             "isSubmitter": False
+                                #           }
+                                #     },
+                                #     {
+                                #         "image": None,
+                                #         "firstName": "ben",
+                                #         "lastName": "Geller",
+                                #         "maidenName": None,
+                                #         "gender": "male",
+                                #         "birthDate": "1985",
+                                #         "birthPlace": "NewYork",
+                                #         "isAlive": True,
+                                #         "deathDate": None,
+                                #         "deathPlace": None,
+                                #         "isSubmitter": False,
+                                #         "relatedPerson": {
+                                #             "image": None,
+                                #             "firstName": "Chandler",
+                                #             "lastName": "Bing",
+                                #             "maidenName": None,
+                                #             "gender": "male",
+                                #             "birthDate": "1985",
+                                #             "birthPlace": "NewYork",
+                                #             "isAlive": True,
+                                #             "deathDate": None,
+                                #             "deathPlace": None,
+                                #             "isSubmitter": False
+                                #           }
+                                #     }
+                                # ]
                               },
                               "submitterEmail": "friends@gmail.com"
         }

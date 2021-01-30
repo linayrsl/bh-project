@@ -15,7 +15,7 @@ class GedcomBuilder:
         images = {}
         gedcom_string = self._create_gedcom_header()
         gedcom_string += self._create_individual_record(self.family_tree_model.submitter, None, None, images)
-        gedcom_string += self._create_children_records(self.family_tree_model.submitter, images)
+        # gedcom_string += self._create_children_records(self.family_tree_model.submitter, images)
         gedcom_string += "\n0 TRLR"
         return gedcom_string, images
 

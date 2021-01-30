@@ -41,7 +41,7 @@ extended_csp["connect-src"] = "'self' *.google-analytics.com"
 
 if not CI:
     CORS(application)
-    Talisman(application, content_security_policy=extended_csp)
+    # Talisman(application, content_security_policy=extended_csp)
 
 RequestID(application)
 

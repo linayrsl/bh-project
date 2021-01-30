@@ -21,7 +21,7 @@ test_family_tree: dict = {
     "gender": "female",
     "birthDate": "18/12/1983",
     "birthPlace": "טשקנט",
-    "isAlive": True,
+    "isAlive": False,
     "deathDate": None,
     "deathPlace": None,
     "isSubmitter": True,
@@ -58,7 +58,40 @@ test_family_tree: dict = {
     },
     "father": None,
     "siblings": [],
-    "children": []
+    "coParents": [{
+        "image": None,
+        "firstName": "אברה",
+        "lastName": "קדברה",
+        "maidenName": None,
+        "gender": "male",
+        "birthDate": None,
+        "birthPlace": None,
+        "isAlive": True,
+        "deathDate": None,
+        "deathPlace": None,
+        "isSubmitter": False,
+        "mother": None,
+        "father": None,
+        "siblings": None,
+        "sharedChildren": [
+            {
+                "image": None,
+                "firstName": "ויני",
+                "lastName": "פו",
+                "maidenName": None,
+                "gender": "male",
+                "birthDate": None,
+                "birthPlace": None,
+                "isAlive": False,
+                "deathDate": None,
+                "deathPlace": None,
+                "isSubmitter": False,
+                "mother": None,
+                "father": None,
+                "siblings": None,
+            }
+        ]
+    }],
   },
   "submitterEmail": "test@gmail.com"
 }
