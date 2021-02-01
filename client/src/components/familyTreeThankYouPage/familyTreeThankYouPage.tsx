@@ -263,6 +263,17 @@ class FamilyTreeThankYouPageComponent extends React.Component<
               </div>
             </div>
           </div>
+          <div className={"credits"}>
+            <div>
+              <Trans i18nKey={"familyTreeThankYouPage.creditsText"}>App Developer: Lina Yaroslavski</Trans>
+            </div>
+            <div>
+              <Trans i18nKey={"familyTreeThankYouPage.creditsText2"}>UX/UI Designer: Neta Manor, Museum Digital Department</Trans>
+            </div>
+            <div>
+              <Trans i18nKey={"familyTreeThankYouPage.creditsText3"}>Project Manager: Eynat Sharon Museum CDO</Trans>
+            </div>
+          </div>
         </div>
       </div>
     );

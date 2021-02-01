@@ -80,24 +80,24 @@
 }
 
 .sharedChildrenDifferentFamilyButton {
-  text-shadow: 1px 1px 2px grey;
-  box-shadow: 1px 1px 2px grey;
   margin-left: auto;
   margin-right: auto;
-  display: block;
-  color: #fff;
+  color: #000000;
   text-decoration: none;
   text-align: center;
-  border: none;
-  background-color: #2814FF;
-  /* background-image: linear-gradient(to right, #238f9c, #37b9c9); */
+  background-color: #FFFFFF;
   width: 360px;
-  height: 54px;
-  line-height: 54px;
-  border-radius: 10px;
+  height: 49px;
+  line-height: 49px;
   cursor: pointer;
   font-size:20px;
   font-family: 'ploni-bold';
+  border: 2px solid #2814FF;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   @media only screen and (max-width: 400px) {
     width: 80%;
     font-size: 16px;
@@ -107,4 +107,7 @@
 .sharedChildrenDifferentFamilyLabel {
   text-align: center;
   padding-top: 2rem;
+  &:focus {
+    outline-width: inherit;
+  }
 }
