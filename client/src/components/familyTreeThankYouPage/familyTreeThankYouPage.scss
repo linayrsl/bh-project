@@ -139,4 +139,14 @@ a {
   padding-right: 3px;
 }
 
+.credits {
+  padding-left: 15px;
+  padding-bottom: 20px;
+  font-size: 16px;
+  font-family: "ploni-regular";
+  font-style: italic;
 
+  [dir=rtl] & {
+    direction: ltr;
+  }
+}

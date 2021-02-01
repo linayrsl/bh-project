@@ -97,8 +97,9 @@ class FamilyTreePageSiblingsComponent extends React.Component<
                   if (newFamilyTree.submitter.coParents?.length === 0) {
                     newFamilyTree.submitter.coParents!.push({
                       ...createPersonDetails(),
-                      sharedChildren: [],
-                      isSubmitter: false
+                      sharedChildren: [{...createPersonDetails(), mother: null, father: null, siblings: [], isSubmitter: false}],
+                      isSubmitter: false,
+                      uniqueKey: new Date().toISOString()
                     });
                     this.setState({familyTree: newFamilyTree});
                   }
@@ -113,7 +114,16 @@ class FamilyTreePageSiblingsComponent extends React.Component<
           {(this.state.familyTree && this.state.familyTree.submitter?.coParents) &&
           this.state.familyTree.submitter.coParents.map((coParent, index) =>
             <CoParentForm
-              key={index}
+              displayAbortButton={index > 0}
+              onAbortClick={() => {
+                const newFamilyTree = {...this.state.familyTree!};
+                newFamilyTree.submitter.coParents = this.state.familyTree!.submitter.coParents!.filter((coParent, i) => i !== index);
+                const newFormValidity = this.state.coParentsFormsValidity.filter((form, i) => i !== index);
+                this.setState({
+                  familyTree: newFamilyTree, coParentsFormsValidity: newFormValidity
+                });
+              }}
+              key={coParent.uniqueKey}
               idPrefix={`coParent${index}`}
               coParent={coParent}
               onValidityChanged={(validity: boolean) => {
@@ -141,8 +151,9 @@ class FamilyTreePageSiblingsComponent extends React.Component<
                 const newFamilyTree = {...this.state.familyTree};
                 newFamilyTree.submitter.coParents!.push({
                   ...createPersonDetails(),
-                  sharedChildren: [],
-                  isSubmitter: false
+                  sharedChildren: [{...createPersonDetails(), mother: null, father: null, siblings: [], isSubmitter: false}],
+                  isSubmitter: false,
+                  uniqueKey: new Date().toISOString()
                 });
                 this.setState({familyTree: newFamilyTree});
               }

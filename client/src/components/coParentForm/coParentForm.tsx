@@ -10,6 +10,8 @@ export interface CoParentFormProps extends WithTranslation {
   coParent: CoParent;
   onValidityChanged: (validity: boolean) => void;
   onChange: (coParent: CoParent) => void;
+  onAbortClick: () => void;
+  displayAbortButton: boolean;
 }
 
 export interface CoParentFormState {
@@ -41,6 +43,8 @@ class CoParentFormComponent extends Component<CoParentFormProps, CoParentFormSta
     const t = this.props.t;
     return (
       <div className={"coParents-container"}>
+        {this.props.displayAbortButton &&
+        <button onClick={this.props.onAbortClick} className={"abortForm"}>ביטול</button>}
         <div>
           <PersonDetailsForm
             idPrefix={`${this.props.idPrefix}`}

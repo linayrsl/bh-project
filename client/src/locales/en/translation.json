@@ -140,7 +140,7 @@
     "telegramLinkShareMessage": "The Museum of the Jewish People's Family Tree App",
     "twitterLinkShareMessage": "The Museum of the Jewish People's Family Tree App",
     "whats'upLinkShareMessage": "The Museum of the Jewish People's Family Tree App",
-    "upperRightRectangleText": "The Museum of the Jewish People's Family Tree App",
+    "upperRightRectangleText": "<0>Come and </0><1>visit</1> the Museum of the Jewish People",
     "upperLeftRectangleText": "<0>Come and </0> <1>discover</1> the Jewish world in our databases",
     "lowerRightRectangleText": "<0>Come and</0> <1>take part</1> in our educational programs",
     "lowerLeftRectangleText": "<0>Come and </0> <1>buy</1> something from our gift shop collection",
@@ -151,7 +151,10 @@
     "thankYouInformationHeader3": "About the Museum of the Jewish People",
     "thankYouInformationText3": "The Museum of the Jewish People is a global institution that tells the story of one, multifaceted culture that is rich and comprised of multiple layers. It tells the stories of men and women, adults and children, families and communities, the Jewish calendar and its holidays, sufferings and joys, fruits of the spirit, education and creative works, traditions and ways of life of the Jewish people that evolved in a variety of countries and in many different periods under various rulers and regimes, in seventy languages and over thousands of years. At the Museum, the Jewish people are depicted as a people who have lived and still live among other peoples and continue to preserve and cultivate a special bond with the Land of Israel and the State of Israel.",
     "thankYouInformationHeader4": "About this project",
-    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry.</2>"
+    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry.</2>",
+    "creditsText": "App Developer: Lina Yaroslavski",
+    "creditsText2": "UX/UI Designer: Neta Manor, Museum Digital Department",
+    "creditsText3": "Project Manager: Eynat Sharon Museum CDO"
   },
   "errorBoundary": {
     "header": "family tree project",
