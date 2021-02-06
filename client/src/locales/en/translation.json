@@ -189,6 +189,11 @@
     "coParentFormTitle": "Other parent",
     "sharedChildrenLabel": "How many children?",
     "sharedChildrenFormLabel": "Child"
+  },
+    "credits": {
+      "app": "App Developer: Lina Yaroslavski",
+      "design": "UX/UI Designer: Neta Manor, Museum Digital Department",
+      "manage": "Project Manager: Eynat Sharon Museum CDO"
   }
 }
 
