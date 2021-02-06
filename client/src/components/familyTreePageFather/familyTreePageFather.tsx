@@ -100,7 +100,7 @@ class FamilyTreePageFatherComponent extends React.Component<
             <div className="parentsLabel">
               <img src={arrowIcon} alt ="" style={{transform: this.state.showParents ? "rotate(180deg)" : "rotate(0deg)"}}/>
             </div>
-            <Trans i18nKey={"familyTreePageFather.familyTreeGrandParentsTitle"}>ההורים של אבא(סבא וסבתא)</Trans>
+            <Trans i18nKey={"familyTreePageFather.familyTreeGrandParentsTitle"}>ההורים של אבא (סבא וסבתא)</Trans>
           </div>
 
           {this.state.showParents &&
@@ -142,13 +142,13 @@ class FamilyTreePageFatherComponent extends React.Component<
             <div className="parentsLabel">
               <img src={arrowIcon} alt ="" style={{transform: this.state.showGrandparents ? "rotate(180deg)" : "rotate(0deg)"}}/>
             </div>
-            <Trans i18nKey={"familyTreePageFather.familyTreeGrandGrandParentsTitle"}>סבא וסבתא של אבא(סבא רבא וסבתא רבא)</Trans>
+            <Trans i18nKey={"familyTreePageFather.familyTreeGrandGrandParentsTitle"}>סבא וסבתא של אבא (סבא רבא וסבתא רבא)</Trans>
           </div>
           {this.state.showGrandparents &&
           <>
             <PersonDetailsForm
               idPrefix="mother-of-grandmother"
-              title={t("familyTreePageFather.familyTreeMotherOfGrandmother", "אמא של סבתא(מצד אבא)")}
+              title={t("familyTreePageFather.familyTreeMotherOfGrandmother", "אמא של סבתא (מצד אבא)")}
               displayIsAlive
               displayMaidenName
               defaults={this.state.familyTree.submitter.father?.mother?.mother!}
@@ -162,7 +162,7 @@ class FamilyTreePageFatherComponent extends React.Component<
             />
             <PersonDetailsForm
               idPrefix="father-of-grandmother"
-              title={t("familyTreePageFather.familyTreeFatherOfGrandmother", "אבא של סבתא(מצד אבא)")}
+              title={t("familyTreePageFather.familyTreeFatherOfGrandmother", "אבא של סבתא (מצד אבא)")}
               displayIsAlive
               displayMaidenName
               defaults={this.state.familyTree.submitter.father?.mother?.father!}
