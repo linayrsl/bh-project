@@ -102,7 +102,7 @@ class FamilyTreePageMotherComponent extends React.Component<
             <div className="parentsLabel">
               <img src={arrowIcon} alt ="" style={{transform: this.state.showParents ? "rotate(180deg)" : "rotate(0deg)"}}/>
             </div>
-            <Trans i18nKey={"familyTreePageMother.familyTreeGrandParentsTitle"}>ההורים של אמא(סבא וסבתא)</Trans>
+            <Trans i18nKey={"familyTreePageMother.familyTreeGrandParentsTitle"}>ההורים של אמא (סבא וסבתא)</Trans>
           </div>
           {this.state.showParents &&
           <>
@@ -143,13 +143,13 @@ class FamilyTreePageMotherComponent extends React.Component<
             <div className="parentsLabel">
               <img src={arrowIcon} alt ="" style={{transform: this.state.showGrandparents ? "rotate(180deg)" : "rotate(0deg)"}}/>
             </div>
-            <Trans i18nKey={"familyTreePageMother.familyTreeGrandGrandParentsTitle"}>סבא וסבתא של אמא(סבא רבא וסבתא רבא)</Trans>
+            <Trans i18nKey={"familyTreePageMother.familyTreeGrandGrandParentsTitle"}>סבא וסבתא של אמא (סבא רבא וסבתא רבא)</Trans>
           </div>
           {this.state.showGrandparents &&
           <>
             <PersonDetailsForm
               idPrefix="mother-of-grandmother"
-              title={t("familyTreePageMother.familyTreeMotherOfGrandmother", "אמא של סבתא(מצד אמא)")}
+              title={t("familyTreePageMother.familyTreeMotherOfGrandmother", "אמא של סבתא (מצד אמא)")}
               displayIsAlive
               displayMaidenName
               defaults={this.state.familyTree.submitter.mother?.mother?.mother!}
@@ -163,7 +163,7 @@ class FamilyTreePageMotherComponent extends React.Component<
             />
             <PersonDetailsForm
               idPrefix="father-of-grandmother"
-              title={t("familyTreePageMother.familyTreeFatherOfGrandmother", "אבא של סבתא(מצד אמא)")}
+              title={t("familyTreePageMother.familyTreeFatherOfGrandmother", "אבא של סבתא (מצד אמא)")}
               displayIsAlive
               displayMaidenName
               defaults={this.state.familyTree.submitter.mother?.mother?.father!}
@@ -177,7 +177,7 @@ class FamilyTreePageMotherComponent extends React.Component<
             />
             <PersonDetailsForm
               idPrefix="mother-of-grandfather"
-              title={t("familyTreePageMother.familyTreeMotherOfGrandfather", "אמא של סבא(מצד אמא)")}
+              title={t("familyTreePageMother.familyTreeMotherOfGrandfather", "אמא של סבא (מצד אמא)")}
               displayIsAlive
               displayMaidenName
               defaults={this.state.familyTree.submitter.mother?.father?.mother!}
@@ -191,7 +191,7 @@ class FamilyTreePageMotherComponent extends React.Component<
             />
             <PersonDetailsForm
               idPrefix="father-of-grandfather"
-              title={t("familyTreePageMother.familyTreeFatherOfGrandfather", "אבא של סבא(מצד אמא)")}
+              title={t("familyTreePageMother.familyTreeFatherOfGrandfather", "אבא של סבא (מצד אמא)")}
               displayIsAlive
               displayMaidenName
               defaults={this.state.familyTree.submitter.mother?.father?.father!}
