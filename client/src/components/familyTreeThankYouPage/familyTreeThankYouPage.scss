@@ -140,13 +140,28 @@ a {
 }
 
 .credits {
-  padding-left: 15px;
-  padding-bottom: 20px;
-  font-size: 16px;
+  text-align: center;
+  font-size: 18px;
   font-family: "ploni-regular";
   font-style: italic;
-
+  margin-top: 3rem;
+  padding-bottom: 20px;
+  @media only screen and (max-width: 400px) {
+    text-align: left;
+    margin-top: 2rem;
+    padding-left: 30px;
+    font-size: 16px;
+  }
   [dir=rtl] & {
-    direction: ltr;
+    direction: rtl;
+    text-align: center;
+    padding-right: 30px;
+    font-family: "ploni-regular";
+    font-style: italic;
+    @media only screen and (max-width: 400px) {
+      margin-top: 2rem;
+      font-size: 16px;
+      text-align: right;
+    }
   }
 }

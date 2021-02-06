@@ -265,13 +265,13 @@ class FamilyTreeThankYouPageComponent extends React.Component<
           </div>
           <div className={"credits"}>
             <div>
-              <Trans i18nKey={"familyTreeThankYouPage.creditsText"}>App Developer: Lina Yaroslavski</Trans>
+              <Trans i18nKey={"credits.app"}>פיתוח אפליקציה: לינה ירוסלבסקי</Trans>
             </div>
             <div>
-              <Trans i18nKey={"familyTreeThankYouPage.creditsText2"}>UX/UI Designer: Neta Manor, Museum Digital Department</Trans>
+              <Trans i18nKey={"credits.design"}>עיצוב UI/UX: נטע מנור, מחלקת הדיגיטל במוזיאון העם היהודי</Trans>
             </div>
             <div>
-              <Trans i18nKey={"familyTreeThankYouPage.creditsText3"}>Project Manager: Eynat Sharon Museum CDO</Trans>
+              <Trans i18nKey={"credits.manage"}>ניהול פרויקט: עינת שרון, מנהלת מחלקת הדיגיטל במוזיאון </Trans>
             </div>
           </div>
         </div>
