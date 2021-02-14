@@ -47,6 +47,8 @@ class RegisterPageComponent extends React.Component<
   register(): Promise<any> {
     this.setState({ httpRequestInProgress: true });
 
+    const t = this.props.t;
+
     let apiResponsePromise = axios
       .post(`${this.props.config.apiBaseUrl}/api/auth/register/`, {
         firstName: this.state.firstName,
@@ -57,9 +59,9 @@ class RegisterPageComponent extends React.Component<
       })
       .catch(error => {
         if (error && error.response && error.response.status === 400) {
-          toast.error("מספר סלולרי ו/או דואר אלקטרוני שגויים");
+          toast.error(t("ToastNotifications.registerNotification", "מספר סלולרי ו/או דואר אלקטרוני שגויים"));
         } else {
-          toast.error("לא הצלחנו לשלוח קוד אימות. נא נסה שוב מאוחר יותר");
+          toast.error(t("ToastNotifications.registerNotification2", "לא הצלחנו לשלוח קוד אימות. נא נסה שוב מאוחר יותר"));
         }
         return Promise.reject(error);
       })

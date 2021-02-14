@@ -7,7 +7,7 @@ import {Gender} from "../../contracts/gender";
 import {PersonDetails} from "../../contracts/personDetails";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
 
-import "./personDetailsForm.css";
+import "./personDetailsForm.scss";
 
 export interface PersonDetailsFormProps extends WithTranslation {
   idPrefix: string;
@@ -40,8 +40,6 @@ class PersonDetailsFormComponent extends React.Component<
       gender: props.defaultGender || null,
       birthDate: null,
       birthPlace: null,
-      motherID: null,
-      fatherID: null,
       isAlive: true,
       deathDate: null,
       deathPlace: null,

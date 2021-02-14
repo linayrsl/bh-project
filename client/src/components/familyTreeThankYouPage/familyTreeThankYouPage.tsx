@@ -19,8 +19,8 @@ import ReactTooltip from 'react-tooltip';
 
 import { Header } from "../header/header";
 import "./familyTreeThankYouPage.scss";
-import bhLogoHe from "../../assets/images/bh-logo-he.svg";
-import bhLogoEn from "../../assets/images/bh-logo-en.svg";
+import bhLogoHe from "../../assets/images/new-logo-hebrew.svg";
+import bhLogoEn from "../../assets/images/new-logo-english.svg";
 import shareIcon from "../../assets/images/Share.svg";
 
 export interface FamilyTreeThankYouPageProps extends WithTranslation {}
@@ -261,6 +261,17 @@ class FamilyTreeThankYouPageComponent extends React.Component<
                   </Trans>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className={"credits"}>
+            <div>
+              <Trans i18nKey={"credits.app"}>פיתוח אפליקציה: לינה ירוסלבסקי</Trans>
+            </div>
+            <div>
+              <Trans i18nKey={"credits.design"}>עיצוב UI/UX: נטע מנור, מחלקת הדיגיטל במוזיאון העם היהודי</Trans>
+            </div>
+            <div>
+              <Trans i18nKey={"credits.manage"}>ניהול פרויקט: עינת שרון, מנהלת מחלקת הדיגיטל במוזיאון </Trans>
             </div>
           </div>
         </div>

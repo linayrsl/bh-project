@@ -36,7 +36,7 @@ class App extends Component<AppProps, AppState> {
     super(props);
     const language = props.i18n.language;
     if (language === "en" && typeof window !== "undefined") {
-      window.document.title = "Family tree project of the Museum of the Jewish People at Beit Hatfutsot"
+      window.document.title = "Family tree project of the Museum of the Jewish People"
     }
 
     this.state = {
@@ -45,6 +45,10 @@ class App extends Component<AppProps, AppState> {
         ...((window as any).clientConfigOverride || {})
       }
     }
+  }
+
+  componentDidMount() {
+    console.log("app did mount");
   }
 
   render() {

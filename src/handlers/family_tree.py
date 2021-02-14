@@ -3,16 +3,21 @@ import io
 import logging
 import re
 import zipfile
-from typing import Dict
+from typing import Dict, Optional, Generator, Any, Union
 
 from flask import Blueprint, request, Response, abort
 from jsonschema import validate, ValidationError, FormatChecker
 
 from src.database.database_connection import DatabaseConnection
 from src.database.family_tree_db import log_family_tree_submission
+from src.gedcom.gedcom_builder import GedcomBuilder
 
-from src.gedcom.handler import handler
 from src.mail.email import Email
+from src.models.co_parent import CoParent, make_co_parent_from_person_details
+from src.models.family_tree import FamilyTree
+from src.models.person_details import PersonDetails
+from src.models.person_node import PersonNode, make_person_node_from_person_details
+from src.models.submitter import Submitter, make_submitter_from_person_node
 from src.settings import SENDGRID_API_KEY, GEDCOM_EMAIL_FROM, GEDCOM_EMAIL_TO, DATABASE_URL
 
 logger = logging.getLogger(__name__)
@@ -22,7 +27,6 @@ family_tree_json_schema = {
         "person": {
             "type": "object",
             "properties": {
-                "ID": {"type": "string", "pattern": "^[0-9]+$"},
                 "firstName": {"type": ["string", "null"]},
                 "lastName": {"type": ["string", "null"]},
                 "maidenName": {"type": ["string", "null"]},
@@ -30,47 +34,109 @@ family_tree_json_schema = {
                 "birthDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
                 "birthPlace": {"type": ["string", "null"]},
                 "isAlive": {"type": "boolean"},
-                "deathDate": {"type": ["string", "null"], "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
-                "deathPlace": {"type": ["string", "null"]},
-                "motherID": {"type": ["string", "null"], "pattern": "^[0-9]+$"},
-                "fatherID": {"type": ["string", "null"], "pattern": "^[0-9]+$"},
-                "siblings": {
-                    "type": "array",
-                    "items": {"type": "string", "pattern": "^[0-9]+$"}
+                "mother": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/person",
+                            "additionalProperties": False
+                        },
+                        {"type": "null"}
+                    ],
                 },
+                "father": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/person",
+                            "additionalProperties": False
+                        },
+                        {"type": "null"}
+                    ],
+                },
+                "siblings": {
+                    "type": ["array", "null"],
+                    "items": {
+                        "$ref": "#/definitions/person",
+                        "additionalProperties": False
+                    }
+                },
+                "isSubmitter": {"type": "boolean"},
                 "image": {"type": ["string", "null"]}
             },
-            "required": ["fatherID",
-                         "motherID",
-                         "ID"],
-            "dependencies": {
-                "deathDate": {
+            "oneOf": [
+                {
                     "properties": {
+                        "deathDate": {"type": "string", "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
+                        "deathPlace": {"type": "string"},
+                        "isAlive": {
+                            "enum": [False]
+                        }
+                    }
+                }, {
+                    "properties": {
+                        "deathDate": {"enum": [None]},
+                        "deathPlace": {"type": "string"},
                         "isAlive": {
                             "enum": [False]
                         }
                     }
                 },
-                "deathPlace": {
+                {
                     "properties": {
+                        "deathDate": {"type": "string", "pattern": "^([0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{4})$"},
+                        "deathPlace": {"enum": [None]},
                         "isAlive": {
                             "enum": [False]
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "deathDate": {"enum": [None]},
+                        "deathPlace": {"enum": [None]},
+                        "isAlive": {"enum": [False, True]}
+                    }
+                }
+            ],
+        },
+        "submitter": {
+            "allOf": [
+                {"$ref": "#/definitions/person"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "coParents": {
+                            "type": ["array", "null"],
+                            "items": {
+                                "allOf": [
+                                    {"$ref": "#/definitions/person"},
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "sharedChildren": {
+                                                 "type": ["array"],
+                                                 "items": {
+                                                    "$ref": "#/definitions/person"
+                                                 }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
                         }
                     }
                 }
-            }
+            ],
+            "required": ["firstName",
+                         "lastName",
+                         "gender"],
         }
     },
     "type": "object",
     "properties": {
         "submitterEmail": {"type": "string"},
         "language": {"type": "string"},
-        "familyTree": {
-            "type": "object",
-            "patternProperties": {
-                "^[0-9]+$": {
-                    "$ref": "#/definitions/person"}
-            },
+        "submitter": {
+            "$ref": "#/definitions/submitter",
             "additionalProperties": False
         }
     }
@@ -93,18 +159,24 @@ def family_tree_post():
         return abort(400, e.message)
 
     try:
-        image_dict: Dict[str, str]
-        gedcom_string, image_dict, _ = handler(family_tree_json["familyTree"], family_tree_json["language"])
+        family_tree_model: FamilyTree = map_family_tree_json_to_model(family_tree_json)
+    except Exception:
+        logger.exception("Failed to map family tree model from family tree json")
+        return abort(500, description="Failed to parse family tree json")
+
+    try:
+        gedcom = GedcomBuilder(family_tree_model)
+        gedcom_string, images = gedcom.get_gedcom_string()
     except Exception:
         logger.exception("Failed to generate gedcom from family tree json")
         return abort(500, description="Failed to generate gedcom")
 
     try:
-        user_id = re.findall(r'I[0-9]+', gedcom_string, re.UNICODE)[0][1:]
+        user_id = family_tree_model.submitter.id
         file_name = 'user{}.ged'.format(user_id)
         zip_file_name = 'user{}.zip'.format(user_id)
 
-        user_last_name = re.findall(r'/\w+', gedcom_string, re.UNICODE)[0][1:]
+        user_last_name = family_tree_model.submitter.last_name
         content = str(b'{} family tree', 'utf-8').format(user_last_name)
     except Exception:
         logger.exception("Failed to extract user name and user last name from gedcom string")
@@ -120,7 +192,7 @@ def family_tree_post():
     zip_file_data = create_zip_with_gedcom_and_images(
         file_name,
         gedcom_string.encode(),
-        {key: base64.b64decode(value) for (key, value) in image_dict.items()})
+        {key: base64.b64decode(value) for (key, value) in images.items()})
 
     if send_email.send_zip(
             zip_file_name,
@@ -133,12 +205,16 @@ def family_tree_post():
                 logger.error("Could not get connection to database")
                 return abort(500, description="Failed to connect to database")
 
-            log_family_tree_submission(db_connection, family_tree_json["familyTree"], family_tree_json["submitterEmail"])
+            log_family_tree_submission(
+                db_connection,
+                family_tree_model,
+                count_family_tree_individuals(family_tree_model.submitter),
+                len(images.values()))
 
         logger.info("Family tree submission log saved to database")
 
-        if not send_email.send_zip_to_user(zip_file_name, zip_file_data, family_tree_json["submitterEmail"]):
-            logger.error("Gedcom wasn't sent to the user with email {}".format(family_tree_json["submitterEmail"]))
+        if not send_email.send_zip_to_user(zip_file_name, zip_file_data, family_tree_model.submitter_email):
+            logger.error("Gedcom wasn't sent to the user with email {}".format(family_tree_model.submitter_email))
 
         return Response("{}", mimetype="application/json")
 
@@ -153,3 +229,81 @@ def create_zip_with_gedcom_and_images(file_name: str, data: bytes, images: Dict[
         for image_name, image_data in images.items():
             zip_file.writestr(image_name, image_data)
     return zip_buffer.getvalue()
+
+
+def sequential_id_generator():
+    next_id = 1
+    while True:
+        yield next_id
+        next_id += 1
+
+
+def map_person_details_json_to_model(person_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[PersonDetails]:
+    if not person_json:
+        return None
+    person_node = PersonDetails(
+        id=next(id_generator),
+        image=person_json["image"] if "image" in person_json else None,
+        first_name=person_json["firstName"] if "firstName" in person_json else None,
+        last_name=person_json["lastName"] if "lastName" in person_json else None,
+        maiden_name=person_json["maidenName"] if "maidenName" in person_json else None,
+        birth_date=person_json["birthDate"] if "birthDate" in person_json else None,
+        birth_place=person_json["birthPlace"] if "birthPlace" in person_json else None,
+        gender=person_json["gender"] if "gender" in person_json else None,
+        is_alive=person_json["isAlive"] if "isAlive" in person_json else None,
+        death_date=person_json["deathDate"] if "deathDate" in person_json else None,
+        death_place=person_json["deathDate"] if "deathPlace" in person_json else None)
+    return person_node
+
+
+def map_person_node_json_to_model(person_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[PersonNode]:
+    if not person_json:
+        return None
+    person_node = make_person_node_from_person_details(
+        map_person_details_json_to_model(person_json, id_generator))
+
+    person_node.mother = map_person_node_json_to_model(person_json["mother"], id_generator) if "mother" in person_json else None
+    person_node.father = map_person_node_json_to_model(person_json["father"], id_generator) if "father" in person_json else None
+    person_node.siblings = [map_person_node_json_to_model(sibling, id_generator) for sibling in
+                            person_json["siblings"]] if "siblings" in person_json and person_json["siblings"] else None
+
+    return person_node
+
+
+def map_submitter_json_to_model(submitter_json: Dict, id_generator: Generator[int, Any, None]) -> Optional[Submitter]:
+    if not submitter_json:
+        return None
+    submitter = make_submitter_from_person_node(
+        map_person_node_json_to_model(submitter_json, id_generator))
+
+    submitter.co_parents = [map_co_parent_json_to_model(co_parent_json, id_generator) for co_parent_json in
+                            submitter_json["coParents"]] if "coParents" in submitter_json else None
+
+    return submitter
+
+
+def map_family_tree_json_to_model(family_tree_json: Dict) -> FamilyTree:
+    family_tree_model = FamilyTree(
+        submitter_email=family_tree_json["submitterEmail"],
+        language=family_tree_json["language"],
+        submitter=map_submitter_json_to_model(family_tree_json["submitter"], sequential_id_generator())
+    )
+    return family_tree_model
+
+
+def map_co_parent_json_to_model(co_parent_json: Dict, id_generator: Generator[int, Any, None]) -> CoParent:
+    person = map_person_details_json_to_model(co_parent_json, id_generator)
+    co_parent = make_co_parent_from_person_details(person)
+    co_parent.shared_children = [map_person_node_json_to_model(shared_child_json, id_generator) for shared_child_json in co_parent_json["sharedChildren"]]
+    return co_parent
+
+
+def count_family_tree_individuals(person: Union[Submitter, PersonNode, None]):
+    if not person:
+        return 0
+    return 1 + \
+        count_family_tree_individuals(person.mother) + \
+        count_family_tree_individuals(person.father) + \
+        (len(person.siblings) if person.siblings else 0) + \
+        (len(person.co_parents) if isinstance(person, Submitter) and person.co_parents else 0) + \
+        sum([len(co_parent.shared_children) for co_parent in person.co_parents]) if isinstance(person, Submitter) and person.co_parents else 0

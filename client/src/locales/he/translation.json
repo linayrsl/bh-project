@@ -3,13 +3,13 @@
     "changeLanguage": "Go to English version",
     "welcomeMessage": "ברוכים הבאים",
     "welcomeMessagePart2": "<0>ל</0><1>פרויקט עצי המשפחה</1>",
-    "welcomeMessagePart3": "של מוזיאון העם היהודי בבית התפוצות.",
+    "welcomeMessagePart3": "של מוזיאון העם היהודי",
     "welcomeMessagePart4": "",
     "theProjectObjective": "כאן תוכלו ליצור את עץ המשפחה שלכם",
-    "theProjectObjective2": "ב-4 צעדים פשוטים.",
+    "theProjectObjective2": "ב-4 צעדים פשוטים",
     "projectDisclaimer": "העץ שתבנו יישמר במאגר עצי המשפחה",
     "projectDisclaimer2": "המאובטח של מוזיאון העם היהודי ותוכלו לעיין בו",
-    "projectDisclaimer3": "ולערוך אותו בעתיד באתר המוזיאון.",
+    "projectDisclaimer3": "ולערוך אותו בעתיד באתר המוזיאון",
     "proceedButton": "כניסה "
   },
   "registerPage": {
@@ -33,7 +33,7 @@
   },
   "verificationPage": {
     "header": "אימות דואר אלקטרוני",
-    "verificationMessage": "בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה",
+    "verificationMessage": "בדקו את תיבת הדואר <1>{{userEmail}}</1>. בדקות הקרובות תתקבל הודעה",
     "verificationMessage2": "ובה קוד אימות, יש להעתיק את הקוד לכאן:",
     "verificationCode": "קוד אימות",
     "verificationCodePlaceholder": "הזינו קוד",
@@ -62,9 +62,9 @@
     "personDetailsLastNamePlaceholder": "לחצו להוספה",
     "personDetailsMaidenName": "שם נעורים",
     "personDetailsFormerName": "שם קודם",
-    "personDetailsDefaultName": "שם נעורים/שם קודם",
+    "personDetailsDefaultName": "שם נעורים/קודם",
     "personDetailsMaidenNamePlaceholder": "לחצו להוספה",
-    "personDetailsGender": "מין",
+    "personDetailsGender": "בחרו",
     "personDetailsMalePlaceholder": "זכר",
     "personDetailsFemalePlaceholder": "נקבה",
     "personDetailsOtherPlaceholder": "אחר",
@@ -79,24 +79,40 @@
   "familyTreePageMother" : {
     "header": "הצד של אמא  2/4",
     "familyTreeCurrentEntity": "אמא",
+    "familyTreeGrandparentsTitle": "ההורים של אמא (סבא וסבתא)",
     "familyTreeMothersMother": "אמא של אמא",
     "familyTreeMothersFather": "אבא של אמא",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אמא (סבא רבא וסבתא רבא)",
+    "familyTreeMotherOfGrandmother": "אמא של סבתא",
+    "familyTreeFatherOfGrandmother": "אבא של סבתא",
+    "familyTreeMotherOfGrandfather": "אמא של סבא",
+    "familyTreeFatherOfGrandfather": "אבא של סבא",
     "familyTreeProceedButton": "המשיכו"
   },
   "familyTreePageFather": {
     "header": "הצד של אבא  3/4",
     "familyTreeCurrentEntity": "אבא",
+    "familyTreeGrandparentsTitle": "ההורים של אבא (סבא וסבתא)",
     "familyTreeFathersMother": "אמא של אבא",
     "familyTreeFathersFather": "אבא של אבא",
+    "familyTreeGrandGrandParentsTitle": "סבא וסבתא של אבא (סבא רבא וסבתא רבא)",
+    "familyTreeMotherOfGrandmother": "אמא של סבתא",
+    "familyTreeFatherOfGrandmother": "אבא של סבתא",
+    "familyTreeMotherOfGrandfather": "אמא של סבא",
+    "familyTreeFatherOfGrandfather": "אבא של סבא",
     "familyTreeProceedButton": "המשיכו"
   },
   "familyTreePageSiblings": {
-    "header": "אחים/אחיות  4/4",
+    "header": "אחים/ות, ילדים/ות  4/4",
     "familyTreeSiblingsMessage": "כמה אחים/אחיות יש לך ?",
+    "familyTreeChildrenMessage": "כמה ילדים/ילדות יש לך ?",
     "familyTreeSiblingsIncreaseNumber": "להגדיל מספר אחים או אחיות באחד",
     "familyTreeSiblingsDecreaseNumber": "להפחית מספר אחים או אחיות באחד",
     "familyTreeCurrentEntity": "אח/אחות",
-    "familyTreeSiblingsProceedButton": "לסיום הקישו כאן"
+    "familyTreeCurrentEntityChild": "ילד/ילדה",
+    "familyTreeSiblingsProceedButton": "לסיום הקישו כאן",
+    "sharedChildrenLabel": "האם יש לך ילדים/ות ?",
+    "sharedChildrenDifferentFamilyLabel": "יש לי עוד ילדים/ות מהורה אחר"
   },
   "familyTreePageSubmit": {
     "header": "סיימת את בניית עץ המשפחה שלך",
@@ -110,7 +126,7 @@
     "thankYouMessage": "<0>תודה רבה!</0>",
     "thankYouMessage2": "<0>העץ נשמר במאגר עצי המשפחה המאובטח של מוזיאון העם היהודי. <1> ברגעים אלו נשלח אליכם קובץ מייל עם הפרטים.</1></0>",
     "thankYouMessage2_5": "",
-    "thankYouMessage3": "אתם מוזמנים לבקר במוזיאון העם היהודי בבית התפוצות ולהמשיך ללמוד, ",
+    "thankYouMessage3": "אתם מוזמנים לבקר במוזיאון העם היהודי ולהמשיך ללמוד, ",
     "thankYouMessage4": "לחקור ולהיות חלק מהסיפור.",
     "linkSharingOptionsMessage": "רוצה לשתף:",
     "linkShareSentTitle": "אפליקציה לבניית עצי משפחה של מוזיאון העם היהודי",
@@ -132,11 +148,11 @@
     "thankYouInformationHeader": "אודות מאגר עצי המשפחה במוזיאון",
     "thankYouInformationText": "מעל ל-5 מיליוני בני אדם כבר רשומים במרכז לגנאלוגיה יהודית במוזיאון העם היהודי, והמאגר גדל מדי יום ומדי שעה. מבקרים ממגוון מקומות ואורחות חיים באים להתחקות אחר שורשיהם, לתעד ולהנציח את אילן משפחתם עבור הדורות הבאים, ובכך הם מוסיפים עוד ענף לאילן המשפחתי הגדול של העם היהודי.",
     "thankYouInformationHeader2": "אודות מאגרי המידע של המוזיאון",
-    "thankYouInformationText2": "במוזיאון העם היהודי בבית התפוצות מאגרי מידע מגוונים ועשירים. אילנות יוחסין (עצי משפחה), פירושים לשמות משפחה, תולדותיהן של קהילות ברחבי העולם, צילומים, תמונות וסרטים, קטעי מוזיקה, מידע על מושגים ואישים – כל החומרים נמצאים באתר אחד, עם חיפוש שמאגם את סוגי התוכן וגם מקשר ביניהם בקישורים פנימיים.",
+    "thankYouInformationText2": "במוזיאון העם היהודי מאגרי מידע מגוונים ועשירים. אילנות יוחסין (עצי משפחה), פירושים לשמות משפחה, תולדותיהן של קהילות ברחבי העולם, צילומים, תמונות וסרטים, קטעי מוזיקה, מידע על מושגים ואישים – כל החומרים נמצאים באתר אחד, עם חיפוש שמאגם את סוגי התוכן וגם מקשר ביניהם בקישורים פנימיים.",
     "thankYouInformationHeader3": "אודות מוזיאון העם היהודי",
-    "thankYouInformationText3": "מוזיאון העם היהודי בבית התפוצות הוא מוסד עולמי שמספר על תרבות אחת רבת-פנים, עשירה ועתירת רבדים; הוא מספר על אנשים ונשים, על מבוגרים וילדים, על משפחות וקהילות, על השנה העברית ומועדיה, על תלאות ושמחות, ועל פירות הרוח, החינוך והיצירה, המסורות ואורחות החיים של העם היהודי, אשר נוצרו במגוון ארצות, בכל מיני תקופות, תחת שליטים ומשטרים שונים, ובשבעים לשונות, במשך אלפי שנים. במוזיאון העם היהודי מתואר העם היהודי, עם בקרב עמים אחרים, אשר שומר ומטפח גם קשר מיוחד אל ארץ ישראל ואל מדינת ישראל.",
+    "thankYouInformationText3": "מוזיאון העם היהודי הוא מוסד עולמי שמספר על תרבות אחת רבת-פנים, עשירה ועתירת רבדים; הוא מספר על אנשים ונשים, על מבוגרים וילדים, על משפחות וקהילות, על השנה העברית ומועדיה, על תלאות ושמחות, ועל פירות הרוח, החינוך והיצירה, המסורות ואורחות החיים של העם היהודי, אשר נוצרו במגוון ארצות, בכל מיני תקופות, תחת שליטים ומשטרים שונים, ובשבעים לשונות, במשך אלפי שנים. במוזיאון העם היהודי מתואר העם היהודי, עם בקרב עמים אחרים, אשר שומר ומטפח גם קשר מיוחד אל ארץ ישראל ואל מדינת ישראל.",
     "thankYouInformationHeader4": "אודות פרויקט זה",
-    "thankYouInformationText4": "<0>פרויקט עצי המשפחה הוקם ע\"מ לאפשר את הגדלת מאגר עצי המשפחה של העם היהודי ומתוך מטרה להנגיש את איסוף פרטי המשפחה בצורה נוחה וידידותית למשתמשים דרך הטלפון הנייד. הפרויקט נעשה בשיתוף עם ארגון</0> <1>;she codes</1> <2>ששם לו למטרה לקדם נשים במגזר ההייטק, ונוהל ע\"י מחלקת הדיגיטל של מוזיאון העם היהודי בבית התפוצות.</2>"
+    "thankYouInformationText4": "<0>פרויקט עצי המשפחה הוקם ע\"מ לאפשר את הגדלת מאגר עצי המשפחה של העם היהודי ומתוך מטרה להנגיש את איסוף פרטי המשפחה בצורה נוחה וידידותית למשתמשים דרך הטלפון הנייד. הפרויקט נעשה בשיתוף עם ארגון</0> <1>;she codes</1> <2>ששם לו למטרה לקדם נשים במגזר ההייטק.</2>"
   },
   "errorBoundary": {
     "header": "פרויקט עצי המשפחה",
@@ -153,6 +169,28 @@
   "pageNotFoundError": {
     "header": "פרויקט עצי המשפחה",
     "pageNotFoundErrorMessage": "<0>הדף המבוקש לא נמצא, ניתן לפנות ל<1>דף הבית</1></0>"
+  },
+  "listOfPersons" : {
+    "secondParentLabel": "הורה נוסף"
+  },
+  "ToastNotifications": {
+    "submitNotification": " השליחה נכשלה, נא צור קשר עם בית התפוצות info@bh.org.il",
+    "registerNotification": "מספר סלולרי ו/או דואר אלקטרוני שגויים",
+    "registerNotification2": "לא הצלחנו לשלוח קוד אימות. נא נסה שוב מאוחר יותר",
+    "verificationNotification": "יש להזין קוד אימות בן 5 ספרות",
+    "verificationNotification2": "קוד אימות שגוי. נא נסה שוב.",
+    "verificationNotification3": "קוד האימות לא קיים. נא נסה להירשם בשנית.",
+    "verificationNotification4": "לא הצלחנו לאמת פרטים אישיים. נא נסה להירשם מחדש."
+  },
+  "coParents": {
+    "coParentFormTitle": "הורה נוסף",
+    "sharedChildrenLabel": "?כמה ילדים/ות משותפים/ות יש לכם/ן",
+    "sharedChildrenFormLabel": "ילד/ילדה"
+  },
+  "credits": {
+    "app": "פיתוח אפליקציה: לינה ירוסלבסקי",
+    "design": "עיצוב UI/UX: נטע מנור, מחלקת הדיגיטל במוזיאון העם היהודי",
+    "manage": "ניהול פרויקט: עינת שרון, מנהלת מחלקת הדיגיטל במוזיאון"
   }
 }
 

@@ -4,12 +4,12 @@
     "welcomeMessage": "Welcome to the",
     "welcomeMessagePart2": "<0></0><1> Family Tree Project</1>",
     "welcomeMessagePart3": " of the Museum of the Jewish People ",
-    "welcomeMessagePart4": " at Beit Hatfutsot.",
-    "theProjectObjective": "This is where you'll be able to build your family tree",
-    "theProjectObjective2": "in 4 simple steps.",
+    "welcomeMessagePart4": "",
+    "theProjectObjective": "Build your family tree in 4 simple steps",
+    "theProjectObjective2": "in 4 simple steps",
     "projectDisclaimer": "The tree you build will be saved in the secure family tree",
     "projectDisclaimer2": "database at the Museum of the Jewish People, enabling you",
-    "projectDisclaimer3": "to view and edit it on the Museum's website in the future.",
+    "projectDisclaimer3": "to view and edit it on the Museum's website in the future",
     "proceedButton": "Enter"
   },
   "registerPage": {
@@ -22,8 +22,8 @@
     "registerFormEmail": "Email",
     "registerFormEmailPlaceholder": "Enter your email address",
     "registerFormEmailErrorMessage": "Invalid email address",
-    "registerFormPhone": "Cell phone",
-    "registerFormPhonePlaceholder": "Enter your cell phone number",
+    "registerFormPhone": "Mobile phone",
+    "registerFormPhonePlaceholder": "Enter your mobile phone number",
     "registerFormPhoneErrorMessage": "Invalid cell phone number",
     "registerFormMandatoryFieldsMessage": "* Mandatory fields",
     "registerFormAcceptConditions": "I have read and agree to the ",
@@ -33,7 +33,7 @@
   },
   "verificationPage": {
     "header": "Email verification",
-    "verificationMessage": "Check your mailbox. A message containing a verification code will be sent in the next few minutes.",
+    "verificationMessage": "Check your mailbox <1>{{userEmail}}</1>. A message containing a verification code will be sent in the next few minutes.",
     "verificationMessage2": "Copy the code here:",
     "verificationCode": "Verification code",
     "verificationCodePlaceholder": "Enter the code",
@@ -63,7 +63,7 @@
     "personDetailsFormerName": "Former name",
     "personDetailsDefaultName": "Former name/Maiden name",
     "personDetailsMaidenNamePlaceholder": "Click to add",
-    "personDetailsGender": "Sex",
+    "personDetailsGender": "Select",
     "personDetailsMalePlaceholder": "Male",
     "personDetailsFemalePlaceholder": "Female",
     "personDetailsOtherPlaceholder": "Other",
@@ -78,24 +78,40 @@
   "familyTreePageMother" : {
     "header": "Your mother's side 2/4",
     "familyTreeCurrentEntity": "Your mother",
+    "familyTreeGrandParentsTitle": "Mother's parents (grandfather and grandmother)",
     "familyTreeMothersMother": "Your mother's mother",
     "familyTreeMothersFather": "Your mother's father",
+    "familyTreeGrandGrandParentsTitle": "Mother's grandparents (grand grandfather and grand grandmother)",
+    "familyTreeMotherOfGrandmother": "Your grandmother's mother",
+    "familyTreeFatherOfGrandmother": "Your grandmother's father",
+    "familyTreeMotherOfGrandfather": "Your grandfather's mother",
+    "familyTreeFatherOfGrandfather": "Your grandfather's father",
     "familyTreeProceedButton": "Next"
   },
   "familyTreePageFather": {
     "header": "Your father's side 3/4",
     "familyTreeCurrentEntity": "Your father",
+    "familyTreeGrandParentsTitle": "Father's parents (grandfather and grandmother)",
     "familyTreeFathersMother": "Your father's mother",
     "familyTreeFathersFather": "Your father's father",
+    "familyTreeGrandGrandParentsTitle": "Father's grandparents (grand grandfather and grand grandmother)",
+    "familyTreeMotherOfGrandmother": "Your grandmother's mother",
+    "familyTreeFatherOfGrandmother": "Your grandmother's father",
+    "familyTreeMotherOfGrandfather": "Your grandfather's mother",
+    "familyTreeFatherOfGrandfather": "Your grandfather's father",
     "familyTreeProceedButton": "Next"
   },
   "familyTreePageSiblings": {
-    "header": "Siblings 4/4",
+    "header": "Siblings, Children 4/4",
     "familyTreeSiblingsMessage": "How many siblings do you have?",
+    "familyTreeChildrenMessage": "How many children do you have?",
     "familyTreeSiblingsIncreaseNumber": "Increase the number of brothers or sisters by one",
     "familyTreeSiblingsDecreaseNumber": "Decrease the number of brothers or sisters by one",
     "familyTreeCurrentEntity": "Brother/sister",
-    "familyTreeSiblingsProceedButton": "Click here to finish"
+    "familyTreeCurrentEntityChild": "Child",
+    "familyTreeSiblingsProceedButton": "Click here to finish",
+    "sharedChildrenLabel": "Do you have children?",
+    "sharedChildrenDifferentFamilyLabel": "I have children from different parent"
   },
   "familyTreePageSubmit": {
     "header": "You have finished building your family tree",
@@ -109,7 +125,7 @@
     "thankYouMessage": "<0>Thank you!</0>",
     "thankYouMessage2": "<0>The tree has been saved in the secure family tree database at the Museum of the Jewish People.</0>",
     "thankYouMessage2_5": "A file containing the information will be sent to you by email in the next few minutes. ",
-    "thankYouMessage3": "You're welcome to visit the Museum of the Jewish People at Beit Hatfutsot and continue studying,",
+    "thankYouMessage3": "You're welcome to visit the Museum of the Jewish People and continue studying,",
     "thankYouMessage4": " researching and being part of the story",
     "linkSharingOptionsMessage": "Would you like to share:",
     "linkShareSentTitle": "The Museum of the Jewish People's tree building application",
@@ -124,18 +140,21 @@
     "telegramLinkShareMessage": "The Museum of the Jewish People's Family Tree App",
     "twitterLinkShareMessage": "The Museum of the Jewish People's Family Tree App",
     "whats'upLinkShareMessage": "The Museum of the Jewish People's Family Tree App",
-    "upperRightRectangleText": "The Museum of the Jewish People's Family Tree App",
+    "upperRightRectangleText": "<0>Come and </0><1>visit</1> the Museum of the Jewish People",
     "upperLeftRectangleText": "<0>Come and </0> <1>discover</1> the Jewish world in our databases",
     "lowerRightRectangleText": "<0>Come and</0> <1>take part</1> in our educational programs",
     "lowerLeftRectangleText": "<0>Come and </0> <1>buy</1> something from our gift shop collection",
     "thankYouInformationHeader": "About the family tree database at the Museum",
     "thankYouInformationText": "Over 5 million people are already registered at the Jewish Genealogy Center at the Museum of the Jewish People. The database is growing every day and every hour. Visitors from a variety of places and societies life come to trace their roots, record and preserve their family trees for the next generations. By doing so, they are adding another branch to the large family tree of the Jewish people.",
     "thankYouInformationHeader2": "About the Museum's databases",
-    "thankYouInformationText2": "The Museum of the Jewish People at Beit Hatfutsot is home to diverse and rich databases: family trees, meanings of last names, histories of Jewish communities across the globe, photographs, images and films, musical compositions, and information about concepts and people. All the materials can be found on a single website, where a search pools the various types of content and also connects them using internal links.",
+    "thankYouInformationText2": "The Museum of the Jewish People at is home to diverse and rich databases: family trees, meanings of last names, histories of Jewish communities across the globe, photographs, images and films, musical compositions, and information about concepts and people. All the materials can be found on a single website, where a search pools the various types of content and also connects them using internal links.",
     "thankYouInformationHeader3": "About the Museum of the Jewish People",
-    "thankYouInformationText3": "The Museum of the Jewish People at Beit Hatfutsot is a global institution that tells the story of one, multifaceted culture that is rich and comprised of multiple layers. It tells the stories of men and women, adults and children, families and communities, the Jewish calendar and its holidays, sufferings and joys, fruits of the spirit, education and creative works, traditions and ways of life of the Jewish people that evolved in a variety of countries and in many different periods under various rulers and regimes, in seventy languages and over thousands of years. At the Museum, the Jewish people are depicted as a people who have lived and still live among other peoples and continue to preserve and cultivate a special bond with the Land of Israel and the State of Israel.",
+    "thankYouInformationText3": "The Museum of the Jewish People is a global institution that tells the story of one, multifaceted culture that is rich and comprised of multiple layers. It tells the stories of men and women, adults and children, families and communities, the Jewish calendar and its holidays, sufferings and joys, fruits of the spirit, education and creative works, traditions and ways of life of the Jewish people that evolved in a variety of countries and in many different periods under various rulers and regimes, in seventy languages and over thousands of years. At the Museum, the Jewish people are depicted as a people who have lived and still live among other peoples and continue to preserve and cultivate a special bond with the Land of Israel and the State of Israel.",
     "thankYouInformationHeader4": "About this project",
-    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry. The project is managed by the Digital Department at the Museum of the Jewish People at Beit Hatfutsot..</2>"
+    "thankYouInformationText4": "<0>The family tree project was introduced in order to expand the family tree database at the Museum of the Jewish People, with the aim being to facilitate the collection of and access to family information using a cell phone. The project is a collaboration with the</0> <1>she codes;</1> <2>community, whose goal is to help women integrate into the hi-tech industry.</2>",
+    "creditsText": "App Developer: Lina Yaroslavski",
+    "creditsText2": "UX/UI Designer: Neta Manor, Museum Digital Department",
+    "creditsText3": "Project Manager: Eynat Sharon Museum CDO"
   },
   "errorBoundary": {
     "header": "family tree project",
@@ -152,6 +171,29 @@
   "pageNotFoundError": {
     "header": "family tree project",
     "pageNotFoundErrorMessage": "<0>The requested information was not found.  You can go back to the  <1>homepage</1></0>"
+  },
+  "listOfPersons": {
+    "secondParentLabel": "Partner/Child’s second parent"
+  },
+
+  "ToastNotifications": {
+    "submitNotification": "The information was not processed. Please contact: info@bh.org.il",
+    "registerNotification": "Incorrect Mobile phone number and/or email",
+    "registerNotification2": "Failing to send verification code, please try again later",
+    "verificationNotification": "Please insert 5 digit verification code",
+    "verificationNotification2": "Incorrect verification code, please try again",
+    "verificationNotification3": "No such verification code, please register again",
+    "verificationNotification4": "Personal detail confirmation failed, please try register again"
+  },
+  "coParents": {
+    "coParentFormTitle": "Other parent",
+    "sharedChildrenLabel": "How many children?",
+    "sharedChildrenFormLabel": "Child"
+  },
+    "credits": {
+      "app": "App Developer: Lina Yaroslavski",
+      "design": "UX/UI Designer: Neta Manor, Museum Digital Department",
+      "manage": "Project Manager: Eynat Sharon Museum CDO"
   }
 }
 

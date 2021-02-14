@@ -7,11 +7,13 @@ import {
 } from "../personDetailsForm/personDetailsForm";
 import { ProceedButton } from "../proceedButton/proceedButton";
 import {Trans, WithTranslation, withTranslation} from 'react-i18next';
+import {FamilyTree} from "../../contracts/familyTree";
+import {loadOrCreateTree, saveTree} from "../../familyTreeService";
 
 export interface FamilyTreePageSubmitterProps extends WithTranslation {}
 
 export interface FamilyTreePageSubmitterState {
-  submitterDetails?: PersonDetailsFormState;
+  familyTree?: FamilyTree;
   allFormsValid: boolean;
 }
 
@@ -27,15 +29,21 @@ class FamilyTreePageSubmitterComponent extends React.Component<
   }
 
   componentDidMount() {
-    let item = localStorage.getItem("submitterDetails");
-    if (item) {
-      let submitterDetails = JSON.parse(item);
-      this.setState({ submitterDetails: submitterDetails });
+    this.setState({ familyTree: loadOrCreateTree() });
+  }
+
+  componentDidUpdate(prevProps: Readonly<FamilyTreePageSubmitterProps>, prevState: Readonly<FamilyTreePageSubmitterState>) {
+    if (prevState.familyTree !== this.state.familyTree && this.state.familyTree) {
+      saveTree(this.state.familyTree);
     }
   }
 
-  formChangeHandler(formName: string, state: PersonDetailsFormState) {
-    localStorage.setItem(formName, JSON.stringify(state));
+  formChangeHandler(formData: PersonDetailsFormState) {
+    const familyTree = {...this.state.familyTree} as FamilyTree;
+    Object.assign(familyTree.submitter, formData);
+    this.setState({
+      familyTree
+    });
   }
 
   formValidityHandler(isValid: boolean) {
@@ -54,16 +62,16 @@ class FamilyTreePageSubmitterComponent extends React.Component<
           <div className="level">4</div>
         </div>
         <div className="family-tree-body page-content-container ">
-          <PersonDetailsForm
+          {this.state.familyTree && <PersonDetailsForm
             isSubmitter={true}
-            defaults={this.state.submitterDetails}
+            defaults={this.state.familyTree.submitter}
             onFormChange={(state: PersonDetailsFormState) => {
-              this.formChangeHandler("submitterDetails", state);
+              this.formChangeHandler(state);
             }}
             onFormValidityChange={this.formValidityHandler.bind(this)}
             idPrefix="me"
             title={t("familyTreePageSubmitter.familyTreeCurrentEntity", "אני")}
-          />
+          />}
           <div className={"mandatory-fields-message"}>
             <Trans i18nKey={"familyTreePageSubmitter.familyTreeMandatoryFieldsMessage"}>* שדות חובה למילוי</Trans>
           </div>

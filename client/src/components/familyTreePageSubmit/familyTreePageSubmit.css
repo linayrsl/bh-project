@@ -1,9 +1,12 @@
+/*--base-color: #2814FF;*/
+/*--econdary-color: #000000;*/
+
 .pre-submittion-text {
   text-align: center;
   font-size: 22px;
   padding-top: 20px;
   padding-bottom: 100px;
-  color: #535454;
+  color: #000000;
 }
 
 .choose-option {
@@ -38,13 +41,13 @@
   }
 }
 .option-yes {
-  background-color: #37b9c9;
-  background-image: linear-gradient(to right, #238f9c, #37b9c9);
+  background-color: #2814FF;
+  font-family: 'anomalia-regular';
 }
 
 .option-no {
-  background-color: #c95644;
-  background-image: linear-gradient(to right, #b5281d, #c95644);
+  background-color: #2814FF;
+  font-family: 'anomalia-regular';
 }
 
 .family-tree-submit-body {

@@ -1,6 +1,6 @@
 import * as React from "react";
-import bhLogoHe from "../../assets/images/bh-logo-he.svg";
-import bhLogoEn from "../../assets/images/bh-logo-en.svg";
+import bhLogoHe from "../../assets/images/new-logo-hebrew.svg";
+import bhLogoEn from "../../assets/images/new-logo-english.svg";
 import {i18n} from "../../i18n";
 import "./header.scss";
 

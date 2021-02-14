@@ -40,6 +40,8 @@ class VerificationPageComponent extends React.Component<
   verifyCode(): Promise<any> {
     this.setState({ httpRequestInProgress: true });
 
+    const t = this.props.t;
+
     let apiResponsePromise = axios
       .post(
         `${this.props.config.apiBaseUrl}/api/auth/verification-code/${decodeURIComponent(
@@ -53,13 +55,13 @@ class VerificationPageComponent extends React.Component<
       })
       .catch(error => {
         if (error && error.response && error.response.status === 400) {
-          toast.error("יש להזין קוד אימות בן 5 ספרות");
+          toast.error(t("ToastNotifications.verificationNotification", "יש להזין קוד אימות בן 5 ספרות"));
         } else if (error && error.response && error.response.status === 401) {
-          toast.error("קוד אימות שגוי. נא נסה שוב.");
+          toast.error(t("ToastNotifications.verificationNotification2", "קוד אימות שגוי. נא נסה שוב."));
         } else if (error && error.response && error.response.status === 404) {
-          toast.error("קוד האימות לא קיים. נא נסה להירשם בשנית.");
+          toast.error(t("ToastNotifications.verificationNotification3", "קוד האימות לא קיים. נא נסה להירשם בשנית."));
         } else {
-          toast.error("לא הצלחנו לאמת פרטים אישיים. נא נסה להירשם מחדש.");
+          toast.error(t("ToastNotifications.verificationNotification4", "לא הצלחנו לאמת פרטים אישיים. נא נסה להירשם מחדש."));
         }
         return Promise.reject(error);
       })
@@ -79,7 +81,9 @@ class VerificationPageComponent extends React.Component<
         <div className="verification-body page-content-container ">
           <div className="verification-message">
             <div className="verification-message1">
-             <Trans i18nKey={"verificationPage.verificationMessage"}> בדקו את תיבת הדואר. בדקות הקרובות תתקבל הודעה</Trans>
+             <Trans i18nKey={"verificationPage.verificationMessage"}> בדקו את תיבת הדואר
+               <span>{{userEmail: decodeURIComponent(this.props.match!.params.email)}}</span>
+               . בדקות הקרובות תתקבל הודעה</Trans>
             </div>
             <div className="verification-message2">
               <Trans i18nKey={"verificationPage.verificationMessage2"}>ובה קוד אימות, יש להעתיק את הקוד לכאן:</Trans>
