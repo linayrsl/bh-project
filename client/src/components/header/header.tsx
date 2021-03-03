@@ -12,6 +12,7 @@ export interface HeaderProps {
 class Header extends React.Component<HeaderProps> {
   render() {
     return (
+
       <div className={`${this.props.className || ""} bh-header`}>
         <div className="title">{this.props.title}</div>
         <div className="logo">
