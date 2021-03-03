@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import {i18n} from "i18next";
-
+import {Helmet} from "react-helmet";
 import { HomePage } from "./components/homePage/homePage";
 import { RegisterPage } from "./components/registerPage/registerPage";
 import { VerificationPage } from "./components/verificationPage/verificationPage";
@@ -47,10 +47,6 @@ class App extends Component<AppProps, AppState> {
     }
   }
 
-  componentDidMount() {
-    console.log("app did mount");
-  }
-
   render() {
     const language = this.props.i18n.language;
 
@@ -62,6 +58,9 @@ class App extends Component<AppProps, AppState> {
     return (
       <appConfigContext.Provider
         value={this.state.config}>
+        <Helmet>
+          <script src={this.state.config.accessibilityUrl} />
+        </Helmet>
         <div dir={direction} className="bh-app">
           <BrowserRouter basename={language === "en" ? "/en" : "/"}>
             <ReportAnalyticsPageView />
