@@ -34,7 +34,7 @@ application = Flask(
 application.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 
 extended_csp = GOOGLE_CSP_POLICY.copy()
-extended_csp["script-src"] += " 'unsafe-inline' *.google-analytics.com"
+extended_csp["script-src"] += " 'unsafe-inline' *.google-analytics.com *.enable.co.il"
 extended_csp["style-src"] += " 'unsafe-inline'"
 extended_csp["img-src"] = "'self' blob: data: *.google-analytics.com"
 extended_csp["connect-src"] = "'self' *.google-analytics.com"
