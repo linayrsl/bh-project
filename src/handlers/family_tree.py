@@ -1,7 +1,6 @@
 import base64
 import io
 import logging
-import re
 import zipfile
 from typing import Dict, Optional, Generator, Any, Union
 
@@ -306,4 +305,4 @@ def count_family_tree_individuals(person: Union[Submitter, PersonNode, None]):
         count_family_tree_individuals(person.father) + \
         (len(person.siblings) if person.siblings else 0) + \
         (len(person.co_parents) if isinstance(person, Submitter) and person.co_parents else 0) + \
-        sum([len(co_parent.shared_children) for co_parent in person.co_parents]) if isinstance(person, Submitter) and person.co_parents else 0
+        (sum([len(co_parent.shared_children) for co_parent in person.co_parents]) if isinstance(person, Submitter) and person.co_parents else 0)
