@@ -15,22 +15,24 @@ logger = logging.getLogger(__name__)
 
 
 def create_csv_string(db_connection) -> Optional[str]:
-    relevant_columns = ["email",
-                        "first_name",
+    relevant_columns = ["first_name",
                         "last_name",
-                        "gender",
                         "gedcom_language",
-                        "date_of_birth",
                         "address",
+                        "city",
+                        "phone",
+                        "zip",
                         "country",
+                        "gedcom_url",
                         "creation_time",
                         "num_of_people",
                         "num_of_photos",
                         "is_new_tree"]
     with db_connection.cursor() as cursor:
         try:
-            cursor.execute(f"""SELECT {",".join(relevant_columns)}
+            cursor.execute(f"""SELECT {",".join(["family_tree_upload_log.email"] + relevant_columns)}
                             FROM family_tree_upload_log
+                            LEFT JOIN users ON family_tree_upload_log.email=users.email
                             WHERE 
                                 creation_time BETWEEN CURRENT_DATE - interval '7 days' AND CURRENT_DATE
                             ORDER BY
@@ -42,7 +44,7 @@ def create_csv_string(db_connection) -> Optional[str]:
         rows = cursor.fetchall()
 
         csv_file = StringIO()
-        csv.writer(csv_file).writerow(relevant_columns)
+        csv.writer(csv_file).writerow(["email"] + relevant_columns)
         csv.writer(csv_file).writerows(rows)
         return csv_file.getvalue()
 

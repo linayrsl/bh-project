@@ -20,9 +20,15 @@
   color: #000000;
   margin-bottom: 30px;
   padding-right: 10px;
+  color: #2814ff;
 }
 
-[dir=ltr] .register-user {
+.mandatory-fields-register {
+  font-size: 18px;
+  color: #000000;
+}
+
+[dir="ltr"] .register-user {
   padding-right: 0;
   padding-left: 10px;
 }
@@ -36,7 +42,8 @@
   margin-top: 10px;
 }
 
-.accept-conditions-full {
+.accept-conditions-full,
+.accept-declaration {
   margin-right: 5px;
   font-size: 18px;
   color: #000000;
@@ -85,7 +92,7 @@ input.invalid {
 }
 
 .phone-input-container label {
-  font-family: 'ploni-bold';
+  font-family: "ploni-bold";
 }
 
 .phone-input-container .PhoneInput {
@@ -94,10 +101,9 @@ input.invalid {
   flex-direction: row;
 }
 
-[dir=ltr] .phone-input-container .PhoneInput {
+[dir="ltr"] .phone-input-container .PhoneInput {
   flex-direction: row-reverse;
 }
-
 
 .phone-input-container .PhoneInput .PhoneInputInput {
   border: 0;
@@ -105,20 +111,20 @@ input.invalid {
   background-color: #f9f9f9;
   color: #000000;
   font-size: 18px;
-  font-family: 'ploni-regular';
+  font-family: "ploni-regular";
   text-align: left;
 }
 
-[dir=ltr] .phone-input-container .PhoneInput .PhoneInputInput {
+[dir="ltr"] .phone-input-container .PhoneInput .PhoneInputInput {
   text-align: right;
 }
 
 .PhoneInputCountry {
   margin-right: 5px;
-  font-family: 'ploni-regular';
+  font-family: "ploni-regular";
 }
 
-[dir=ltr] .PhoneInputCountry {
+[dir="ltr"] .PhoneInputCountry {
   margin-right: 0;
   margin-left: 5px;
 }
@@ -141,7 +147,7 @@ input.invalid {
 }
 
 @media only screen and (max-width: 400px) {
-  .phone-input-container input::placeholder  {
+  .phone-input-container input::placeholder {
     font-size: 16px;
   }
   .phone-input-container .PhoneInput {
@@ -158,10 +164,44 @@ input.invalid {
 }
 
 .mandatory-field-indicator {
-  color: red;
+  color: #000000;
+  /*color: red;*/
+  padding-left: 0.3rem;
 }
 
 .mandatory-fields-message {
   color: red;
   margin-top: 25px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.declaration {
+  color: #2814ff;
+  font-size: 26px;
+  margin-top: 27px;
+}
+
+.declaration-list {
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+  /* padding-inline-start: 1.2rem; */
+}
+
+.declaration-list-item {
+  font-weight: normal;
+}
+
+.declaration-list li:not(:first-child) {
+  margin-top: 1rem;
 }
