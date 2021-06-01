@@ -14,7 +14,7 @@
   },
   "registerPage": {
     "header": "הרשמה",
-    "registerDetails": "פרטי רישום",
+    "registerDetails": "פרטי רישום <1>(שדות חובה *)</1>",
     "registerFormName": "שם פרטי",
     "registerFormNamePlaceholder": "הזינו שם פרטי",
     "registerFormLastName": "שם משפחה",
@@ -25,7 +25,22 @@
     "registerFormPhone": "טלפון סלולרי",
     "registerFormPhonePlaceholder": "הזינו מספר",
     "registerFormPhoneErrorMessage": "מספר טלפון לא תקין",
+    "registerFormAddress": "כתובת",
+    "registerFormAddressPlaceholder": "הזינו כתובת",
+    "registerFormCity": "עיר",
+    "registerFormCityPlaceholder": "הזינו עיר",
+    "registerFormZip": "מיקוד",
+    "registerFormZipPlaceholder": "הזינו מיקוד",
+    "registerFormCountry": "מדינה",
+    "registerFormCountryPlaceholder": "בחרו מדינה",
+    "registerFormDeclaration": "הצהרה",
+    "registerFormDeclarationText": "אני מתחייב/ת בזאת כי הפרטים אשר מסרתי באילן היוחסין שהפקדתי במרכז לגניאלוגיה יהודית ע\"ש דגלס א. גודלמן שבבית התפוצות נכונים למיטב ידיעתי, ונמסרו על ידי בתום לב.",
+    "registerFormDeclarationText2": "ידוע לי, כי בכל מקרה בו יפנה למרכז צד ג' כלשהו, שפרטיו מופעים באילן היוחסין שהפקדתי, בדרישה להסיר את פרטיו מהאילן – מכל סיבה שהיא – ייאלץ המרכז להסיר את הקובץ מהמאגר, שכן אין באפשרות המרכז לבדוק את אמיתות המידע הנמסר על ידי. המרכז מתחייב להודיע לי על הסרת הקובץ בנסיבות האמורות.",
+    "registerFormDeclarationText3": "במקרה בו ייתבע המרכז בגין פרטיו המצויים באילן היוחסין שהפקדתי, ולא ניתן יהיה להסתפק בהורדת הקובץ מהמאגר, אני מתחייב/ת לשפות את המרכז בגין כל תביעה כאמור.",
+    "registerFormDeclarationText4": "אני מסכים/ה שהמידע שמסרתי (לרבות שמי, כתובתי, מספר הטלפון ודוא\"ל), יעמוד לרשות הציבור לצורך עריכת חיפושים גניאלוגיים ו/או מחקרים אחרים.",
+    "registerFormDeclarationText5": "אני מתחייב/ת, כי אין ולא יהיו לי בעתיד כל תביעות כלפי המרכז בגין הכללת אילן היוחסין שמסרתי במאגר המרכז (לרבות העלאתו של האתר אינטרנט), וכן לגבי הסרת האילן האמור.",
     "registerFormMandatoryFieldsMessage": "* שדות חובה למילוי",
+    "registerFormAcceptDeclaration": "אני מסכים/ה לתוכנה של ההצהרה לעיל",
     "registerFormAcceptConditions": "קראתי ואני מסכים/ה ל",
     "registerUseConditionsLink": "תנאי השימוש",
     "registerDisclaimer": "לא לדאוג, לא נשלח הודעות ספאם!",
@@ -53,7 +68,6 @@
     "ImageCropAcceptButton": "אישור",
     "ImageCropCancelButton": "ביטול",
     "ImageRotateButton": "סובב"
-
   },
   "personDetailsForm": {
     "personDetailsName": "שם פרטי",
@@ -76,7 +90,7 @@
     "personDetailsDeathPlace": "מקום פטירה",
     "personDetailsDeathPlacePlaceholder": "עיר או/ו מדינה"
   },
-  "familyTreePageMother" : {
+  "familyTreePageMother": {
     "header": "הצד של אמא  2/4",
     "familyTreeCurrentEntity": "אמא",
     "familyTreeGrandparentsTitle": "ההורים של אמא (סבא וסבתא)",
@@ -170,7 +184,7 @@
     "header": "פרויקט עצי המשפחה",
     "pageNotFoundErrorMessage": "<0>הדף המבוקש לא נמצא, ניתן לפנות ל<1>דף הבית</1></0>"
   },
-  "listOfPersons" : {
+  "listOfPersons": {
     "secondParentLabel": "הורה נוסף"
   },
   "ToastNotifications": {
@@ -193,4 +207,3 @@
     "manage": "ניהול פרויקט: עינת שרון, מנהלת מחלקת הדיגיטל במוזיאון"
   }
 }
-

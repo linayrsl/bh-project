@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 
 from src.activetrail.activetrail_client import ActiveTrailClient
 from src.database.database_connection import DatabaseConnection
+from src.database.user import create_user_record
 from src.database.verification_code import store_verification_code, check_verification_code, update_attempts, \
     verification_attempts_exceeded, delete_verification_code
 from src.exceptions.verification_code_not_found import VerificationCodeNotFound
@@ -89,22 +90,12 @@ def register_post():
     last_name = register_info_json["lastName"]
     email = register_info_json["email"]
     phone = register_info_json["phone"]
+    address = register_info_json["address"]
+    city = register_info_json["city"]
+    country = register_info_json["country"]
+    zip_code = register_info_json["zip"]
     language = register_info_json["language"]
     logger.info("Generated verification code")
-
-    if not send_verification_code_to_mail(verification_code, email, language):
-        logger.error("Failed to send email with verification code: {}".format(email))
-        return abort(500, description="Wasn't able to send email to {}".format(email))
-
-    activetrail_api_client = ActiveTrailClient(ACTIVETRAIL_API_BASE_URL,
-                                               ACTIVETRAIL_API_KEY)
-
-    try:
-        activetrail_api_client.create_contact(first_name, last_name, email, phone)
-    except Exception:
-        logger.exception("Failed to create contact in ActiveTrail "
-                         "(first_name: '{}', last_name: '{}', email: '{}', phone: '{}')"
-                         .format(first_name, last_name, email, phone))
 
     with DatabaseConnection(DATABASE_URL) as db_connection:
         if not db_connection:
@@ -117,6 +108,26 @@ def register_post():
             return abort(500, "Failed to generate verification code")
 
         logger.info("Verification code stored in database")
+
+        if not create_user_record(db_connection, email, first_name, last_name, phone, address, city, country, zip_code):
+            logger.error("Failed to user record in database")
+            return abort(500, "Failed to create user record")
+
+        logger.info("User record created in database")
+
+        if not send_verification_code_to_mail(verification_code, email, language):
+            logger.error("Failed to send email with verification code: {}".format(email))
+            return abort(500, description="Wasn't able to send email to {}".format(email))
+
+        activetrail_api_client = ActiveTrailClient(ACTIVETRAIL_API_BASE_URL,
+                                                   ACTIVETRAIL_API_KEY)
+
+        try:
+            activetrail_api_client.create_contact(first_name, last_name, email, phone)
+        except Exception:
+            logger.exception("Failed to create contact in ActiveTrail "
+                             "(first_name: '{}', last_name: '{}', email: '{}', phone: '{}')"
+                             .format(first_name, last_name, email, phone))
 
         logger.info("Request was processed successfully and response was sent")
         return make_response()

@@ -14,7 +14,7 @@
   },
   "registerPage": {
     "header": "Registration",
-    "registerDetails": "Registration information",
+    "registerDetails": "Registration information (Mandatory fields *)",
     "registerFormName": "First name",
     "registerFormNamePlaceholder": "Enter your first name",
     "registerFormLastName": "Last name",
@@ -25,7 +25,22 @@
     "registerFormPhone": "Mobile phone",
     "registerFormPhonePlaceholder": "Enter your mobile phone number",
     "registerFormPhoneErrorMessage": "Invalid cell phone number",
+    "registerFormAddress": "Address",
+    "registerFormAddressPlaceholder": "Enter your address",
+    "registerFormCity": "City",
+    "registerFormCityPlaceholder": "Enter your city",
+    "registerFormZip": "Zip code",
+    "registerFormZipPlaceholder": "Enter your zip code",
+    "registerFormCountry": "Country",
+    "registerFormCountryPlaceholder": "Enter your country",
+    "registerFormDeclaration": "Declaration",
+    "registerFormDeclarationText": "I declare that the information contained in this family tree which I have submitted at the Douglas E. Goldman Jewish Genealogy Center at the Museum of the Jewish People (“the Center”) is to the best of my knowledge correct and was furnished by me in good faith.",
+    "registerFormDeclarationText2": "I know that in the event that any other party, whose data may appear in the family tree I have submitted, demands for any reason that the Center deletes his data from the tree, the Center is obliged to delete the file from the database as the Center has no possibility of checking the reliability of the information I have submitted. The Center is obliged to inform me that the aforementioned file has been deleted.",
+    "registerFormDeclarationText3": "In the event that legal action is taken against the Center because of particulars contained in the family tree that I have submitted, and if it would be insufficient to delete the file from the database, I undertake to release the Center from any claim or liability in question.",
+    "registerFormDeclarationText4": "I agree that the information which I have submitted (including my name, address, telephone number, e-mail address) will be available to the public for genealogical and/or other research.",
+    "registerFormDeclarationText5": "I declare that I do not have nor will have in the future any claims against the Center concerning the addition of the family tree I submitted into the database (or the Internet) as well as its removal from the database.",
     "registerFormMandatoryFieldsMessage": "* Mandatory fields",
+    "registerFormAcceptDeclaration": "I accept the above Declaration",
     "registerFormAcceptConditions": "I have read and agree to the ",
     "registerUseConditionsLink": "Terms of Use",
     "registerDisclaimer": "Don't worry. Spam messages will not be sent to you!",
@@ -75,7 +90,7 @@
     "personDetailsDeathPlace": "Place of death",
     "personDetailsDeathPlacePlaceholder": "City and/or country"
   },
-  "familyTreePageMother" : {
+  "familyTreePageMother": {
     "header": "Your mother's side 2/4",
     "familyTreeCurrentEntity": "Your mother",
     "familyTreeGrandParentsTitle": "Mother's parents (grandfather and grandmother)",
@@ -190,10 +205,9 @@
     "sharedChildrenLabel": "How many children?",
     "sharedChildrenFormLabel": "Child"
   },
-    "credits": {
-      "app": "App Developer: Lina Yaroslavski",
-      "design": "UX/UI Designer: Neta Manor, Museum Digital Department",
-      "manage": "Project Manager: Eynat Sharon Museum CDO"
+  "credits": {
+    "app": "App Developer: Lina Yaroslavski",
+    "design": "UX/UI Designer: Neta Manor, Museum Digital Department",
+    "manage": "Project Manager: Eynat Sharon Museum CDO"
   }
 }
-

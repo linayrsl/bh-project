@@ -9,6 +9,7 @@ export interface TextInputProps {
   title: string;
   className?: string;
   type: string;
+  min?: string;
   placeholder: string;
   required?: boolean;
   validateRegex?: RegExp;
@@ -73,6 +74,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
           }}
           id={this.props.id}
           type={this.props.type}
+          min={this.props.min}
           placeholder={this.props.placeholder}
         />
         {!this.state.isValid && <div className={"invalid-input-feedback"}>{this.props.validationErrorMessage}</div>}
