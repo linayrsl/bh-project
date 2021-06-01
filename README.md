@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS family_tree_upload_log (
     num_of_photos integer,
     is_new_tree boolean,
     gedcom_url character varying(2048)
+    CONSTRAINT fk_email
+      FOREIGN KEY(email) 
+	  REFERENCES users(email)
 );
 ```
 
@@ -44,6 +47,7 @@ CREATE TABLE IF NOT EXISTS users
     city character varying(128) NOT NULL,
     zip character varying(64) NOT NULL,
     country character varying(128) NOT NULL,
+    phone character varying(128) NOT NULL,
     CONSTRAINT users_pkey PRIMARY KEY (email)
 );
 ```
