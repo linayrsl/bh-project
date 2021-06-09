@@ -27,7 +27,6 @@ export interface RegisterPageState {
   city: string;
   zip: string;
   country: string;
-  disclaimer: boolean;
   declaration: boolean;
   httpRequestInProgress: boolean;
   isPhoneValid: boolean;
@@ -48,7 +47,6 @@ class RegisterPageComponent extends React.Component<
     zip: "",
     country: "",
     declaration: false,
-    disclaimer: false,
     httpRequestInProgress: false,
     isPhoneValid: true,
     wasPhoneInvalidBefore: false,
@@ -106,22 +104,11 @@ class RegisterPageComponent extends React.Component<
       this.state.zip.length > 0 &&
       this.state.country.length > 0 &&
       this.state.declaration &&
-      this.state.disclaimer &&
       isValidPhoneNumber(this.state.phone)
     );
   }
   render() {
     const t = this.props.t;
-    console.log(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.email,
-      this.state.phone,
-      this.state.address,
-      this.state.city,
-      this.state.zip,
-      this.state.country
-    );
     return (
       <div className="register-page-container">
         {this.state.httpRequestInProgress && <Loader />}
@@ -358,7 +345,7 @@ class RegisterPageComponent extends React.Component<
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     this.setState({ declaration: event.target.checked });
                   }}
-                  defaultChecked={this.state.disclaimer}
+                  defaultChecked={this.state.declaration}
                   type="checkbox"
                   className="declaration-checkbox"
                 />
@@ -366,34 +353,6 @@ class RegisterPageComponent extends React.Component<
                   <Trans i18nKey={"registerPage.registerFormAcceptDeclaration"}>
                     אני מסכים/ה לתוכנה של ההצהרה לעיל
                   </Trans>
-                </span>
-              </div>
-              <div className="user-checkbox styled-checkbox ">
-                <input
-                  onChange={(event) => {
-                    this.setState({ disclaimer: event.target.checked });
-                  }}
-                  defaultChecked={this.state.disclaimer}
-                  type="checkbox"
-                  className="checkbox"
-                />
-                <span className="accept-conditions-full">
-                  <Trans i18nKey={"registerPage.registerFormAcceptConditions"}>
-                    קראתי ואני מסכים/ה ל
-                  </Trans>
-                  <a
-                    target="_blank"
-                    href={
-                      i18n.language === "he"
-                        ? "https://www.bh.org.il/he/%d7%9e%d7%90%d7%92%d7%a8%d7%99%d7%9d-%d7%95%d7%90%d7%95%d7%a1%d7%a4%d7%99%d7%9d/%d7%92%d7%a0%d7%90%d7%9c%d7%95%d7%92%d7%99%d7%94-%d7%99%d7%94%d7%95%d7%93%d7%99%d7%aa/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%95%d7%99%d7%aa%d7%95%d7%a8/"
-                        : "https://www.bh.org.il/databases/jewish-genealogy/declaration/"
-                    }
-                    className="accept-conditions"
-                  >
-                    <Trans i18nKey={"registerPage.registerUseConditionsLink"}>
-                      תנאי השימוש
-                    </Trans>
-                  </a>
                 </span>
               </div>
             </form>
