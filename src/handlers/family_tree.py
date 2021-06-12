@@ -2,6 +2,7 @@ import base64
 import io
 import logging
 import zipfile
+import time
 from typing import Dict, Optional, Generator, Any, Union
 
 from flask import Blueprint, request, Response, abort
@@ -18,6 +19,7 @@ from src.models.person_details import PersonDetails
 from src.models.person_node import PersonNode, make_person_node_from_person_details
 from src.models.submitter import Submitter, make_submitter_from_person_node
 from src.settings import SENDGRID_API_KEY, GEDCOM_EMAIL_FROM, GEDCOM_EMAIL_TO, DATABASE_URL
+from src.storage.azure_client import upload_file
 
 logger = logging.getLogger(__name__)
 
@@ -171,11 +173,11 @@ def family_tree_post():
         return abort(500, description="Failed to generate gedcom")
 
     try:
-        user_id = family_tree_model.submitter.id
-        file_name = 'user{}.ged'.format(user_id)
-        zip_file_name = 'user{}.zip'.format(user_id)
-
         user_last_name = family_tree_model.submitter.last_name
+        base_file_name = '{}_{}'.format(user_last_name, int(time.time()))
+        file_name = '{}.ged'.format(base_file_name)
+        zip_file_name = '{}.zip'.format(base_file_name)
+
         content = str(b'{} family tree', 'utf-8').format(user_last_name)
     except Exception:
         logger.exception("Failed to extract user name and user last name from gedcom string")
@@ -193,11 +195,11 @@ def family_tree_post():
         gedcom_string.encode(),
         {key: base64.b64decode(value) for (key, value) in images.items()})
 
-    if send_email.send_zip(
-            zip_file_name,
-            zip_file_data):
+    file_url = upload_file(zip_file_name, zip_file_data)
 
-        logger.info("Gedcom zip sent to email successfully")
+    if file_url is not None:
+
+        logger.info("Gedcom zip uploaded successfully")
 
         with DatabaseConnection(DATABASE_URL) as db_connection:
             if not db_connection:
@@ -208,7 +210,8 @@ def family_tree_post():
                 db_connection,
                 family_tree_model,
                 count_family_tree_individuals(family_tree_model.submitter),
-                len(images.values()))
+                len(images.values()),
+                file_url)
 
         logger.info("Family tree submission log saved to database")
 
@@ -217,7 +220,7 @@ def family_tree_post():
 
         return Response("{}", mimetype="application/json")
 
-    logger.error("Failed to send Gedcom zip to email")
+    logger.error("Failed to upload Gedcom zip")
     return abort(500, "Failed to send family tree to Beit Hatfutzot")
 
 

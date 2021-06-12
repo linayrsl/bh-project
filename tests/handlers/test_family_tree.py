@@ -101,6 +101,7 @@ class TestFamilyTree(unittest.TestCase):
     def setUp(self) -> None:
         super().setUp()
         os.environ["SENDGRID_TEST"] = "True"
+        os.environ["MOCK_GEDCOM_UPLOAD_RESULT"] = "https://familytreestorage.blob.core.windows.net/gedcomfiles/user1.zip"
 
     def test_family_tree_valid(self):
         family_tree = copy.deepcopy(test_family_tree)
