@@ -9,7 +9,12 @@ from src.models.family_tree import FamilyTree
 logger = logging.getLogger(__name__)
 
 
-def log_family_tree_submission(db_connection, family_tree_model: FamilyTree, num_of_persons, num_of_images) -> bool:
+def log_family_tree_submission(
+        db_connection,
+        family_tree_model: FamilyTree,
+        num_of_persons,
+        num_of_images,
+        file_url: str) -> bool:
     with db_connection.cursor() as cursor:
 
         if not family_tree_model:
@@ -22,7 +27,8 @@ def log_family_tree_submission(db_connection, family_tree_model: FamilyTree, num
                                        "creation_time": datetime.now(),
                                        "num_of_people": num_of_persons,
                                        "num_of_photos": num_of_images,
-                                       "is_new_tree": True}
+                                       "is_new_tree": True,
+                                       "gedcom_url": file_url}
         except Exception:
             logger.exception("Failed to generate upload log record")
             return False
