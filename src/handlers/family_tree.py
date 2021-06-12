@@ -174,7 +174,6 @@ def family_tree_post():
 
     try:
         user_last_name = family_tree_model.submitter.last_name
-        user_id = family_tree_model.submitter.id
         base_file_name = '{}_{}'.format(user_last_name, int(time.time()))
         file_name = '{}.ged'.format(base_file_name)
         zip_file_name = '{}.zip'.format(base_file_name)

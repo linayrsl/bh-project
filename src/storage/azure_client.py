@@ -1,3 +1,4 @@
+import os
 from typing import Optional
 from datetime import datetime, timedelta
 from azure.storage.blob import BlobProperties, BlobServiceClient, BlobClient
@@ -10,6 +11,9 @@ logger = logging.getLogger(__name__)
 
 
 def upload_file(file_name: str, data: bytes) -> Optional[str]:
+    if os.environ.get("MOCK_GEDCOM_UPLOAD_RESULT") is not None:
+        return os.environ.get("MOCK_GEDCOM_UPLOAD_RESULT")
+
     try:
         blob_service_client = BlobServiceClient.from_connection_string(AZURE_CONNECTION_STRING)
         blob: BlobClient = blob_service_client \
