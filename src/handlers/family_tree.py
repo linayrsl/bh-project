@@ -19,7 +19,7 @@ from src.models.person_details import PersonDetails
 from src.models.person_node import PersonNode, make_person_node_from_person_details
 from src.models.submitter import Submitter, make_submitter_from_person_node
 from src.settings import SENDGRID_API_KEY, GEDCOM_EMAIL_FROM, GEDCOM_EMAIL_TO, DATABASE_URL
-from src.storage.azure_client import upload_file
+from src.storage.google_cloud_client import upload_file
 
 logger = logging.getLogger(__name__)
 

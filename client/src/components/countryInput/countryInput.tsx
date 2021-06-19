@@ -19,14 +19,20 @@ interface CountryInputProps {
 const CountryInput: React.FunctionComponent<CountryInputProps> = ({
   onChange,
 }) => {
-  const [country, setCountry] = useState("");
-  const { t } = useTranslation();
+  // const [country, setCountry] = useState("");
+  // const { t } = useTranslation();
   const listOfCountries = useMemo(() => {
     const countriesNames: string[] = Object.values(
       countries.getNames(i18next.language === "en" ? "en" : "he", {
         select: "official",
       })
     );
+    countriesNames.sort();
+    const countryToBeFirstInList =
+      i18next.language === "en" ? "Israel" : "ישראל";
+    const countryIndex = countriesNames.indexOf(countryToBeFirstInList);
+    countriesNames.splice(countryIndex, 1);
+    countriesNames.unshift(countryToBeFirstInList);
     return Object.values(countriesNames).map((country) => (
       <option value={country} key={country}>
         {country}
