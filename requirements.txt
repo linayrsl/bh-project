@@ -11,3 +11,4 @@ flask-log-request-id==0.10.1
 requests_futures==1.0.0
 flask-talisman>=0.7.0,<1
 azure-storage-blob>=12.8.1,<13
+google-cloud-storage>=1.38.0,<2
