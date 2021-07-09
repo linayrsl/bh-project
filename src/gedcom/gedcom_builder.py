@@ -89,7 +89,7 @@ class GedcomBuilder:
             image_file_name = "{}.jpg".format(person.id)
             images[image_file_name] = person.image
             indi_record += "\n1 OBJE"
-            indi_record += self._generate_record(2, "FILE {}", person.image)
+            indi_record += self._generate_record(2, "FILE {}", image_file_name)
         return indi_record + indi_record_mother + indi_record_father + indi_record_sibling + family_record
 
     def _generate_family_record_id(self, mother: Union[PersonNode, PersonDetails, None], father: Union[PersonNode, PersonDetails, None]):
