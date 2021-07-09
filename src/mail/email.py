@@ -155,7 +155,7 @@ class Email:
             logger.info("Sent gedcom successfully with response code: {}".format(response.status_code))
             return True
         except Exception:
-            logger.exception("Failed to sent gedcom")
+            logger.exception("Failed to send gedcom")
             return False
 
     def send_verification_code(self, to_email: str, verification_code: str):

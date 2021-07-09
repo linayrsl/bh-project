@@ -22,18 +22,33 @@ CREATE TABLE IF NOT EXISTS verification_codes (
 ```sql
 CREATE TABLE IF NOT EXISTS family_tree_upload_log (
     id SERIAL PRIMARY KEY,
-    email VARCHAR NOT NULL,
-    first_name VARCHAR NOT NULL,
-    last_name VARCHAR NOT NULL,
-    gender VARCHAR(1) NOT NULL,
-    gedcom_language VARCHAR(2) NOT NULL,
-    date_of_birth DATE,
-    address VARCHAR NOT NULL,
-    country VARCHAR NOT NULL,
-    creation_time TIMESTAMP WITH TIME ZONE,
-    num_of_people INT,
-    num_of_photos INT,
-    is_new_tree BOOLEAN
+    email character varying NOT NULL,
+    gedcom_language character varying(2) NOT NULL,
+    creation_time timestamp with time zone,
+    num_of_people integer,
+    num_of_photos integer,
+    is_new_tree boolean,
+    gedcom_url character varying(2048)
+    CONSTRAINT fk_email
+      FOREIGN KEY(email) 
+	  REFERENCES users(email)
+);
+```
+
+`users` table with the following schema:
+
+```sql
+CREATE TABLE IF NOT EXISTS users
+(
+    email character varying(256) NOT NULL,
+    first_name character varying(128) NOT NULL,
+    last_name character varying(128) NOT NULL,
+    address character varying(1024) NOT NULL,
+    city character varying(128) NOT NULL,
+    zip character varying(64) NOT NULL,
+    country character varying(128) NOT NULL,
+    phone character varying(128) NOT NULL,
+    CONSTRAINT users_pkey PRIMARY KEY (email)
 );
 ```
 

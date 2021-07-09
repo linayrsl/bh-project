@@ -1,0 +1,43 @@
+.country-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  font-family: "ploni-bold";
+  color: #000000;
+  border-bottom: 1px solid #000000;
+  label {
+    line-height: 35px;
+    font-size: 20px;
+    @media only screen and (max-width: 400px) {
+      font-size: 16px;
+    }
+  }
+  select {
+    max-width: 60%;
+    border: none;
+    background: transparent;
+    align-self: flex-start;
+    font-size: 18px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    text-align-last: left;
+    height: 35px;
+    font-family: "ploni-regular";
+    padding-left: 30px;
+    background-image: url("../../assets/images/arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+
+    @media only screen and (max-width: 400px) {
+      font-size: 16px;
+    }
+  }
+}
+
+[dir="ltr"] select {
+  text-align-last: right;
+  background-position: right center;
+  padding-right: 30px;
+}

@@ -7,30 +7,31 @@ from src.database.database_connection import DatabaseConnection
 from src.logging.logging_setup import logging_setup
 from src.mail.email import Email
 from src.settings import DATABASE_URL, SENDGRID_API_KEY, REPORT_EMAIL_FROM, \
-    REPORT_EMAIL_TO
-
+    REPORT_EMAIL_TO, REPORT_CSV_ENCODING
 
 logging_setup()
 logger = logging.getLogger(__name__)
 
 
 def create_csv_string(db_connection) -> Optional[str]:
-    relevant_columns = ["email",
-                        "first_name",
+    relevant_columns = ["first_name",
                         "last_name",
-                        "gender",
                         "gedcom_language",
-                        "date_of_birth",
                         "address",
+                        "city",
+                        "phone",
+                        "zip",
                         "country",
+                        "gedcom_url",
                         "creation_time",
                         "num_of_people",
                         "num_of_photos",
                         "is_new_tree"]
     with db_connection.cursor() as cursor:
         try:
-            cursor.execute(f"""SELECT {",".join(relevant_columns)}
+            cursor.execute(f"""SELECT {",".join(["family_tree_upload_log.email"] + relevant_columns)}
                             FROM family_tree_upload_log
+                            LEFT JOIN users ON family_tree_upload_log.email=users.email
                             WHERE 
                                 creation_time BETWEEN CURRENT_DATE - interval '7 days' AND CURRENT_DATE
                             ORDER BY
@@ -42,7 +43,7 @@ def create_csv_string(db_connection) -> Optional[str]:
         rows = cursor.fetchall()
 
         csv_file = StringIO()
-        csv.writer(csv_file).writerow(relevant_columns)
+        csv.writer(csv_file).writerow(["email"] + relevant_columns)
         csv.writer(csv_file).writerows(rows)
         return csv_file.getvalue()
 
@@ -57,7 +58,7 @@ with DatabaseConnection(DATABASE_URL) as connection:
                                "Family Tree Submitter Weekly CSV Report",
                                "Family Tree Submitter Weekly CSV Report",
                                language=None)
-            sent_successfully = send_email.send_csv("weekly-csv-report.csv", csv_str.encode("utf-8"))
+            sent_successfully = send_email.send_csv("weekly-csv-report.csv", csv_str.encode(REPORT_CSV_ENCODING, 'ignore'))
             if not sent_successfully:
                 logger.error("Failed to send CSV weekly report by mail")
             logger.info("CSV report was sent successfully")

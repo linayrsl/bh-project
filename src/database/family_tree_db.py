@@ -9,37 +9,26 @@ from src.models.family_tree import FamilyTree
 logger = logging.getLogger(__name__)
 
 
-def log_family_tree_submission(db_connection, family_tree_model: FamilyTree, num_of_persons, num_of_images) -> bool:
+def log_family_tree_submission(
+        db_connection,
+        family_tree_model: FamilyTree,
+        num_of_persons,
+        num_of_images,
+        file_url: str) -> bool:
     with db_connection.cursor() as cursor:
 
         if not family_tree_model:
             logger.info("Family tree model is empty")
             return False
 
-        submitter = family_tree_model.submitter
-
         try:
-            birth_date = None
-            try:
-                birth_date = datetime.strptime(submitter.birth_date, "%d/%m/%Y") if submitter.birth_date else None
-            except ValueError:
-                try:
-                    birth_date = datetime.strptime(submitter.birth_date, "%Y") if submitter.birth_date else None
-                except ValueError:
-                    logger.error(f"Unsupported date format {submitter.birth_date}")
-
             upload_log_record: Dict = {"email": family_tree_model.submitter_email,
-                                       "first_name": submitter.first_name,
-                                       "last_name": submitter.last_name,
-                                       "gender": submitter.gender[0],
                                        "gedcom_language": family_tree_model.language,
-                                       "date_of_birth": birth_date,
-                                       "address": '',
-                                       "country": '',
                                        "creation_time": datetime.now(),
                                        "num_of_people": num_of_persons,
                                        "num_of_photos": num_of_images,
-                                       "is_new_tree": True}
+                                       "is_new_tree": True,
+                                       "gedcom_url": file_url}
         except Exception:
             logger.exception("Failed to generate upload log record")
             return False
