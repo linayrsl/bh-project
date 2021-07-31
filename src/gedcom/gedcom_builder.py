@@ -42,6 +42,14 @@ class GedcomBuilder:
 2 VERS 5.5.1""".format(self.family_tree_model.submitter.id, date, time)
         return lines_header
 
+    def _get_gender(self, person: Union[PersonNode, PersonDetails]) -> str:
+        if person and getattr(person, "gender", None):
+            if person.gender.lower() == "male":
+                return "M"
+            if person.gender.lower() == "female":
+                return "F"
+        return "U"
+
     def _generate_record(self, level, tag, *params):
         if len([param for param in params if param]) == 0:
             return ""
@@ -59,7 +67,7 @@ class GedcomBuilder:
         indi_record += self._generate_record(1, "NAME {} /{}/", person.first_name, person.last_name)
         indi_record += self._generate_record(2, "GIVN {}", person.first_name)
         indi_record += self._generate_record(2, "SURN {}", person.last_name)
-        indi_record += self._generate_record(1, "SEX {}", person.gender)
+        indi_record += self._generate_record(1, "SEX {}", self._get_gender(person))
         indi_record += "\n1 BIRT"
         indi_record += self._generate_record(2, "DATE {}", self._format_date(person.birth_date))
         indi_record += self._generate_record(2, "PLAC {}", person.birth_place)
