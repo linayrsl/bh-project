@@ -12,7 +12,7 @@
 1 NAME Monica /Geller/
 2 GIVN Monica
 2 SURN Geller
-1 SEX female
+1 SEX F
 1 BIRT
 2 DATE 1980
 2 PLAC New York
@@ -21,20 +21,23 @@
 1 NAME Judy /Geller/
 2 GIVN Judy
 2 SURN Geller
-1 SEX female
+1 SEX F
 1 BIRT
 2 DATE 1964
 2 PLAC New York
 1 FAMC @M3F6@
 1 FAMS @M2F9@
 0 @3@ INDI
+1 SEX U
 1 BIRT
 1 FAMC @M4F5@
 1 FAMS @M3F6@
 0 @4@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M4F5@
 0 @5@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M4F5@
 0 @M4F5@ FAM
@@ -42,13 +45,16 @@
 1 WIFE @4@
 1 CHIL @3@
 0 @6@ INDI
+1 SEX U
 1 BIRT
 1 FAMC @M7F8@
 1 FAMS @M3F6@
 0 @7@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M7F8@
 0 @8@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M7F8@
 0 @M7F8@ FAM
@@ -63,20 +69,23 @@
 1 NAME Jack /Geller/
 2 GIVN Jack
 2 SURN Geller
-1 SEX male
+1 SEX M
 1 BIRT
 2 DATE 1962
 2 PLAC New York
 1 FAMC @M10F13@
 1 FAMS @M2F9@
 0 @10@ INDI
+1 SEX U
 1 BIRT
 1 FAMC @M11F12@
 1 FAMS @M10F13@
 0 @11@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M11F12@
 0 @12@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M11F12@
 0 @M11F12@ FAM
@@ -84,13 +93,16 @@
 1 WIFE @11@
 1 CHIL @10@
 0 @13@ INDI
+1 SEX U
 1 BIRT
 1 FAMC @M14F15@
 1 FAMS @M10F13@
 0 @14@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M14F15@
 0 @15@ INDI
+1 SEX U
 1 BIRT
 1 FAMS @M14F15@
 0 @M14F15@ FAM
@@ -105,7 +117,7 @@
 1 NAME Ross /Geller/
 2 GIVN Ross
 2 SURN Geller
-1 SEX male
+1 SEX M
 1 BIRT
 2 DATE 1985
 2 PLAC NewYork
@@ -119,7 +131,7 @@
 1 NAME Chandler /Bing First/
 2 GIVN Chandler
 2 SURN Bing First
-1 SEX male
+1 SEX M
 1 BIRT
 2 DATE 1985
 2 PLAC NewYork
@@ -128,7 +140,7 @@
 1 NAME Ben /Geller First/
 2 GIVN Ben
 2 SURN Geller First
-1 SEX male
+1 SEX M
 1 BIRT
 2 DATE 1985
 2 PLAC NewYork
@@ -141,7 +153,7 @@
 1 NAME Chandler /Bing Second/
 2 GIVN Chandler
 2 SURN Bing Second
-1 SEX male
+1 SEX M
 1 BIRT
 2 DATE 1985
 2 PLAC NewYork
@@ -150,7 +162,7 @@
 1 NAME Ben /Geller Second/
 2 GIVN Ben
 2 SURN Geller Second
-1 SEX male
+1 SEX M
 1 BIRT
 2 DATE 1985
 2 PLAC NewYork
