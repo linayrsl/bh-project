@@ -180,19 +180,16 @@ class Email:
             logger.exception("Failed to sent verification code")
             return False
 
-    def send_csv(self, file_name: str, data: bytes) -> bool:
+    def send_report(self, file_name: str, data: bytes, file_type: str = "text/csv") -> bool:
         # create message
         message = Mail(self.from_email, self.to_email, self.subject, self.content)
 
         # create attachment
-        file_type = "text/csv"
         encoded = base64.b64encode(data).decode()
         attachment = Attachment()
         attachment.file_content = FileContent(encoded)
         attachment.file_type = FileType(file_type)
         attachment.file_name = file_name
-        # attachment.disposition = Disposition('attachment')
-        # attachment.content_id = ContentId('Example Content ID')
         message.attachment = attachment
 
         # This code is for testing purposes.
@@ -209,5 +206,5 @@ class Email:
             logger.info("Sent gedcom successfully with response code: {}".format(response.status_code))
             return True
         except Exception as error:
-            logger.exception(f"Failed to sent csv {error}")
+            logger.exception(f"Failed to sent report {error}")
             return False
