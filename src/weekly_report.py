@@ -72,17 +72,20 @@ def create_xlsx_bytes(db_connection) -> Optional[bytes]:
                             FROM family_tree_upload_log
                             LEFT JOIN users ON family_tree_upload_log.email=users.email
                             WHERE 
-                                creation_time BETWEEN CURRENT_DATE - interval '4 months' AND CURRENT_DATE
+                                creation_time BETWEEN CURRENT_DATE - interval '7 days' AND CURRENT_DATE
                             ORDER BY
                                 creation_time ASC;""")
         except Exception:
             logger.exception("Failed to fetch database report")
             return None
 
+        # Column index is 10 because email is prepended to be the first column
+        date_column_index = 10
         rows = cursor.fetchall()
 
         xlsx_file = io.BytesIO()
         workbook = xlsxwriter.Workbook(xlsx_file, {'in_memory': True, 'remove_timezone': True})
+        date_format = workbook.add_format({'num_format': 'dd/mm/yy hh:mm'})
         worksheet = workbook.add_worksheet()
 
         for col_index, col in enumerate(["email"] + relevant_columns):
@@ -90,7 +93,10 @@ def create_xlsx_bytes(db_connection) -> Optional[bytes]:
 
         for row_index, row in enumerate(rows):
             for col_index, col in enumerate(row):
-                worksheet.write(row_index + 1, col_index, col)
+                if col_index == date_column_index:
+                    worksheet.write(row_index + 1, col_index, col, date_format)
+                else:
+                    worksheet.write(row_index + 1, col_index, col)
         workbook.close()
         xlsx_file.seek(0)
         return xlsx_file.read()
