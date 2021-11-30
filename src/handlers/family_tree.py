@@ -195,9 +195,9 @@ def family_tree_post():
         gedcom_string.encode(),
         {key: base64.b64decode(value) for (key, value) in images.items()})
 
-    file_url = upload_file(zip_file_name, zip_file_data)
+    uploaded_file_name = upload_file(zip_file_name, zip_file_data)
 
-    if file_url is not None:
+    if uploaded_file_name is not None:
 
         logger.info("Gedcom zip uploaded successfully")
 
@@ -211,7 +211,7 @@ def family_tree_post():
                 family_tree_model,
                 count_family_tree_individuals(family_tree_model.submitter),
                 len(images.values()),
-                file_url)
+                uploaded_file_name)
 
         logger.info("Family tree submission log saved to database")
 

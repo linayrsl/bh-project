@@ -31,15 +31,21 @@ def upload_file(file_name: str, data: bytes) -> Optional[str]:
         blob = bucket.blob(file_name)
         with io.BytesIO(data) as data_file:
             blob.upload_from_file(data_file)
-        return generate_signed_url(credentials, GOOGLE_CLOUD_BUCKET, file_name)
+        return file_name
+        # return generate_signed_url(credentials, GOOGLE_CLOUD_BUCKET, file_name)
     except Exception as e:
         logger.exception("Failed to upload to Google Cloud storage: {}".format(e))
         return None
 
 
-def generate_signed_url(google_credentials, bucket_name, object_name,
-                        subresource=None, expiration=604800, http_method='GET',
+def generate_signed_url(object_name, subresource=None, expiration=604800, http_method='GET',
                         query_parameters=None, headers=None):
+
+    json_account_info = json.loads(GOOGLE_CLOUD_CREDENTIALS)  # convert JSON to dictionary
+    google_credentials = service_account.Credentials.from_service_account_info(
+        json_account_info)
+
+    bucket_name = GOOGLE_CLOUD_BUCKET
 
     if expiration > 604800:
         raise Exception('Expiration time parameter for google cloud storage blob signed url can\'t be longer than 604800 seconds (7 days).')
