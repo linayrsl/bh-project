@@ -14,7 +14,7 @@ def log_family_tree_submission(
         family_tree_model: FamilyTree,
         num_of_persons,
         num_of_images,
-        file_url: str) -> bool:
+        uploaded_file_name: str) -> bool:
     with db_connection.cursor() as cursor:
 
         if not family_tree_model:
@@ -28,7 +28,7 @@ def log_family_tree_submission(
                                        "num_of_people": num_of_persons,
                                        "num_of_photos": num_of_images,
                                        "is_new_tree": True,
-                                       "gedcom_url": file_url}
+                                       "file_name": uploaded_file_name}
         except Exception:
             logger.exception("Failed to generate upload log record")
             return False

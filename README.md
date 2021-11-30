@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS family_tree_upload_log (
     num_of_people integer,
     num_of_photos integer,
     is_new_tree boolean,
-    gedcom_url character varying(2048)
+    file_name character varying(2048)
     CONSTRAINT fk_email
       FOREIGN KEY(email) 
 	  REFERENCES users(email)
