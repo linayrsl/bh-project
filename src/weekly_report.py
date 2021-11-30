@@ -12,6 +12,7 @@ from src.logging.logging_setup import logging_setup
 from src.mail.email import Email
 from src.settings import DATABASE_URL, SENDGRID_API_KEY, REPORT_EMAIL_FROM, \
     REPORT_EMAIL_TO, REPORT_CSV_ENCODING
+from storage.google_cloud_client import generate_signed_url
 
 logging_setup()
 logger = logging.getLogger(__name__)
@@ -53,7 +54,8 @@ def create_csv_string(db_connection) -> Optional[str]:
 
 
 def create_xlsx_bytes(db_connection) -> Optional[bytes]:
-    relevant_columns = ["first_name",
+    relevant_columns = ["family_tree_upload_log.email",
+                        "first_name",
                         "last_name",
                         "gedcom_language",
                         "address",
@@ -61,14 +63,14 @@ def create_xlsx_bytes(db_connection) -> Optional[bytes]:
                         "phone",
                         "zip",
                         "country",
-                        "gedcom_url",
+                        "file_name",
                         "creation_time",
                         "num_of_people",
                         "num_of_photos",
                         "is_new_tree"]
     with db_connection.cursor() as cursor:
         try:
-            cursor.execute(f"""SELECT {",".join(["family_tree_upload_log.email"] + relevant_columns)}
+            cursor.execute(f"""SELECT {",".join(relevant_columns)}
                             FROM family_tree_upload_log
                             LEFT JOIN users ON family_tree_upload_log.email=users.email
                             WHERE 
@@ -83,15 +85,26 @@ def create_xlsx_bytes(db_connection) -> Optional[bytes]:
         date_column_index = 10
         rows = cursor.fetchall()
 
+        file_name_index: int = relevant_columns.index("file_name")
+        relevant_columns[0] = "email"
+        relevant_columns[file_name_index] = "gedcom_url"
+
+        rows_for_xlsx = []
+        for row in rows:
+            row_for_xlsx = list(row)
+            file_name: str = row_for_xlsx[file_name_index]
+            row_for_xlsx[file_name_index] = generate_signed_url(file_name)
+            rows_for_xlsx.append(row_for_xlsx)
+
         xlsx_file = io.BytesIO()
         workbook = xlsxwriter.Workbook(xlsx_file, {'in_memory': True, 'remove_timezone': True})
         date_format = workbook.add_format({'num_format': 'dd/mm/yy hh:mm'})
         worksheet = workbook.add_worksheet()
 
-        for col_index, col in enumerate(["email"] + relevant_columns):
+        for col_index, col in enumerate(relevant_columns):
             worksheet.write(0, col_index, col)
 
-        for row_index, row in enumerate(rows):
+        for row_index, row in enumerate(rows_for_xlsx):
             for col_index, col in enumerate(row):
                 if col_index == date_column_index:
                     worksheet.write(row_index + 1, col_index, col, date_format)
